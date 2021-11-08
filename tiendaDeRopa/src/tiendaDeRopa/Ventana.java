@@ -48,5 +48,8 @@ public class Ventana extends JFrame{
 		JButton btnNewButton = new JButton("ACCEDER");
 		btnNewButton.setBounds(202, 177, 89, 23);
 		getContentPane().add(btnNewButton);
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 500, 250);
 	}
 }
