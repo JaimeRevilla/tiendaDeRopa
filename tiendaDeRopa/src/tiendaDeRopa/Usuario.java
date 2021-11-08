@@ -7,14 +7,14 @@ public class Usuario implements Serializable{
 	private String nombre;
 	private String dir;
 	private String mail;
-	private String pass;
-	private char permisos;
+	private String con;
+	private boolean permisos;
 	
-	public void Usuario(String nombre, String dir, String mail, String pass, char permisos) {
+	public void Usuario(String nombre, String dir, String mail, String con, boolean permisos) {
 		this.nombre = nombre;
 		this.dir = dir;
 		this.mail = mail;
-		this.pass = pass;
+		this.con = con;
 		this.permisos = permisos;
 		
 	}
@@ -31,11 +31,11 @@ public class Usuario implements Serializable{
 		return mail;
 	}
 
-	public String getPass() {
-		return pass;
+	public String getCon() {
+		return con;
 	}
 
-	public char getPermisos() {
+	public boolean getPermisos() {
 		return permisos;
 	}
 
