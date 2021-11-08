@@ -27,6 +27,7 @@ import java.awt.ScrollPane;
 import java.awt.Point;
 import javax.swing.JSlider;
 import javax.swing.JLabel;
+import javax.swing.Box;
 
 public class VentanaUsuario extends JFrame {
 
@@ -67,7 +68,7 @@ public class VentanaUsuario extends JFrame {
 		contentPane.add(label);
 		
 		Label label_1 = new Label("PRECIO");
-		label_1.setBounds(10, 125, 47, 22);
+		label_1.setBounds(306, 92, 47, 22);
 		contentPane.add(label_1);
 		
 		Label label_2 = new Label("CUENTA");
@@ -77,7 +78,7 @@ public class VentanaUsuario extends JFrame {
 		
 		Label label_3 = new Label("FAVORITOS");
 		label_3.setAlignment(Label.CENTER);
-		label_3.setBounds(372, 31, 62, 22);
+		label_3.setBounds(375, 31, 62, 22);
 		contentPane.add(label_3);
 		
 		Label label_4 = new Label("CARRITO");
@@ -86,18 +87,19 @@ public class VentanaUsuario extends JFrame {
 		contentPane.add(label_4);
 		
 		JSlider slider = new JSlider();
+		slider.setMinorTickSpacing(50);
 		slider.setValue(0);
-		slider.setBounds(63, 121, 200, 26);
+		slider.setBounds(356, 88, 200, 26);
 		contentPane.add(slider);
 		
 		JLabel lblNewLabel = new JLabel("0");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(45, 153, 46, 14);
+		lblNewLabel.setBounds(338, 120, 46, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("100");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(233, 153, 46, 14);
+		lblNewLabel_1.setBounds(520, 113, 46, 14);
 		contentPane.add(lblNewLabel_1);
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
