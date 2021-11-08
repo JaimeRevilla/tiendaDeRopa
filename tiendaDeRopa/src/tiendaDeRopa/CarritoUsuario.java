@@ -67,7 +67,7 @@ public class CarritoUsuario extends JFrame {
 	public void guardarPago(){ 	
 		try {
 			ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream("guardadodeprueba.dat"));
-			salida.writeObject(this.carrito.getCarritos());
+		//	salida.writeObject(this.carritos.getCarritos());
 			salida.close();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -81,7 +81,11 @@ public class CarritoUsuario extends JFrame {
 			ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("guardadodeprueba.dat"));
 			ArrayList<Carrito> entrada1 = (ArrayList<Carrito>)entrada.readObject();
 			entrada.close();
+
 		//	getCarritos.setRecursos(entrada1);
+
+			//carritos.setCarritos(entrada1);
+
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
