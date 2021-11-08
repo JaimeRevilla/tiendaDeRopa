@@ -12,5 +12,6 @@ public class Prueba {
 		System.out.println("Pedro");
 		
 		System.out.println("Pedrito");
+
 	}
 }
