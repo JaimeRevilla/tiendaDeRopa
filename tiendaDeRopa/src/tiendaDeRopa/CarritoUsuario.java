@@ -9,12 +9,19 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
 import javax.swing.JScrollBar;
 import javax.swing.JButton;
 
 public class CarritoUsuario extends JFrame {
 
 	private JPanel contentPane;
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -51,4 +58,31 @@ public class CarritoUsuario extends JFrame {
 		btnNewButton.setBounds(174, 208, 89, 23);
 		contentPane.add(btnNewButton);
 	}
+	/*
+	 * Guardar el pago en un fichero
+	 */
+	public void guardarPago(){ 	
+		try {
+			ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream("guardadodeprueba.dat"));
+			salida.writeObject(this.carrito.getCarritos());
+			salida.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	/*
+	 *Cargar el pago en un fichero
+	 */
+	public void cargarPago() {	
+		try {
+			ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("guardadodeprueba.dat"));
+			ArrayList<Carrito> entrada1 = (ArrayList<Carrito>)entrada.readObject();
+			entrada.close();
+			carritos.setRecursos(entrada1);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 }
