@@ -12,6 +12,7 @@ import javax.swing.JScrollBar;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.awt.event.ActionEvent;
 
 public class VentanaPrincipal extends JFrame {
@@ -20,6 +21,7 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel panelIzq, panelSur, panelNorte, panelDrc;
 	private JButton btnVolverAtras, btnIrParaAdelante, btnPrincipio, btnIniciarSesion, btnCarrito;
 	private JLabel lblHombre, lblMujer;
+	private JFrame ventanaActual;
 	 
 
 	/**
@@ -42,6 +44,13 @@ public class VentanaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaPrincipal() {
+//		Connection con = BDUsuario.initBD("SweetWear.db");
+//		BDUsuario.crearTabla(con);
+//		BDUsuario.closeBD(con);
+		ventanaActual = this;
+		
+		
+		setTitle("SWEET WEAR");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(200, 150, 450, 500);
 		contentPane = new JPanel();
@@ -95,6 +104,15 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		panelCentral.add(btnImagenCentral);
+		
+		
+		btnVolverAtras.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+			}
+		});
 	}
 
 }

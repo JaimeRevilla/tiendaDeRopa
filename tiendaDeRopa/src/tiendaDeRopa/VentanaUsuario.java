@@ -32,29 +32,30 @@ import javax.swing.Box;
 public class VentanaUsuario extends JFrame {
 
 	private JPanel contentPane;
+	private JFrame ventanaAnterior;
 	
 	
 	
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaUsuario frame = new VentanaUsuario();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					VentanaUsuario frame = new VentanaUsuario();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
-	public VentanaUsuario() {
+	public VentanaUsuario(JFrame va) {
+		ventanaAnterior = va;
+		
 		setTitle("SWEET WEAR");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		setBounds(345, 700, 345, 700);
-
 		setBounds(100, 100, 582, 409);
 		
 
