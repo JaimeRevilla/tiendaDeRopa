@@ -12,6 +12,7 @@ import java.awt.Label;
 import javax.swing.JEditorPane;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
+import javax.swing.JButton;
 
 public class CuentaUsuario extends JFrame {
 
@@ -75,5 +76,9 @@ public class CuentaUsuario extends JFrame {
 		JTextPane textPane_3 = new JTextPane();
 		textPane_3.setBounds(108, 213, 122, 20);
 		contentPane.add(textPane_3);
+		
+		JButton btnNewButton = new JButton("REGISTRARME");
+		btnNewButton.setBounds(276, 125, 122, 23);
+		contentPane.add(btnNewButton);
 	}
 }
