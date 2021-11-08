@@ -9,7 +9,8 @@ public class Prueba {
 		
 		System.out.println("adios");
 		
-		System.out.println("Pdro");
-
+		System.out.println("Pedro");
+		
+		System.out.println("Pedrito");
 	}
 }
