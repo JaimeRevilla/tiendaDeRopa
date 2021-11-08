@@ -39,7 +39,7 @@ public class Usuario implements Serializable{
 		return permisos;
 	}
 
-
+	int hola;
 	
 	
 	
