@@ -8,7 +8,7 @@ import java.util.Map;
 public class Carrito implements Serializable{
 	private String codigo;
 	private String usuario;
-	private Map<String, Integer> articulos = new HashMap <String, Integer>();
+	private Map <String, Integer> articulos = new HashMap <String, Integer>();
 	private double precio;
 	private String fecha;
 	private String hora;
