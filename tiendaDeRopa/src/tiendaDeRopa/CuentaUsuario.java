@@ -44,36 +44,36 @@ public class CuentaUsuario extends JFrame {
 		lblNewLabel.setBounds(10, 11, 73, 30);
 		contentPane.add(lblNewLabel);
 		
-		Label label = new Label("NOMBRE");
+		JLabel label = new JLabel("NOMBRE");
 		label.setBounds(10, 70, 62, 22);
 		contentPane.add(label);
 		
-		Label label_1 = new Label("DIRECCION");
+		JLabel label_1 = new JLabel("DIRECCION");
 		label_1.setBounds(10, 114, 62, 22);
 		contentPane.add(label_1);
 		
-		Label label_2 = new Label("EMAIL");
+		JLabel label_2 = new JLabel("EMAIL");
 		label_2.setBounds(10, 164, 62, 22);
 		contentPane.add(label_2);
 		
-		Label label_3 = new Label("CONTRASE\u00D1A");
+		JLabel label_3 = new JLabel("CONTRASE\u00D1A");
 		label_3.setBounds(10, 213, 73, 22);
 		contentPane.add(label_3);
 		
 		JTextPane textPane = new JTextPane();
-		textPane.setBounds(94, 70, 122, 20);
+		textPane.setBounds(108, 70, 122, 20);
 		contentPane.add(textPane);
 		
 		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setBounds(94, 114, 122, 20);
+		textPane_1.setBounds(108, 114, 122, 20);
 		contentPane.add(textPane_1);
 		
 		JTextPane textPane_2 = new JTextPane();
-		textPane_2.setBounds(94, 164, 122, 20);
+		textPane_2.setBounds(108, 164, 122, 20);
 		contentPane.add(textPane_2);
 		
 		JTextPane textPane_3 = new JTextPane();
-		textPane_3.setBounds(94, 215, 122, 20);
+		textPane_3.setBounds(108, 213, 122, 20);
 		contentPane.add(textPane_3);
 	}
 }
