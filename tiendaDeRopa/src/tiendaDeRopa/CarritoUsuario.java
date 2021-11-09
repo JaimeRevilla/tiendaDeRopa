@@ -1,19 +1,14 @@
 package tiendaDeRopa;
 
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import examenResuelto.parc201811.examenResuelto.parc201811.BD;
-import examenResuelto.parc201811.examenResuelto.parc201811.CentroEd;
-import examenResuelto.parc201811.examenResuelto.parc201811.Contador;
-import examenResuelto.parc201811.examenResuelto.parc201811.Datos;
-import examenResuelto.parc201811.examenResuelto.parc201811.Tabla;
-import examenResuelto.parc201811.examenResuelto.parc201811.VentanaDatos;
-import examenResuelto.parc201811.examenResuelto.parc201811.VentanaDatos.MentoraCentro;
+
 import tiendaDeRopa.Carrito.GestorCarrito;
 
 import javax.swing.JLabel;
@@ -79,13 +74,13 @@ public class CarritoUsuario extends JFrame {
 		btnCargarPago.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				btncargarPago();
+				//btncargarPago();
 			}
 		});
 		btnGuardarPago.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				btnguardarPago();
+				//btnguardarPago();
 			}
 		});
 		//NUEVO
