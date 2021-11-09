@@ -1,4 +1,4 @@
-package tiendaDeRopa;
+package clases;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

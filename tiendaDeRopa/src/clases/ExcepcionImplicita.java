@@ -1,4 +1,4 @@
-package tiendaDeRopa;
+package clases;
 
 public class ExcepcionImplicita {
 	

@@ -1,4 +1,4 @@
-package tiendaDeRopa;
+package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -33,22 +33,7 @@ public class VentanaUsuario extends JFrame {
 
 	private JPanel contentPane;
 	private JFrame ventanaAnterior;
-	
-	
-	
-	
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					VentanaUsuario frame = new VentanaUsuario();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+
 
 	public VentanaUsuario(JFrame va) {
 		ventanaAnterior = va;

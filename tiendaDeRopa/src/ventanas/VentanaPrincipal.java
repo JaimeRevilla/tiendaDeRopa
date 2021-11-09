@@ -1,14 +1,18 @@
-package tiendaDeRopa;
+package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
@@ -17,10 +21,11 @@ import java.awt.event.ActionEvent;
 
 public class VentanaPrincipal extends JFrame {
 
+	//DECLARACION DE LAS VARIABLES
 	private JPanel contentPane;
-	private JPanel panelIzq, panelSur, panelNorte, panelDrc;
+	private JPanel  panelCentral, panelCentralNorte, panelCentralSur, panelDrc;
 	private JButton btnVolverAtras, btnIrParaAdelante, btnPrincipio, btnIniciarSesion, btnCarrito;
-	private JLabel lblHombre, lblMujer;
+	private JLabel imagenCentral;
 	private JFrame ventanaActual;
 	 
 
@@ -50,69 +55,51 @@ public class VentanaPrincipal extends JFrame {
 		ventanaActual = this;
 		
 		
+		
+		//PROPIEDADES DE LAS VENTANAS
 		setTitle("SWEET WEAR");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(200, 150, 450, 500);
+		setBounds(250, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		panelSur = new JPanel();
-		contentPane.add(panelSur, BorderLayout.SOUTH);
 		
-		panelIzq = new JPanel();
-		contentPane.add(panelIzq, BorderLayout.WEST);
 		
-		lblMujer = new JLabel("MUJER");
-		panelIzq.add(lblMujer);
-		lblMujer.setBackground(new Color(240, 240, 240));
 		
-		lblHombre = new JLabel("HOMBRE");
-		panelIzq.add(lblHombre);
+		//CREACION DE LOS PANELES
 		
-		panelNorte = new JPanel();
-		contentPane.add(panelNorte, BorderLayout.NORTH);
-		
-		btnVolverAtras = new JButton("<--");
-		panelNorte.add(btnVolverAtras);
-		
-		btnIrParaAdelante = new JButton("-->");
-		panelNorte.add(btnIrParaAdelante);
-		
-		btnPrincipio = new JButton("SWEET WEAR ");
-		panelNorte.add(btnPrincipio);
-		
-		btnIniciarSesion = new JButton("IniciarSesion");
-		panelNorte.add(btnIniciarSesion);
-		
-		btnCarrito = new JButton("Carrito");
-		panelNorte.add(btnCarrito);
-		
+		btnCarrito = new JButton(new ImageIcon("tiendaDeRopa\\src\\imagenes\\IconoCarrito.png"));
+	
+		panelCentral = new JPanel();
+		panelCentralNorte = new JPanel(new GridLayout(1, 3));
+		panelCentralSur = new JPanel(new GridLayout(3, 3));
 		panelDrc = new JPanel();
-		contentPane.add(panelDrc, BorderLayout.EAST);
 		
-		JPanel panelCentral = new JPanel();
+		
+		//CREACION DE LOS COMPONENTES
+		imagenCentral = new JLabel(new ImageIcon("tiendaDeRopa\\src\\imagenes\\tienda-de-ropa.jpg"));
+		
+		//AÑADIR LOS COMPONENTES A LOS CONTENEDORES
+		panelCentralSur.add(imagenCentral);
+		panelCentral.add(panelCentralNorte);
+		panelCentral.add(panelCentralSur);
+		
+		panelCentralNorte.add(btnIniciarSesion);
+		panelCentralNorte.add(btnCarrito);
+		
+		
+		//AÑADIR LOS PANELES A LA VENTANA
 		contentPane.add(panelCentral, BorderLayout.CENTER);
+		//contentPane.add(panelDrc, BorderLayout.EAST);
 		
-		JButton btnImagenCentral = new JButton("IMAGEN CENTRAL");
+
+		
+		
 		
 		//EVENTOS
-		btnImagenCentral.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		panelCentral.add(btnImagenCentral);
 		
-		
-		btnVolverAtras.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			
-			}
-		});
 	}
 
 }
