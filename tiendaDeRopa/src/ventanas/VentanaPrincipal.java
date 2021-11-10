@@ -18,8 +18,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Clase4Newton.Prog3Clase4Bis.src.Persona;
-import Clase4Newton.Prog3Clase4Bis.src.Ventana1;
+
 import clases.Producto;
 import clases.Usuario;
 

@@ -22,6 +22,11 @@ public class Producto{
 	}
 	
 	
+	
+
+	public static int getContador() {
+		return contador;
+	}
 
 	public int getCodigo() {
 		return codigo;
