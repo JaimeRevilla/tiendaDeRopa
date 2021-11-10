@@ -38,6 +38,7 @@ public class VentanaRegistro extends JFrame {
 	private JPasswordField txtCon;
 	private JTextField txtNombre, txtEdad, txtMail;
 	private JButton btnRegistrar, btnVolver;
+	private JFrame VentanaActual, VentanaAnterior;
 
 	/**
 	 * Launch the application.
@@ -58,11 +59,13 @@ public class VentanaRegistro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaRegistro() {
+	public VentanaRegistro(JFrame va) {
 
 		Connection con = BDUsuario.initBD("SweetWear.db");
 		BDUsuario.crearTabla(con);
 		BDUsuario.closeBD(con);
+		VentanaAnterior = va;
+		VentanaActual = this;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -198,12 +201,18 @@ public class VentanaRegistro extends JFrame {
 		});
 		
 		
+		/**
+		 * Botón que al clickar cierra la ventana actual y abre la anterior
+		 */
 		
-		
-		
-		
-		//Falta hacer el Action listener del voton volver!!
-		
+		btnVolver.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaActual.dispose();
+				VentanaAnterior.setVisible(true);
+			}
+		});
+		setVisible(true);		
 		
 		
 		

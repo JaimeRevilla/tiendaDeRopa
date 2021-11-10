@@ -7,14 +7,19 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.TreeMap;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Clase4Newton.Prog3Clase4Bis.src.Persona;
+import Clase4Newton.Prog3Clase4Bis.src.Ventana1;
 import clases.Producto;
 import clases.Usuario;
 
@@ -27,6 +32,9 @@ public class VentanaPrincipal extends JFrame {
 	private JFrame ventanaActual;
 	public static TreeMap<String, ArrayList<Producto>> tmPedidos; //MAPA que tiene como clave el nombre del usuario y como valor el pedido con los productos
 	public static TreeMap<String, Usuario> tmUsuarios;
+	private DefaultListModel<Usuario> modeloListaUsuario;
+	private JList<Usuario> listaUsuario;
+
 	/**
 	 * Launch the application.
 	 */
@@ -55,6 +63,9 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		modeloListaUsuario = new DefaultListModel<>();
+		listaUsuario = new JList<Usuario>(modeloListaUsuario);
 		
 		//CREAMOS LOS PANELES
 		panelCentral = new JPanel();
@@ -91,13 +102,37 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 	}
+	/**
+	 * Metodo por el cual los pedidos que se hubiesen hecho en el carrito son borrados
+	 */
+	
+	private void borrarPedido() {
+		Object [] claves = tmPedidos.keySet().toArray();
+		for (Object c : claves) {
+			tmPedidos.remove(c);
+		}
+	}
+	
+	
 	private void cargarMapaPedidos() {
+		/*String texto = "INFORMACION DEL PEDIDO";
+		for(String clave: tmPedidos.keySet()) {
+			texto = texto + clave + "\n";
+			HashSet<String> valor = tmPedidos.get(clave);
+			for(String pedi: valor) {
+				texto = texto + "\t\t" + pedi + "\n";
+			}
+		}*/
 		
+		//hacer que el tmPedidos se pueda enlazar con el HashSet<>
 	}
 	
 	
 	private void cargarMapaUsuarios () {
-
+		for(String clave: tmUsuarios.keySet()) {
+			Usuario valor = tmUsuarios.get(clave);
+			modeloListaUsuario.addElement(valor);
+		}
 
 	
 	}

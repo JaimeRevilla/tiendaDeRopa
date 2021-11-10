@@ -119,4 +119,6 @@ public class VentanaInicioSesion extends JFrame {
 		textCon.setText("");
 	}
 	
+	
+	
 }
