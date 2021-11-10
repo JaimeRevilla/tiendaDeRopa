@@ -1,10 +1,12 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import javax.swing.ImageIcon;
@@ -13,6 +15,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clases.Producto;
+import clases.Usuario;
+
 public class VentanaPrincipal extends JFrame {
 	//DECLARACION DE LOS ATRIBUTOS
 	
@@ -20,8 +25,8 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel panelCentral;
 	private JButton btnInicioSesion, btnSalir;
 	private JFrame ventanaActual;
-	//public static TreeMap<String, ArrayList<Producto>> tmUsuario; //MAPA que tiene como clave el nombre del usuario y como valor el pedido con los productos
-	
+	public static TreeMap<String, ArrayList<Producto>> tmPedidos; //MAPA que tiene como clave el nombre del usuario y como valor el pedido con los productos
+	public static TreeMap<String, Usuario> tmUsuarios;
 	/**
 	 * Launch the application.
 	 */
@@ -86,5 +91,18 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 	}
+	private void cargarMapaPedidos() {
+		
+	}
+	
+	
+	private void cargarMapaUsuarios () {
 
+
+	
+	}
 }
+
+
+
+
