@@ -72,7 +72,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		btnCarrito = new JButton(new ImageIcon("tiendaDeRopa\\src\\imagenes\\IconoCarrito.png"));
 	
-		panelCentral = new JPanel();
+		panelCentral = new JPanel(new GridLayout(3,3));
 		panelCentralNorte = new JPanel(new GridLayout(1, 3));
 		panelCentralSur = new JPanel(new GridLayout(3, 3));
 		panelDrc = new JPanel();
