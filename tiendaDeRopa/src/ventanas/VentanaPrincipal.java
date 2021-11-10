@@ -1,6 +1,7 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,6 +51,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		//CREAMOS LOS PANELES
 		panelCentral = new JPanel();
+		panelCentral.setBackground(Color.CYAN);
 		//AÑADIMOS LOS PANELES AL PANEL PRINCIPAL DE LA VENTANA
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		//CREAMOS LOS COMPONENTES

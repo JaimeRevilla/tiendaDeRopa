@@ -1,6 +1,7 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -52,8 +53,8 @@ public class VentanaInicioSesion extends JFrame {
 		panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 
-		lblNombre = new JLabel("Introduce el nombre: ");
-		lblCon = new JLabel("Introduce tu contrasenia: ");
+		lblNombre = new JLabel("INTRODUCE TU NOMBRE DE USUARIO: ");
+		lblCon = new JLabel("INTRODUCE UNA CONTRASEÑA: ");
 		
 		textNombre = new JTextField();
 		textCon = new JPasswordField();
@@ -72,6 +73,8 @@ public class VentanaInicioSesion extends JFrame {
 		btnIniciarSesion = new JButton("INICIAR SESION");
 		panelSur.add(btnIniciarSesion);
 		
+		panelCentral.setBackground(Color.CYAN);
+		panelSur.setBackground(Color.CYAN);
 		
 		btnVolverAtras.addActionListener(new ActionListener() {
 			
@@ -94,6 +97,8 @@ public class VentanaInicioSesion extends JFrame {
 				BDUsuario.closeBD(con);
 				if (resul == 0) {
 					JOptionPane.showMessageDialog(null, "¡¡PRIMERO TIENES QUE REGISTRARTE!!");
+					new VentanaRegistro();
+					ventanaActual.setVisible(false);
 				} else if (resul == 1){
 					JOptionPane.showMessageDialog(null, "¡¡LA CONTRASEÑA EN INCORRECTA!!");
 				} else if (resul == 2){

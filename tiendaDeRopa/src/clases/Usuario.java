@@ -40,6 +40,12 @@ public class Usuario{
 		return permisos;
 	}
 
+	@Override
+	public String toString() {
+		return "Usuario [nombre=" + nombre + ", mail=" + mail + ", edad=" + edad + ", con=" + con + ", permisos="
+				+ permisos + "]";
+	}
+
 	
 	
 	
