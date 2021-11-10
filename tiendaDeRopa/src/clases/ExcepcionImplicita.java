@@ -1,6 +1,6 @@
 package clases;
 
-public class ExcepcionImplicita {
+public class ExcepcionImplicita extends RuntimeException {
 	
 	private String mensaje;
 	

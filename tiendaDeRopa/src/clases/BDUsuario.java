@@ -60,8 +60,8 @@ public class BDUsuario {
 	 * @param c Contraseña del usuario
 	 * @param permisos Booleano que indica si el usuario tiene derecho a los permisos de administrador
 	 */
-	public static void insertarUsuario(Connection con, String nom, String mail, String c, boolean permisos) {
-		String sent = "INSERT INTO usuario VALUES ('"+nom+"', '"+mail+"', '"+c+"', '"+permisos+"')";
+	public static void insertarUsuario(Connection con, String nom, int edad, String mail, String c, boolean permisos) {
+		String sent = "INSERT INTO usuario VALUES ('"+nom+"', '"+edad+"', '"+mail+"', '"+c+"', '"+permisos+"')";
 		Statement stmt = null;
 		
 		try {

@@ -5,14 +5,14 @@ package clases;
 public class Usuario{
 	
 	private String nombre;
-	private String dir;
 	private String mail;
+	private int edad;
 	private String con;
 	private boolean permisos;
 	
-	public Usuario(String nombre, String dir, String mail, String con, boolean permisos) {
+	public Usuario(String nombre, int edad, String mail, String con, boolean permisos) {
 		this.nombre = nombre;
-		this.dir = dir;
+		this.edad = edad;
 		this.mail = mail;
 		this.con = con;
 		this.permisos = permisos;
@@ -23,12 +23,13 @@ public class Usuario{
 		return nombre;
 	}
 
-	public String getDir() {
-		return dir;
+	
+	public int getEdad() {
+		return edad;
 	}
 
-	public String getMail() {
-		return mail;
+	public void setEdad(int edad) {
+		this.edad = edad;
 	}
 
 	public String getCon() {

@@ -99,8 +99,7 @@ public class VentanaInicioSesion extends JFrame {
 				} else if (resul == 2){
 					JOptionPane.showMessageDialog(null, "¡¡BIENVENIDO!!");
 				}
-				textNombre.setText("");
-				textCon.setText("");
+				vaciarCampos();
 			}
 		});
 		
