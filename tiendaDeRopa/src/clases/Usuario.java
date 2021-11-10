@@ -1,8 +1,8 @@
 package clases;
 
-import java.io.Serializable;
 
-public class Usuario implements Serializable{
+
+public class Usuario{
 	
 	private String nombre;
 	private String dir;
@@ -10,7 +10,7 @@ public class Usuario implements Serializable{
 	private String con;
 	private boolean permisos;
 	
-	public void Usuario(String nombre, String dir, String mail, String con, boolean permisos) {
+	public Usuario(String nombre, String dir, String mail, String con, boolean permisos) {
 		this.nombre = nombre;
 		this.dir = dir;
 		this.mail = mail;
@@ -39,7 +39,6 @@ public class Usuario implements Serializable{
 		return permisos;
 	}
 
-	int hola;
 	
 	
 	

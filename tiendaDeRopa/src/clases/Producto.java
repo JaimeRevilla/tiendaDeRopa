@@ -4,16 +4,16 @@ import java.io.Serializable;
 
 public class Producto implements Serializable{
 	
+	private static int contador = 0;
 	
-	private String codigo;
+	private int codigo;
 	private String nombre;
 	private double precio;
 	private int stock;
 	private String descripcion;
-	private String detalles;
 	
 	public void producto(String codigo, String nombre, double precio, int stock) {
-		this.codigo = codigo;
+		this.codigo = contador++; //Guardo el valor del contado en el atributo código y luego al contador le sumo 1
 		this.nombre = nombre;
 		this.precio = precio;
 		this.stock = stock;
@@ -21,20 +21,19 @@ public class Producto implements Serializable{
 	}
 	
 	public void producto(String codigo, String nombre, double precio, int stock, String descripcion, String detalles) {
-		this.codigo = codigo;
+		this.codigo = contador++; 
 		this.nombre = nombre;
 		this.precio = precio;
 		this.stock = stock;
 		this.descripcion = descripcion;
-		this.detalles = detalles;
 	
 	}
 
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 
@@ -70,14 +69,6 @@ public class Producto implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	public String getDetalles() {
-		return detalles;
-	}
-
-	public void setDetalles(String detalles) {
-		this.detalles = detalles;
-	}
-	
 	
 	
 	
