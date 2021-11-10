@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.TreeMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,9 +18,10 @@ public class VentanaPrincipal extends JFrame {
 	
 	private JPanel contentPane;
 	private JPanel panelCentral;
-	private JButton btnInicioSesion;
+	private JButton btnInicioSesion, btnSalir;
 	private JFrame ventanaActual;
-
+	//public static TreeMap<String, ArrayList<Producto>> tmUsuario; //MAPA que tiene como clave el nombre del usuario y como valor el pedido con los productos
+	
 	/**
 	 * Launch the application.
 	 */
@@ -55,9 +57,11 @@ public class VentanaPrincipal extends JFrame {
 		//AÑADIMOS LOS PANELES AL PANEL PRINCIPAL DE LA VENTANA
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		//CREAMOS LOS COMPONENTES
-		btnInicioSesion = new JButton("IniciarSesion");
+		btnInicioSesion = new JButton("INICIAR SESION");
+		btnSalir = new JButton("SALIR");
 		//AÑADIMOS LOS COMPONENTES A LOS PANELES
 		panelCentral.add(btnInicioSesion);
+		panelCentral.add(btnSalir);
 		//EVENTOS
 		btnInicioSesion.addActionListener(new ActionListener() {
 			
@@ -68,6 +72,19 @@ public class VentanaPrincipal extends JFrame {
 				
 			}
 		});
+		
+		btnSalir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+						System.exit(0);
+					}
+		});
+		
+		
+		
+		
+		
 	}
 
 }
