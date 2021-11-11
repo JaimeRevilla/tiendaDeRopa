@@ -9,7 +9,6 @@ import java.sql.Statement;
 public class BDUsuario {
 
 	
-	String Hola;
 	/**
 	 * Metodo que crea la conexion con la base de datos 
 	 * @param nombreBD El nombre de la base de datos
@@ -189,5 +188,11 @@ public class BDUsuario {
 		
 		
 	}
+	
+	
+	
+	
+	
+	
 	
 }
