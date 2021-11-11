@@ -97,7 +97,7 @@ public class VentanaInicioSesion extends JFrame {
 				BDUsuario.closeBD(con);
 				if (resul == 0) {
 					JOptionPane.showMessageDialog(null, "¡¡PRIMERO TIENES QUE REGISTRARTE!!");
-					new VentanaRegistro();
+					new VentanaRegistro(ventanaActual);
 					ventanaActual.setVisible(false);
 				} else if (resul == 1){
 					JOptionPane.showMessageDialog(null, "¡¡LA CONTRASEÑA EN INCORRECTA!!");
