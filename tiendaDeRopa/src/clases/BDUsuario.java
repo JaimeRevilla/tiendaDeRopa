@@ -126,7 +126,7 @@ public class BDUsuario {
 	 *         2 --> El usuario esta registrado y todos los datos introducidos son correctos
 	 */
 	public static int obtenerUsuario(Connection con, String nom, String c) {
-		String sent = "SELECT con FROM usuario WHERE nom = '"+nom+"'";
+		String sent = "SELECT c FROM usuario WHERE nom = '"+nom+"'";
 		Statement stmt = null;
 		int res = 0;
 		
@@ -166,7 +166,7 @@ public class BDUsuario {
 	 * @param con Conexion con la BBDD
 	 */
 	public static void crearTabla(Connection con) {
-		String sent = "CREATE TABLE IF NOT EXISTS usuario (nom String, mail String, c String , permisos boolean)";
+		String sent = "CREATE TABLE IF NOT EXISTS usuario (nom String, int edad, mail String, c String , permisos boolean)";
 		Statement stmt = null;
 		
 		try {
