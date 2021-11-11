@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class BDUsuario {
+public class BDGeneral {
 
 	
 	String Hola;
@@ -191,3 +191,4 @@ public class BDUsuario {
 	}
 	
 }
+
