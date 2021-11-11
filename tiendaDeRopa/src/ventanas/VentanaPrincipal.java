@@ -6,7 +6,9 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.TreeMap;
 
@@ -14,6 +16,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -33,6 +36,7 @@ public class VentanaPrincipal extends JFrame {
 	public static TreeMap<String, Usuario> tmUsuarios;
 	private DefaultListModel<Usuario> modeloListaUsuario;
 	private JList<Usuario> listaUsuario;
+	private JLabel lblHora;
 
 	/**
 	 * Launch the application.
@@ -74,9 +78,12 @@ public class VentanaPrincipal extends JFrame {
 		//CREAMOS LOS COMPONENTES
 		btnInicioSesion = new JButton("INICIAR SESION");
 		btnSalir = new JButton("SALIR");
+		
+		lblHora = new JLabel("");
 		//AÑADIMOS LOS COMPONENTES A LOS PANELES
 		panelCentral.add(btnInicioSesion);
 		panelCentral.add(btnSalir);
+		panelCentral.add(lblHora);
 		//EVENTOS
 		btnInicioSesion.addActionListener(new ActionListener() {
 			
@@ -96,6 +103,32 @@ public class VentanaPrincipal extends JFrame {
 					}
 		});
 		
+		//HILOS
+		
+		Runnable r1 = new Runnable() {
+
+			@Override
+			public void run() {
+				while (true) {
+					SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH_mm_ss");
+					long milis = System.currentTimeMillis();
+					Date fecha = new Date(milis);
+					String f = sdf.format(fecha);
+					lblHora.setText(f);
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					lblHora.setText("");
+				}
+				
+			}
+		};
+		Thread t1 = new Thread(r1);
+		t1.start();
+		
 		
 		
 		
@@ -111,6 +144,8 @@ public class VentanaPrincipal extends JFrame {
 			tmPedidos.remove(c);
 		}
 	}
+	
+	
 	
 	
 	private void cargarMapaPedidos() {
