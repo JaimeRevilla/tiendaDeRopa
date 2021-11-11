@@ -17,7 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import clases.BDUsuario;
+import clases.BD;
 
 public class VentanaInicioSesion extends JFrame {
 
@@ -31,9 +31,9 @@ public class VentanaInicioSesion extends JFrame {
 	
 	
 	public VentanaInicioSesion(JFrame va) {
-		Connection con = BDUsuario.initBD("SweetWear.db");
-		BDUsuario.crearTabla(con);
-		BDUsuario.closeBD(con);
+		Connection con = BD.initBD("SweetWear.db");
+		BD.crearTabla(con);
+		BD.closeBD(con);
 		ventanaAnterior = va;
 		ventanaActual = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,9 +92,9 @@ public class VentanaInicioSesion extends JFrame {
 				String n = textNombre.getText();
 				String c = textCon.getText();
 				
-				Connection con = BDUsuario.initBD("SweetWear.db"); 
-				int resul = BDUsuario.obtenerUsuario(con, n, c);
-				BDUsuario.closeBD(con);
+				Connection con = BD.initBD("SweetWear.db"); 
+				int resul = BD.obtenerUsuario(con, n, c);
+				BD.closeBD(con);
 				if (resul == 0) {
 					JOptionPane.showMessageDialog(null, "¡¡PRIMERO TIENES QUE REGISTRARTE!!");
 					new VentanaRegistro(ventanaActual);

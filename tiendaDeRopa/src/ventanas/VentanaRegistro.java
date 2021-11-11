@@ -24,7 +24,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import clases.BDUsuario;
+import clases.BD;
 import clases.ExcepcionImplicita;
 import clases.Usuario;
 
@@ -61,9 +61,9 @@ public class VentanaRegistro extends JFrame {
 	 */
 	public VentanaRegistro(JFrame va) {
 
-		Connection con = BDUsuario.initBD("SweetWear.db");
-		BDUsuario.crearTabla(con);
-		BDUsuario.closeBD(con);
+		Connection con = BD.initBD("SweetWear.db");
+		BD.crearTabla(con);
+		BD.closeBD(con);
 		VentanaAnterior = va;
 		VentanaActual = this;
 		
@@ -175,9 +175,9 @@ public class VentanaRegistro extends JFrame {
 				//FALTARIA PONER AQUI DE ALGUNA MANERA LO DE LOS PERMISOS
 				Usuario u = new Usuario(n, ed, m, c, false);
 				//AÑADIRLO AL MAPA DE CLAVE USUARIO Y VALOR EL CARRITO ASOCIADO A ESE USUARIO!
-				Connection con = BDUsuario.initBD("SweetWear.db");
-				BDUsuario.insertarUsuario(con, n, ed, m, c, false);
-				BDUsuario.closeBD(con);
+				Connection con = BD.initBD("SweetWear.db");
+				BD.insertarUsuario(con, n, ed, m, c, false);
+				BD.closeBD(con);
 				JOptionPane.showMessageDialog(null, "Persona registrada correctamente", "REGISTRO CORRECTO", JOptionPane.INFORMATION_MESSAGE);
 					
 				//Logger Usuarios
