@@ -9,6 +9,11 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +28,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 
@@ -38,8 +45,9 @@ public class VentanaPrincipal extends JFrame {
 	private JFrame ventanaActual;
 	public static TreeMap<String, ArrayList<Producto>> tmPedidos; //MAPA que tiene como clave el nombre del usuario y como valor el pedido con los productos
 	public static TreeMap<String, Usuario> tmUsuarios;
-	private DefaultListModel<Usuario> modeloListaUsuario;
-	private JList<Usuario> listaUsuario;
+	public static DefaultListModel<Usuario> modeloListaUsuario;
+	public static JList<Usuario> listaUsuario;
+	private JScrollPane scrollLista;
 	private JLabel lblHora;
 
 	/**
@@ -61,6 +69,12 @@ public class VentanaPrincipal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	/**
+	 * 
+	 */
+	/**
+	 * 
+	 */
 	public VentanaPrincipal() {
 		//PROPIEDADES DE LA VENTANA
 		ventanaActual = this;
@@ -71,8 +85,7 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		modeloListaUsuario = new DefaultListModel<>();
-		listaUsuario = new JList<Usuario>(modeloListaUsuario);
+		
 		
 		//CREAMOS LOS PANELES
 		panelCentral = new JPanel();
@@ -83,6 +96,12 @@ public class VentanaPrincipal extends JFrame {
 		//CREAMOS LOS COMPONENTES
 		btnInicioSesion = new JButton("INICIAR SESION");
 		btnSalir = new JButton("SALIR");
+		
+		modeloListaUsuario = new DefaultListModel<>();
+		listaUsuario = new JList<Usuario>(modeloListaUsuario);
+		scrollLista = new JScrollPane(listaUsuario);
+		
+		
 		
 //		ImageIcon icon = new ImageIcon("tiendaDeRopa\\src\\imagenes\\IconoCarrito.png");
 //		Icon i = new ImageIcon(icon.getImage().getScaledInstance(alto, ancho, Image.SCALE_DEFAULT));
@@ -109,6 +128,7 @@ public class VentanaPrincipal extends JFrame {
 		panelCentral.add(btnInicioSesion);
 		panelCentral.add(btnSalir);
 		panelCentral.add(lblHora);
+		panelCentral.add(scrollLista);
 		//EVENTOS
 		btnInicioSesion.addActionListener(new ActionListener() {
 			
@@ -130,6 +150,10 @@ public class VentanaPrincipal extends JFrame {
 		
 		//HILOS
 		
+		/*
+		 * ESTE HILO NOS MUESTRA LA HORA ACTUAL EL CUAL SE ACTUALIZA CADA SEGUNDO PARA QUE SEA POSIBLE ACTUALIZARSE.
+		 */
+		
 		Runnable r1 = new Runnable() {
 
 			@Override
@@ -141,7 +165,7 @@ public class VentanaPrincipal extends JFrame {
 					String f = sdf.format(fecha);
 					lblHora.setText(f);
 					try {
-						Thread.sleep(500);
+						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -173,7 +197,10 @@ public class VentanaPrincipal extends JFrame {
 	
 	
 	
-	private void cargarMapaPedidos() {
+	/**
+	 * Metodo que carga el mapaPedidos en un TextArea
+	 */
+	private void cargarMapaPedidosEnTextArea() {
 		/*String texto = "INFORMACION DEL PEDIDO";
 		for(String clave: tmPedidos.keySet()) {
 			texto = texto + clave + "\n";
@@ -187,7 +214,10 @@ public class VentanaPrincipal extends JFrame {
 	}
 	
 	
-	private void cargarMapaUsuarios () {
+	/**
+	 * Metodo que carga el mapaUsuarios en una JList
+	 */
+	private void cargarMapaUsuariosEnLista () {
 		for(String clave: tmUsuarios.keySet()) {
 			Usuario valor = tmUsuarios.get(clave);
 			modeloListaUsuario.addElement(valor);
@@ -196,10 +226,84 @@ public class VentanaPrincipal extends JFrame {
 		
 	}
 	
+	//PRIMERO LLAMAR A ESTE METODO Y UNA VEZ EL MAPA ESTE LLENO LLAMAR A cargarMapaUsuariosEnLista PARA QUE SE CARGUE EL MODELO DE LA LISTA
+	/**
+	 * Metodo que carga de un fichero de texto los el mapaUsuarios.
+	 */
+	private void cargarMapaUsuariosEnFicheroDeTexto () {
+		BufferedReader br = null;
+		
+		try {
+			br = new BufferedReader(new FileReader("USUARIOS.txt"));
+			String linea = br.readLine();
+			while (linea != null) {
+				String [] datosUsuario = linea.split(" ");
+				String nombre = datosUsuario[0];
+				int edad = Integer.parseInt(datosUsuario[1]);
+				String mail = datosUsuario[2];
+				String con = datosUsuario[3];
+				boolean permisos = Boolean.parseBoolean(datosUsuario[4]);
+				Usuario u = new Usuario(nombre, edad, mail, con, permisos);
+				tmUsuarios.put(nombre, u);
+				linea = br.readLine();
+				
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (br!= null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+		
+	}
 	
+	
+	/**
+	 * Metodo que guarda el mapaUsuarios en un fichero de Texto
+	 */
+	private void guardarMapaUsuariosEnFicheroDeTexto () {
+		PrintWriter pw = null;
+		
+		try {
+			pw = new PrintWriter("USUARIOS.txt");
+			for (String nombre: VentanaPrincipal.tmUsuarios.keySet()) {
+				pw.println(nombre);
+				Usuario u = VentanaPrincipal.tmUsuarios.get(nombre);
+				pw.print(" " + u);
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (pw!= null) {
+				pw.flush();
+				pw.close();
+			}
+		}
+		
+		
+		
+	}
+	
+		
 	
 	
 }
+
 
 
 
