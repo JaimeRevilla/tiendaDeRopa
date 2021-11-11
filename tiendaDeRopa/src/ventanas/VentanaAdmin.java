@@ -31,6 +31,7 @@ public class VentanaAdmin extends JFrame {
 	private JLabel lblPrecio, lblStock, lblMarca, lblNombre;
 	private JTextField txtPrecio, txtStock, txtMarca;
 	private JTextArea textArea;
+	private JFrame VentanaActual, VentanaAnterior;
 
 	/**
 	 * Launch the application.
@@ -120,10 +121,14 @@ public class VentanaAdmin extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				//QUE VUELVA A LA VENTANA DESDE LA QUE HA VENIDO!
+				VentanaActual.dispose();
+				VentanaAnterior.setVisible(true);
 			}
 		});
+		setVisible(true);
+				
+				//QUE VUELVA A LA VENTANA DESDE LA QUE HA VENIDO!
+			
 		
 		
 		btnMostarMapa.addActionListener(new ActionListener() {
