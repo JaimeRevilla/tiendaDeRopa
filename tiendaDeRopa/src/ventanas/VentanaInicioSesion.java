@@ -33,6 +33,7 @@ public class VentanaInicioSesion extends JFrame {
 	public VentanaInicioSesion(JFrame va) {
 		Connection con = BD.initBD("SweetWear.db");
 		BD.crearTabla(con);
+		BD.obtenerMapaUsuarios(con);
 		BD.closeBD(con);
 		ventanaAnterior = va;
 		ventanaActual = this;
@@ -76,12 +77,15 @@ public class VentanaInicioSesion extends JFrame {
 		panelCentral.setBackground(Color.CYAN);
 		panelSur.setBackground(Color.CYAN);
 		
+		
+		
 		btnVolverAtras.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ventanaActual.dispose();
-				ventanaAnterior.setVisible(true);
+//				ventanaActual.dispose();
+//				ventanaAnterior.setVisible(true);
+				volver();
 			}
 		});
 		
@@ -103,6 +107,8 @@ public class VentanaInicioSesion extends JFrame {
 					JOptionPane.showMessageDialog(null, "¡¡LA CONTRASEÑA EN INCORRECTA!!");
 				} else if (resul == 2){
 					JOptionPane.showMessageDialog(null, "¡¡BIENVENIDO!!");
+					VentanaPrincipal.lblNombre.setText("BIENVENIDO " + n);
+					volver();
 				}
 				vaciarCampos();
 			}
@@ -119,6 +125,9 @@ public class VentanaInicioSesion extends JFrame {
 		textCon.setText("");
 	}
 	
-	
+	private void volver() {
+		ventanaActual.dispose();
+		ventanaAnterior.setVisible(true);
+	}
 	
 }

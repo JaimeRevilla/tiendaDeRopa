@@ -2,7 +2,7 @@ package clases;
 
 
 
-public class Usuario{
+public class Usuario implements Comparable<Usuario> {
 	
 	private String nombre;
 	private String mail;
@@ -47,7 +47,10 @@ public class Usuario{
 	}
 
 	
-	
+	public int compareTo(Usuario o) {
+		//ORDENAR DESCENDENTEMENTE
+		return o.nombre.compareTo(this.nombre);
+	}
 	
 
 }

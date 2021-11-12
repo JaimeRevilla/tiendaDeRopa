@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.TreeMap;
 
 public class BD {
 
@@ -59,7 +60,7 @@ public class BD {
 	 * @param c Contraseña del usuario
 	 * @param permisos Booleano que indica si el usuario tiene derecho a los permisos de administrador
 	 */
-	public static void insertarUsuario(Connection con, String nom, int edad, String mail, String c, boolean permisos) {
+	public static void insertarUsuario(Connection con, String nom, int edad, String mail, String c , boolean permisos) {
 		String sent = "INSERT INTO usuario VALUES ('"+nom+"', '"+edad+"', '"+mail+"', '"+c+"', '"+permisos+"')";
 		Statement stmt = null;
 		
@@ -133,7 +134,7 @@ public class BD {
 			stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sent);
 			if (rs.next()) {
-				if (rs.getString("con").equals(c)) {
+				if (rs.getString("c").equals(c)) {
 					res = 2;
 				} else {
 					res = 1;
@@ -165,7 +166,7 @@ public class BD {
 	 * @param con Conexion con la BBDD
 	 */
 	public static void crearTabla(Connection con) {
-		String sent = "CREATE TABLE IF NOT EXISTS usuario (nom String, int edad, mail String, c String , permisos boolean)";
+		String sent = "CREATE TABLE IF NOT EXISTS usuario (nom String, edad int, mail String, c String , permisos boolean)";
 		Statement stmt = null;
 		
 		try {
@@ -189,6 +190,30 @@ public class BD {
 		
 	}
 	
+	public static TreeMap<String, Usuario> obtenerMapaUsuarios(Connection con) {
+		TreeMap<String, Usuario> tmUsuarios = new TreeMap<>();
+		
+		String sent = "SELECT * FROM usuario";
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sent);
+			while(rs.next()) {
+				String nombre = rs.getString("nom");
+				int edad = rs.getInt("edad");
+				String mail = rs.getString("mail");
+				String c = rs.getString("c");
+				boolean permisos = rs.getBoolean("permisos");
+				Usuario u = new Usuario(nombre, edad, mail, c, permisos);
+				tmUsuarios.put(nombre, u);
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return tmUsuarios;
+	}
 	
 	
 	

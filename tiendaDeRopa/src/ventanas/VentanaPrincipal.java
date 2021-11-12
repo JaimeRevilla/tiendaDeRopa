@@ -9,6 +9,9 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -49,6 +52,7 @@ public class VentanaPrincipal extends JFrame {
 	public static JList<Usuario> listaUsuario;
 	private JScrollPane scrollLista;
 	private JLabel lblHora;
+	public static JLabel lblNombre;
 
 	/**
 	 * Launch the application.
@@ -109,6 +113,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		lblHora = new JLabel("");
+		lblNombre = new JLabel("");
 		
 		btnPruebaFoto = new JButton();
 		btnPruebaFoto.setBounds(80, 80, 80, 80);
@@ -129,6 +134,7 @@ public class VentanaPrincipal extends JFrame {
 		panelCentral.add(btnSalir);
 		panelCentral.add(lblHora);
 		panelCentral.add(scrollLista);
+		panelCentral.add(lblNombre);
 		//EVENTOS
 		btnInicioSesion.addActionListener(new ActionListener() {
 			
@@ -180,7 +186,23 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		
-		
+		this.addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				cargarMapaUsuariosDeFicheroDeTexto();
+			}
+				
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				guardarMapaUsuariosEnFicheroDeTexto();
+			}
+			
+			
+			
+		});
 		
 	}
 	/**
@@ -230,7 +252,7 @@ public class VentanaPrincipal extends JFrame {
 	/**
 	 * Metodo que carga de un fichero de texto los el mapaUsuarios.
 	 */
-	private void cargarMapaUsuariosEnFicheroDeTexto () {
+	private void cargarMapaUsuariosDeFicheroDeTexto () {
 		BufferedReader br = null;
 		
 		try {
@@ -298,6 +320,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 	}
+	
 	
 		
 	
