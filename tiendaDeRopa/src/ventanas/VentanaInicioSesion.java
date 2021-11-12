@@ -33,7 +33,7 @@ public class VentanaInicioSesion extends JFrame {
 	public VentanaInicioSesion(JFrame va) {
 		Connection con = BD.initBD("SweetWear.db");
 		BD.crearTabla(con);
-		BD.obtenerMapaUsuarios(con);
+		VentanaPrincipal.tmUsuarios = BD.obtenerMapaUsuarios(con);
 		BD.closeBD(con);
 		ventanaAnterior = va;
 		ventanaActual = this;

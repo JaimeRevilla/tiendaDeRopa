@@ -17,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,7 +36,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-
+import clases.BD;
 import clases.Producto;
 import clases.Usuario;
 
@@ -150,7 +151,9 @@ public class VentanaPrincipal extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-						System.exit(0);
+				//guardarMapaUsuariosEnFicheroDeTexto();		
+				System.exit(0);
+						
 					}
 		});
 		
