@@ -3,6 +3,8 @@ package clases;
 public class Zapato extends Producto {
 	private String colorCordones;
 	private boolean goretex;
+
+	
 	
 	public Zapato(String codigo, String nombre, double precio, int stock, String marca, String color, boolean goretex) {
 		super(codigo, nombre, precio, stock, marca);
