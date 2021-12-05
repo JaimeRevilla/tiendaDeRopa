@@ -62,7 +62,7 @@ public class VentanaRegistro extends JFrame {
 	public VentanaRegistro(JFrame va) {
 
 		Connection con = BD.initBD("SweetWear.db");
-		BD.crearTabla(con);
+		BD.crearTablaUsuario(con);
 		BD.closeBD(con);
 		VentanaAnterior = va;
 		VentanaActual = this;

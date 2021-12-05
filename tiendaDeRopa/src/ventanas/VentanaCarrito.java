@@ -1,4 +1,4 @@
-package tiendaDeRopa;
+package ventanas;
 
 import java.awt.BorderLayout;
 
@@ -32,33 +32,36 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 
-public class CarritoUsuario extends JFrame {
+public class VentanaCarrito extends JFrame {
 
 	private JPanel contentPane;
+	private JFrame ventanaActual, ventanaAnterior;
 	
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CarritoUsuario frame = new CarritoUsuario();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					VentanaCarrito frame = new VentanaCarrito();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 	//JTable de la ventana
 	private JTable uProductos;
 	/*
 	 * Creacion de la ventana
 	 */
-	public CarritoUsuario() {
+	public VentanaCarrito(JFrame va) {
 		//Configuracion general de la ventana
 		setTitle("SWEET WEAR");
 		setSize(800, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ventanaAnterior = va;
+		ventanaActual = this;
 		//Creacion de los componentes y contenedores 
 		JPanel uCarrito = new JPanel();
 		uProductos = new JTable();

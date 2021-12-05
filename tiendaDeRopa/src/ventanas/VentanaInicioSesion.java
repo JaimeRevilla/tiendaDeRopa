@@ -32,7 +32,7 @@ public class VentanaInicioSesion extends JFrame {
 	
 	public VentanaInicioSesion(JFrame va) {
 		Connection con = BD.initBD("SweetWear.db");
-		BD.crearTabla(con);
+		BD.crearTablaUsuario(con);
 		VentanaPrincipal.tmUsuarios = BD.obtenerMapaUsuarios(con);
 		BD.closeBD(con);
 		ventanaAnterior = va;
@@ -106,7 +106,7 @@ public class VentanaInicioSesion extends JFrame {
 				} else if (resul == 1){
 					JOptionPane.showMessageDialog(null, "¡¡LA CONTRASEÑA EN INCORRECTA!!");
 				} else if (resul == 2){
-					JOptionPane.showMessageDialog(null, "¡¡BIENVENIDO!!");
+					JOptionPane.showMessageDialog(null, "¡¡BIENVENIDO "+ n+ "!!");
 					VentanaPrincipal.lblNombre.setText("BIENVENIDO " + n);
 					volver();
 				}

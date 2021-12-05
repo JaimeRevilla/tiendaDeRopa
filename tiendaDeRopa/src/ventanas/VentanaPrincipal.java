@@ -3,6 +3,7 @@ package ventanas;
 import java.awt.BorderLayout;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -20,9 +21,11 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.TreeMap;
+import java.util.Vector;
 
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
@@ -34,7 +37,10 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 import clases.BD;
 import clases.Producto;
@@ -44,7 +50,7 @@ public class VentanaPrincipal extends JFrame {
 	//DECLARACION DE LOS ATRIBUTOS
 	
 	private JPanel contentPane;
-	private JPanel panelCentral;
+	private JPanel panelCentral, panelArriba, panelNorte, panelArribaDrc, panelArribaIzq;
 	private JButton btnInicioSesion, btnSalir, btnPruebaFoto;
 	private JFrame ventanaActual;
 	public static TreeMap<String, ArrayList<Producto>> tmPedidos; //MAPA que tiene como clave el nombre del usuario y como valor el pedido con los productos
@@ -54,6 +60,10 @@ public class VentanaPrincipal extends JFrame {
 	private JScrollPane scrollLista;
 	private JLabel lblHora;
 	public static JLabel lblNombre;
+	private JTable tablaPrin;
+	private DefaultTableModel modeloTablaPrin;
+	private JScrollPane scrollTabla;
+	
 
 	/**
 	 * Launch the application.
@@ -71,15 +81,6 @@ public class VentanaPrincipal extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	/**
-	 * 
-	 */
-	/**
-	 * 
-	 */
 	public VentanaPrincipal() {
 		//PROPIEDADES DE LA VENTANA
 		ventanaActual = this;
@@ -95,7 +96,23 @@ public class VentanaPrincipal extends JFrame {
 		//CREAMOS LOS PANELES
 		panelCentral = new JPanel();
 		panelCentral.setBackground(Color.CYAN);
-		panelCentral.setLayout(new GridLayout(5,5,3,3));
+		panelCentral.setLayout(new GridLayout(0,1,0,0));
+		
+		panelArriba = new JPanel();
+		panelArriba.setLayout(new GridLayout(0,2,0,0));
+		panelCentral.add(panelArriba);
+		
+		panelArribaIzq = new JPanel();
+		panelArriba.add(panelArribaIzq);
+		panelArribaIzq.setBackground(Color.CYAN);
+		
+		panelArribaDrc = new JPanel();
+		panelArriba.add(panelArribaDrc);
+		panelArribaDrc.setBackground(Color.CYAN);
+		
+		
+		
+		
 		//AÑADIMOS LOS PANELES AL PANEL PRINCIPAL DE LA VENTANA
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		//CREAMOS LOS COMPONENTES
@@ -106,7 +123,45 @@ public class VentanaPrincipal extends JFrame {
 		listaUsuario = new JList<Usuario>(modeloListaUsuario);
 		scrollLista = new JScrollPane(listaUsuario);
 		
+		modeloTablaPrin = new DefaultTableModel();
+		Vector<String> cabeceras = new Vector<String>( Arrays.asList( "PEDRO") );
+		modeloTablaPrin = new DefaultTableModel(  
+				new Vector<Vector<Object>>(),  
+				cabeceras  
+			) {
+				public boolean isCellEditable(int row, int column) {
+					if(column==0)
+						return false;
+					return true;
+				}
+			};
+			
+		tablaPrin = new JTable(modeloTablaPrin);
 		
+		//ESTO NO FUNCIONA!!!
+		tablaPrin.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+			
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+				JButton btnCalcetines = new JButton("CALCETINES");
+				JButton btnCamisetas = new JButton("CAMISETAS");
+				
+				
+				Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+				if(column == 0 && row == 0) {
+					value = btnCalcetines;
+					return  (JButton) value;
+				}
+				if (column == 1 && row == 1) {
+					value = btnCamisetas;
+					return (Component) value;
+				}
+				return c;
+			}
+		});
+		
+		JScrollPane scrollTabla = new JScrollPane(tablaPrin);
+		panelArribaDrc.add(scrollTabla);
 		
 //		ImageIcon icon = new ImageIcon("tiendaDeRopa\\src\\imagenes\\IconoCarrito.png");
 //		Icon i = new ImageIcon(icon.getImage().getScaledInstance(alto, ancho, Image.SCALE_DEFAULT));
@@ -129,13 +184,17 @@ public class VentanaPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		panelCentral.add(btnPruebaFoto);
+		panelArribaIzq.add(btnPruebaFoto);
 		//AÑADIMOS LOS COMPONENTES A LOS PANELES
-		panelCentral.add(btnInicioSesion);
-		panelCentral.add(btnSalir);
-		panelCentral.add(lblHora);
-		panelCentral.add(scrollLista);
-		panelCentral.add(lblNombre);
+		panelArribaIzq.add(btnInicioSesion);
+		panelArribaIzq.add(btnSalir);
+		panelArribaIzq.add(lblHora);
+		panelArribaIzq.add(scrollLista);
+		panelArribaIzq.add(lblNombre);
+		
+		setLocationRelativeTo( null );
+		
+		 
 		//EVENTOS
 		btnInicioSesion.addActionListener(new ActionListener() {
 			
@@ -155,6 +214,18 @@ public class VentanaPrincipal extends JFrame {
 				System.exit(0);
 						
 					}
+		});
+		
+		
+		btnPruebaFoto.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//NO FUNCIONA!!
+				new VentanaCarrito(ventanaActual);
+				ventanaActual.setVisible(false);
+				
+			}
 		});
 		
 		//HILOS
@@ -200,7 +271,7 @@ public class VentanaPrincipal extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				// TODO Auto-generated method stub
-				guardarMapaUsuariosEnFicheroDeTexto();
+				//guardarMapaUsuariosEnFicheroDeTexto();
 			}
 			
 			
@@ -324,7 +395,45 @@ public class VentanaPrincipal extends JFrame {
 		
 	}
 	
-	
+	private void cargarMapaPedidosDeFicheroDeTexto () {
+		BufferedReader br = null;
+		
+		try {
+			br = new BufferedReader(new FileReader("USUARIOS.txt"));
+			String linea = br.readLine();
+			while (linea != null) {
+				String [] datosUsuario = linea.split(" ");
+				String nombre = datosUsuario[0];
+				int edad = Integer.parseInt(datosUsuario[1]);
+				String mail = datosUsuario[2];
+				String con = datosUsuario[3];
+				boolean permisos = Boolean.parseBoolean(datosUsuario[4]);
+				Usuario u = new Usuario(nombre, edad, mail, con, permisos);
+				tmUsuarios.put(nombre, u);
+				linea = br.readLine();
+				
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (br!= null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+		
+	}	
 		
 	
 	

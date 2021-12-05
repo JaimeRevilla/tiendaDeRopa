@@ -165,7 +165,7 @@ public class BD {
 	 * Metodo para crear la tabla usuario en caso de que todavia no exista
 	 * @param con Conexion con la BBDD
 	 */
-	public static void crearTabla(Connection con) {
+	public static void crearTablaUsuario(Connection con) {
 		String sent = "CREATE TABLE IF NOT EXISTS usuario (nom String, edad int, mail String, c String , permisos boolean)";
 		Statement stmt = null;
 		
