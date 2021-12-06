@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -34,10 +35,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -45,6 +50,7 @@ import javax.swing.table.DefaultTableModel;
 import clases.BD;
 import clases.Producto;
 import clases.Usuario;
+
 
 public class VentanaPrincipal extends JFrame {
 	//DECLARACION DE LOS ATRIBUTOS
@@ -58,11 +64,18 @@ public class VentanaPrincipal extends JFrame {
 	public static DefaultListModel<Usuario> modeloListaUsuario;
 	public static JList<Usuario> listaUsuario;
 	private JScrollPane scrollLista;
-	private JLabel lblHora;
+	private JLabel lblHora, lblTitulo;
 	public static JLabel lblNombre;
 	private JTable tablaPrin;
 	private DefaultTableModel modeloTablaPrin;
 	private JScrollPane scrollTabla;
+	private JMenuBar menuBar;
+	private JMenu mnFile;
+	private JMenu mnExit;
+	private JMenu mnProductos;
+	private JMenuItem mntmCargarArchivo;
+	private JMenuItem mntmCerrarAplicacion;
+	private JMenuItem mntmCalcetines;
 	
 
 	/**
@@ -110,11 +123,15 @@ public class VentanaPrincipal extends JFrame {
 		panelArriba.add(panelArribaDrc);
 		panelArribaDrc.setBackground(Color.CYAN);
 		
+		panelNorte = new JPanel();
+		panelNorte.setBackground(Color.CYAN);
+		
 		
 		
 		
 		//AÑADIMOS LOS PANELES AL PANEL PRINCIPAL DE LA VENTANA
 		contentPane.add(panelCentral, BorderLayout.CENTER);
+		contentPane.add(panelNorte, BorderLayout.NORTH);
 		//CREAMOS LOS COMPONENTES
 		btnInicioSesion = new JButton("INICIAR SESION");
 		btnSalir = new JButton("SALIR");
@@ -170,6 +187,41 @@ public class VentanaPrincipal extends JFrame {
 		
 		lblHora = new JLabel("");
 		lblNombre = new JLabel("");
+		lblTitulo = new JLabel("SWEET WEAR");
+		lblTitulo.setForeground(Color.BLACK);
+		
+		FlowLayout flowLayout = (FlowLayout) panelNorte.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEFT);
+		
+		menuBar = new JMenuBar();
+		panelNorte.add(menuBar);
+		
+		mnFile = new JMenu("File");
+		mnFile.setHorizontalAlignment(SwingConstants.LEFT);
+		menuBar.add(mnFile);
+		
+		mntmCargarArchivo = new JMenuItem("Cargar Archivo");
+		mntmCargarArchivo.setHorizontalAlignment(SwingConstants.LEFT);
+		mnFile.add(mntmCargarArchivo);
+		
+		mnExit = new JMenu("Exit");
+		mnExit.setHorizontalAlignment(SwingConstants.LEFT);
+		menuBar.add(mnExit);
+		
+		mntmCerrarAplicacion = new JMenuItem("SALIR");
+		mntmCerrarAplicacion.setHorizontalAlignment(SwingConstants.LEFT);
+		mnExit.add(mntmCerrarAplicacion);
+		
+		mnProductos = new JMenu("PRODUCTOS");
+		mnProductos.setHorizontalAlignment(SwingConstants.LEFT);
+		menuBar.add(mnProductos);
+		
+		mntmCalcetines = new JMenuItem("CALCETINES");
+		mntmCalcetines.setHorizontalAlignment(SwingConstants.LEFT);
+		mnProductos.add(mntmCalcetines);
+		
+		panelNorte.add(lblTitulo);
+		
 		
 		btnPruebaFoto = new JButton();
 		btnPruebaFoto.setBounds(80, 80, 80, 80);
@@ -258,9 +310,35 @@ public class VentanaPrincipal extends JFrame {
 		Thread t1 = new Thread(r1);
 		t1.start();
 		
+		Runnable r2 = new Runnable() {
+			
+			@Override
+			public void run() {
+				while (true) {
+					panelArribaIzq.setBackground(Color.PINK);
+					panelArribaDrc.setBackground(Color.BLUE);
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					panelArribaIzq.setBackground(Color.BLUE);
+					panelArribaDrc.setBackground(Color.PINK);
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}
+		};
+		Thread t2 = new Thread(r2);
+		t2.start();
 		
-		
-		this.addWindowListener(new WindowAdapter() {
+		ventanaActual.addWindowListener(new WindowAdapter() {
 			
 			@Override
 			public void windowOpened(WindowEvent e) {
@@ -277,6 +355,8 @@ public class VentanaPrincipal extends JFrame {
 			
 			
 		});
+		
+		
 		
 	}
 	/**
@@ -326,7 +406,7 @@ public class VentanaPrincipal extends JFrame {
 	/**
 	 * Metodo que carga de un fichero de texto los el mapaUsuarios.
 	 */
-	private void cargarMapaUsuariosDeFicheroDeTexto () {
+	public static void cargarMapaUsuariosDeFicheroDeTexto () {
 		BufferedReader br = null;
 		
 		try {
@@ -411,7 +491,6 @@ public class VentanaPrincipal extends JFrame {
 				Usuario u = new Usuario(nombre, edad, mail, con, permisos);
 				tmUsuarios.put(nombre, u);
 				linea = br.readLine();
-				
 			}
 			
 		} catch (FileNotFoundException e) {
