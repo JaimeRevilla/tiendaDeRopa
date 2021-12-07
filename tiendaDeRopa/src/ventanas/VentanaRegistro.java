@@ -38,23 +38,25 @@ public class VentanaRegistro extends JFrame {
 	private JPasswordField txtCon;
 	private JTextField txtNombre, txtEdad, txtMail;
 	private JButton btnRegistrar, btnVolver;
-	private JFrame VentanaActual, VentanaAnterior;
+	private static JFrame VentanaActual;
+
+	private JFrame VentanaAnterior;
 
 	/**
 	 * Launch the application.
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					VentanaRegistro frame = new VentanaRegistro();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VentanaRegistro frame = new VentanaRegistro(null);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+}
 
 	/**
 	 * Create the frame.
@@ -62,8 +64,8 @@ public class VentanaRegistro extends JFrame {
 	public VentanaRegistro(JFrame va) {
 
 		Connection con = BD.initBD("SweetWear.db");
-		BD.crearTablaUsuario(con);
-		BD.closeBD(con);
+		BD.crearTablaUsuario(con);		//HE QUITADO TANTO EN ESTA VENTANA COMO EN LA DE INICIO DE 
+		BD.closeBD(con);					//SESION ESTE APARTADO DE BD PARA QUE AL MENOS SE VEA QUE LA FUNCION FUNCIONA
 		VentanaAnterior = va;
 		VentanaActual = this;
 		

@@ -21,10 +21,10 @@ public class Producto{
 		this.precio = precio;
 		this.stock = stock;
 		this.marca = marca;
-		this.rutaFoto = rutaFoto;
+		/*this.rutaFoto = rutaFoto;*/
 	}
 	
-	
+	//CREO QUE RUTA FOTO ES ALGO QUE NO NECESITAMOS DE MOMENTO, CREO QUE ES ALGO MAS ESTETICO QUE IMPORTANTE (NO DIGO QUE SEA MALA IDEA)
 	
 
 	public static int getContador() {
@@ -87,13 +87,5 @@ public class Producto{
 	public void setRutaFoto(String rutaFoto) {
 		this.rutaFoto = rutaFoto;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

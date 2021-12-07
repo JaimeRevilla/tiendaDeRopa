@@ -83,8 +83,8 @@ public class VentanaInicioSesion extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				ventanaActual.dispose();
-//				ventanaAnterior.setVisible(true);
+				ventanaActual.dispose();
+				ventanaAnterior.setVisible(true);
 				volver();
 			}
 		});
