@@ -30,12 +30,12 @@ public class VentanaInicioSesion extends JFrame {
 	private JPasswordField textCon;
 	
 	
-	public VentanaInicioSesion(JFrame va) {
+	public VentanaInicioSesion() {
 		Connection con = BD.initBD("SweetWear.db");
-		BD.crearTablaUsuario(con);
-		VentanaPrincipal.tmUsuarios = BD.obtenerMapaUsuarios(con);
-		BD.closeBD(con);
-		ventanaAnterior = va;
+		//BD.crearTablaUsuario(con);
+		//VentanaPrincipal.tmUsuarios = BD.obtenerMapaUsuarios(con);
+		//BD.closeBD(con);
+		//ventanaAnterior = va;
 		ventanaActual = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -101,7 +101,7 @@ public class VentanaInicioSesion extends JFrame {
 				BD.closeBD(con);
 				if (resul == 0) {
 					JOptionPane.showMessageDialog(null, "¡¡PRIMERO TIENES QUE REGISTRARTE!!");
-					new VentanaRegistro(ventanaActual);
+					//new VentanaRegistro(ventanaActual);
 					ventanaActual.setVisible(false);
 				} else if (resul == 1){
 					JOptionPane.showMessageDialog(null, "¡¡LA CONTRASEÑA EN INCORRECTA!!");

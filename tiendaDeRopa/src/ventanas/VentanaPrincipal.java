@@ -57,14 +57,14 @@ public class VentanaPrincipal extends JFrame {
 	
 	private JPanel contentPane;
 	private JPanel panelCentral, panelArriba, panelNorte, panelArribaDrc, panelArribaIzq;
-	private JButton btnInicioSesion, btnSalir, btnPruebaFoto;
+	private JButton btnInicioSesion, btnSalir, btnPruebaFoto, btnRegistrarme;
 	private JFrame ventanaActual;
 	public static TreeMap<String, ArrayList<Producto>> tmPedidos; //MAPA que tiene como clave el nombre del usuario y como valor el pedido con los productos
 	public static TreeMap<String, Usuario> tmUsuarios;
 	public static DefaultListModel<Usuario> modeloListaUsuario;
 	public static JList<Usuario> listaUsuario;
 	private JScrollPane scrollLista;
-	private JLabel lblHora, lblTitulo;
+	private JLabel lblTitulo;
 	public static JLabel lblNombre;
 	private JTable tablaPrin;
 	private DefaultTableModel modeloTablaPrin;
@@ -76,6 +76,7 @@ public class VentanaPrincipal extends JFrame {
 	private JMenuItem mntmCargarArchivo;
 	private JMenuItem mntmCerrarAplicacion;
 	private JMenuItem mntmCalcetines;
+	private JLabel lblHora;
 	
 
 	/**
@@ -98,7 +99,7 @@ public class VentanaPrincipal extends JFrame {
 		//PROPIEDADES DE LA VENTANA
 		ventanaActual = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(500, 500, 600, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -135,13 +136,14 @@ public class VentanaPrincipal extends JFrame {
 		//CREAMOS LOS COMPONENTES
 		btnInicioSesion = new JButton("INICIAR SESION");
 		btnSalir = new JButton("SALIR");
+		btnRegistrarme = new JButton("REGISTRARME");
 		
 		modeloListaUsuario = new DefaultListModel<>();
 		listaUsuario = new JList<Usuario>(modeloListaUsuario);
 		scrollLista = new JScrollPane(listaUsuario);
 		
 		modeloTablaPrin = new DefaultTableModel();
-		Vector<String> cabeceras = new Vector<String>( Arrays.asList( "PEDRO") );
+		Vector<String> cabeceras = new Vector<String>( Arrays.asList() );
 		modeloTablaPrin = new DefaultTableModel(  
 				new Vector<Vector<Object>>(),  
 				cabeceras  
@@ -179,13 +181,6 @@ public class VentanaPrincipal extends JFrame {
 		
 		JScrollPane scrollTabla = new JScrollPane(tablaPrin);
 		panelArribaDrc.add(scrollTabla);
-		
-//		ImageIcon icon = new ImageIcon("tiendaDeRopa\\src\\imagenes\\IconoCarrito.png");
-//		Icon i = new ImageIcon(icon.getImage().getScaledInstance(alto, ancho, Image.SCALE_DEFAULT));
-		
-		
-		
-		lblHora = new JLabel("");
 		lblNombre = new JLabel("");
 		lblTitulo = new JLabel("SWEET WEAR");
 		lblTitulo.setForeground(Color.BLACK);
@@ -222,6 +217,9 @@ public class VentanaPrincipal extends JFrame {
 		
 		panelNorte.add(lblTitulo);
 		
+		lblHora = new JLabel("");
+		panelNorte.add(lblHora);
+		
 		
 		btnPruebaFoto = new JButton();
 		btnPruebaFoto.setBounds(80, 80, 80, 80);
@@ -240,8 +238,8 @@ public class VentanaPrincipal extends JFrame {
 		//AÑADIMOS LOS COMPONENTES A LOS PANELES
 		panelArribaIzq.add(btnInicioSesion);
 		panelArribaIzq.add(btnSalir);
-		panelArribaIzq.add(lblHora);
 		panelArribaIzq.add(scrollLista);
+		panelArribaIzq.add(btnRegistrarme);
 		panelArribaIzq.add(lblNombre);
 		
 		setLocationRelativeTo( null );
@@ -252,9 +250,10 @@ public class VentanaPrincipal extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new VentanaInicioSesion(ventanaActual);
-				ventanaActual.setVisible(false);
-				
+				VentanaInicioSesion I = new VentanaInicioSesion();
+				I.setVisible(true);
+				VentanaPrincipal P = new VentanaPrincipal();
+				P.setVisible(false);
 			}
 		});
 		
@@ -266,6 +265,18 @@ public class VentanaPrincipal extends JFrame {
 				System.exit(0);
 						
 					}
+		});
+		
+		//EVENTO DELBOTON REGISTRAR
+		btnRegistrarme.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaRegistro R = new VentanaRegistro();
+				R.setVisible(true);
+				VentanaPrincipal P = new VentanaPrincipal();
+				P.setVisible(false);
+			}
 		});
 		
 		
@@ -310,7 +321,7 @@ public class VentanaPrincipal extends JFrame {
 		Thread t1 = new Thread(r1);
 		t1.start();
 		
-		Runnable r2 = new Runnable() {
+		/*Runnable r2 = new Runnable() {
 			
 			@Override
 			public void run() {
@@ -336,7 +347,7 @@ public class VentanaPrincipal extends JFrame {
 			}
 		};
 		Thread t2 = new Thread(r2);
-		t2.start();
+		t2.start();*/
 		
 		ventanaActual.addWindowListener(new WindowAdapter() {
 			
