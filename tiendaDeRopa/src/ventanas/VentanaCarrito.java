@@ -96,7 +96,7 @@ public class VentanaCarrito extends JFrame {
 				//btnguardarPago();
 			}
 		});
-	
+		
 
 		
 		

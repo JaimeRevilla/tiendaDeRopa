@@ -1,6 +1,37 @@
 package clases;
 
-public class Calcetines {
-	//Aplicar enum tipo de calcetin
-	//Poner talla de calcetin por rangos
+public class Calcetines extends Producto {
+	private TipoCalcetines tipoCalcetinas;
+
+	public Calcetines(int codigo, String color, String nombre, double precio, int stock, String marca, String rutaFoto,
+			TipoCalcetines tipoCalcetinas) {
+		super(codigo, color, nombre, precio, stock, marca, rutaFoto);
+		if(nombre.contains("PINKIE")) {
+			this.tipoCalcetinas = tipoCalcetinas.PINKIE;
+		}else if(nombre.contains("TOBILLERO")) {
+			this.tipoCalcetinas = tipoCalcetinas.TOBILLERO;
+		}else if(nombre.contains("ALTO")) {
+			this.tipoCalcetinas = tipoCalcetinas.ALTO;
+		}
+		
+	}
+
+	public TipoCalcetines getTipoCalcetinas() {
+		return tipoCalcetinas;
+	}
+
+	public void setTipoCalcetinas(TipoCalcetines tipoCalcetinas) {
+		this.tipoCalcetinas = tipoCalcetinas;
+	}
+
+	@Override
+	public String toString() {
+		return "Calcetines [tipoCalcetinas=" + tipoCalcetinas + ", getTipoCalcetinas()=" + getTipoCalcetinas()
+				+ ", getCodigo()=" + getCodigo() + ", getColor()=" + getColor() + ", getNombre()=" + getNombre()
+				+ ", getPrecio()=" + getPrecio() + ", getStock()=" + getStock() + ", getMarca()=" + getMarca()
+				+ ", getRutaFoto()=" + getRutaFoto() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
+	}
+	
+	
 }
