@@ -7,7 +7,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
+import clases.Producto;
 
 //import tiendaDeRopa.Carrito.GestorCarrito;
 
@@ -26,6 +28,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.TreeMap;
 
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -35,23 +38,24 @@ import javax.swing.JButton;
 public class VentanaCarrito extends JFrame {
 
 	private JPanel contentPane;
-	private JFrame ventanaActual, ventanaAnterior;
+	private static JFrame ventanaActual;
+	private JFrame ventanaAnterior;
+	private JTable uProductos;//JTable de la ventana
+	private DefaultTableModel tmPedidos1;
+	public static TreeMap<String, ArrayList<Producto>> tmPedidos;
 	
-
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					VentanaCarrito frame = new VentanaCarrito();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-	//JTable de la ventana
-	private JTable uProductos;
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VentanaCarrito frame = new VentanaCarrito(ventanaActual);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 	/*
 	 * Creacion de la ventana
 	 */
@@ -62,11 +66,13 @@ public class VentanaCarrito extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventanaAnterior = va;
 		ventanaActual = this;
+		
 		//Creacion de los componentes y contenedores 
 		JPanel uCarrito = new JPanel();
 		uProductos = new JTable();
 		JButton btnCargarPago = new JButton("Cargar_pago ");
 		JButton btnGuardarPago = new JButton("Guardar_Pago ");
+		
 		//Asigancion de los botones 
 		uCarrito.add(btnCargarPago);//El boton es uCarrito
 		uCarrito.add(btnGuardarPago);
@@ -87,10 +93,6 @@ public class VentanaCarrito extends JFrame {
 			}
 		});
 		
-		
-		
-		
-		//No entiendo @JONPAR
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
