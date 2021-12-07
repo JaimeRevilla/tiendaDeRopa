@@ -241,7 +241,7 @@ public class VentanaPrincipal extends JFrame {
 		panelArribaIzq.add(btnInicioSesion);
 		panelArribaIzq.add(btnSalir);
 		panelArribaIzq.add(lblHora);
-		panelArribaIzq.add(scrollLista);
+		//panelArribaIzq.add(scrollLista);
 		panelArribaIzq.add(lblNombre);
 		
 		setLocationRelativeTo( null );
