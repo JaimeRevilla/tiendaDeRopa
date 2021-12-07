@@ -199,7 +199,7 @@ public class VentanaAdmin extends JFrame {
 		//String nombres[] = {"ID","COLOR","TIPO PRODUCTO","PRECIO", "STOCK", "MARCA", "RUTA FOTO"};
 		
 		modeloTablaProductos = new DefaultTableModel();
-		Vector<String> cabeceras = new Vector<String>( Arrays.asList( "ID","COLOR","TIPO PRODUCTO","PRECIO", "STOCK", "MARCA"/*, "RUTA FOTO"*/) );
+		Vector<String> cabeceras = new Vector<String>( Arrays.asList( "ID","COLOR","TIPO PRODUCTO","PRECIO", "STOCK", "MARCA", "RUTA FOTO") );
 		modeloTablaProductos = new DefaultTableModel(  
 				new Vector<Vector<Object>>(),  
 				cabeceras  
@@ -254,13 +254,13 @@ public class VentanaAdmin extends JFrame {
 				int stock = Integer.parseInt(txtStock.getText());
 				String marca = txtMarca.getText();
 				ImageIcon im = (ImageIcon)lblFoto.getIcon();
-				//String rutaFoto = im.getDescription();
+				String rutaFoto = im.getDescription();
 				
 				//AQUI HABRA QUE VER COMO ATRIBUIRLE EL CODIGO AL PRODUCTO
 				//SUPONGO QUE SE HARA CONTANDO LOS PRODUCTOS DE LA BASE DE DATOS
 				//OSEA AÑADIENDOLO A LA BASES DE DATOS Y PILLANDO DE HAY EL ID/CODIGO!!!
-				Producto p = new Producto(999, color, nombre, precio, stock, marca);
-				String [] fila = {String.valueOf(p.getCodigo()), color, nombre, String.valueOf(precio), String.valueOf(stock), marca};
+				Producto p = new Producto(999, color, nombre, precio, stock, marca, rutaFoto);
+				String [] fila = {String.valueOf(p.getCodigo()), color, nombre, String.valueOf(precio), String.valueOf(stock), marca, rutaFoto};
 				modeloTablaProductos.addRow(fila);
 				
 				

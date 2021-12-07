@@ -144,6 +144,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		modeloTablaPrin = new DefaultTableModel();
 		Vector<String> cabeceras = new Vector<String>( Arrays.asList() );
+		
 		modeloTablaPrin = new DefaultTableModel(  
 				new Vector<Vector<Object>>(),  
 				cabeceras  
@@ -238,6 +239,10 @@ public class VentanaPrincipal extends JFrame {
 		//AÑADIMOS LOS COMPONENTES A LOS PANELES
 		panelArribaIzq.add(btnInicioSesion);
 		panelArribaIzq.add(btnSalir);
+
+		panelArribaIzq.add(lblHora);
+		//panelArribaIzq.add(scrollLista);
+
 		panelArribaIzq.add(scrollLista);
 		panelArribaIzq.add(btnRegistrarme);
 		panelArribaIzq.add(lblNombre);
@@ -249,11 +254,9 @@ public class VentanaPrincipal extends JFrame {
 		btnInicioSesion.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				VentanaInicioSesion I = new VentanaInicioSesion();
-				I.setVisible(true);
-				VentanaPrincipal P = new VentanaPrincipal();
-				P.setVisible(false);
+			public void actionPerformed(ActionEvent e) {;
+				new VentanaInicioSesion(ventanaActual);
+				ventanaActual.setVisible(false);
 			}
 		});
 		
@@ -272,10 +275,8 @@ public class VentanaPrincipal extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaRegistro R = new VentanaRegistro();
-				R.setVisible(true);
-				VentanaPrincipal P = new VentanaPrincipal();
-				P.setVisible(false);
+				new VentanaRegistro(ventanaActual);
+				ventanaActual.setVisible(false);
 			}
 		});
 		
@@ -284,8 +285,8 @@ public class VentanaPrincipal extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//NO FUNCIONA!!
-				new VentanaCarrito(ventanaActual);
+				//NO SE XQ ESTA VENTANA NO SE ABRE!!!!
+				new VentanaCarritoUsuario(ventanaActual);
 				ventanaActual.setVisible(false);
 				
 			}

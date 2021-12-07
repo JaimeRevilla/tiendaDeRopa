@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import clases.Producto;
+import examen.parc202112.BaseDatos;
 
 //import tiendaDeRopa.Carrito.GestorCarrito;
 
@@ -25,9 +26,12 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.TreeMap;
 
 import javax.swing.JScrollBar;
@@ -92,6 +96,9 @@ public class VentanaCarrito extends JFrame {
 				//btnguardarPago();
 			}
 		});
+	
+
+		
 		
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

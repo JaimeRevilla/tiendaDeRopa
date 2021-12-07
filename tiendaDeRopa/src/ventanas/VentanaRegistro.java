@@ -49,7 +49,7 @@ public class VentanaRegistro extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaRegistro frame = new VentanaRegistro();
+					VentanaRegistro frame = new VentanaRegistro(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,12 +61,12 @@ public class VentanaRegistro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaRegistro() {
+	public VentanaRegistro(JFrame va) {
 
 		Connection con = BD.initBD("SweetWear.db");
-		//BD.crearTablaUsuario(con);		//HE QUITADO TANTO EN ESTA VENTANA COMO EN LA DE INICIO DE 
-		//BD.closeBD(con);					//SESION ESTE APARTADO DE BD PARA QUE AL MENOS SE VEA QUE LA FUNCION FUNCIONA
-		//VentanaAnterior = va;
+		BD.crearTablaUsuario(con);		//HE QUITADO TANTO EN ESTA VENTANA COMO EN LA DE INICIO DE 
+		BD.closeBD(con);					//SESION ESTE APARTADO DE BD PARA QUE AL MENOS SE VEA QUE LA FUNCION FUNCIONA
+		VentanaAnterior = va;
 		VentanaActual = this;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -12,9 +12,9 @@ public class Producto{
 	private double precio;
 	private int stock;
 	private String marca;
-	//private String rutaFoto;
+	private String rutaFoto;
 	
-	public Producto(int codigo, String color, String nombre, double precio, int stock, String marca/*, String rutaFoto*/) {
+	public Producto(int codigo, String color, String nombre, double precio, int stock, String marca, String rutaFoto) {
 		this.codigo = contador++; //Guardo el valor del contado en el atributo código y luego al contador le sumo 1
 		this.color = color;
 		this.nombre = nombre;
@@ -80,12 +80,12 @@ public class Producto{
 		this.marca = marca;
 	}
 
-	/*public String getRutaFoto() {
+	public String getRutaFoto() {
 		return rutaFoto;
 	}
 
 	public void setRutaFoto(String rutaFoto) {
 		this.rutaFoto = rutaFoto;
-	}*/
+	}
 
 }
