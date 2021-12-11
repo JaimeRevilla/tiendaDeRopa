@@ -98,7 +98,6 @@ public class VentanaInicioSesion extends JFrame {
 				
 				Connection con = BD.initBD("SweetWear.db"); 
 				int resul = BD.obtenerUsuario(con, n, c);
-				BD.closeBD(con);
 				if (resul == 0) {
 					JOptionPane.showMessageDialog(null, "¡¡PRIMERO TIENES QUE REGISTRARTE!!");
 					new VentanaRegistro(ventanaActual);
@@ -108,8 +107,15 @@ public class VentanaInicioSesion extends JFrame {
 				} else if (resul == 2){
 					JOptionPane.showMessageDialog(null, "¡¡BIENVENIDO "+ n+ "!!");
 					VentanaPrincipal.lblNombre.setText("BIENVENIDO " + n);
+					boolean admin = BD.obtenerAdmin(con, n);
+					System.out.println(n);
+					System.out.println(admin);
+					if (!admin == true) {
+						VentanaPrincipal.btnAdmin.setVisible(true);
+					}
 					volver();
 				}
+				BD.closeBD(con);
 				vaciarCampos();
 			}
 		});

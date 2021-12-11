@@ -66,7 +66,7 @@ public class VentanaAdmin extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaAdmin frame = new VentanaAdmin();
+					VentanaAdmin frame = new VentanaAdmin(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -78,7 +78,7 @@ public class VentanaAdmin extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaAdmin() {
+	public VentanaAdmin(JFrame va) {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,6 +87,7 @@ public class VentanaAdmin extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		ventanaAnterior = va;
 		ventanaActual = this;
 		
 		panelCentro = new JPanel();
@@ -286,8 +287,9 @@ public class VentanaAdmin extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new VentanaAdmin2(ventanaActual);
+				VentanaAdmin2 v1 = new VentanaAdmin2(ventanaActual);
 				ventanaActual.setVisible(false);
+				v1.setVisible(true);
 				
 				//NO SE XQ NO ME HABRE LA VENTANA ADMIN2
 				

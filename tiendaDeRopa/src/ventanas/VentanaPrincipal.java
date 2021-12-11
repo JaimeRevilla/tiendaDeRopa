@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -38,10 +39,12 @@ import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RootPaneContainer;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -56,8 +59,11 @@ public class VentanaPrincipal extends JFrame {
 	//DECLARACION DE LOS ATRIBUTOS
 	
 	private JPanel contentPane;
-	private JPanel panelCentral, panelArriba, panelNorte, panelArribaDrc, panelArribaIzq;
+	private JPanel panelCentral, panelArriba, panelNorte, panelArribaDrc, panelArribaIzq, panelNorteIzq, panelNorteMedio, panelNorteDrc;
+	private JPanel panelP1, panelP2, panelP3, panelP4, panelP5;
 	private JButton btnInicioSesion, btnSalir, btnPruebaFoto, btnRegistrarme;
+	private JButton btnP1, btnP2, btnP3, btnP4, btnP5;
+	public static JButton btnAdmin;
 	private JFrame ventanaActual;
 	public static TreeMap<String, ArrayList<Producto>> tmPedidos; //MAPA que tiene como clave el nombre del usuario y como valor el pedido con los productos
 	public static TreeMap<String, Usuario> tmUsuarios;
@@ -70,12 +76,11 @@ public class VentanaPrincipal extends JFrame {
 	private DefaultTableModel modeloTablaPrin;
 	private JScrollPane scrollTabla;
 	private JMenuBar menuBar;
-	private JMenu mnFile;
 	private JMenu mnExit;
 	private JMenu mnProductos;
-	private JMenuItem mntmCargarArchivo;
 	private JMenuItem mntmCerrarAplicacion;
-	private JMenuItem mntmCalcetines;
+	private JMenuItem mntmPantalones;
+	
 	private JLabel lblHora;
 	
 
@@ -99,7 +104,8 @@ public class VentanaPrincipal extends JFrame {
 		//PROPIEDADES DE LA VENTANA
 		ventanaActual = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(500, 500, 600, 450);
+		//setBounds(500, 500, 600, 450);
+		setSize(1650, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -113,19 +119,78 @@ public class VentanaPrincipal extends JFrame {
 		panelCentral.setLayout(new GridLayout(0,1,0,0));
 		
 		panelArriba = new JPanel();
-		panelArriba.setLayout(new GridLayout(0,2,0,0));
+		panelArriba.setLayout(new GridLayout(2,0,0,0));
 		panelCentral.add(panelArriba);
 		
 		panelArribaIzq = new JPanel();
 		panelArriba.add(panelArribaIzq);
 		panelArribaIzq.setBackground(Color.CYAN);
 		
+	    
+	
+		
+		
 		panelArribaDrc = new JPanel();
 		panelArriba.add(panelArribaDrc);
+		panelArribaDrc.setLayout(new GridLayout(2, 3));
 		panelArribaDrc.setBackground(Color.CYAN);
 		
 		panelNorte = new JPanel();
 		panelNorte.setBackground(Color.CYAN);
+		panelNorte.setLayout(new GridLayout(0,3,0,0));
+		
+		panelNorteIzq = new JPanel();
+		panelNorteIzq.setBackground(Color.CYAN);
+		panelNorte.add(panelNorteIzq);
+		
+		panelNorteMedio = new JPanel();
+		panelNorteMedio.setBackground(Color.CYAN);
+		panelNorte.add(panelNorteMedio);
+		
+		panelNorteDrc = new JPanel();
+		panelNorteDrc.setBackground(Color.CYAN);
+		panelNorte.add(panelNorteDrc);
+	
+		//-------------------------------------------
+		panelP1 = new JPanel();
+		panelArribaDrc.add(panelP1);
+		panelP1.setBackground(Color.CYAN);
+		
+		panelP2 = new JPanel();
+		panelArribaDrc.add(panelP2);
+		panelP2.setBackground(Color.CYAN);
+		
+		panelP3 = new JPanel();
+		panelArribaDrc.add(panelP3);
+		panelP3.setBackground(Color.CYAN);
+		
+		panelP4 = new JPanel();
+		panelArribaDrc.add(panelP4);
+		panelP4.setBackground(Color.CYAN);
+		
+		panelP5 = new JPanel();
+		panelArribaDrc.add(panelP5);
+		panelP5.setBackground(Color.CYAN);
+		
+		btnP1 = new JButton();
+		ponerFotoABoton(btnP1, "tiendaDeRopa\\src\\imagenes\\IconoZapatillas.png", 120, 120, 120, 120);
+		panelP1.add(btnP1);
+		
+		btnP2 = new JButton();
+		ponerFotoABoton(btnP2, "tiendaDeRopa\\src\\imagenes\\IconoCalcetines.png", 120, 120, 120, 120);
+		panelP2.add(btnP2);
+		
+		btnP3 = new JButton();
+		ponerFotoABoton(btnP3, "tiendaDeRopa\\src\\imagenes\\IconoSudadera.png", 120, 120, 120, 120);
+		panelP3.add(btnP3);
+		
+		btnP4 = new JButton();
+		ponerFotoABoton(btnP4, "tiendaDeRopa\\src\\imagenes\\IconoPantalones.png", 120, 120, 120, 120);
+		panelP4.add(btnP4);
+		
+		btnP5 = new JButton();
+		ponerFotoABoton(btnP5, "tiendaDeRopa\\src\\imagenes\\IconoCamiseta.png", 120, 120, 120, 120);
+		panelP5.add(btnP5);
 		
 		
 		
@@ -134,9 +199,24 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		contentPane.add(panelNorte, BorderLayout.NORTH);
 		//CREAMOS LOS COMPONENTES
-		btnInicioSesion = new JButton("INICIAR SESION");
-		btnSalir = new JButton("SALIR");
-		btnRegistrarme = new JButton("REGISTRARME");
+		btnInicioSesion = new JButton();
+		ponerFotoABoton(btnInicioSesion, "tiendaDeRopa\\src\\imagenes\\IconoIniciarSesion.png", 30, 30, 30, 30);
+		
+		btnSalir = new JButton();
+		ponerFotoABoton(btnSalir, "tiendaDeRopa\\src\\imagenes\\IconoSalir.png", 30, 30, 30, 30);
+		
+		
+		btnRegistrarme = new JButton();
+		ponerFotoABoton(btnRegistrarme, "tiendaDeRopa\\src\\imagenes\\IconoRegistro.jpg", 30, 30, 30, 30);
+		
+		
+		btnAdmin = new JButton();
+		ponerFotoABoton(btnAdmin, "tiendaDeRopa\\src\\imagenes\\IconoAdmin.png", 30, 30, 30, 30);
+		
+		
+		btnAdmin.setVisible(false);
+		
+		
 		
 		modeloListaUsuario = new DefaultListModel<>();
 		listaUsuario = new JList<Usuario>(modeloListaUsuario);
@@ -181,24 +261,27 @@ public class VentanaPrincipal extends JFrame {
 		});
 		
 		JScrollPane scrollTabla = new JScrollPane(tablaPrin);
-		panelArribaDrc.add(scrollTabla);
+		//panelArribaDrc.add(scrollTabla);
 		lblNombre = new JLabel("");
 		lblTitulo = new JLabel("SWEET WEAR");
 		lblTitulo.setForeground(Color.BLACK);
 		
-		FlowLayout flowLayout = (FlowLayout) panelNorte.getLayout();
+		FlowLayout flowLayout = (FlowLayout) panelNorteIzq.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		
+		FlowLayout flowLayout2 = (FlowLayout) panelNorteDrc.getLayout();
+		flowLayout2.setAlignment(FlowLayout.RIGHT);
+		
 		menuBar = new JMenuBar();
-		panelNorte.add(menuBar);
+		panelNorteIzq.add(menuBar);
 		
-		mnFile = new JMenu("File");
-		mnFile.setHorizontalAlignment(SwingConstants.LEFT);
-		menuBar.add(mnFile);
-		
-		mntmCargarArchivo = new JMenuItem("Cargar Archivo");
-		mntmCargarArchivo.setHorizontalAlignment(SwingConstants.LEFT);
-		mnFile.add(mntmCargarArchivo);
+//		mnFile = new JMenu("File");
+//		mnFile.setHorizontalAlignment(SwingConstants.LEFT);
+//		menuBar.add(mnFile);
+//		
+//		mntmCargarArchivo = new JMenuItem("Cargar Archivo");
+//		mntmCargarArchivo.setHorizontalAlignment(SwingConstants.LEFT);
+//		mnFile.add(mntmCargarArchivo);
 		
 		mnExit = new JMenu("Exit");
 		mnExit.setHorizontalAlignment(SwingConstants.LEFT);
@@ -212,40 +295,32 @@ public class VentanaPrincipal extends JFrame {
 		mnProductos.setHorizontalAlignment(SwingConstants.LEFT);
 		menuBar.add(mnProductos);
 		
-		mntmCalcetines = new JMenuItem("CALCETINES");
-		mntmCalcetines.setHorizontalAlignment(SwingConstants.LEFT);
-		mnProductos.add(mntmCalcetines);
+		mntmPantalones = new JMenuItem("PANTALONES");
+		mntmPantalones.setHorizontalAlignment(SwingConstants.LEFT);
+		mnProductos.add(mntmPantalones);
 		
-		panelNorte.add(lblTitulo);
+		panelNorteMedio.add(lblTitulo);
 		
 		lblHora = new JLabel("");
-		panelNorte.add(lblHora);
 		
-		
+			
 		btnPruebaFoto = new JButton();
-		btnPruebaFoto.setBounds(80, 80, 80, 80);
-		int ancho = btnPruebaFoto.getWidth();
-		int alto = btnPruebaFoto.getHeight();
-		ImageIcon icon = new ImageIcon("tiendaDeRopa\\src\\imagenes\\IconoCarrito.png");
-		Icon i = new ImageIcon(icon.getImage().getScaledInstance(alto, ancho, Image.SCALE_DEFAULT));
-		btnPruebaFoto.setIcon(i);
+		ponerFotoABoton(btnPruebaFoto, "tiendaDeRopa\\src\\imagenes\\IconoCarrito.png", 30, 30, 30, 30);
+		
 		
 		//btnPruebaFoto = new JButton(new ImageIcon("tiendaDeRopa\\src\\imagenes\\IconoCarrito.png"));
-		btnPruebaFoto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		panelArribaIzq.add(btnPruebaFoto);
 		//AÑADIMOS LOS COMPONENTES A LOS PANELES
 		panelArribaIzq.add(btnInicioSesion);
 		panelArribaIzq.add(btnSalir);
 
-		panelArribaIzq.add(lblHora);
+		panelNorteDrc.add(lblHora);
 		//panelArribaIzq.add(scrollLista);
 
-		panelArribaIzq.add(scrollLista);
+		//panelArribaIzq.add(scrollLista);
 		panelArribaIzq.add(btnRegistrarme);
-		panelArribaIzq.add(lblNombre);
+		panelNorteDrc.add(lblNombre);
+		panelArribaIzq.add(btnAdmin);
 		
 		setLocationRelativeTo( null );
 		
@@ -286,8 +361,36 @@ public class VentanaPrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//NO SE XQ ESTA VENTANA NO SE ABRE!!!!
-				new VentanaCarritoUsuario(ventanaActual);
+				String texto = lblNombre.getText();
+				if (texto != "") {
+					VentanaCarritoUsuario v1 = new VentanaCarritoUsuario(ventanaActual);
+					ventanaActual.setVisible(false);
+					v1.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesión primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
+		btnAdmin.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaAdmin v1 = new VentanaAdmin(ventanaActual);
 				ventanaActual.setVisible(false);
+				v1.setVisible(true);
+				
+			}
+		});
+		
+		
+		mntmPantalones.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaPantalones v1 = new VentanaPantalones(ventanaActual);
+				ventanaActual.setVisible(false);
+				v1.setVisible(true);
 				
 			}
 		});
@@ -367,6 +470,7 @@ public class VentanaPrincipal extends JFrame {
 			
 			
 		});
+		
 		
 		
 		
@@ -526,7 +630,19 @@ public class VentanaPrincipal extends JFrame {
 		
 	}	
 		
+	public static void ponerFotoABoton (JButton btn, String rutaFoto, int x, int y, int width, int height) {
+		btn.setBounds(x, y, width, height);
+		int ancho = btn.getWidth();
+		int alto = btn.getHeight();
+		ImageIcon icon = new ImageIcon(rutaFoto);
+		Icon i = new ImageIcon(icon.getImage().getScaledInstance(alto, ancho, Image.SCALE_DEFAULT));
+		btn.setIcon(i);
+		btn.setBackground(Color.GREEN);
+	}
 	
+	
+	
+    
 	
 }
 

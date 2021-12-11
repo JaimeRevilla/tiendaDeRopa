@@ -159,7 +159,35 @@ public class BD {
 		}return res;	
 	}
 	
-	
+	public static boolean obtenerAdmin(Connection con, String nom) {
+		String sent = "SELECT * FROM usuario WHERE nom = '"+nom+"'";
+		Statement stmt = null;
+		boolean res = false;
+		
+		try {
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sent);
+			if (rs.next()) {
+				res = rs.getBoolean("permisos");
+			}
+			rs.close();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}return res;	
+	}
 	
 	/**
 	 * Metodo para crear la tabla usuario en caso de que todavia no exista
@@ -217,7 +245,36 @@ public class BD {
 	
 	
 	
+	//------------------------------------------------------------------------------------------------------------------------
+	//METODOS DE LA BD RELACIONADOS CON LOS PRODUCTOS
 	
+	public static void crearTablaProducto(Connection con) {
+		String sent = "CREATE TABLE IF NOT EXISTS producto (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String)";
+		Statement stmt = null;
+		
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(sent);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+	}
 	
-	
+	//eliminarProducto
+	//InsetarProducto
+	//ObtenerProducto
+	//Los que se ocurran
 }
