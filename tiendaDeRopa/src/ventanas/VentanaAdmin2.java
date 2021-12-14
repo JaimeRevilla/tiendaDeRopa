@@ -15,6 +15,7 @@ import java.util.TreeMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
@@ -124,18 +125,19 @@ public class VentanaAdmin2 extends JFrame {
 		});
 		
 		btnTextArea.addActionListener(new ActionListener() {
+			//ARREGLAR ESTO !!!!!
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String texto = "";
 				for (String clave: VentanaPrincipal.tmUsuarios.keySet()) {
 					texto = texto + clave + "\n" + "\t";
-					Usuario us = VentanaPrincipal.tmUsuarios.get(clave);
-					texto = texto + us + "\t";
+					//Usuario us = VentanaPrincipal.tmUsuarios.get(clave);
+					//texto =  texto +  us  + "\t";
+					texto = texto + VentanaPrincipal.tmUsuarios.get(clave) + "\t";
 				}
 				textAreaUsuarios.setText(texto);
 				
-				//textAreaUsuarios.setText("PEDROQ");
 				
 			}
 		});

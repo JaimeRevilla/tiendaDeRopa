@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,6 +29,7 @@ public class VentanaInicioSesion extends JFrame {
 	private JLabel lblNombre, lblCon;
 	private JTextField textNombre;
 	private JPasswordField textCon;
+	public static String n;
 	
 	
 	public VentanaInicioSesion(JFrame va) {
@@ -93,7 +95,8 @@ public class VentanaInicioSesion extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String n = textNombre.getText();
+				n = textNombre.getText();
+				//String n = textNombre.getText();
 				String c = textCon.getText();
 				
 				Connection con = BD.initBD("SweetWear.db"); 
@@ -107,10 +110,11 @@ public class VentanaInicioSesion extends JFrame {
 				} else if (resul == 2){
 					JOptionPane.showMessageDialog(null, "¡¡BIENVENIDO "+ n+ "!!");
 					VentanaPrincipal.lblNombre.setText("BIENVENIDO " + n);
+					VentanaPrincipal.tmPedidos.put(n, new ArrayList<>());
 					boolean admin = BD.obtenerAdmin(con, n);
 					System.out.println(n);
 					System.out.println(admin);
-					if (!admin == true) {
+					if (admin == true) {
 						VentanaPrincipal.btnAdmin.setVisible(true);
 					}
 					volver();

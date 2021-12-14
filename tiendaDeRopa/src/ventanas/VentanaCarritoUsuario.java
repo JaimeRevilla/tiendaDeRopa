@@ -5,20 +5,24 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clases.BD;
+import clases.Producto;
 
 public class VentanaCarritoUsuario extends JFrame {
 
 	private JPanel contentPane;
 	private JFrame ventanaActual, ventanaAnterior;
-	private JPanel panelSur;
+	private JPanel panelSur, panelNorte;
 	private JButton btnVolver;
+	public static JLabel lblCarrito;
 
 	/**
 	 * Launch the application.
@@ -59,6 +63,21 @@ public class VentanaCarritoUsuario extends JFrame {
 		
 		btnVolver = new JButton("VOLVER");
 		panelSur.add(btnVolver);
+		
+		panelNorte = new JPanel();
+		contentPane.add(panelNorte, BorderLayout.NORTH);
+		
+		lblCarrito = new JLabel();
+		panelNorte.add(lblCarrito);
+		
+		
+		//ESTO ME DA PROBLEMA NO SE XQ!!!
+//		ArrayList<Producto> al = VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n);
+//		for(Producto p: al)
+//			System.out.println(p);
+		
+		
+		
 		
 		btnVolver.addActionListener(new ActionListener() {
 			

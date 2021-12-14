@@ -25,6 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -39,15 +40,18 @@ import javax.swing.table.TableCellRenderer;
 import clases.Producto;
 import clases.TipoCalcetines;
 import clases.TipoProductos;
+import clases.TipoSudadera;
 
 public class VentanaAdmin extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel panelCentro, panelSur, panelArriba, panelArribaIzq, panelArribaDrc, panelNorte;
-	private JButton btnMostarMapa, btnVolver, btnAniadir;
-	private JComboBox<String> comboProductos;
-	private JLabel lblPrecio, lblStock, lblMarca, lblNombre, lblColor, lblFoto;
-	private JTextField txtPrecio, txtStock, txtMarca, txtColor;
+	public static JPanel panelCentro, panelSur, panelArriba, panelArribaIzq, panelArribaDrc, panelNorte;
+	private JButton btnMostarMapa, btnVolver, btnAniadir, btnElegirEsePanel;
+	public static JComboBox<String> comboProductos;
+	public static JLabel lblPrecio, lblStock, lblMarca, lblNombre, lblColor, lblFoto;
+	public static JTextField txtPrecio, txtStock, txtMarca, txtColor;
+	public static JLabel lblTipoCalcetines, lblTipoSudadera;
+	public static JComboBox<String> comboTipoCalcetines, comboTipoSudaderas;
 	private JTextArea textArea;
 	private JFrame ventanaActual, ventanaAnterior;
 	private JTable tablaProductos;
@@ -58,6 +62,7 @@ public class VentanaAdmin extends JFrame {
 	private JMenu mnExit;
 	private JMenuItem mntmCargarArchivo;
 	private JMenuItem mntmCerrarAplicacion;
+	public static JPanel panelCalcetines, panelSudadera, panelPantalones, panelCamiseta, panelZapato;
 
 	/**
 	 * Launch the application.
@@ -104,15 +109,15 @@ public class VentanaAdmin extends JFrame {
 		menuBar = new JMenuBar();
 		panelNorte.add(menuBar);
 		
-		mnFile = new JMenu("File");
+		mnFile = new JMenu("CARGAR FOTO");
 		mnFile.setHorizontalAlignment(SwingConstants.LEFT);
 		menuBar.add(mnFile);
 		
-		mntmCargarArchivo = new JMenuItem("Cargar Archivo");
+		mntmCargarArchivo = new JMenuItem("CARGAR FOTO");
 		mntmCargarArchivo.setHorizontalAlignment(SwingConstants.LEFT);
 		mnFile.add(mntmCargarArchivo);
 		
-		mnExit = new JMenu("Exit");
+		mnExit = new JMenu("SALIR");
 		mnExit.setHorizontalAlignment(SwingConstants.LEFT);
 		menuBar.add(mnExit);
 		
@@ -138,10 +143,19 @@ public class VentanaAdmin extends JFrame {
 		panelArriba.add(panelArribaDrc);
 		panelArribaDrc.setBackground(Color.CYAN);
 		
+		//--------------------------------------------------------
+//		panelCalcetines = new JPanel();
+//		panelCalcetines.setLayout(new GridLayout(0, 2));
+//		panelArriba.add(panelCalcetines);
+//		panelCalcetines.setBackground(Color.CYAN);
 		
+		
+		
+		//---------------------------------------------------------------
 		btnMostarMapa = new JButton("USUARIOS");
 		btnVolver = new JButton("VOLVER");
 		btnAniadir = new JButton("AÑADIR PRODUCTO");
+		btnElegirEsePanel = new JButton("CREAR UN PRODUCTO DE ESE TIPO");
 		
 		
 //		textArea = new JTextArea();
@@ -149,45 +163,118 @@ public class VentanaAdmin extends JFrame {
 		lblFoto = new JLabel();
 		panelArribaDrc.add(lblFoto);
 		
+		//----------------------------------------------------------------------
+		//CARGAR TODOS LOS COMBOS
 		comboProductos = new JComboBox<>();
 		for (TipoProductos s: TipoProductos.values()) {
 			String n = String.valueOf(s);
 			comboProductos.addItem(n);
+		}
 		
+		comboTipoCalcetines = new JComboBox<>();
+		for (TipoCalcetines s : TipoCalcetines.values()) {
+			String n = String.valueOf(s);
+			comboTipoCalcetines.addItem(n);
+		}
+		
+		comboTipoSudaderas = new JComboBox<>();
+		for (TipoSudadera s : TipoSudadera.values()) {
+			String n = String.valueOf(s);
+			comboTipoSudaderas.addItem(n);
 		}
 		
 		
-		lblNombre = new JLabel("NOMBRE: ");
-		lblColor = new JLabel("COLOR");
-		lblPrecio = new JLabel("PRECIO: ");
-		lblStock = new JLabel("STOCK: ");
-		lblMarca = new JLabel("MARCA: ");
-		
-		txtPrecio = new JTextField();
-		txtStock = new JTextField();
-		txtMarca = new JTextField();
-		txtColor = new JTextField();
-		txtPrecio.setColumns(10);
-		txtStock.setColumns(10);
-		txtMarca.setColumns(10);
-		txtColor.setColumns(10);
 		
 		
+		//SEGURAMENTE ESTO HABRA QUE METERLO EN ALGUN HILO SUPONGO
 		
+		lblNombre = new JLabel("NOMBRE");
 		panelArribaIzq.add(lblNombre);
 		panelArribaIzq.add(comboProductos);
-		panelArribaIzq.add(lblColor);
-		panelArribaIzq.add(txtColor);
-		panelArribaIzq.add(lblPrecio);
-		panelArribaIzq.add(txtPrecio);
-		panelArribaIzq.add(lblStock);
-		panelArribaIzq.add(txtStock);
-		panelArribaIzq.add(lblMarca);
-		panelArribaIzq.add(txtMarca);
+//		int pos = comboProductos.getSelectedIndex();
+//			if (pos != -1) {
+//				String selec = comboProductos.getItemAt(pos);
+//				if (selec == "CALCETINES") {
+//					VentanaAdmin.mostrarPanel(panelArribaIzq);
+//					lblTipoCalcetines = new JLabel("TIPO CALCETINES: ");
+//					panelArribaIzq.add(lblTipoCalcetines);
+//					panelArribaIzq.add(comboTipoCalcetines);
+//				}
+//				else if (selec == "SUDADERA") {
+//					lblTipoSudadera = new JLabel("TIPO SUDADERA");
+//					panelArribaIzq.add(lblTipoSudadera);
+//					panelArribaIzq.add(comboTipoSudaderas);
+//				}
+//				else if (selec == "CAMISETA")
+//					System.out.println("");
+//				else if (selec == "PANTALON")
+//					System.out.println("PERRO");
+//				else if (selec == "ZAPATOS")
+//					System.out.println("ZAPATOS");
+//					
+//				}
+		
+			
+		
+		
+		
+		
+//		int pos = comboProductos.getSelectedIndex();
+//		if (pos != -1) {
+//			String selec = comboProductos.getItemAt(pos);
+//			if (selec == "CALCETINES") {
+//				lblTipoCalcetines = new JLabel("TIPO CALCETINES");
+//				panelArribaIzq.add(lblTipoCalcetines);
+//				panelArribaIzq.add(comboTipoCalcetines);	
+//			}
+//			else if (selec == "SUDADERA") {
+//				lblTipoSudadera = new JLabel("TIPO SUDADERA");
+//				panelArribaIzq.add(lblTipoSudadera);
+//				panelArribaIzq.add(comboTipoSudaderas);
+//			}
+//			else if (selec == "CAMISETA")
+//				System.out.println("");
+//			else if (selec == "PANTALON")
+//				System.out.println("PERRO");
+//			else if (selec == "ZAPATOS")
+//				System.out.println("ZAPATOS");
+//			
+//		}
+		
+		
+		
+//		lblNombre = new JLabel("NOMBRE: ");
+//		lblColor = new JLabel("COLOR");
+//		lblPrecio = new JLabel("PRECIO: ");
+//		lblStock = new JLabel("STOCK: ");
+//		lblMarca = new JLabel("MARCA: ");
+//		
+//		txtPrecio = new JTextField();
+//		txtStock = new JTextField();
+//		txtMarca = new JTextField();
+//		txtColor = new JTextField();
+//		txtPrecio.setColumns(10);
+//		txtStock.setColumns(10);
+//		txtMarca.setColumns(10);
+//		txtColor.setColumns(10);
+//		
+//		
+//		
+//		panelArribaIzq.add(lblNombre);
+//		panelArribaIzq.add(comboProductos);
+//		panelArribaIzq.add(lblColor);
+//		panelArribaIzq.add(txtColor);
+//		panelArribaIzq.add(lblPrecio);
+//		panelArribaIzq.add(txtPrecio);
+//		panelArribaIzq.add(lblStock);
+//		panelArribaIzq.add(txtStock);
+//		panelArribaIzq.add(lblMarca);
+//		panelArribaIzq.add(txtMarca);
 		
 		panelSur.add(btnVolver);
 		panelSur.add(btnAniadir);
 		panelSur.add(btnMostarMapa);
+		panelSur.add(btnElegirEsePanel);
 		
 		
 		
@@ -319,7 +406,6 @@ public class VentanaAdmin extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
-				
 			}
 		});
 		
@@ -340,6 +426,69 @@ public class VentanaAdmin extends JFrame {
 				
 			}
 		});
+		
+		btnElegirEsePanel.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int pos = comboProductos.getSelectedIndex();
+					if (pos != -1) {
+						String selec = comboProductos.getItemAt(pos);
+						if (selec == "CALCETINES") {
+							VentanaAdmin.mostrarPanel(panelArribaIzq);
+							lblTipoCalcetines = new JLabel("TIPO CALCETINES: ");
+							panelArribaIzq.add(lblTipoCalcetines);
+							panelArribaIzq.add(comboTipoCalcetines);
+						}
+						else if (selec == "SUDADERA") {
+							VentanaAdmin.mostrarPanel(panelArribaIzq);
+							lblTipoSudadera = new JLabel("TIPO SUDADERA");
+							panelArribaIzq.add(lblTipoSudadera);
+							panelArribaIzq.add(comboTipoSudaderas);
+						}
+						else if (selec == "CAMISETA")
+							System.out.println("");
+						else if (selec == "PANTALON")
+							System.out.println("PERRO");
+						else if (selec == "ZAPATOS")
+							System.out.println("ZAPATOS");
+							
+						}
+				
+				
+			}
+		});
+		
+	}
+	
+	public static void mostrarPanel(JPanel panel) {
+		//lblNombre = new JLabel("NOMBRE: ");
+		lblColor = new JLabel("COLOR");
+		lblPrecio = new JLabel("PRECIO: ");
+		lblStock = new JLabel("STOCK: ");
+		lblMarca = new JLabel("MARCA: ");
+		
+		txtPrecio = new JTextField();
+		txtStock = new JTextField();
+		txtMarca = new JTextField();
+		txtColor = new JTextField();
+		txtPrecio.setColumns(10);
+		txtStock.setColumns(10);
+		txtMarca.setColumns(10);
+		txtColor.setColumns(10);
+		
+		
+		
+//		panel.add(lblNombre);
+//		panel.add(comboProductos);
+		panel.add(lblColor);
+		panel.add(txtColor);
+		panel.add(lblPrecio);
+		panel.add(txtPrecio);
+		panel.add(lblStock);
+		panel.add(txtStock);
+		panel.add(lblMarca);
+		panel.add(txtMarca);
 		
 	}
 

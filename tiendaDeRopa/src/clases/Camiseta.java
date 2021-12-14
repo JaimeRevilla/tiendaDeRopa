@@ -7,11 +7,11 @@ public class Camiseta extends Producto {
 			TipoCamiseta tipoCamiseta) {
 		super(codigo, color, nombre, precio, stock, marca, rutaFoto);
 		if(nombre.contains("POLO")) {
-			this.tipoCamiseta = tipoCamiseta.POLO;
+			this.tipoCamiseta = TipoCamiseta.POLO;
 		}else if(nombre.contains("CAMISETA")) {
-			this.tipoCamiseta = tipoCamiseta.CAMISETA;
+			this.tipoCamiseta = TipoCamiseta.CAMISETA;
 		}else if(nombre.contains("CAMISA")) {
-			this.tipoCamiseta = tipoCamiseta.CAMISA;
+			this.tipoCamiseta = TipoCamiseta.CAMISA;
 		}
 		
 	}

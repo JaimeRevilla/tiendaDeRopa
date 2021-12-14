@@ -7,13 +7,13 @@ public class Sudadera extends Producto {
 			TipoSudadera tipoSudadera) {
 		super(codigo, color, nombre, precio, stock, marca, rutaFoto);
 		if(nombre.contains("CON_GORRO")) {
-			this.tipoSudadera = tipoSudadera.CON_GORRO;
+			this.tipoSudadera = TipoSudadera.CON_GORRO;
 		}else if(nombre.contains("SIN_GORRO")) {
-			this.tipoSudadera = tipoSudadera.SIN_GORRO;
+			this.tipoSudadera = TipoSudadera.SIN_GORRO;
 		}else if(nombre.contains("LARGA_GORRO")) {
-			this.tipoSudadera = tipoSudadera.LARGA_GORRO;
-		}else if(nombre.contains("")) {
-			this.tipoSudadera = tipoSudadera.LARGA_SIN_GORRO;
+			this.tipoSudadera = TipoSudadera.LARGA_GORRO;
+		}else {
+			this.tipoSudadera = TipoSudadera.LARGA_SIN_GORRO;
 		}
 	
 	}

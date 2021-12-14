@@ -61,26 +61,17 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JPanel panelCentral, panelArriba, panelNorte, panelArribaDrc, panelArribaIzq, panelNorteIzq, panelNorteMedio, panelNorteDrc;
 	private JPanel panelP1, panelP2, panelP3, panelP4, panelP5;
-	private JButton btnInicioSesion, btnSalir, btnPruebaFoto, btnRegistrarme;
+	private JButton btnInicioSesion, btnSalir, btnCarrito, btnRegistrarme;
 	private JButton btnP1, btnP2, btnP3, btnP4, btnP5;
 	public static JButton btnAdmin;
 	private JFrame ventanaActual;
-	public static TreeMap<String, ArrayList<Producto>> tmPedidos; //MAPA que tiene como clave el nombre del usuario y como valor el pedido con los productos
-	public static TreeMap<String, Usuario> tmUsuarios;
+	public static TreeMap<String, ArrayList<Producto>> tmPedidos = new TreeMap<>(); //MAPA que tiene como clave el nombre del usuario y como valor el pedido con los productos
+	public static TreeMap<String, Usuario> tmUsuarios = new TreeMap<>();
 	public static DefaultListModel<Usuario> modeloListaUsuario;
 	public static JList<Usuario> listaUsuario;
 	private JScrollPane scrollLista;
 	private JLabel lblTitulo;
 	public static JLabel lblNombre;
-	private JTable tablaPrin;
-	private DefaultTableModel modeloTablaPrin;
-	private JScrollPane scrollTabla;
-	private JMenuBar menuBar;
-	private JMenu mnExit;
-	private JMenu mnProductos;
-	private JMenuItem mntmCerrarAplicacion;
-	private JMenuItem mntmPantalones;
-	
 	private JLabel lblHora;
 	
 
@@ -218,50 +209,6 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		
-		modeloListaUsuario = new DefaultListModel<>();
-		listaUsuario = new JList<Usuario>(modeloListaUsuario);
-		scrollLista = new JScrollPane(listaUsuario);
-		
-		modeloTablaPrin = new DefaultTableModel();
-		Vector<String> cabeceras = new Vector<String>( Arrays.asList() );
-		
-		modeloTablaPrin = new DefaultTableModel(  
-				new Vector<Vector<Object>>(),  
-				cabeceras  
-			) {
-				public boolean isCellEditable(int row, int column) {
-					if(column==0)
-						return false;
-					return true;
-				}
-			};
-			
-		tablaPrin = new JTable(modeloTablaPrin);
-		
-		//ESTO NO FUNCIONA!!!
-		tablaPrin.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
-			
-			@Override
-			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-				JButton btnCalcetines = new JButton("CALCETINES");
-				JButton btnCamisetas = new JButton("CAMISETAS");
-				
-				
-				Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-				if(column == 0 && row == 0) {
-					value = btnCalcetines;
-					return  (JButton) value;
-				}
-				if (column == 1 && row == 1) {
-					value = btnCamisetas;
-					return (Component) value;
-				}
-				return c;
-			}
-		});
-		
-		JScrollPane scrollTabla = new JScrollPane(tablaPrin);
-		//panelArribaDrc.add(scrollTabla);
 		lblNombre = new JLabel("");
 		lblTitulo = new JLabel("SWEET WEAR");
 		lblTitulo.setForeground(Color.BLACK);
@@ -272,44 +219,19 @@ public class VentanaPrincipal extends JFrame {
 		FlowLayout flowLayout2 = (FlowLayout) panelNorteDrc.getLayout();
 		flowLayout2.setAlignment(FlowLayout.RIGHT);
 		
-		menuBar = new JMenuBar();
-		panelNorteIzq.add(menuBar);
 		
-//		mnFile = new JMenu("File");
-//		mnFile.setHorizontalAlignment(SwingConstants.LEFT);
-//		menuBar.add(mnFile);
-//		
-//		mntmCargarArchivo = new JMenuItem("Cargar Archivo");
-//		mntmCargarArchivo.setHorizontalAlignment(SwingConstants.LEFT);
-//		mnFile.add(mntmCargarArchivo);
-		
-		mnExit = new JMenu("Exit");
-		mnExit.setHorizontalAlignment(SwingConstants.LEFT);
-		menuBar.add(mnExit);
-		
-		mntmCerrarAplicacion = new JMenuItem("SALIR");
-		mntmCerrarAplicacion.setHorizontalAlignment(SwingConstants.LEFT);
-		mnExit.add(mntmCerrarAplicacion);
-		
-		mnProductos = new JMenu("PRODUCTOS");
-		mnProductos.setHorizontalAlignment(SwingConstants.LEFT);
-		menuBar.add(mnProductos);
-		
-		mntmPantalones = new JMenuItem("PANTALONES");
-		mntmPantalones.setHorizontalAlignment(SwingConstants.LEFT);
-		mnProductos.add(mntmPantalones);
 		
 		panelNorteMedio.add(lblTitulo);
 		
 		lblHora = new JLabel("");
 		
 			
-		btnPruebaFoto = new JButton();
-		ponerFotoABoton(btnPruebaFoto, "tiendaDeRopa\\src\\imagenes\\IconoCarrito.png", 30, 30, 30, 30);
+		btnCarrito = new JButton();
+		ponerFotoABoton(btnCarrito, "tiendaDeRopa\\src\\imagenes\\IconoCarrito.png", 30, 30, 30, 30);
 		
 		
 		//btnPruebaFoto = new JButton(new ImageIcon("tiendaDeRopa\\src\\imagenes\\IconoCarrito.png"));
-		panelArribaIzq.add(btnPruebaFoto);
+		panelArribaIzq.add(btnCarrito);
 		//AÑADIMOS LOS COMPONENTES A LOS PANELES
 		panelArribaIzq.add(btnInicioSesion);
 		panelArribaIzq.add(btnSalir);
@@ -319,7 +241,7 @@ public class VentanaPrincipal extends JFrame {
 
 		//panelArribaIzq.add(scrollLista);
 		panelArribaIzq.add(btnRegistrarme);
-		panelNorteDrc.add(lblNombre);
+		panelNorteIzq.add(lblNombre);
 		panelArribaIzq.add(btnAdmin);
 		
 		setLocationRelativeTo( null );
@@ -356,7 +278,7 @@ public class VentanaPrincipal extends JFrame {
 		});
 		
 		
-		btnPruebaFoto.addActionListener(new ActionListener() {
+		btnCarrito.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -366,6 +288,7 @@ public class VentanaPrincipal extends JFrame {
 					VentanaCarritoUsuario v1 = new VentanaCarritoUsuario(ventanaActual);
 					ventanaActual.setVisible(false);
 					v1.setVisible(true);
+					VentanaCarritoUsuario.lblCarrito.setText("CARRITO DE LA COMPRA DE " + VentanaInicioSesion.n);
 				} else {
 					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesión primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
@@ -384,7 +307,7 @@ public class VentanaPrincipal extends JFrame {
 		});
 		
 		
-		mntmPantalones.addActionListener(new ActionListener() {
+		btnP4.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -394,6 +317,9 @@ public class VentanaPrincipal extends JFrame {
 				
 			}
 		});
+		
+		
+		//--------------------------------------------------------------------------------------------------------------
 		
 		//HILOS
 		
@@ -453,10 +379,15 @@ public class VentanaPrincipal extends JFrame {
 		Thread t2 = new Thread(r2);
 		t2.start();*/
 		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		
+		//EVENTOS DE VENTANA
 		ventanaActual.addWindowListener(new WindowAdapter() {
 			
 			@Override
 			public void windowOpened(WindowEvent e) {
+				System.out.println("se abre la ventana");
 				cargarMapaUsuariosDeFicheroDeTexto();
 			}
 				
@@ -464,7 +395,7 @@ public class VentanaPrincipal extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				// TODO Auto-generated method stub
-				//guardarMapaUsuariosEnFicheroDeTexto();
+				guardarMapaUsuariosEnFicheroDeTexto();
 			}
 			
 			
@@ -472,7 +403,7 @@ public class VentanaPrincipal extends JFrame {
 		});
 		
 		
-		
+	//---------------------------------------------------------------------------------------------------------------------------	
 		
 	}
 	/**
@@ -524,15 +455,15 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	public static void cargarMapaUsuariosDeFicheroDeTexto () {
 		BufferedReader br = null;
-		
+		//System.out.println("ENTRO A CARGAR");
 		try {
 			br = new BufferedReader(new FileReader("USUARIOS.txt"));
 			String linea = br.readLine();
 			while (linea != null) {
 				String [] datosUsuario = linea.split(" ");
 				String nombre = datosUsuario[0];
-				int edad = Integer.parseInt(datosUsuario[1]);
-				String mail = datosUsuario[2];
+				String mail = datosUsuario[1];
+				int edad = Integer.parseInt(datosUsuario[2]);
 				String con = datosUsuario[3];
 				boolean permisos = Boolean.parseBoolean(datosUsuario[4]);
 				Usuario u = new Usuario(nombre, edad, mail, con, permisos);
@@ -558,13 +489,18 @@ public class VentanaPrincipal extends JFrame {
 			}
 		}
 		
+		for(String n: tmUsuarios.keySet()) {
+			System.out.println(n);
+			System.out.println("\t"+tmUsuarios.get(n));
+		}
+		
 		
 		
 	}
 	
 	
 	/**
-	 * Metodo que guarda el mapaUsuarios en un fichero de Texto
+	 * METODO QUE GUARDA EL mapaUsuarios EN UN FICHERO DE TEXTO
 	 */
 	private void guardarMapaUsuariosEnFicheroDeTexto () {
 		PrintWriter pw = null;
@@ -574,7 +510,8 @@ public class VentanaPrincipal extends JFrame {
 			for (String nombre: VentanaPrincipal.tmUsuarios.keySet()) {
 				pw.println(nombre);
 				Usuario u = VentanaPrincipal.tmUsuarios.get(nombre);
-				pw.print(" " + u);
+				pw.print("\t" + u); //TODO Cambiar formato al guardar
+				//pw.print(" " + u.getNombre); O ALGO ASI
 			}
 			
 		} catch (FileNotFoundException e) {
@@ -591,6 +528,9 @@ public class VentanaPrincipal extends JFrame {
 		
 	}
 	
+	/**
+	 * METODO QUE CARGA EN UN FICHERO DE TEXTO LOS PEDIDOS DE CADA USUARIO
+	 */
 	private void cargarMapaPedidosDeFicheroDeTexto () {
 		BufferedReader br = null;
 		
@@ -630,6 +570,15 @@ public class VentanaPrincipal extends JFrame {
 		
 	}	
 		
+	/**
+	 * METODO QUE PONE UNA IMÁGEN A UN BOTON CON LAS MEDIDAS PERSONALIZADAS
+	 * @param btn --> EL BOTON AL QUE SE LE VA A PONER UNA IMÁGEN
+	 * @param rutaFoto --> RUTA DE LA IMAGEN PARA PODER ACCEDER A ELLA
+	 * @param x --> VALOR DE LA COORDENADA X DE LA IMÁGEN
+	 * @param y --> VALOR DE LA COORDENADA Y DE LA IMÁGEN
+	 * @param width --> ANCHURA DE LA IMÁGEN
+	 * @param height --> ALTURA DE LA IMÁGEN
+	 */
 	public static void ponerFotoABoton (JButton btn, String rutaFoto, int x, int y, int width, int height) {
 		btn.setBounds(x, y, width, height);
 		int ancho = btn.getWidth();

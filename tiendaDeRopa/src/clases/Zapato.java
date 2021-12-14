@@ -1,16 +1,46 @@
 package clases;
 
+/**
+ * @author 34688
+ *
+ */
 public class Zapato extends Producto {
 	private String colorCordones;
 	private boolean goretex;
+	private TipoZapato tipoZapato;
 
 	
 	
-	public Zapato(int codigo, String nombre, double precio, int stock, String marca, String color, String rutaFoto, boolean goretex) {
+	public Zapato(int codigo, String nombre, double precio, int stock, String marca, String color, String rutaFoto, boolean goretex,
+			TipoZapato tipoZapato) {
 		super(codigo, nombre, color, precio, stock, marca, rutaFoto);
 		this.colorCordones = color;
 		this.goretex = goretex;
+		if(nombre.contains("BOTAS")) {
+			this.tipoZapato = TipoZapato.BOTAS;
+		}else if(nombre.contains("DEPORTIVAS")) {
+			this.tipoZapato = TipoZapato.DEPORTIVAS;
+		}else if(nombre.contains("FORMALES")) {
+			this.tipoZapato = TipoZapato.FORMALES;
+		}else if(nombre.contains("TACONES")) {
+			this.tipoZapato = TipoZapato.TACONES;
+		}
+	
 	}
+	
+	
+
+	public TipoZapato getTipoZapato() {
+		return tipoZapato;
+	}
+
+
+
+	public void setTipoZapato(TipoZapato tipoZapato) {
+		this.tipoZapato = tipoZapato;
+	}
+
+
 
 	public String getColorCordones() {
 		return colorCordones;
@@ -27,11 +57,18 @@ public class Zapato extends Producto {
 		this.goretex = goretex;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "Zapato [colorCordones=" + colorCordones + ", goretex=" + goretex + ", getNombre()=" + getNombre()
-				+ ", getPrecio()=" + getPrecio() + ", getStock()=" + getStock() + ", getMarca()=" + getMarca() + "]";
+		return "Zapato [colorCordones=" + colorCordones + ", goretex=" + goretex + ", tipoZapato=" + tipoZapato
+				+ ", getCodigo()=" + getCodigo() + ", getColor()=" + getColor() + ", getNombre()=" + getNombre()
+				+ ", getPrecio()=" + getPrecio() + ", getStock()=" + getStock() + ", getMarca()=" + getMarca()
+				+ ", getRutaFoto()=" + getRutaFoto() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
+
+	
 	
 	
 	

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.TreeMap;
 
+
 public class BD {
 
 	
@@ -168,7 +169,8 @@ public class BD {
 			stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sent);
 			if (rs.next()) {
-				res = rs.getBoolean("permisos");
+				String r = rs.getString("permisos");
+				res = Boolean.parseBoolean(r);
 			}
 			rs.close();
 			
@@ -248,8 +250,123 @@ public class BD {
 	//------------------------------------------------------------------------------------------------------------------------
 	//METODOS DE LA BD RELACIONADOS CON LOS PRODUCTOS
 	
-	public static void crearTablaProducto(Connection con) {
-		String sent = "CREATE TABLE IF NOT EXISTS producto (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String)";
+
+	
+	
+	public static void crearTablaCalcetines(Connection con) {
+		String sent = "CREATE TABLE IF NOT EXISTS calcetines (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String, tipoCalcetines String)";
+		Statement stmt = null;
+		
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(sent);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+	}
+	
+	
+	//------------------------------------------------------------------------------------------------------------------------------
+	
+	
+	
+	public static void crearTablaCamiseta(Connection con) {
+		String sent = "CREATE TABLE IF NOT EXISTS camiseta (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String, tipoCamiseta String)";
+		Statement stmt = null;
+		
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(sent);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+	}
+	
+	//------------------------------------------------------------------------------------------------------------------
+	
+	
+	public static void crearTablaPantalon(Connection con) {
+		String sent = "CREATE TABLE IF NOT EXISTS pantalon (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String, tipoPantalon String)";
+		Statement stmt = null;
+		
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(sent);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------------
+	
+	public static void crearTablaSudadera(Connection con) {
+		String sent = "CREATE TABLE IF NOT EXISTS sudadera (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String, tipoCamiseta String)";
+		Statement stmt = null;
+		
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(sent);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+	}
+	
+//----------------------------------------------------------------------------------------------------------------
+	
+	public static void crearTablaZapato(Connection con) {
+		String sent = "CREATE TABLE IF NOT EXISTS zapato (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String, colorCordones String, goretex boolean, tipoZapato String)";
 		Statement stmt = null;
 		
 		try {

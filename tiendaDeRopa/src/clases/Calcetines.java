@@ -7,11 +7,11 @@ public class Calcetines extends Producto {
 			TipoCalcetines tipoCalcetinas) {
 		super(codigo, color, nombre, precio, stock, marca, rutaFoto);
 		if(nombre.contains("PINKIE")) {
-			this.tipoCalcetinas = tipoCalcetinas.PINKIE;
+			this.tipoCalcetinas = TipoCalcetines.PINKIE;
 		}else if(nombre.contains("TOBILLERO")) {
-			this.tipoCalcetinas = tipoCalcetinas.TOBILLERO;
+			this.tipoCalcetinas = TipoCalcetines.TOBILLERO;
 		}else if(nombre.contains("ALTO")) {
-			this.tipoCalcetinas = tipoCalcetinas.ALTO;
+			this.tipoCalcetinas = TipoCalcetines.ALTO;
 		}
 		
 	}
