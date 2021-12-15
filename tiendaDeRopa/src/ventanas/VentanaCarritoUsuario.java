@@ -2,27 +2,36 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import clases.BD;
 import clases.Producto;
+import clases.Usuario;
 
 public class VentanaCarritoUsuario extends JFrame {
 
 	private JPanel contentPane;
 	private JFrame ventanaActual, ventanaAnterior;
-	private JPanel panelSur, panelNorte;
-	private JButton btnVolver;
+	private JPanel panelSur, panelNorte, panelCentral, panelCentralArriba, panelCentralAbajo;
+	private JButton btnVolver, btnImprimirRecivo;
 	public static JLabel lblCarrito;
+	public static DefaultListModel<Producto> modeloListaPedido;
+	public static JList<Producto> listaPedido;
+	private JScrollPane scrollListaPedido;
+	private JLabel lblPrecio;
 
 	/**
 	 * Launch the application.
@@ -48,16 +57,19 @@ public class VentanaCarritoUsuario extends JFrame {
 		//AQUI IRA CODIGO
 		BD.closeBD(con);
 		
+		//PROPIEDADES DE LA VENTANA
 		ventanaAnterior = va;
 		ventanaActual = this;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setSize(1650, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
+		
+		//CREACIÓN DE LOS PANELES
 		panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		
@@ -67,18 +79,48 @@ public class VentanaCarritoUsuario extends JFrame {
 		panelNorte = new JPanel();
 		contentPane.add(panelNorte, BorderLayout.NORTH);
 		
+		panelCentral = new JPanel();
+		panelCentral.setLayout(new GridLayout(2,1));
+		contentPane.add(panelCentral, BorderLayout.CENTER);
+		
+		panelCentralArriba = new JPanel();
+		panelCentral.add(panelCentralArriba);
+		
+		panelCentralAbajo = new JPanel();
+		panelCentral.add(panelCentralAbajo);
+		
+		//CREACION DE LOS COMPONENTES
 		lblCarrito = new JLabel();
+		lblPrecio = new JLabel();
+		
+		btnImprimirRecivo = new JButton("IMPRIMIR RECIVO");
+		panelSur.add(btnImprimirRecivo);
+		
+		modeloListaPedido = new DefaultListModel<>();
+		listaPedido = new JList<>(modeloListaPedido);
+		scrollListaPedido = new JScrollPane(listaPedido);
+		
+		//METER LOS COMPONENTES EN LOS PANELES
 		panelNorte.add(lblCarrito);
+		panelCentralArriba.add(scrollListaPedido);
+		panelCentralAbajo.add(lblPrecio);
+		
+		for (Producto p:VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n)){
+			modeloListaPedido.addElement(p);
+		}
+		
+		if (VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).size() == 0){
+			lblPrecio.setText("NO HAY PRODUCTOS EN EL CARRITO");
+		}else {
+			double pre = 0;
+			for (Producto p: VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n)) {
+				pre = pre + (p.getPrecio() * p.getStock());
+				lblPrecio.setText("PRECIO TOTAL: "+ pre + "euros");
+			 }
+		}	
 		
 		
-		//ESTO ME DA PROBLEMA NO SE XQ!!!
-//		ArrayList<Producto> al = VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n);
-//		for(Producto p: al)
-//			System.out.println(p);
-		
-		
-		
-		
+		//EVENTOS
 		btnVolver.addActionListener(new ActionListener() {
 			
 			@Override
@@ -89,7 +131,37 @@ public class VentanaCarritoUsuario extends JFrame {
 			}
 		});
 		
+		btnImprimirRecivo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//LO QUE VA A HACER ESTE METODO ES COGER Y PONER EL ARRAYLIST EN UN FICHERO DE TEXTO LLAMADO FACTURA
+				
+			}
+		});
 		
+		//HILO
+		
+//		Runnable r1 = new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//				while (true) {
+//					if (VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).size() == 0){
+//						lblPrecio.setText("NO HAY PRODUCTOS EN EL CARRITO");
+//					}else {
+//						double pre = 0;
+//						for (Producto p: VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n)) {
+//							pre = pre + p.getPrecio();
+//							lblPrecio.setText("PRECIO TOTAL: "+ pre + "euros");
+//						 }
+//					}
+//				}
+//				
+//			}
+//		};
+//		Thread t1 = new Thread(r1);
+//		t1.start();
 		
 		
 	}

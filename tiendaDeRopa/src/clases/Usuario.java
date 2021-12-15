@@ -18,6 +18,28 @@ public class Usuario implements Comparable<Usuario> {
 		this.permisos = permisos;
 		
 	}
+	
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setCon(String con) {
+		this.con = con;
+	}
+
+
+	public void setPermisos(boolean permisos) {
+		this.permisos = permisos;
+	}
+
 
 	public String getNombre() {
 		return nombre;

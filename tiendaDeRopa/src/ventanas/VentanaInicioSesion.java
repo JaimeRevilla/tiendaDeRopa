@@ -33,14 +33,19 @@ public class VentanaInicioSesion extends JFrame {
 	
 	
 	public VentanaInicioSesion(JFrame va) {
-		Connection con = BD.initBD("SweetWear.db");
-		BD.crearTablaUsuario(con);
-		VentanaPrincipal.tmUsuarios = BD.obtenerMapaUsuarios(con);
-		BD.closeBD(con);
+//		Connection con = BD.initBD("SweetWear.db");
+//		BD.crearTablaUsuario(con);
+//		BD.crearTablaCalcetines(con);
+//		BD.crearTablaCamiseta(con);
+//		BD.crearTablaPantalon(con);
+//		BD.crearTablaSudadera(con);
+//		BD.crearTablaZapato(con);
+//		VentanaPrincipal.tmUsuarios = BD.obtenerMapaUsuarios(con);
+//		BD.closeBD(con);
 		ventanaAnterior = va;
 		ventanaActual = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setSize(1650, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -111,6 +116,7 @@ public class VentanaInicioSesion extends JFrame {
 					JOptionPane.showMessageDialog(null, "¡¡BIENVENIDO "+ n+ "!!");
 					VentanaPrincipal.lblNombre.setText("BIENVENIDO " + n);
 					VentanaPrincipal.tmPedidos.put(n, new ArrayList<>());
+					VentanaPrincipal.btnCerrarSesion.setVisible(true);;
 					boolean admin = BD.obtenerAdmin(con, n);
 					System.out.println(n);
 					System.out.println(admin);

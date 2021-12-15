@@ -31,8 +31,7 @@ public class Pantalon extends Producto {
 	public String toString() {
 		return "Pantalon [tipoPantalon=" + tipoPantalon + ", getCodigo()=" + getCodigo() + ", getColor()=" + getColor()
 				+ ", getNombre()=" + getNombre() + ", getPrecio()=" + getPrecio() + ", getStock()=" + getStock()
-				+ ", getMarca()=" + getMarca() + ", getRutaFoto()=" + getRutaFoto() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", getMarca()=" + getMarca() + ", getRutaFoto()=" + getRutaFoto()+ "]";
 	}
 	
 	

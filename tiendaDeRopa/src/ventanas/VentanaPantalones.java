@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clases.Pantalon;
+import clases.TipoPantalon;
 
 public class VentanaPantalones extends JFrame {
 
@@ -146,8 +147,12 @@ public class VentanaPantalones extends JFrame {
 						String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
 						int canti = Integer.parseInt(cant);
 						System.out.println(canti);
-						VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Pantalon(0, cant, cant, resp, canti, cant, cant, null)); //AQUI AÑADIR EL PRODUCTO
+						//IDEA!!: IGUAL CREAR EN LA BD LOS OBJETOS DE LAS IMAGENES Y COGER LOS 
+						//ATRIBUTOS PARA CREAR EL OBJETO DE LA BASE DE DATOS
+						VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Pantalon(0, "rojo", "vaquero", 20, canti, "nike","la ruta", TipoPantalon.CHANDAL)); //AQUI AÑADIR EL PRODUCTO
 						System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
+						System.out.println("Hola");
+						JOptionPane.showMessageDialog(null, "¡¡PRODUCTO AÑADIDO CORRECTAMENTE!!");
 					}	
 				}else {
 					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesión primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
