@@ -27,12 +27,14 @@ public class Pantalon extends Producto {
 	}
 
 
-	@Override
+//	@Override
+//	public String toString() {
+//		return "Pantalon [tipoPantalon=" + tipoPantalon + ", getCodigo()=" + getCodigo() + ", getColor()=" + getColor()
+//				+ ", getNombre()=" + getNombre() + ", getPrecio()=" + getPrecio() + ", getStock()=" + getStock()
+//				+ ", getMarca()=" + getMarca() + ", getRutaFoto()=" + getRutaFoto()+ "]";
+//	}
 	public String toString() {
-		return "Pantalon [tipoPantalon=" + tipoPantalon + ", getCodigo()=" + getCodigo() + ", getColor()=" + getColor()
-				+ ", getNombre()=" + getNombre() + ", getPrecio()=" + getPrecio() + ", getStock()=" + getStock()
-				+ ", getMarca()=" + getMarca() + ", getRutaFoto()=" + getRutaFoto()+ "]";
+		return "Pantalon: " + getNombre() + " " + getPrecio() + "euros" + " " + getStock() + " unidades";
 	}
-	
 	
 }

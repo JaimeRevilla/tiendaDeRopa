@@ -160,6 +160,12 @@ public class BD {
 		}return res;	
 	}
 	
+	/**
+	 * METODO PARA OBTENER LOS PERMISOS DE UN USUARIO
+	 * @param con Conexion con la BBDD
+	 * @param nom Nombre del Usuario
+	 * @return Devuelve true o fasle
+	 */
 	public static boolean obtenerAdmin(Connection con, String nom) {
 		String sent = "SELECT * FROM usuario WHERE nom = '"+nom+"'";
 		Statement stmt = null;
@@ -292,10 +298,51 @@ public class BD {
 		}
 	}
 	
+	
+	
+	/**
+	 * Metodo que te devuelve el usuario con el nombre que se le pasa por parámetro
+	 * @param con Conexion con la BBDD
+	 * @param nom Nombre del usuario
+	 * @return Devuelve el usuario
+	 */
+	public static Usuario obtenerUsuario(Connection con, String nom) {
+		String sent = "SELECT * FROM usuario WHERE nom = '"+nom+"'";
+		Statement stmt = null;
+		Usuario u = null;
+		try {
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sent);
+			if (rs.next()) {
+				String nombre = rs.getString("nom");
+				int edad = rs.getInt("edad");
+				String mail = rs.getString("mail");
+				String c = rs.getString("c");
+				boolean permisos = rs.getBoolean("permisos");
+				u = new Usuario(nombre, edad, mail, c, permisos);
+			}
+			rs.close();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}return u;	
+	}
 	//------------------------------------------------------------------------------------------------------------------------
 	//METODOS DE LA BD RELACIONADOS CON LOS PRODUCTOS
 	public static void crearTablaProductosCliente(Connection con) {
-		String sent = "CREATE TABLE IF NOT EXISTS calcetines (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String,  tipoProducto String, tipoCalcetines String, tipoCamiseta String, tipoPantalon String, tipoCamiseta String, colorCordones String, goretex boolean, tipoZapato String)";
+		String sent = "CREATE TABLE IF NOT EXISTS pedido (codigo int , cliente String, color String, nombre String, precio double, cantidad int, marca String, rutaFoto String,  tipoProducto String, tipoCalcetines String, tipoCamiseta String, tipoPantalon String, tipoSudadera String, colorCordones String, goretex boolean, tipoZapato String)";
 		Statement stmt = null;
 		
 		try {
@@ -315,12 +362,10 @@ public class BD {
 				}
 			}
 		}
-		
-		
 	}
 	
-	public static void insertarProducto(Connection con, int codigo  , String color , String nombre  ,  double precio , int stock , String marca , String rutaFoto  , String tipoProducto ,  String tipoCalcetines ,String tipoCamiseta ,String tipoPantalon ,String tipoSudadera ,String colorCordones ,boolean goretex ,String tipoZapato ){
-		String sent = "INSERT INTO usuario VALUES ('"+codigo+"', '"+color+"', '"+nombre+"', '"+precio+"', '"+stock+"', '"+marca+"', '"+rutaFoto+"', '"+tipoProducto+"', '"+tipoCalcetines+"', '"+tipoCamiseta+"', '"+tipoPantalon+"', '"+tipoSudadera+"', '"+colorCordones+"', '"+goretex+"', '"+tipoZapato+"')";
+	public static void insertarProductoCliente(Connection con, int codigo , String cliente, String color , String nombre , double precio ,int cantidad ,String marca ,String rutaFoto ,String  tipoProducto ,String tipoCalcetines ,String tipoCamiseta ,String tipoPantalon ,String tipoSudadera ,String colorCordones ,boolean goretex ,String tipoZapato ) {
+		String sent = "INSERT INTO pedido VALUES ('"+codigo+"', '"+cliente+"', '"+color+"', '"+nombre+"', '"+precio+"', '"+cantidad+"', '"+marca+"', '"+rutaFoto+"', '"+tipoProducto+"', '"+tipoCalcetines+"', '"+tipoCamiseta+"', '"+tipoPantalon+"', '"+tipoSudadera+"', '"+colorCordones+"', '"+goretex+"', '"+tipoZapato+"')";
 		Statement stmt = null;
 		
 		try {
@@ -344,6 +389,136 @@ public class BD {
 		
 	}
 	
+	public static void crearTablaProductosTienda(Connection con) {
+		String sent = "CREATE TABLE IF NOT EXISTS tienda (codigo int PRIMARY KEY AUTOINCREMENT, color String, nombre String, precio double, stock int, marca String, rutaFoto String,  tipoProducto String, tipoCalcetines String, tipoCamiseta String, tipoPantalon String, tipoSudadera String, colorCordones String, goretex boolean, tipoZapato String)";
+		Statement stmt = null;
+		
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(sent);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public static Producto obtenerProductoTienda(Connection con, String nom) {
+		String sent = "SELECT * FROM tienda WHERE nombre = '"+nom+"'";
+		Statement stmt = null;
+		int stock = 0;
+		Producto p = null;
+		try {
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sent);
+			if (rs.next()) {
+				int codigo = rs.getInt("codigo");
+				String color = rs.getString("color");
+				String nombre = rs.getString("nombre");
+				double precio = rs.getDouble("precio");
+				stock = rs.getInt("stock");
+				String marca = rs.getString("marca");
+				String rutaFoto = rs.getString("rutaFoto");
+				String tipoProducto = rs.getString("tipoProducto");
+				String tipoCalcetines = rs.getString("tipoCalcetines");
+				String tipoCamiseta = rs.getString("tipoCamiseta");
+				String tipoPantalon = rs.getString("tipoPantalon");
+				String tipoSudadera = rs.getString("tipoSudadera");
+				String colorCordones = rs.getString("colorCordones");
+				boolean goretex = rs.getBoolean("goretex");
+				String tipoZapato = rs.getString("tipoZapato");
+				p = new Producto(codigo, color, nombre, precio, stock, marca, rutaFoto);
+					
+			}
+			rs.close();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}return p;	
+	}
+	
+	
+	public static int obtenerStockProducto(Connection con, String nom) {
+		String sent = "SELECT * FROM tienda WHERE nombre = '"+nom+"'";
+		Statement stmt = null;
+		int stock = 0;
+		try {
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sent);
+			if (rs.next()) {
+				stock = rs.getInt("stock");
+			}
+			rs.close();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}return stock;	
+	}
+	
+	public static void insertarProductoTienda(Connection con, int codigo  , String color , String nombre  ,  double precio , int stock , String marca , String rutaFoto  , String tipoProducto ,  String tipoCalcetines ,String tipoCamiseta ,String tipoPantalon ,String tipoSudadera ,String colorCordones ,boolean goretex ,String tipoZapato ){
+		String sent = "INSERT INTO tienda VALUES ('"+codigo+"', '"+color+"', '"+nombre+"', '"+precio+"', '"+stock+"', '"+marca+"', '"+rutaFoto+"', '"+tipoProducto+"', '"+tipoCalcetines+"', '"+tipoCamiseta+"', '"+tipoPantalon+"', '"+tipoSudadera+"', '"+colorCordones+"', '"+goretex+"', '"+tipoZapato+"')";
+		Statement stmt = null;
+		
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(sent);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+	
+	public static void restarUnidadesAProducto(Connection con, String nom, int unidades) throws SQLException {
+		String sent = "update tienda set stock = stock - "+unidades+ " where nombre = '"+nom+"'";
+		Statement stmt = null;
+		stmt = con.createStatement();
+		stmt.executeUpdate(sent);
+	}
 	
 	//---------------------------------------------------------------------------------------------------------------------------
 	

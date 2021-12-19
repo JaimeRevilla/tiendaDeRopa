@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,7 +16,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clases.BD;
 import clases.Pantalon;
+import clases.Producto;
 import clases.TipoPantalon;
 
 public class VentanaPantalones extends JFrame {
@@ -85,6 +89,13 @@ public class VentanaPantalones extends JFrame {
 		lblChandal = new JLabel("PANTALONES CHANDAL");
 		panelP12.add(lblChandal);
 		
+		Connection con = BD.initBD("SweetWear.db");
+		int sto = BD.obtenerStockProducto(con, "Chandal");
+		if (sto == 0) 
+			lblChandal.setText("PANTALONES CHANDAL" + ": " + "NO HAY NINGUNA UNIDAD EN STOCK");
+		else
+			lblChandal.setText("PANTALONES CHANDAL" + ": " + "Cantidades restantes: " + sto + " unidades");
+		
 		//----------------------------------------------------------------------------
 		panelP2 = new JPanel();
 		panelP2.setLayout(new GridLayout(2, 1));
@@ -102,6 +113,8 @@ public class VentanaPantalones extends JFrame {
 		
 		lblVaquero = new JLabel("PANTALONES VAQUEROS");
 		panelP22.add(lblVaquero);
+		
+
 		
 		//--------------------------------------------------------------------------
 		panelP3 = new JPanel();
@@ -146,20 +159,37 @@ public class VentanaPantalones extends JFrame {
 						//AQUI SE AÑADIRA AL CARRITO ESTE PRODUCTO
 						String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
 						int canti = Integer.parseInt(cant);
-						System.out.println(canti);
-						//IDEA!!: IGUAL CREAR EN LA BD LOS OBJETOS DE LAS IMAGENES Y COGER LOS 
-						//ATRIBUTOS PARA CREAR EL OBJETO DE LA BASE DE DATOS
-						VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Pantalon(0, "rojo", "vaquero", 20, canti, "nike","laRuta", TipoPantalon.CHANDAL)); //AQUI AÑADIR EL PRODUCTO
-						System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
-						System.out.println("Hola");
-						JOptionPane.showMessageDialog(null, "¡¡PRODUCTO AÑADIDO CORRECTAMENTE!!");
+						if (canti > 0) {
+							Connection con = BD.initBD("SweetWear.db");
+							int stock = BD.obtenerStockProducto(con, "Chandal");
+							if (stock >= canti) {
+								if (stock == 0) 
+									lblChandal.setText("PANTALONES CHANDAL" + ": " + "NO HAY CANTIDADES EN STOCK");
+								else
+									lblChandal.setText("PANTALONES CHANDAL" + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
+								Producto p = BD.obtenerProductoTienda(con, "Chandal");
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Pantalon(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoPantalon.CHANDAL)); //AQUI AÑADIR EL PRODUCTO
+								System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
+								BD.insertarProductoCliente(con, 0,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Pantalon", "", "", "Chandal", "", "", false, "");
+								try {
+									BD.restarUnidadesAProducto(con, "Chandal", canti);
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								JOptionPane.showMessageDialog(null, "¡¡PRODUCTO AÑADIDO CORRECTAMENTE!!");
+								BD.closeBD(con);
+							}else
+								JOptionPane.showMessageDialog(null, "Lo sentimos, no hay suficientes unidades en stock", "ERROR", JOptionPane.ERROR_MESSAGE);
+						}else
+							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un nÃºmero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}	
 				}else {
 					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesión primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
 			}
-		});
-		
+		});	
 	}
+	
 
 }

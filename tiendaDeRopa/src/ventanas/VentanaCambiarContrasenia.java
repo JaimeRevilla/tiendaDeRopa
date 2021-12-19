@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 
 import javax.swing.JButton;
@@ -16,6 +18,7 @@ import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import clases.BD;
+import clases.Usuario;
 
 public class VentanaCambiarContrasenia extends JFrame {
 
@@ -93,6 +96,9 @@ public class VentanaCambiarContrasenia extends JFrame {
 		panelSur.add(btnvolver);
 		panelSur.add(btnCambiarCon);
 		
+		
+		
+		
 		//EVENTOS
 		btnvolver.addActionListener(new ActionListener() {
 			
@@ -119,6 +125,9 @@ public class VentanaCambiarContrasenia extends JFrame {
 						JOptionPane.showMessageDialog(null, "LA CONTRASEÑA NUEVA ES LA MISMA QUE LA VIEJA", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}else if (nueva.equals(nuevaRepetida)) {
 						BD.modificarConUsuario(con, VentanaInicioSesion.n, nueva);
+						Usuario u = BD.obtenerUsuario(con, VentanaInicioSesion.n);
+						u.setCon(nueva);
+						VentanaPrincipal.tmUsuarios.get(VentanaInicioSesion.n).setCon(nueva);
 						JOptionPane.showMessageDialog(null, "CONTRASEÑA ACTUALIZADA CORRECTAMENTE");
 					}else{
 						JOptionPane.showMessageDialog(null, "LA CONTRASEÑAS NO COINCIDEN", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -133,7 +142,34 @@ public class VentanaCambiarContrasenia extends JFrame {
 		});
 		
 		
+		//EVENTOS DE VENTANA
+		ventanaActual.addWindowListener(new WindowAdapter() {
+					
+			@Override
+			public void windowOpened(WindowEvent e) {
+
+				}
+						
+					
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				VentanaPrincipal.guardarMapaUsuariosEnFicheroDeTexto();
+			}
+					
+					
+					
+		});
+				
+		
+		
 	}
+	
+	
+	
+			
+	
+	
 	private void vaciarCampos() {
 		txtConActual.setText("");
 		txtConNueva.setText("");

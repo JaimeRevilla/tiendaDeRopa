@@ -99,12 +99,13 @@ public class VentanaPrincipal extends JFrame {
 		//BASE DE DATOS
 		Connection con = BD.initBD("SweetWear.db");
 		BD.crearTablaUsuario(con);
+		BD.crearTablaProductosTienda(con);
 		BD.crearTablaProductosCliente(con);
-		BD.crearTablaCalcetines(con);
-		BD.crearTablaCamiseta(con);
-		BD.crearTablaPantalon(con);
-		BD.crearTablaSudadera(con);
-		BD.crearTablaZapato(con);
+//		BD.crearTablaCalcetines(con);
+//		BD.crearTablaCamiseta(con);
+//		BD.crearTablaPantalon(con);
+//		BD.crearTablaSudadera(con);
+//		BD.crearTablaZapato(con);
 		VentanaPrincipal.tmUsuarios = BD.obtenerMapaUsuarios(con);
 		BD.closeBD(con);
 		
@@ -555,7 +556,7 @@ public class VentanaPrincipal extends JFrame {
 	/**
 	 * METODO QUE GUARDA EL mapaUsuarios EN UN FICHERO DE TEXTO
 	 */
-	private void guardarMapaUsuariosEnFicheroDeTexto () {
+	public static void guardarMapaUsuariosEnFicheroDeTexto () {
 		PrintWriter pw = null;
 		
 		try {
