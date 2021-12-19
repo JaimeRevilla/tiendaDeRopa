@@ -115,8 +115,16 @@ public class VentanaInicioSesion extends JFrame {
 				} else if (resul == 2){
 					JOptionPane.showMessageDialog(null, "¡¡BIENVENIDO "+ n+ "!!");
 					VentanaPrincipal.lblNombre.setText("BIENVENIDO " + n);
-					VentanaPrincipal.tmPedidos.put(n, new ArrayList<>());
-					VentanaPrincipal.btnCerrarSesion.setVisible(true);;
+					
+					if (!VentanaPrincipal.tmPedidos.containsKey(n))
+						VentanaPrincipal.tmPedidos.put(n, new ArrayList<>());
+					else 
+						VentanaPrincipal.tmPedidos.get(n);
+					
+					VentanaPrincipal.btnCerrarSesion.setVisible(true);
+					VentanaPrincipal.pb.setVisible(true);
+					VentanaPrincipal.btnCambiarCon.setVisible(true);
+					VentanaPrincipal.btnInicioSesion.setVisible(false);
 					boolean admin = BD.obtenerAdmin(con, n);
 					System.out.println(n);
 					System.out.println(admin);

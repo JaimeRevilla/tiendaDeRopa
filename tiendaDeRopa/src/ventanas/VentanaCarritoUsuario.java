@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -13,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -26,7 +29,7 @@ public class VentanaCarritoUsuario extends JFrame {
 	private JPanel contentPane;
 	private JFrame ventanaActual, ventanaAnterior;
 	private JPanel panelSur, panelNorte, panelCentral, panelCentralArriba, panelCentralAbajo;
-	private JButton btnVolver, btnImprimirRecivo;
+	private JButton btnVolver, btnImprimirRecivo, btnBorrar;
 	public static JLabel lblCarrito;
 	public static DefaultListModel<Producto> modeloListaPedido;
 	public static JList<Producto> listaPedido;
@@ -96,6 +99,9 @@ public class VentanaCarritoUsuario extends JFrame {
 		btnImprimirRecivo = new JButton("IMPRIMIR RECIVO");
 		panelSur.add(btnImprimirRecivo);
 		
+		btnBorrar = new JButton("BORRAR PRODUCTO");
+		panelSur.add(btnBorrar);
+		
 		modeloListaPedido = new DefaultListModel<>();
 		listaPedido = new JList<>(modeloListaPedido);
 		scrollListaPedido = new JScrollPane(listaPedido);
@@ -105,10 +111,11 @@ public class VentanaCarritoUsuario extends JFrame {
 		panelCentralArriba.add(scrollListaPedido);
 		panelCentralAbajo.add(lblPrecio);
 		
+		
 		for (Producto p:VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n)){
 			modeloListaPedido.addElement(p);
 		}
-		
+
 		if (VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).size() == 0){
 			lblPrecio.setText("NO HAY PRODUCTOS EN EL CARRITO");
 		}else {
@@ -118,7 +125,6 @@ public class VentanaCarritoUsuario extends JFrame {
 				lblPrecio.setText("PRECIO TOTAL: "+ pre + "euros");
 			 }
 		}	
-		
 		
 		//EVENTOS
 		btnVolver.addActionListener(new ActionListener() {
@@ -139,6 +145,49 @@ public class VentanaCarritoUsuario extends JFrame {
 				
 			}
 		});
+		
+		btnBorrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int pos = listaPedido.getSelectedIndex();
+				if (pos != -1) {
+					modeloListaPedido.removeElementAt(pos);	
+					Producto p = VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).get(pos);
+					VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).remove(p);
+					double pre = 0;
+					for (Producto pro: VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n)) {
+						pre = pre + (pro.getPrecio() * pro.getStock());
+						lblPrecio.setText("PRECIO TOTAL: "+ pre + "euros");
+					}
+					//lblPrecio.setText("PRECIO TOTAL: "+ (pre - p.getPrecio()) + "euros");
+					
+				}else 
+					JOptionPane.showMessageDialog(null, "NO HAS SELECCIONADO NINGUN PRODUCTO", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+			}
+		});
+		
+		
+		
+		//EVENTOS DE VENTANA
+				ventanaActual.addWindowListener(new WindowAdapter() {
+					
+					@Override
+					public void windowOpened(WindowEvent e) {
+						//VentanaPrincipal.cargarMapaPedidosDeFicheroDeTexto();
+					}
+						
+					
+					@Override
+					public void windowClosing(WindowEvent e) {
+						// TODO Auto-generated method stub
+						VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
+					}
+					
+					
+					
+				});
+				
 		
 		//HILO
 		

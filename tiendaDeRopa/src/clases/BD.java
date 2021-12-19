@@ -245,10 +245,107 @@ public class BD {
 		return tmUsuarios;
 	}
 	
+	public static String obtenerConUsuario(Connection con, String nom) {
+		String sent = "SELECT * FROM usuario WHERE nom = '"+nom+"'";
+		Statement stmt = null;
+		String c = "";
+		
+		try {
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sent);
+			if (rs.next()) {
+				 c = rs.getString("c");
+			}
+			rs.close();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}return c;
+	}
 	
+	public static void modificarConUsuario(Connection con, String nom, String c){
+		String sent = "update usuario set c='"+c+"' where nom = '"+nom+"'";
+		Statement stmt = null;
+		try {
+			stmt = con.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			stmt.executeUpdate(sent);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	//------------------------------------------------------------------------------------------------------------------------
 	//METODOS DE LA BD RELACIONADOS CON LOS PRODUCTOS
+	public static void crearTablaProductosCliente(Connection con) {
+		String sent = "CREATE TABLE IF NOT EXISTS calcetines (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String,  tipoProducto String, tipoCalcetines String, tipoCamiseta String, tipoPantalon String, tipoCamiseta String, colorCordones String, goretex boolean, tipoZapato String)";
+		Statement stmt = null;
+		
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(sent);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+	}
+	
+	public static void insertarProducto(Connection con, int codigo  , String color , String nombre  ,  double precio , int stock , String marca , String rutaFoto  , String tipoProducto ,  String tipoCalcetines ,String tipoCamiseta ,String tipoPantalon ,String tipoSudadera ,String colorCordones ,boolean goretex ,String tipoZapato ){
+		String sent = "INSERT INTO usuario VALUES ('"+codigo+"', '"+color+"', '"+nombre+"', '"+precio+"', '"+stock+"', '"+marca+"', '"+rutaFoto+"', '"+tipoProducto+"', '"+tipoCalcetines+"', '"+tipoCamiseta+"', '"+tipoPantalon+"', '"+tipoSudadera+"', '"+colorCordones+"', '"+goretex+"', '"+tipoZapato+"')";
+		Statement stmt = null;
+		
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(sent);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+	
+	
+	//---------------------------------------------------------------------------------------------------------------------------
 	
 
 	
@@ -339,7 +436,7 @@ public class BD {
 	//-----------------------------------------------------------------------------------------------------------------
 	
 	public static void crearTablaSudadera(Connection con) {
-		String sent = "CREATE TABLE IF NOT EXISTS sudadera (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String, tipoCamiseta String)";
+		String sent = "CREATE TABLE IF NOT EXISTS sudadera (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String, tipoSudadera String)";
 		Statement stmt = null;
 		
 		try {

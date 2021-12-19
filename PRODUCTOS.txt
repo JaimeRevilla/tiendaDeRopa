@@ -1,0 +1,5 @@
+Piki 0 rojo vaquero 20.0 33 nike laRuta
+iker 1 rojo vaquero 20.0 33 nike laRuta
+iker 2 rojo vaquero 20.0 222 nike laRuta
+o 3 rojo vaquero 20.0 77 nike laRuta
+o 4 rojo vaquero 20.0 66 nike laRuta

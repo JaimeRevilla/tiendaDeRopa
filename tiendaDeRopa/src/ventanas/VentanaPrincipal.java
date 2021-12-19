@@ -41,10 +41,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.RootPaneContainer;
+import javax.swing.SpinnerModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -61,9 +63,9 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JPanel panelCentral, panelArriba, panelNorte, panelArribaDrc, panelArribaIzq, panelNorteIzq, panelNorteMedio, panelNorteDrc;
 	private JPanel panelP1, panelP2, panelP3, panelP4, panelP5;
-	private JButton btnInicioSesion, btnSalir, btnCarrito, btnRegistrarme;
+	private JButton btnSalir, btnCarrito, btnRegistrarme;
 	private JButton btnP1, btnP2, btnP3, btnP4, btnP5;
-	public static JButton btnAdmin, btnCerrarSesion;
+	public static JButton btnAdmin, btnCerrarSesion, btnCambiarCon,  btnInicioSesion;
 	private JFrame ventanaActual;
 	public static TreeMap<String, ArrayList<Producto>> tmPedidos = new TreeMap<>(); //MAPA que tiene como clave el nombre del usuario y como valor el pedido con los productos
 	public static TreeMap<String, Usuario> tmUsuarios = new TreeMap<>();
@@ -73,6 +75,7 @@ public class VentanaPrincipal extends JFrame {
 	private JLabel lblTitulo;
 	public static JLabel lblNombre;
 	private JLabel lblHora;
+	public static JProgressBar pb = new JProgressBar( 0, 500 );
 	
 
 	/**
@@ -96,6 +99,7 @@ public class VentanaPrincipal extends JFrame {
 		//BASE DE DATOS
 		Connection con = BD.initBD("SweetWear.db");
 		BD.crearTablaUsuario(con);
+		BD.crearTablaProductosCliente(con);
 		BD.crearTablaCalcetines(con);
 		BD.crearTablaCamiseta(con);
 		BD.crearTablaPantalon(con);
@@ -240,17 +244,29 @@ public class VentanaPrincipal extends JFrame {
 		btnCarrito = new JButton();
 		ponerFotoABoton(btnCarrito, "tiendaDeRopa\\src\\imagenes\\IconoCarrito.png", 30, 30, 30, 30);
 		
+		btnCambiarCon = new JButton();
+		ponerFotoABoton(btnCambiarCon, "tiendaDeRopa\\src\\imagenes\\IconoCambiarContraseña.png", 30, 30, 30, 30);
+		btnCambiarCon.setVisible(false);
+		
+		pb = new JProgressBar(0, 500);
+		pb.setVisible(false);
+	
+		
 		//AÑADIMOS LOS COMPONENTES A LOS PANELES
 
 		panelArribaIzq.add(btnCarrito);
 		panelArribaIzq.add(btnInicioSesion);
 		panelArribaIzq.add(btnSalir);
 		panelArribaIzq.add(btnCerrarSesion);
+		panelArribaIzq.add(btnCambiarCon);
 
 		panelNorteDrc.add(lblHora);
 		panelArribaIzq.add(btnRegistrarme);
 		panelNorteIzq.add(lblNombre);
 		panelArribaIzq.add(btnAdmin);
+		panelArribaIzq.add(pb);
+		
+
 		
 		setLocationRelativeTo( null );
 		
@@ -319,7 +335,12 @@ public class VentanaPrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			lblNombre.setText("");
+			VentanaInicioSesion.n = "";
 			btnAdmin.setVisible(false);
+			btnCambiarCon.setVisible(false);
+			pb.setVisible(false);
+			btnCerrarSesion.setVisible(false);
+			btnInicioSesion.setVisible(true);
 			repaint();
 				
 			}
@@ -337,6 +358,16 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		
+		btnCambiarCon.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaCambiarContrasenia v1 = new VentanaCambiarContrasenia(ventanaActual);
+				ventanaActual.setVisible(false);
+				v1.setVisible(true);
+				
+			}
+		});
 		
 		
 		
@@ -409,6 +440,7 @@ public class VentanaPrincipal extends JFrame {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				cargarMapaUsuariosDeFicheroDeTexto();
+				cargarMapaPedidosDeFicheroDeTexto();
 			}
 				
 			
@@ -416,6 +448,7 @@ public class VentanaPrincipal extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				// TODO Auto-generated method stub
 				guardarMapaUsuariosEnFicheroDeTexto();
+				guardarMapaPedidosEnFicheroDeTexto();
 			}
 			
 			
@@ -509,10 +542,10 @@ public class VentanaPrincipal extends JFrame {
 			}
 		}
 		
-		for(String n: tmUsuarios.keySet()) {
-			System.out.println(n);
-			System.out.println("\t"+tmUsuarios.get(n));
-		}
+//		for(String n: tmUsuarios.keySet()) {
+//			System.out.println(n);
+//			System.out.println("\t"+tmUsuarios.get(n));
+//		}
 		
 		
 		
@@ -550,21 +583,28 @@ public class VentanaPrincipal extends JFrame {
 	/**
 	 * METODO QUE CARGA EN UN FICHERO DE TEXTO LOS PEDIDOS DE CADA USUARIO
 	 */
-	private void cargarMapaPedidosDeFicheroDeTexto () {
+	public static void cargarMapaPedidosDeFicheroDeTexto () {
 		BufferedReader br = null;
-		//HAY QUE CAMBIARLO!!!
 		try {
-			br = new BufferedReader(new FileReader("USUARIOS.txt"));
+			br = new BufferedReader(new FileReader("PRODUCTOS.txt"));
 			String linea = br.readLine();
 			while (linea != null) {
-				String [] datosUsuario = linea.split(" ");
-				String nombre = datosUsuario[0];
-				int edad = Integer.parseInt(datosUsuario[1]);
-				String mail = datosUsuario[2];
-				String con = datosUsuario[3];
-				boolean permisos = Boolean.parseBoolean(datosUsuario[4]);
-				Usuario u = new Usuario(nombre, edad, mail, con, permisos);
-				tmUsuarios.put(nombre, u);
+				String [] datosProducto = linea.split(" ");
+				String nombreCliente = datosProducto[0];
+				int codigo = Integer.parseInt(datosProducto[1]);
+				String color = datosProducto[2];
+				String nombre = datosProducto[3];
+				double precio = Double.parseDouble(datosProducto[4]);
+				int stock = Integer.parseInt(datosProducto[5]);
+				String marca = datosProducto[6];
+				String rutaFoto = datosProducto[7];
+				Producto p = new Producto(codigo, color, nombre, precio, stock, marca, rutaFoto);
+				if (!VentanaPrincipal.tmPedidos.containsKey(nombreCliente)){
+					VentanaPrincipal.tmPedidos.put(nombreCliente, new ArrayList<Producto>());
+					VentanaPrincipal.tmPedidos.get(nombreCliente).add(p);
+				}else {
+					VentanaPrincipal.tmPedidos.get(nombreCliente).add(p);
+				}
 				linea = br.readLine();
 			}
 			
@@ -584,10 +624,47 @@ public class VentanaPrincipal extends JFrame {
 				}
 			}
 		}
-		
-		
+		for(String n: tmPedidos.keySet()) {
+			System.out.println(n);
+			for(Producto p: tmPedidos.get(n))
+				System.out.println("\t" +p);
+		}
 		
 	}	
+	
+	public static void guardarMapaPedidosEnFicheroDeTexto () {
+		PrintWriter pw = null;
+		
+		try {
+			pw = new PrintWriter("PRODUCTOS.txt");
+			for (String nombre: VentanaPrincipal.tmPedidos.keySet()) {
+				ArrayList<Producto> u = VentanaPrincipal.tmPedidos.get(nombre);
+				//pw.println(nombre + "\n" + "\t");
+				for (Producto p: u) {
+					pw.println(nombre + " " + p.getCodigo() + " " + p.getColor() + " " + p.getNombre()+ " " + p.getPrecio()+ " " + p.getStock()+ " " + p.getMarca()+ " " + p.getRutaFoto());
+				}
+				
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (pw!= null) {
+				pw.flush();
+				pw.close();
+			}
+		}
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 		
 	/**
 	 * METODO QUE PONE UNA IMÁGEN A UN BOTON CON LAS MEDIDAS PERSONALIZADAS

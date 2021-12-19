@@ -149,7 +149,7 @@ public class VentanaPantalones extends JFrame {
 						System.out.println(canti);
 						//IDEA!!: IGUAL CREAR EN LA BD LOS OBJETOS DE LAS IMAGENES Y COGER LOS 
 						//ATRIBUTOS PARA CREAR EL OBJETO DE LA BASE DE DATOS
-						VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Pantalon(0, "rojo", "vaquero", 20, canti, "nike","la ruta", TipoPantalon.CHANDAL)); //AQUI AÑADIR EL PRODUCTO
+						VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Pantalon(0, "rojo", "vaquero", 20, canti, "nike","laRuta", TipoPantalon.CHANDAL)); //AQUI AÑADIR EL PRODUCTO
 						System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
 						System.out.println("Hola");
 						JOptionPane.showMessageDialog(null, "¡¡PRODUCTO AÑADIDO CORRECTAMENTE!!");
