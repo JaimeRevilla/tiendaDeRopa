@@ -131,10 +131,7 @@ public class VentanaAdmin2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String texto = "";
 				for (String clave: VentanaPrincipal.tmUsuarios.keySet()) {
-					texto = texto + clave + "\n" + "\t";
-					//Usuario us = VentanaPrincipal.tmUsuarios.get(clave);
-					//texto =  texto +  us  + "\t";
-					texto = texto + VentanaPrincipal.tmUsuarios.get(clave) + "\t";
+					texto = texto + clave + "\t"+ VentanaPrincipal.tmUsuarios.get(clave) + "\n";
 				}
 				textAreaUsuarios.setText(texto);
 				

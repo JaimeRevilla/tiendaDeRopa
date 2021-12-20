@@ -88,4 +88,16 @@ public class Producto{
 		this.rutaFoto = rutaFoto;
 	}
 
+//	@Override
+//	public String toString() {
+//		return "Producto [codigo=" + codigo + ", color=" + color + ", nombre=" + nombre + ", precio=" + precio
+//				+ ", stock=" + stock + ", marca=" + marca + ", rutaFoto=" + rutaFoto + "]";
+//	}
+	
+	public String toString() {
+		return getNombre() + " " + getPrecio() + "euros" + " " + getStock() + " uds";
+	}
+	
+	
+
 }

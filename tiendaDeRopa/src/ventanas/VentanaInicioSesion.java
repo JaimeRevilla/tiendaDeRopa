@@ -107,11 +107,13 @@ public class VentanaInicioSesion extends JFrame {
 				Connection con = BD.initBD("SweetWear.db"); 
 				int resul = BD.obtenerUsuario(con, n, c);
 				if (resul == 0) {
-					JOptionPane.showMessageDialog(null, "¡¡PRIMERO TIENES QUE REGISTRARTE!!");
+					//JOptionPane.showMessageDialog(null, "¡¡PRIMERO TIENES QUE REGISTRARTE!!");
+					JOptionPane.showMessageDialog(null, "¡¡PRIMERO TIENES QUE REGISTRARTE!!", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 					new VentanaRegistro(ventanaActual);
 					ventanaActual.setVisible(false);
 				} else if (resul == 1){
-					JOptionPane.showMessageDialog(null, "¡¡LA CONTRASEÑA EN INCORRECTA!!");
+					//JOptionPane.showMessageDialog(null, "¡¡LA CONTRASEÑA EN INCORRECTA!!");
+					JOptionPane.showMessageDialog(null, "¡¡LA CONTRASEÑA EN INCORRECTA!!", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				} else if (resul == 2){
 					JOptionPane.showMessageDialog(null, "¡¡BIENVENIDO "+ n+ "!!");
 					VentanaPrincipal.lblNombre.setText("BIENVENIDO " + n);
@@ -123,6 +125,7 @@ public class VentanaInicioSesion extends JFrame {
 					
 					VentanaPrincipal.btnCerrarSesion.setVisible(true);
 					VentanaPrincipal.pb.setVisible(true);
+					VentanaPrincipal.sp.setVisible(true);
 					VentanaPrincipal.btnCambiarCon.setVisible(true);
 					VentanaPrincipal.btnInicioSesion.setVisible(false);
 					boolean admin = BD.obtenerAdmin(con, n);

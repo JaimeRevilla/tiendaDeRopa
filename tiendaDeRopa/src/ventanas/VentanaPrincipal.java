@@ -44,11 +44,15 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.RootPaneContainer;
 import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -75,7 +79,10 @@ public class VentanaPrincipal extends JFrame {
 	private JLabel lblTitulo;
 	public static JLabel lblNombre;
 	private JLabel lblHora;
-	public static JProgressBar pb = new JProgressBar( 0, 500 );
+	public static JProgressBar pb = new JProgressBar();
+	public static SpinnerModel modelosp;
+	public static JSpinner sp;
+	
 	
 
 	/**
@@ -249,7 +256,12 @@ public class VentanaPrincipal extends JFrame {
 		ponerFotoABoton(btnCambiarCon, "tiendaDeRopa\\src\\imagenes\\IconoCambiarContraseña.png", 30, 30, 30, 30);
 		btnCambiarCon.setVisible(false);
 		
-		pb = new JProgressBar(0, 500);
+		modelosp = new SpinnerNumberModel(50, 0, 100, 1);
+		sp = new JSpinner(modelosp);
+		sp.setVisible(false);
+		
+		pb = new JProgressBar(0, 100);
+		pb.setValue(50);
 		pb.setVisible(false);
 	
 		
@@ -266,6 +278,7 @@ public class VentanaPrincipal extends JFrame {
 		panelNorteIzq.add(lblNombre);
 		panelArribaIzq.add(btnAdmin);
 		panelArribaIzq.add(pb);
+		panelArribaIzq.add(sp);
 		
 
 		
@@ -273,6 +286,16 @@ public class VentanaPrincipal extends JFrame {
 		
 		 
 		//EVENTOS
+		
+		sp.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				// TODO Auto-generated method stub
+				int valor = (int) sp.getValue();
+				pb.setValue(valor);
+			}
+		});
 		btnInicioSesion.addActionListener(new ActionListener() {
 			
 			@Override

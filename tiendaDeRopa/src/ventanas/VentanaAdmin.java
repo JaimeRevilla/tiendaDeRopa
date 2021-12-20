@@ -342,36 +342,6 @@ public class VentanaAdmin extends JFrame {
 				
 				
 		//EVENTOS
-		btnAniadir.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				//CREAR UNA BASE DE DATOS PARA PRODUCTO
-				//METER EL PRODUCTO EN LA BASE DE DATOS
-				//METERLOS EN LOS DEMAS SITIOS QUE SEA NECESARIO (LA TABLA Y LA JLIST)
-				int pos = comboProductos.getSelectedIndex();
-				String nombre = comboProductos.getItemAt(pos);
-				String color = txtColor.getText();
-				double precio = Double.parseDouble(txtPrecio.getText());
-				int stock = Integer.parseInt(txtStock.getText());
-				String marca = txtMarca.getText();
-				ImageIcon im = (ImageIcon)lblFoto.getIcon();
-				String rutaFoto = im.getDescription();
-				
-				//AQUI HABRA QUE VER COMO ATRIBUIRLE EL CODIGO AL PRODUCTO
-				//SUPONGO QUE SE HARA CONTANDO LOS PRODUCTOS DE LA BASE DE DATOS
-				//OSEA AÑADIENDOLO A LA BASES DE DATOS Y PILLANDO DE HAY EL ID/CODIGO!!!
-				Producto p = new Producto(999, color, nombre, precio, stock, marca, rutaFoto);
-				String [] fila = {String.valueOf(p.getCodigo()), color, nombre, String.valueOf(precio), String.valueOf(stock), marca, rutaFoto};
-				modeloTablaProductos.addRow(fila);
-				
-				
-				
-			}
-		});
-		
 		btnVolver.addActionListener(new ActionListener() {
 			
 			@Override
@@ -393,27 +363,6 @@ public class VentanaAdmin extends JFrame {
 				VentanaAdmin2 v1 = new VentanaAdmin2(ventanaActual);
 				ventanaActual.setVisible(false);
 				v1.setVisible(true);
-				
-				//NO SE XQ NO ME HABRE LA VENTANA ADMIN2
-				
-				
-				
-				
-				
-				
-//				String texto = "";
-//				for (String clave: VentanaPrincipal.tmPedidos.keySet()) {
-//					texto = texto + clave + "\n" + "\t";
-//					ArrayList<Producto> productos = VentanaPrincipal.tmPedidos.get(clave);
-//					for(Producto p: productos) {
-//						texto = texto + p + "\n";
-//					}
-//				}
-//				textArea.setText(texto);
-				
-				
-				//METODO QUE MOSTRARA EL MAPA DE LO QUE SEA EN UN TEXT AREA!!
-				
 			}
 		});
 		
@@ -470,15 +419,87 @@ public class VentanaAdmin extends JFrame {
 							System.out.println("ZAPATOS");
 							
 						}
+					
 				
 				
 			}
 		});
 		
+		
+		//EVENTOS
+			btnAniadir.addActionListener(new ActionListener() {
+					
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+						
+					//CREAR UNA BASE DE DATOS PARA PRODUCTO
+					//METER EL PRODUCTO EN LA BASE DE DATOS
+					//METERLOS EN LOS DEMAS SITIOS QUE SEA NECESARIO (LA TABLA Y LA JLIST)
+					int pos = comboProductos.getSelectedIndex();
+					String nombre = comboProductos.getItemAt(pos);
+					String color = txtColor.getText();
+					double precio = Double.parseDouble(txtPrecio.getText());
+					int stock = Integer.parseInt(txtStock.getText());
+					String marca = txtMarca.getText();
+					ImageIcon im = (ImageIcon)lblFoto.getIcon();
+					if (im == null)
+						JOptionPane.showMessageDialog(null, "Tienes que Seleccionar una imagen", "ERROR", JOptionPane.ERROR_MESSAGE);
+					
+					String rutaFoto = im.getDescription();
+					int posTipoCalcetines = comboTipoCalcetines.getSelectedIndex();
+					String nombreTipoCalcetines = comboTipoCalcetines.getItemAt(pos);
+					
+					
+						
+					Connection con = BD.initBD("SweetWear.db");
+					int cod = 0;
+					try {
+						cod = BD.contarProductosTienda(con);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					cod = cod + 1;
+					
+					//AQUI HABRA QUE VER COMO ATRIBUIRLE EL CODIGO AL PRODUCTO
+					//SUPONGO QUE SE HARA CONTANDO LOS PRODUCTOS DE LA BASE DE DATOS
+					//OSEA AÑADIENDOLO A LA BASES DE DATOS Y PILLANDO DE HAY EL ID/CODIGO!!!
+					Producto p = new Producto(999, color, nombre, precio, stock, marca, rutaFoto);
+					String [] fila = {String.valueOf(cod), color, nombre+nombreTipoCalcetines, String.valueOf(precio), String.valueOf(stock), marca, rutaFoto};
+					modeloTablaProductos.addRow(fila);
+					
+						
+				
+					//HABRA QUE PONERLE DE CODIGO 1 MAS QUE EL CODIGO DEL ULTIMO PRODUCTO QUE HAY EN LA TABLA DE LA BASE DE DATOS!!
+					if (nombre.equals("CALCETINES")) {
+						BD.insertarProductoTienda(con, cod, color, nombre+nombreTipoCalcetines, precio, stock, marca, rutaFoto, nombre , nombreTipoCalcetines, "", "", "", "", false, "");
+					} else if (nombre.equals("PANTALON")) {
+						//BD.insertarProductoTienda(con, cod, color, nombre, precio, stock, marca, rutaFoto, rutaFoto, rutaFoto, rutaFoto, nombre, marca, color, rootPaneCheckingEnabled, rutaFoto);
+					}else if (nombre.equals("CAMISETA")) {
+						//BD.insertarProductoTienda(con, cod, color, nombre, precio, stock, marca, rutaFoto, rutaFoto, rutaFoto, rutaFoto, nombre, marca, color, rootPaneCheckingEnabled, rutaFoto);
+					}else if (nombre.equals("SUDADERA")) {
+						//BD.insertarProductoTienda(con, cod, color, nombre, precio, stock, marca, rutaFoto, rutaFoto, rutaFoto, rutaFoto, nombre, marca, color, rootPaneCheckingEnabled, rutaFoto);
+					}else if (nombre.equals("ZAPATOS")) {
+						//BD.insertarProductoTienda(con, cod, color, nombre, precio, stock, marca, rutaFoto, rutaFoto, rutaFoto, rutaFoto, nombre, marca, color, rootPaneCheckingEnabled, rutaFoto);
+					}
+					BD.closeBD(con);
+					JOptionPane.showMessageDialog(null, "¡¡PRODUCTO AÑADIDO CORRECTAMENTE!!");
+				}
+					
+			});
+		
+		
 	}
 	
 	public static void mostrarPanel(JPanel panel) {
-		//lblNombre = new JLabel("NOMBRE: ");
+		panel.removeAll();
+		lblNombre = new JLabel("NOMBRE: ");
+		comboProductos = new JComboBox<>();
+		for (TipoProductos s: TipoProductos.values()) {
+			String n = String.valueOf(s);
+			comboProductos.addItem(n);
+		}
 		lblColor = new JLabel("COLOR");
 		lblPrecio = new JLabel("PRECIO: ");
 		lblStock = new JLabel("STOCK: ");
@@ -495,8 +516,8 @@ public class VentanaAdmin extends JFrame {
 		
 		
 		
-//		panel.add(lblNombre);
-//		panel.add(comboProductos);
+		panel.add(lblNombre);
+		panel.add(comboProductos);
 		panel.add(lblColor);
 		panel.add(txtColor);
 		panel.add(lblPrecio);
@@ -505,6 +526,8 @@ public class VentanaAdmin extends JFrame {
 		panel.add(txtStock);
 		panel.add(lblMarca);
 		panel.add(txtMarca);
+		
+		panel.updateUI();
 		
 	}
 

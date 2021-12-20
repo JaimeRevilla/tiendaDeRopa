@@ -3,6 +3,7 @@ Piki 1 Negro Chandal 20.0 300 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonCha
 Piki 2 Negro Chandal 20.0 250 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
 Piki 3 Negro Chandal 20.0 1 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
 a 4 Negro Chandal 20.0 5 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
+a 37 Negro Chandal 20.0 1 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
 arene 5 Negro Chandal 20.0 5 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
 arene 6 Negro Chandal 20.0 1 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
 arene 7 Negro Chandal 20.0 1 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
@@ -29,5 +30,7 @@ iker 27 Negro Chandal 20.0 5 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChan
 iker 28 Negro Chandal 20.0 5 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
 iker 29 Negro Chandal 20.0 1 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
 iker 30 Negro Chandal 20.0 1 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
-o 31 Negro Chandal 20.0 5 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
-o 32 Negro Chandal 20.0 5 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
+iker 31 Negro Chandal 20.0 1 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
+iker 32 Negro Chandal 20.0 1 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
+o 33 Negro Chandal 20.0 5 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
+o 34 Negro Chandal 20.0 5 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png

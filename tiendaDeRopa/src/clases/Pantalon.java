@@ -33,8 +33,9 @@ public class Pantalon extends Producto {
 //				+ ", getNombre()=" + getNombre() + ", getPrecio()=" + getPrecio() + ", getStock()=" + getStock()
 //				+ ", getMarca()=" + getMarca() + ", getRutaFoto()=" + getRutaFoto()+ "]";
 //	}
+	
 	public String toString() {
-		return "Pantalon: " + getNombre() + " " + getPrecio() + "euros" + " " + getStock() + " unidades";
+		return getNombre() + " " + getPrecio() + "euros" + " " + getStock() + " uds";
 	}
 	
 }

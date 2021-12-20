@@ -21,6 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import clases.BD;
+import clases.Pantalon;
 import clases.Producto;
 import clases.Usuario;
 
@@ -113,7 +114,7 @@ public class VentanaCarritoUsuario extends JFrame {
 		
 		
 		for (Producto p:VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n)){
-			modeloListaPedido.addElement(p);
+				modeloListaPedido.addElement(p);
 		}
 
 		if (VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).size() == 0){
