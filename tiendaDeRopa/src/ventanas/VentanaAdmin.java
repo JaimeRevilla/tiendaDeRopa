@@ -11,6 +11,8 @@ import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -37,6 +39,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import clases.BD;
 import clases.Producto;
 import clases.TipoCalcetines;
 import clases.TipoProductos;
@@ -289,15 +292,28 @@ public class VentanaAdmin extends JFrame {
 		modeloTablaProductos = new DefaultTableModel();
 		Vector<String> cabeceras = new Vector<String>( Arrays.asList( "ID","COLOR","TIPO PRODUCTO","PRECIO", "STOCK", "MARCA", "RUTA FOTO") );
 		modeloTablaProductos = new DefaultTableModel(  
-				new Vector<Vector<Object>>(),  
-				cabeceras  
-			) {
-				public boolean isCellEditable(int row, int column) {
-					if(column==0)
-						return false;
-					return true;
-				}
-			};
+			new Vector<Vector<Object>>(),  
+			cabeceras  
+		) {
+			public boolean isCellEditable(int row, int column) {
+				if(column==0)
+					return false;
+				return true;
+			}
+		};
+		
+		Connection con = BD.initBD("SweetWear.db");
+		ArrayList<Producto> al = BD.getTienda(con);
+		int cod = 0;
+		try {
+			cod = BD.contarProductosTienda(con);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		for (Producto p: al)
+			modeloTablaProductos.addRow( new Object[] { cod, p.getColor(), p.getNombre(), p.getPrecio(), p.getStock(), p.getMarca(), p.getRutaFoto() } );
+		BD.closeBD(con);
 		
 		//modeloTablaProductos.setColumnIdentifiers(nombres);
 		tablaProductos = new JTable(modeloTablaProductos);
@@ -414,7 +430,7 @@ public class VentanaAdmin extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser fc = new JFileChooser("C:\\Users\\34688\\Desktop\\workspace\\tiendaDeRopa\\tiendaDeRopa\\src\\imagenes");
+				JFileChooser fc = new JFileChooser("tiendaDeRopa\\src\\imagenes");
 				int sel = fc.showOpenDialog(null);
 				if(sel == JFileChooser.APPROVE_OPTION) {
 					File ficheroSeleccionado = fc.getSelectedFile();

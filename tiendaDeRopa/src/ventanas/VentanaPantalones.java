@@ -30,6 +30,7 @@ public class VentanaPantalones extends JFrame {
 	private JButton btnVolver, btnChandal, btnVaqueros, btnCampana;
 	private JLabel lblChandal, lblVaquero, lblCampana;
 
+
 	/**
 	 * Launch the application.
 	 */
@@ -136,6 +137,7 @@ public class VentanaPantalones extends JFrame {
 		
 		
 		
+		 
 		
 		//EVENTOS
 		btnVolver.addActionListener(new ActionListener() {
@@ -170,7 +172,15 @@ public class VentanaPantalones extends JFrame {
 								Producto p = BD.obtenerProductoTienda(con, "Chandal");
 								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Pantalon(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoPantalon.CHANDAL)); //AQUI AÑADIR EL PRODUCTO
 								System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
-								BD.insertarProductoCliente(con, 0,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Pantalon", "", "", "Chandal", "", "", false, "");
+								int num = 0;
+								try {
+									num = BD.contarProductos(con);
+								} catch (SQLException e2) {
+									// TODO Auto-generated catch block
+									e2.printStackTrace();
+								}
+								num = num + 1;
+								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Pantalon", "", "", "Chandal", "", "", false, "");
 								try {
 									BD.restarUnidadesAProducto(con, "Chandal", canti);
 								} catch (SQLException e1) {

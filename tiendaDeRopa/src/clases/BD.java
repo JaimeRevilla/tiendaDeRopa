@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.TreeMap;
+
 
 
 public class BD {
@@ -364,6 +366,53 @@ public class BD {
 		}
 	}
 	
+	public static ArrayList<Producto> getTienda(Connection con) {
+		ArrayList<Producto> al = new ArrayList<>();
+		String sent = "select * from tienda;";
+		Statement stmt = null;
+		try {
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery( sent );
+			while( rs.next() ) { 
+				int codigo = rs.getInt("codigo");
+				String color = rs.getString("color");
+				String nombre = rs.getString("nombre");
+				double precio = rs.getDouble("precio");
+				int stock = rs.getInt("stock");
+				String marca = rs.getString("marca");
+				String rutaFoto = rs.getString("rutaFoto");
+				Producto p = new Producto(codigo, color, nombre, precio, stock, marca, rutaFoto);
+				al.add(p);
+				
+			
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return al;
+	}
+	
+	
+	
+	
+	
+	/**
+	 * Metodo para saber cuantos productos hay en la tabla de pedidos
+	 * @param con Conexion con la BD
+	 * @return el numero de pedidos que hay
+	 * @throws SQLException Para no tener que poner try and catch 
+	 */
+	public static int contarProductos(Connection con) throws SQLException {
+		String sent = "select count(*) from pedido";
+		Statement stmt = null;
+		stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(sent);
+		int resul = rs.getInt(1);
+		rs.close();
+		return resul;
+	}
+	
 	public static void insertarProductoCliente(Connection con, int codigo , String cliente, String color , String nombre , double precio ,int cantidad ,String marca ,String rutaFoto ,String  tipoProducto ,String tipoCalcetines ,String tipoCamiseta ,String tipoPantalon ,String tipoSudadera ,String colorCordones ,boolean goretex ,String tipoZapato ) {
 		String sent = "INSERT INTO pedido VALUES ('"+codigo+"', '"+cliente+"', '"+color+"', '"+nombre+"', '"+precio+"', '"+cantidad+"', '"+marca+"', '"+rutaFoto+"', '"+tipoProducto+"', '"+tipoCalcetines+"', '"+tipoCamiseta+"', '"+tipoPantalon+"', '"+tipoSudadera+"', '"+colorCordones+"', '"+goretex+"', '"+tipoZapato+"')";
 		Statement stmt = null;
@@ -410,6 +459,16 @@ public class BD {
 				}
 			}
 		}
+	}
+	
+	public static int contarProductosTienda(Connection con) throws SQLException {
+		String sent = "select count(*) from tienda";
+		Statement stmt = null;
+		stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(sent);
+		int resul = rs.getInt(1);
+		rs.close();
+		return resul;
 	}
 	
 	public static Producto obtenerProductoTienda(Connection con, String nom) {
