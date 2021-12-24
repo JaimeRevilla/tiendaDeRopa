@@ -28,7 +28,7 @@ public class VentanaPantalones extends JFrame {
 	private JFrame ventanaAnterior, ventanaActual;
 	private JPanel panelSur;
 	private JButton btnVolver, btnChandal, btnVaqueros, btnCampana;
-	private JLabel lblChandal, lblVaquero, lblCampana;
+	static public JLabel lblChandal, lblVaquero, lblCampana;
 
 
 	/**

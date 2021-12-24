@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -151,10 +152,23 @@ public class VentanaCarritoUsuario extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				int sto = 0;
 				int pos = listaPedido.getSelectedIndex();
 				if (pos != -1) {
 					modeloListaPedido.removeElementAt(pos);	
 					Producto p = VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).get(pos);
+					Connection con = BD.initBD("SweetWear.db");
+					try {
+						BD.sumarUnidadesAProducto(con, p.getNombre(), p.getStock());
+						sto = BD.obtenerStockProducto(con, p.getNombre());
+						if (p.getNombre().equals("Chandal")) {
+							VentanaPantalones.lblChandal.setText("PANTALONES CHANDAL" + ": " + "Cantidades restantes: " + sto + " unidades");
+						}
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 					VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).remove(p);
 					double pre = 0;
 					for (Producto pro: VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n)) {

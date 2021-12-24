@@ -304,15 +304,15 @@ public class VentanaAdmin extends JFrame {
 		
 		Connection con = BD.initBD("SweetWear.db");
 		ArrayList<Producto> al = BD.getTienda(con);
-		int cod = 0;
-		try {
-			cod = BD.contarProductosTienda(con);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		int cod = 0;
+//		try {
+//			cod = BD.contarProductosTienda(con);
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		for (Producto p: al)
-			modeloTablaProductos.addRow( new Object[] { cod, p.getColor(), p.getNombre(), p.getPrecio(), p.getStock(), p.getMarca(), p.getRutaFoto() } );
+			modeloTablaProductos.addRow( new Object[] { p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), p.getStock(), p.getMarca(), p.getRutaFoto() } );
 		BD.closeBD(con);
 		
 		//modeloTablaProductos.setColumnIdentifiers(nombres);
@@ -447,6 +447,9 @@ public class VentanaAdmin extends JFrame {
 						JOptionPane.showMessageDialog(null, "Tienes que Seleccionar una imagen", "ERROR", JOptionPane.ERROR_MESSAGE);
 					
 					String rutaFoto = im.getDescription();
+					String rutaAdecuada = rutaFoto.substring(46, rutaFoto.length()); 
+					
+					
 					int posTipoCalcetines = comboTipoCalcetines.getSelectedIndex();
 					String nombreTipoCalcetines = comboTipoCalcetines.getItemAt(pos);
 					
@@ -466,14 +469,14 @@ public class VentanaAdmin extends JFrame {
 					//SUPONGO QUE SE HARA CONTANDO LOS PRODUCTOS DE LA BASE DE DATOS
 					//OSEA AÑADIENDOLO A LA BASES DE DATOS Y PILLANDO DE HAY EL ID/CODIGO!!!
 					Producto p = new Producto(999, color, nombre, precio, stock, marca, rutaFoto);
-					String [] fila = {String.valueOf(cod), color, nombre+nombreTipoCalcetines, String.valueOf(precio), String.valueOf(stock), marca, rutaFoto};
+					String [] fila = {String.valueOf(cod), color, nombre+ " " + nombreTipoCalcetines, String.valueOf(precio), String.valueOf(stock), marca, rutaAdecuada};
 					modeloTablaProductos.addRow(fila);
 					
 						
 				
 					//HABRA QUE PONERLE DE CODIGO 1 MAS QUE EL CODIGO DEL ULTIMO PRODUCTO QUE HAY EN LA TABLA DE LA BASE DE DATOS!!
 					if (nombre.equals("CALCETINES")) {
-						BD.insertarProductoTienda(con, cod, color, nombre+nombreTipoCalcetines, precio, stock, marca, rutaFoto, nombre , nombreTipoCalcetines, "", "", "", "", false, "");
+						BD.insertarProductoTienda(con, cod, color, nombre+ " " + nombreTipoCalcetines, precio, stock, marca, rutaAdecuada, nombre , nombreTipoCalcetines, "", "", "", "", false, "");
 					} else if (nombre.equals("PANTALON")) {
 						//BD.insertarProductoTienda(con, cod, color, nombre, precio, stock, marca, rutaFoto, rutaFoto, rutaFoto, rutaFoto, nombre, marca, color, rootPaneCheckingEnabled, rutaFoto);
 					}else if (nombre.equals("CAMISETA")) {

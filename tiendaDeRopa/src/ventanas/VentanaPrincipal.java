@@ -12,6 +12,9 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -482,6 +485,40 @@ public class VentanaPrincipal extends JFrame {
 		
 	//---------------------------------------------------------------------------------------------------------------------------	
 		
+	//EVENTO PROGRESS BAR
+		
+	pb.addMouseListener(new MouseAdapter() {
+		
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			int resp = JOptionPane.showConfirmDialog(null,"¿ESTA SEGURO DE SU OPCIÓN?");
+			if(resp == JOptionPane.OK_OPTION) {
+				VentanaPrincipal.pb.setVisible(false);
+				VentanaPrincipal.sp.setVisible(false);
+				JOptionPane.showMessageDialog(null, "GRACIAS POR COLABORAR!!!", "GRACIAS!!!", JOptionPane.NO_OPTION);
+				//AQUI IRA ALGO PARA EL TEMA DE LAS ESTADISTICAS
+			}
+			
+		}
+	});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	//--------------------------------------------------------------------------------------------------------------------------------	
+		
+		
+	
 	}
 	/**
 	 * Metodo por el cual los pedidos que se hubiesen hecho en el carrito son borrados
@@ -541,9 +578,12 @@ public class VentanaPrincipal extends JFrame {
 				String nombre = datosUsuario[0];
 				String mail = datosUsuario[1];
 				int edad = Integer.parseInt(datosUsuario[2]);
-				String con = datosUsuario[3];
-				boolean permisos = Boolean.parseBoolean(datosUsuario[4]);
-				Usuario u = new Usuario(nombre, edad, mail, con, permisos);
+				String cont = datosUsuario[3];
+//				boolean permisos = Boolean.parseBoolean(datosUsuario[4]);
+				Connection con = BD.initBD("SweetWear.db");
+				boolean permisos = BD.obtenerAdmin(con, nombre);
+				BD.closeBD(con);
+				Usuario u = new Usuario(nombre, edad, mail, cont, permisos);
 				tmUsuarios.put(nombre, u);
 				linea = br.readLine();
 				
@@ -566,10 +606,10 @@ public class VentanaPrincipal extends JFrame {
 			}
 		}
 		
-//		for(String n: tmUsuarios.keySet()) {
-//			System.out.println(n);
-//			System.out.println("\t"+tmUsuarios.get(n));
-//		}
+		for(String n: tmUsuarios.keySet()) {
+			System.out.println(n);
+			System.out.println("\t"+tmUsuarios.get(n));
+		}
 		
 		
 		
@@ -648,11 +688,11 @@ public class VentanaPrincipal extends JFrame {
 				}
 			}
 		}
-		for(String n: tmPedidos.keySet()) {
-			System.out.println(n);
-			for(Producto p: tmPedidos.get(n))
-				System.out.println("\t" +p);
-		}
+//		for(String n: tmPedidos.keySet()) {
+//			System.out.println(n);
+//			for(Producto p: tmPedidos.get(n))
+//				System.out.println("\t" +p);
+//		}
 		
 	}	
 	

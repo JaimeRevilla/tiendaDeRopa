@@ -366,32 +366,7 @@ public class BD {
 		}
 	}
 	
-	public static ArrayList<Producto> getTienda(Connection con) {
-		ArrayList<Producto> al = new ArrayList<>();
-		String sent = "select * from tienda;";
-		Statement stmt = null;
-		try {
-			stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery( sent );
-			while( rs.next() ) { 
-				int codigo = rs.getInt("codigo");
-				String color = rs.getString("color");
-				String nombre = rs.getString("nombre");
-				double precio = rs.getDouble("precio");
-				int stock = rs.getInt("stock");
-				String marca = rs.getString("marca");
-				String rutaFoto = rs.getString("rutaFoto");
-				Producto p = new Producto(codigo, color, nombre, precio, stock, marca, rutaFoto);
-				al.add(p);
-				
-			
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return al;
-	}
+	
 	
 	
 	
@@ -460,6 +435,35 @@ public class BD {
 			}
 		}
 	}
+	
+	public static ArrayList<Producto> getTienda(Connection con) {
+		ArrayList<Producto> al = new ArrayList<>();
+		String sent = "select * from tienda;";
+		Statement stmt = null;
+		try {
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery( sent );
+			while( rs.next() ) { 
+				int codigo = rs.getInt("codigo");
+				String color = rs.getString("color");
+				String nombre = rs.getString("nombre");
+				double precio = rs.getDouble("precio");
+				int stock = rs.getInt("stock");
+				String marca = rs.getString("marca");
+				String rutaFoto = rs.getString("rutaFoto");
+				Producto p = new Producto(codigo, color, nombre, precio, stock, marca, rutaFoto);
+				al.add(p);
+				
+			
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return al;
+	}
+	
+	
 	
 	public static int contarProductosTienda(Connection con) throws SQLException {
 		String sent = "select count(*) from tienda";
@@ -574,6 +578,13 @@ public class BD {
 	
 	public static void restarUnidadesAProducto(Connection con, String nom, int unidades) throws SQLException {
 		String sent = "update tienda set stock = stock - "+unidades+ " where nombre = '"+nom+"'";
+		Statement stmt = null;
+		stmt = con.createStatement();
+		stmt.executeUpdate(sent);
+	}
+	
+	public static void sumarUnidadesAProducto(Connection con, String nom, int unidades) throws SQLException {
+		String sent = "update tienda set stock = stock + "+unidades+ " where nombre = '"+nom+"'";
 		Statement stmt = null;
 		stmt = con.createStatement();
 		stmt.executeUpdate(sent);
