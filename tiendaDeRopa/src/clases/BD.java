@@ -412,9 +412,33 @@ public class BD {
 		}
 		
 	}
+	public static void eliminarProductoCliente(Connection con, int codigo) {
+		String sent = "DELETE FROM pedido WHERE codigo ='"+codigo+"'";
+		Statement stmt = null;
+		try {
+			stmt = con.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			stmt.executeUpdate(sent);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (stmt != null) {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	public static void crearTablaProductosTienda(Connection con) {
-		String sent = "CREATE TABLE IF NOT EXISTS tienda (codigo int PRIMARY KEY AUTOINCREMENT, color String, nombre String, precio double, stock int, marca String, rutaFoto String,  tipoProducto String, tipoCalcetines String, tipoCamiseta String, tipoPantalon String, tipoSudadera String, colorCordones String, goretex boolean, tipoZapato String)";
+		String sent = "CREATE TABLE IF NOT EXISTS tienda (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String,  tipoProducto String, tipoCalcetines String, tipoCamiseta String, tipoPantalon String, tipoSudadera String, colorCordones String, goretex boolean, tipoZapato String)";
 		Statement stmt = null;
 		
 		try {
@@ -438,7 +462,7 @@ public class BD {
 	
 	public static ArrayList<Producto> getTienda(Connection con) {
 		ArrayList<Producto> al = new ArrayList<>();
-		String sent = "select * from tienda;";
+		String sent = "SELECT * FROM tienda;";
 		Statement stmt = null;
 		try {
 			stmt = con.createStatement();
@@ -461,6 +485,47 @@ public class BD {
 			e.printStackTrace();
 		}
 		return al;
+	}
+	
+	public static boolean existeProductoMismoNombre(Connection con, String n) throws SQLException {
+		String sent = "select * from tienda where nombre='"+n+"'";
+		Statement stmt = null;
+		stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(sent);
+		boolean existe = false;
+		if(rs.next())
+			existe = true;
+		rs.close();
+		return existe;
+	}
+	
+	
+	
+	public static void ponerProductoEnOferta(Connection con, String nombre, double porcentaje) throws SQLException {
+		String sent = "update tienda set precio = precio * "+porcentaje+" where nombre='"+nombre+"'";
+		Statement stmt = null;
+		stmt = con.createStatement();
+		stmt.executeUpdate(sent);
+	}
+	
+	public static void finOferta(Connection con, String nombre, double porcentaje) throws SQLException {
+		String sent = "update tienda set precio = precio / "+porcentaje+" where nombre='"+nombre+"'";
+		Statement stmt = null;
+		stmt = con.createStatement();
+		stmt.executeUpdate(sent);
+	}
+	
+	public static void modificarProductoTienda(Connection con, int codigo, String color, String nombre, double precio, int stock, String marca, String rutaFoto) {
+		String sent = "update tienda set codigo="+codigo+",color='"+color+"',nombre='"+nombre+"',precio="+precio+",stock="+stock+",marca='"+marca+"',rutaFoto='"+rutaFoto+"' where codigo="+codigo;
+		Statement stmt = null;
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(sent);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

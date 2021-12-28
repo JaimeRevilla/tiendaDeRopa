@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -36,7 +37,7 @@ public class VentanaCarritoUsuario extends JFrame {
 	public static DefaultListModel<Producto> modeloListaPedido;
 	public static JList<Producto> listaPedido;
 	private JScrollPane scrollListaPedido;
-	private JLabel lblPrecio;
+	private JLabel lblPrecio, lblFoto;
 
 	/**
 	 * Launch the application.
@@ -97,6 +98,7 @@ public class VentanaCarritoUsuario extends JFrame {
 		//CREACION DE LOS COMPONENTES
 		lblCarrito = new JLabel();
 		lblPrecio = new JLabel();
+		lblFoto = new JLabel();
 		
 		btnImprimirRecivo = new JButton("IMPRIMIR RECIVO");
 		panelSur.add(btnImprimirRecivo);
@@ -124,9 +126,21 @@ public class VentanaCarritoUsuario extends JFrame {
 			double pre = 0;
 			for (Producto p: VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n)) {
 				pre = pre + (p.getPrecio() * p.getStock());
-				lblPrecio.setText("PRECIO TOTAL: "+ pre + "euros");
+				lblPrecio.setText("PRECIO TOTAL: "+ pre + " euros");
 			 }
 		}	
+		
+		//EVENTOS DE VENTANA
+		ventanaActual.addWindowListener(new WindowAdapter() {
+					
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
+				VentanaPrincipal.guardarMapaUsuariosEnFicheroDeTexto();
+			}
+		});
+		
 		
 		//EVENTOS
 		btnVolver.addActionListener(new ActionListener() {
@@ -159,24 +173,33 @@ public class VentanaCarritoUsuario extends JFrame {
 					Producto p = VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).get(pos);
 					Connection con = BD.initBD("SweetWear.db");
 					try {
+						BD.eliminarProductoCliente(con, p.getCodigo());
 						BD.sumarUnidadesAProducto(con, p.getNombre(), p.getStock());
 						sto = BD.obtenerStockProducto(con, p.getNombre());
 						if (p.getNombre().equals("Chandal")) {
 							VentanaPantalones.lblChandal.setText("PANTALONES CHANDAL" + ": " + "Cantidades restantes: " + sto + " unidades");
+						}else if (p.getNombre().equals("Vaquero")){
+							VentanaPantalones.lblVaquero.setText("PANTALONES VAQUEROS" + ": " + "Cantidades restantes: " + sto + " unidades");
 						}
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					
-					VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).remove(p);
-					double pre = 0;
-					for (Producto pro: VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n)) {
-						pre = pre + (pro.getPrecio() * pro.getStock());
-						lblPrecio.setText("PRECIO TOTAL: "+ pre + "euros");
+					if (modeloListaPedido.size() != 0) {
+						VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).remove(p);
+						double pre = 0;
+						for (Producto pro: VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n)) {
+							pre = pre + (pro.getPrecio() * pro.getStock());
+							lblPrecio.setText("PRECIO TOTAL: "+ pre + "euros");
+						}
+					} else if (modeloListaPedido.size() == 0) {
+						VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).remove(p);
+						panelCentralArriba.removeAll();
+						panelCentralArriba.add(scrollListaPedido);
+						lblFoto.setIcon(null);
+						lblPrecio.setText("NO HAY PRODUCTOS EN EL CARRITO");
 					}
-					//lblPrecio.setText("PRECIO TOTAL: "+ (pre - p.getPrecio()) + "euros");
-					
 				}else 
 					JOptionPane.showMessageDialog(null, "NO HAS SELECCIONADO NINGUN PRODUCTO", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 			}
@@ -188,44 +211,68 @@ public class VentanaCarritoUsuario extends JFrame {
 				ventanaActual.addWindowListener(new WindowAdapter() {
 					
 					@Override
-					public void windowOpened(WindowEvent e) {
-						//VentanaPrincipal.cargarMapaPedidosDeFicheroDeTexto();
-					}
-						
-					
-					@Override
 					public void windowClosing(WindowEvent e) {
 						// TODO Auto-generated method stub
 						VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 					}
-					
-					
-					
 				});
 				
 		
 		//HILO
 		
-//		Runnable r1 = new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				while (true) {
-//					if (VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).size() == 0){
-//						lblPrecio.setText("NO HAY PRODUCTOS EN EL CARRITO");
-//					}else {
-//						double pre = 0;
-//						for (Producto p: VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n)) {
-//							pre = pre + p.getPrecio();
-//							lblPrecio.setText("PRECIO TOTAL: "+ pre + "euros");
-//						 }
-//					}
-//				}
-//				
-//			}
-//		};
-//		Thread t1 = new Thread(r1);
-//		t1.start();
+		Runnable r1 = new Runnable() {
+			
+			@Override
+			public void run() {
+				while (true) {
+					int pos1 = listaPedido.getSelectedIndex();
+					if (pos1 != -1) {
+						panelCentralArriba.removeAll();
+						Producto p = VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).get(pos1);
+						panelCentralArriba.setLayout(new GridLayout(1,2));
+						panelCentralArriba.add(scrollListaPedido);
+						panelCentralArriba.add(lblFoto);
+						ImageIcon im = new ImageIcon(p.getRutaFoto());
+						im.setDescription(p.getRutaFoto());
+						lblFoto.setIcon(im);
+						try {
+							Thread.sleep(250);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}else if (modeloListaPedido.size() != 0) {
+						panelCentralArriba.removeAll();
+						Producto p1 = VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).get(0);
+						panelCentralArriba.setLayout(new GridLayout(1,2));
+						panelCentralArriba.add(scrollListaPedido);
+						panelCentralArriba.add(lblFoto);
+						ImageIcon im2 = new ImageIcon(p1.getRutaFoto());
+						im2.setDescription(p1.getRutaFoto());
+						lblFoto.setIcon(im2);
+						try {
+							Thread.sleep(250);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}else if (modeloListaPedido.size() == 0){
+						panelCentralArriba.removeAll();
+						panelCentralArriba.add(scrollListaPedido);
+						lblFoto.setIcon(null);
+						try {
+							Thread.sleep(250);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+				
+			}
+		};
+		Thread t1 = new Thread(r1);
+		t1.start();
 		
 		
 	}

@@ -35,6 +35,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -49,7 +51,7 @@ public class VentanaAdmin extends JFrame {
 
 	private JPanel contentPane;
 	public static JPanel panelCentro, panelSur, panelArriba, panelArribaIzq, panelArribaDrc, panelNorte;
-	private JButton btnMostarMapa, btnVolver, btnAniadir, btnElegirEsePanel;
+	private JButton btnMostarMapa, btnVolver, btnAniadir, btnElegirEsePanel, btnOfertas;
 	public static JComboBox<String> comboProductos;
 	public static JLabel lblPrecio, lblStock, lblMarca, lblNombre, lblColor, lblFoto;
 	public static JTextField txtPrecio, txtStock, txtMarca, txtColor;
@@ -159,6 +161,7 @@ public class VentanaAdmin extends JFrame {
 		btnVolver = new JButton("VOLVER");
 		btnAniadir = new JButton("AÑADIR PRODUCTO");
 		btnElegirEsePanel = new JButton("CREAR UN PRODUCTO DE ESE TIPO");
+		btnOfertas = new JButton("OFERTAS");
 		
 		
 //		textArea = new JTextArea();
@@ -278,7 +281,7 @@ public class VentanaAdmin extends JFrame {
 		panelSur.add(btnAniadir);
 		panelSur.add(btnMostarMapa);
 		panelSur.add(btnElegirEsePanel);
-		
+		panelSur.add(btnOfertas);
 		
 		
 		
@@ -304,19 +307,47 @@ public class VentanaAdmin extends JFrame {
 		
 		Connection con = BD.initBD("SweetWear.db");
 		ArrayList<Producto> al = BD.getTienda(con);
-//		int cod = 0;
+		BD.closeBD(con);
+		for (Producto p1: al) {
+			System.out.println(p1.getCodigo());
+			System.out.println(p1);
+		}
 //		try {
 //			cod = BD.contarProductosTienda(con);
 //		} catch (SQLException e1) {
 //			// TODO Auto-generated catch block
 //			e1.printStackTrace();
 //		}
+		int cod = al.get(0).getCodigo();
+		//NO FUNCIONA EL CODIGO DEL PRODUCTO --> SALE UNO QUE NO TIENE QUE SALIR
 		for (Producto p: al)
-			modeloTablaProductos.addRow( new Object[] { p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), p.getStock(), p.getMarca(), p.getRutaFoto() } );
-		BD.closeBD(con);
+			modeloTablaProductos.addRow( new Object[] { cod, p.getColor(), p.getNombre(), p.getPrecio(), p.getStock(), p.getMarca(), p.getRutaFoto() } );
+			cod = cod + 1;
+			
+	
 		
-		//modeloTablaProductos.setColumnIdentifiers(nombres);
+		
 		tablaProductos = new JTable(modeloTablaProductos);
+		
+		tablaProductos.getModel().addTableModelListener(new TableModelListener() {
+			
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				int fil = e.getFirstRow();
+				int codigo = (int) modeloTablaProductos.getValueAt(fil, 0);
+				String color =  (String) modeloTablaProductos.getValueAt(fil, 1);
+				String nombre =  (String) modeloTablaProductos.getValueAt(fil, 2);
+				double precio = (double) modeloTablaProductos.getValueAt(fil, 3);
+				int stock = (int) modeloTablaProductos.getValueAt(fil, 4);
+				String marca = (String) modeloTablaProductos.getValueAt(fil, 5);
+				String rutaFoto = (String) modeloTablaProductos.getValueAt(fil, 6);
+				
+				Connection con = BD.initBD("SweetWear.db");
+				BD.modificarProductoTienda(con, codigo, color, nombre, precio, stock, marca, rutaFoto);
+				BD.closeBD(con);
+				
+			}
+		});
 		
 		tablaProductos.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 			
@@ -331,7 +362,11 @@ public class VentanaAdmin extends JFrame {
 				}
 				return c;
 			}
+		
+			
+			
 		});
+		
 		
 		
 		JScrollPane scrollTablaProductos = new JScrollPane(tablaProductos);
@@ -339,7 +374,7 @@ public class VentanaAdmin extends JFrame {
 		
 		
 				
-				
+			
 				
 		//EVENTOS
 		btnVolver.addActionListener(new ActionListener() {
@@ -363,6 +398,18 @@ public class VentanaAdmin extends JFrame {
 				VentanaAdmin2 v1 = new VentanaAdmin2(ventanaActual);
 				ventanaActual.setVisible(false);
 				v1.setVisible(true);
+			}
+		});
+		
+		btnOfertas.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaOfertas v1 = new VentanaOfertas(ventanaActual);
+				ventanaActual.setVisible(false);
+				v1.setVisible(true);
+				
+				
 			}
 		});
 		
@@ -445,6 +492,16 @@ public class VentanaAdmin extends JFrame {
 					ImageIcon im = (ImageIcon)lblFoto.getIcon();
 					if (im == null)
 						JOptionPane.showMessageDialog(null, "Tienes que Seleccionar una imagen", "ERROR", JOptionPane.ERROR_MESSAGE);
+					
+//					boolean existe = false;
+//					try {
+//						existe = BD.existeProductoMismoNombre(con, nombre);
+//					} catch (SQLException e2) {
+//						// TODO Auto-generated catch block
+//						e2.printStackTrace();
+//					}
+//					if (existe)
+//						JOptionPane.showMessageDialog(null, "ESTE PRODUCTO YA EXISTE!", "ERROR", JOptionPane.ERROR_MESSAGE);
 					
 					String rutaFoto = im.getDescription();
 					String rutaAdecuada = rutaFoto.substring(46, rutaFoto.length()); 

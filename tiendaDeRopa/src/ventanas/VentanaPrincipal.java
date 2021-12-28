@@ -31,6 +31,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.TreeMap;
 import java.util.Vector;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
@@ -86,6 +90,8 @@ public class VentanaPrincipal extends JFrame {
 	public static SpinnerModel modelosp;
 	public static JSpinner sp;
 	
+	static Logger log = Logger.getLogger("Log de Usuarios");
+	
 	
 
 	/**
@@ -111,13 +117,23 @@ public class VentanaPrincipal extends JFrame {
 		BD.crearTablaUsuario(con);
 		BD.crearTablaProductosTienda(con);
 		BD.crearTablaProductosCliente(con);
-//		BD.crearTablaCalcetines(con);
-//		BD.crearTablaCamiseta(con);
-//		BD.crearTablaPantalon(con);
-//		BD.crearTablaSudadera(con);
-//		BD.crearTablaZapato(con);
 		VentanaPrincipal.tmUsuarios = BD.obtenerMapaUsuarios(con);
 		BD.closeBD(con);
+		
+		
+		//CREACION DEL LOGGER
+		Handler handler;
+		try {
+			handler = new FileHandler("Usuarios.log");
+			handler.setFormatter(new SimpleFormatter());
+			log.addHandler(handler);
+		} catch (SecurityException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		
 		//PROPIEDADES DE LA VENTANA
 		ventanaActual = this;
@@ -333,7 +349,6 @@ public class VentanaPrincipal extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//NO SE XQ ESTA VENTANA NO SE ABRE!!!!
 				String texto = lblNombre.getText();
 				if (texto != "") {
 					VentanaCarritoUsuario v1 = new VentanaCarritoUsuario(ventanaActual);
@@ -366,6 +381,7 @@ public class VentanaPrincipal extends JFrame {
 			btnAdmin.setVisible(false);
 			btnCambiarCon.setVisible(false);
 			pb.setVisible(false);
+			sp.setVisible(false);
 			btnCerrarSesion.setVisible(false);
 			btnInicioSesion.setVisible(true);
 			repaint();
@@ -606,11 +622,11 @@ public class VentanaPrincipal extends JFrame {
 			}
 		}
 		
-		for(String n: tmUsuarios.keySet()) {
-			System.out.println(n);
-			System.out.println("\t"+tmUsuarios.get(n));
-		}
-		
+//		for(String n: tmUsuarios.keySet()) {
+//			System.out.println(n);
+//			System.out.println("\t"+tmUsuarios.get(n));
+//		}
+//		
 		
 		
 	}
