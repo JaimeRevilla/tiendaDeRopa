@@ -1,4 +1,4 @@
-Piki 0 Negro Chandal 20.0 1 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
+Piki 0 Negro Chandal 20.0 3 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
 a 1 Negro Chandal 20.0 5 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
 a 2 Negro Chandal 20.0 1 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
 arene 3 Negro Chandal 20.0 5 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
