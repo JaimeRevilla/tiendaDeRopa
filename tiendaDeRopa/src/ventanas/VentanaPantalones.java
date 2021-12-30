@@ -26,7 +26,7 @@ import clases.TipoPantalon;
 public class VentanaPantalones extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel panelCentral, panelP1, panelP11, panelP12, panelP2, panelP21, panelP22, panelP3, panelP31, panelP32;
+	private JPanel panelCentral, panelP1, panelP11, panelP12, panelP2, panelP21, panelP22, panelP3, panelP31, panelP32, panelNorte;
 	private JFrame ventanaAnterior, ventanaActual;
 	private JPanel panelSur;
 	private JButton btnVolver, btnChandal, btnVaqueros, btnCampana;
@@ -237,7 +237,7 @@ public class VentanaPantalones extends JFrame {
 								else
 									lblVaquero.setText("PANTALONES VAQUEROS" + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
 								Producto p = BD.obtenerProductoTienda(con, "Vaquero");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Pantalon(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoPantalon.CHANDAL)); //AQUI AÑADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Pantalon(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoPantalon.VAQUEROS)); //AQUI AÑADIR EL PRODUCTO
 								System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
 								int num = 0;
 								try {

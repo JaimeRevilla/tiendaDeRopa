@@ -10,6 +10,9 @@ import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -189,6 +192,7 @@ public class VentanaAdmin extends JFrame {
 			comboTipoSudaderas.addItem(n);
 		}
 		
+
 		
 		
 		
@@ -303,31 +307,49 @@ public class VentanaAdmin extends JFrame {
 					return false;
 				return true;
 			}
+			
 		};
 		
 		Connection con = BD.initBD("SweetWear.db");
 		ArrayList<Producto> al = BD.getTienda(con);
 		BD.closeBD(con);
-		for (Producto p1: al) {
-			System.out.println(p1.getCodigo());
-			System.out.println(p1);
-		}
+		
 //		try {
 //			cod = BD.contarProductosTienda(con);
 //		} catch (SQLException e1) {
 //			// TODO Auto-generated catch block
 //			e1.printStackTrace();
 //		}
-		int cod = al.get(0).getCodigo();
+		
 		//NO FUNCIONA EL CODIGO DEL PRODUCTO --> SALE UNO QUE NO TIENE QUE SALIR
 		for (Producto p: al)
-			modeloTablaProductos.addRow( new Object[] { cod, p.getColor(), p.getNombre(), p.getPrecio(), p.getStock(), p.getMarca(), p.getRutaFoto() } );
-			cod = cod + 1;
+			modeloTablaProductos.addRow( new Object[] { p.getCodigo()-1, p.getColor(), p.getNombre(), p.getPrecio(), p.getStock(), p.getMarca(), p.getRutaFoto() } );
 			
-	
+			
 		
 		
 		tablaProductos = new JTable(modeloTablaProductos);
+		
+		tablaProductos.addMouseListener(new MouseAdapter() {
+			
+			
+			
+			public void mousePressed(MouseEvent e) {
+				if(e.getClickCount()== 3) {
+					JOptionPane.showMessageDialog(null, "Para borrar un producto, pulse el raton sobre el producto a borrar con ALT pulsado (Solamente borre los nuevos productos)", "ADVERTENCIA!!!", JOptionPane.NO_OPTION);
+					if (e.isAltDown()) {
+						int fil = tablaProductos.getSelectedRow();
+						if (fil != -1) {
+							int cod = (int) modeloTablaProductos.getValueAt(fil, 0);
+							Connection con = BD.initBD("SweetWear.db");
+							BD.eliminarProductoTienda(con, cod);
+							modeloTablaProductos.removeRow(fil);
+						}
+					}
+				}
+			}
+	
+		});
 		
 		tablaProductos.getModel().addTableModelListener(new TableModelListener() {
 			
@@ -421,6 +443,8 @@ public class VentanaAdmin extends JFrame {
 			}
 		});
 		
+		JOptionPane.showMessageDialog(null, "PARA BORRAR UN PRODUCTO PULSE EL RATÓN SOBRE EL CODIGO DE LOS PRODUCTO EN LA TABLA 3 VECES", "ADVERTENCIA!!!", JOptionPane.NO_OPTION);
+
 		
 		mntmCargarArchivo.addActionListener(new ActionListener() {
 			
@@ -465,7 +489,7 @@ public class VentanaAdmin extends JFrame {
 						else if (selec == "ZAPATOS")
 							System.out.println("ZAPATOS");
 							
-						}
+						}//HACER LO MISMO CON LAS QUE FALTAN
 					
 				
 				
@@ -525,7 +549,7 @@ public class VentanaAdmin extends JFrame {
 					//AQUI HABRA QUE VER COMO ATRIBUIRLE EL CODIGO AL PRODUCTO
 					//SUPONGO QUE SE HARA CONTANDO LOS PRODUCTOS DE LA BASE DE DATOS
 					//OSEA AÑADIENDOLO A LA BASES DE DATOS Y PILLANDO DE HAY EL ID/CODIGO!!!
-					Producto p = new Producto(999, color, nombre, precio, stock, marca, rutaFoto);
+					Producto p = new Producto(cod, color, nombre, precio, stock, marca, rutaFoto);
 					String [] fila = {String.valueOf(cod), color, nombre+ " " + nombreTipoCalcetines, String.valueOf(precio), String.valueOf(stock), marca, rutaAdecuada};
 					modeloTablaProductos.addRow(fila);
 					

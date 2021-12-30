@@ -6,12 +6,16 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -40,6 +44,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -53,6 +58,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.RootPaneContainer;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
@@ -64,6 +70,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import clases.BD;
+import clases.PanelConImagenDeFondo;
 import clases.Producto;
 import clases.Usuario;
 
@@ -73,8 +80,8 @@ public class VentanaPrincipal extends JFrame {
 	
 	private JPanel contentPane;
 	private JPanel panelCentral, panelArriba, panelNorte, panelArribaDrc, panelArribaIzq, panelNorteIzq, panelNorteMedio, panelNorteDrc;
-	private JPanel panelP1, panelP2, panelP3, panelP4, panelP5;
-	private JButton btnSalir, btnCarrito, btnRegistrarme;
+	private JPanel panelP1, panelP2, panelP3, panelP4, panelArribaIzq1, panelArribaIzq2;
+	private JButton btnSalir, btnRegistrarme,  btnCarrito, btnBusqueda;
 	private JButton btnP1, btnP2, btnP3, btnP4, btnP5;
 	public static JButton btnAdmin, btnCerrarSesion, btnCambiarCon,  btnInicioSesion;
 	private JFrame ventanaActual;
@@ -85,10 +92,15 @@ public class VentanaPrincipal extends JFrame {
 	private JScrollPane scrollLista;
 	private JLabel lblTitulo;
 	public static JLabel lblNombre;
-	private JLabel lblHora;
+	private JLabel lblHora, lblFrase;
 	public static JProgressBar pb = new JProgressBar();
 	public static SpinnerModel modelosp;
 	public static JSpinner sp;
+	private JTextField txtBusqueda;
+	private JComboBox<String> comboBusqueda;
+	public static ArrayList<String> listaHistorialBusqueda = new ArrayList<String>();
+	
+	private PanelConImagenDeFondo panelConFondo, panelP5;
 	
 	static Logger log = Logger.getLogger("Log de Usuarios");
 	
@@ -145,6 +157,10 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
+		//FONDO DE LA VENTANA
+//		panelConFondo = new PanelConImagenDeFondo(getSize());
+//		panelConFondo.setImage("/imagenes/IconoZapatillas.png");
+//		setContentPane(panelConFondo);
 		
 		
 		//CREAMOS LOS PANELES
@@ -157,8 +173,17 @@ public class VentanaPrincipal extends JFrame {
 		panelCentral.add(panelArriba);
 		
 		panelArribaIzq = new JPanel();
+		panelArribaIzq.setLayout(new GridLayout(2, 1));
 		panelArriba.add(panelArribaIzq);
 		panelArribaIzq.setBackground(Color.CYAN);
+		
+		panelArribaIzq1 = new JPanel();
+		panelArribaIzq.add(panelArribaIzq1);
+		panelArribaIzq1.setBackground(Color.CYAN);
+		
+		panelArribaIzq2 = new JPanel();
+		panelArribaIzq.add(panelArribaIzq2);
+		panelArribaIzq2.setBackground(Color.CYAN);
 		
 	   
 		panelArribaDrc = new JPanel();
@@ -173,6 +198,8 @@ public class VentanaPrincipal extends JFrame {
 		panelNorteIzq = new JPanel();
 		panelNorteIzq.setBackground(Color.CYAN);
 		panelNorte.add(panelNorteIzq);
+		
+		
 		
 		panelNorteMedio = new JPanel();
 		panelNorteMedio.setBackground(Color.CYAN);
@@ -199,9 +226,12 @@ public class VentanaPrincipal extends JFrame {
 		panelArribaDrc.add(panelP4);
 		panelP4.setBackground(Color.CYAN);
 		
-		panelP5 = new JPanel();
+		panelP5 = new PanelConImagenDeFondo(getSize());
+		//panelP5.setImage("/imagenes/IconoZapatillas.png");
 		panelArribaDrc.add(panelP5);
 		panelP5.setBackground(Color.CYAN);
+		
+		
 		
 		btnP1 = new JButton();
 		ponerFotoABoton(btnP1, "tiendaDeRopa\\src\\imagenes\\IconoZapatillas.png", 120, 120, 120, 120);
@@ -222,6 +252,7 @@ public class VentanaPrincipal extends JFrame {
 		btnP5 = new JButton();
 		ponerFotoABoton(btnP5, "tiendaDeRopa\\src\\imagenes\\IconoCamiseta.png", 120, 120, 120, 120);
 		panelP5.add(btnP5);
+		
 		
 		
 		
@@ -248,10 +279,22 @@ public class VentanaPrincipal extends JFrame {
 		btnCerrarSesion = new JButton();
 		ponerFotoABoton(btnCerrarSesion, "tiendaDeRopa\\src\\imagenes\\IconoCerrarSesion.png", 30, 30, 30, 30);
 		
+		btnBusqueda = new JButton();
+		ponerFotoABoton(btnBusqueda, "tiendaDeRopa\\src\\imagenes\\IconoBusqueda.jpg", 30, 30, 30, 30);
+		//NO SE COMO PONER EL BOTON A LA DERECHA DEL TODOO
+		btnBusqueda.setAlignmentX(JButton.RIGHT_ALIGNMENT);
+		
 		
 		lblNombre = new JLabel("");
 		lblTitulo = new JLabel("SWEET WEAR");
 		lblTitulo.setForeground(Color.BLACK);
+		comboBusqueda = new JComboBox<String>();
+
+		//lblFrase = new JLabel("DI QUIÉN ERES SIN HABLAR");
+		lblFrase = new JLabel("AQUI VA UNA FRASE (SLOGAN) ");
+		Font font = new Font("Agency FB", Font.ITALIC, 50);
+		lblFrase.setFont(font);
+		
 		
 		FlowLayout flowLayout = (FlowLayout) panelNorteIzq.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
@@ -266,7 +309,8 @@ public class VentanaPrincipal extends JFrame {
 		panelNorteMedio.add(lblTitulo);
 		
 		lblHora = new JLabel("");
-		
+		txtBusqueda = new JTextField(10);
+	
 			
 		btnCarrito = new JButton();
 		ponerFotoABoton(btnCarrito, "tiendaDeRopa\\src\\imagenes\\IconoCarrito.png", 30, 30, 30, 30);
@@ -282,24 +326,32 @@ public class VentanaPrincipal extends JFrame {
 		pb = new JProgressBar(0, 100);
 		pb.setValue(50);
 		pb.setVisible(false);
+		
+		
+		
 	
 		
 		//AÑADIMOS LOS COMPONENTES A LOS PANELES
 
-		panelArribaIzq.add(btnCarrito);
-		panelArribaIzq.add(btnInicioSesion);
-		panelArribaIzq.add(btnSalir);
-		panelArribaIzq.add(btnCerrarSesion);
-		panelArribaIzq.add(btnCambiarCon);
-
-		panelNorteDrc.add(lblHora);
-		panelArribaIzq.add(btnRegistrarme);
-		panelNorteIzq.add(lblNombre);
-		panelArribaIzq.add(btnAdmin);
-		panelArribaIzq.add(pb);
-		panelArribaIzq.add(sp);
+		panelArribaIzq1.add(btnCarrito);
+		panelArribaIzq1.add(btnInicioSesion);
+		panelArribaIzq1.add(btnSalir);
+		panelArribaIzq1.add(btnCerrarSesion);
+		panelArribaIzq1.add(btnCambiarCon);
 		
 
+		panelNorteDrc.add(lblHora);
+		panelArribaIzq1.add(btnRegistrarme);
+		panelNorteIzq.add(lblNombre);
+		panelArribaIzq1.add(btnAdmin);
+		panelArribaIzq1.add(pb);
+		panelArribaIzq1.add(sp);
+		
+		panelArribaIzq1.add(btnBusqueda);
+		panelArribaIzq1.add(txtBusqueda);
+		panelArribaIzq1.add(comboBusqueda);
+		
+		panelArribaIzq2.add(lblFrase);
 		
 		setLocationRelativeTo( null );
 		
@@ -412,6 +464,76 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		
+		txtBusqueda.addMouseListener(new MouseAdapter() {
+	
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, "Escriba el producto o tipo del producto en minuscula y en singular porfavor!!!", "ADVERTENCIA!!!", JOptionPane.NO_OPTION);
+				JOptionPane.showMessageDialog(null, "Si quiere consultar algo buscado recientemente, seleccionelo en el desplegable, pulse enter y pulse el boton de busqueda!!! ", "ADVERTENCIA!!!", JOptionPane.NO_OPTION);
+				if(listaHistorialBusqueda.size() != 0) {
+					comboBusqueda.removeAllItems();
+					for (String n: listaHistorialBusqueda) {
+						comboBusqueda.addItem(n);
+						comboBusqueda.getItemAt(-1);
+					}
+				}
+			}
+			
+		});
+		
+		
+		comboBusqueda.addKeyListener(new KeyAdapter() {
+			
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					int pos = comboBusqueda.getSelectedIndex();
+					if (pos != -1) {
+						String n = comboBusqueda.getItemAt(pos);
+						txtBusqueda.setText(n);
+					}
+				}
+				
+			}
+		});
+		
+		
+		btnBusqueda.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				String busq = txtBusqueda.getText();
+				if(!busq.equals("")) {
+					if (busq.equals("pantalon") || busq.equals("vaquero") || busq.equals("chandal") || busq.equals("campana")) {
+						if (!listaHistorialBusqueda.contains(busq)) {
+							listaHistorialBusqueda.add(busq);
+						}
+						txtBusqueda.setText("");
+						VentanaPantalones v1 = new VentanaPantalones(ventanaActual);
+						ventanaActual.setVisible(false);
+						v1.setVisible(true);
+						
+					} else {
+						JOptionPane.showMessageDialog(null, "NO EXISTE ESE ARTICULO", "ERROR", JOptionPane.ERROR_MESSAGE);
+						txtBusqueda.setText("");
+					}	
+
+					//AQUI IRAN OTROS ELSE IF CUANDO ESTEN HECHAS LAS DEMAS VENTANAS
+				}else 
+					JOptionPane.showMessageDialog(null, "INDICA EL ARTICULO A ENCONTRAR", "ERROR", JOptionPane.ERROR_MESSAGE);
+				
+				comboBusqueda.removeAllItems();
+				for (String n: listaHistorialBusqueda) {
+					comboBusqueda.addItem(n);
+				}
+				
+			}
+			
+		});
 		
 		
 		//--------------------------------------------------------------------------------------------------------------
@@ -441,39 +563,13 @@ public class VentanaPrincipal extends JFrame {
 					lblHora.setText("");
 				}
 				
+				
 			}
 		};
 		Thread t1 = new Thread(r1);
 		t1.start();
 		
-		/*Runnable r2 = new Runnable() {
-			
-			@Override
-			public void run() {
-				while (true) {
-					panelArribaIzq.setBackground(Color.PINK);
-					panelArribaDrc.setBackground(Color.BLUE);
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					panelArribaIzq.setBackground(Color.BLUE);
-					panelArribaDrc.setBackground(Color.PINK);
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-			}
-		};
-		Thread t2 = new Thread(r2);
-		t2.start();*/
-		
+	
 		
 		//----------------------------------------------------------------------------------------------------------------
 		
@@ -484,6 +580,7 @@ public class VentanaPrincipal extends JFrame {
 			public void windowOpened(WindowEvent e) {
 				cargarMapaUsuariosDeFicheroDeTexto();
 				cargarMapaPedidosDeFicheroDeTexto();
+				cargarListaHistorialBusqueda();
 			}
 				
 			
@@ -492,6 +589,7 @@ public class VentanaPrincipal extends JFrame {
 				// TODO Auto-generated method stub
 				guardarMapaUsuariosEnFicheroDeTexto();
 				guardarMapaPedidosEnFicheroDeTexto();
+				guardarListaHistorialBusqueda();
 			}
 			
 			
@@ -499,7 +597,8 @@ public class VentanaPrincipal extends JFrame {
 		});
 		
 		
-	//---------------------------------------------------------------------------------------------------------------------------	
+	
+	//------------------------------------------------------------------------------------------------------------------------------
 		
 	//EVENTO PROGRESS BAR
 		
@@ -519,17 +618,7 @@ public class VentanaPrincipal extends JFrame {
 		}
 	});
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 	//--------------------------------------------------------------------------------------------------------------------------------	
 		
@@ -740,11 +829,53 @@ public class VentanaPrincipal extends JFrame {
 		
 	}
 	
+	public static void guardarListaHistorialBusqueda() {
+		PrintWriter pw = null;
+		
+		try {
+			pw = new PrintWriter("HISTORIAL.txt");
+			for (String n: listaHistorialBusqueda) {
+				pw.println(n);
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (pw!= null) {
+				pw.flush();
+				pw.close();
+			}
+		}
+	}
 	
+	public static void cargarListaHistorialBusqueda () {
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader("HISTORIAL.txt"));
+			String linea = br.readLine();
+			while (linea != null) {
+				String [] datosProducto = linea.split(" ");
+				String n = datosProducto[0];
+				VentanaPrincipal.listaHistorialBusqueda.add(n);
+				linea = br.readLine();
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (br!= null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 	
-	
-	
-	
+
 		
 	/**
 	 * METODO QUE PONE UNA IMÁGEN A UN BOTON CON LAS MEDIDAS PERSONALIZADAS

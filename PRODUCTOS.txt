@@ -1,1 +1,5 @@
 Piki 0 Negro Chandal 20.0 30 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
+Piki 1 Negro Chandal 20.0 10 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
+a 3 Negro Chandal 20.0 45 Nike tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png
+a 5 Azul Vaquero 20.0 4 Levis tiendaDeRopa\\src\\imagenes\\IconoPantalonVaquero.jpg
+a 7 Azul Vaquero 20.0 4 Levis tiendaDeRopa\\src\\imagenes\\IconoPantalonVaquero.jpg

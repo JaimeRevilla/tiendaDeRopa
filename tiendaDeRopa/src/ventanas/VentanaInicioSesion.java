@@ -124,7 +124,7 @@ public class VentanaInicioSesion extends JFrame {
 				} else if (resul == 2){
 					JOptionPane.showMessageDialog(null, "¡¡BIENVENIDO "+ n+ "!!");
 					VentanaPrincipal.lblNombre.setText("BIENVENIDO " + n);
-					VentanaPrincipal.log.log(Level.INFO, "Se ha iniciado sesion como" + " " + n);;
+					VentanaPrincipal.log.log(Level.INFO, "Se ha iniciado sesion como" + " " + n);
 					
 					if (!VentanaPrincipal.tmPedidos.containsKey(n))
 						VentanaPrincipal.tmPedidos.put(n, new ArrayList<>());

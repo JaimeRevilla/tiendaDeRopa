@@ -438,7 +438,7 @@ public class BD {
 	}
 	
 	public static void crearTablaProductosTienda(Connection con) {
-		String sent = "CREATE TABLE IF NOT EXISTS tienda (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String,  tipoProducto String, tipoCalcetines String, tipoCamiseta String, tipoPantalon String, tipoSudadera String, colorCordones String, goretex boolean, tipoZapato String)";
+		String sent = "CREATE TABLE IF NOT EXISTS tienda (codigo int PRIMARY KEY AUTOINCREMENT , color String, nombre String, precio double, stock int, marca String, rutaFoto String,  tipoProducto String, tipoCalcetines String, tipoCamiseta String, tipoPantalon String, tipoSudadera String, colorCordones String, goretex boolean, tipoZapato String)";
 		Statement stmt = null;
 		
 		try {
@@ -456,6 +456,31 @@ public class BD {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			}
+		}
+	}
+	
+	public static void eliminarProductoTienda(Connection con, int codigo) {
+		String sent = "DELETE FROM tienda WHERE codigo ='"+codigo+"'";
+		Statement stmt = null;
+		try {
+			stmt = con.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			stmt.executeUpdate(sent);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (stmt != null) {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
