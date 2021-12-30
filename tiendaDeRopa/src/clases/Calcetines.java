@@ -1,32 +1,32 @@
 package clases;
 
 public class Calcetines extends Producto {
-	private TipoCalcetines tipoCalcetinas;
+	private TipoCalcetines tipoCalcetines;
 
 	public Calcetines(int codigo, String color, String nombre, double precio, int stock, String marca, String rutaFoto,
 			TipoCalcetines tipoCalcetinas) {
 		super(codigo, color, nombre, precio, stock, marca, rutaFoto);
 		if(nombre.contains("PINKIE")) {
-			this.tipoCalcetinas = TipoCalcetines.PINKIE;
+			this.tipoCalcetines = TipoCalcetines.PINKIE;
 		}else if(nombre.contains("TOBILLERO")) {
-			this.tipoCalcetinas = TipoCalcetines.TOBILLERO;
+			this.tipoCalcetines = TipoCalcetines.TOBILLERO;
 		}else if(nombre.contains("ALTO")) {
-			this.tipoCalcetinas = TipoCalcetines.ALTO;
+			this.tipoCalcetines = TipoCalcetines.ALTO;
 		}
 		
 	}
 
 	public TipoCalcetines getTipoCalcetinas() {
-		return tipoCalcetinas;
+		return tipoCalcetines;
 	}
 
 	public void setTipoCalcetinas(TipoCalcetines tipoCalcetinas) {
-		this.tipoCalcetinas = tipoCalcetinas;
+		this.tipoCalcetines = tipoCalcetinas;
 	}
 
 	@Override
 	public String toString() {
-		return "Calcetines [tipoCalcetinas=" + tipoCalcetinas + ", getTipoCalcetinas()=" + getTipoCalcetinas()
+		return "Calcetines [tipoCalcetinas=" + tipoCalcetines + ", getTipoCalcetinas()=" + getTipoCalcetinas()
 				+ ", getCodigo()=" + getCodigo() + ", getColor()=" + getColor() + ", getNombre()=" + getNombre()
 				+ ", getPrecio()=" + getPrecio() + ", getStock()=" + getStock() + ", getMarca()=" + getMarca()
 				+ ", getRutaFoto()=" + getRutaFoto() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()

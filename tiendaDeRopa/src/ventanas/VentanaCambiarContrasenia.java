@@ -18,6 +18,7 @@ import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import clases.BD;
+import clases.PanelConImagenDeFondo;
 import clases.Usuario;
 
 public class VentanaCambiarContrasenia extends JFrame {
@@ -66,7 +67,7 @@ public class VentanaCambiarContrasenia extends JFrame {
 		panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		
-		panelCentral = new JPanel();
+		panelCentral = new PanelConImagenDeFondo(getSize());
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		panelCentral.setLayout(new GridLayout(3,2));
 		

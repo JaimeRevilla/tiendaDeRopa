@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -24,7 +26,7 @@ import clases.TipoPantalon;
 public class VentanaPantalones extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel panelCentral, panelP1, panelP11, panelP12, panelP2, panelP21, panelP22, panelP3, panelP31, panelP32;
+	private JPanel panelCentral, panelP1, panelP11, panelP12, panelP2, panelP21, panelP22, panelP3, panelP31, panelP32, panelNorte;
 	private JFrame ventanaAnterior, ventanaActual;
 	private JPanel panelSur;
 	private JButton btnVolver, btnChandal, btnVaqueros, btnCampana;
@@ -115,7 +117,12 @@ public class VentanaPantalones extends JFrame {
 		lblVaquero = new JLabel("PANTALONES VAQUEROS");
 		panelP22.add(lblVaquero);
 		
-
+		
+		int sto1 = BD.obtenerStockProducto(con, "Vaquero");
+		if (sto1 == 0) 
+			lblVaquero.setText("PANTALONES VAQUEROS" + ": " + "NO HAY NINGUNA UNIDAD EN STOCK");
+		else
+			lblVaquero.setText("PANTALONES VAQUEROS" + ": " + "Cantidades restantes: " + sto1 + " unidades");
 		
 		//--------------------------------------------------------------------------
 		panelP3 = new JPanel();
@@ -135,7 +142,16 @@ public class VentanaPantalones extends JFrame {
 		lblCampana = new JLabel("PANTALONES CAMPANA");
 		panelP32.add(lblCampana);
 		
-		
+		//EVENTOS DE VENTANA
+		ventanaActual.addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
+				VentanaPrincipal.guardarMapaUsuariosEnFicheroDeTexto();
+			}
+		});
 		
 		 
 		
@@ -199,6 +215,57 @@ public class VentanaPantalones extends JFrame {
 				}
 			}
 		});	
+		
+		
+		btnVaqueros.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String texto = VentanaPrincipal.lblNombre.getText();
+				if (texto != "") {
+					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
+					if(resp == JOptionPane.OK_OPTION) {
+						//AQUI SE AÑADIRA AL CARRITO ESTE PRODUCTO
+						String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
+						int canti = Integer.parseInt(cant);
+						if (canti > 0) {
+							Connection con = BD.initBD("SweetWear.db");
+							int stock = BD.obtenerStockProducto(con, "Vaquero");
+							if (stock >= canti) {
+								if (stock == 0) 
+									lblVaquero.setText("PANTALONES VAQUEROS" + ": " + "NO HAY CANTIDADES EN STOCK");
+								else
+									lblVaquero.setText("PANTALONES VAQUEROS" + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
+								Producto p = BD.obtenerProductoTienda(con, "Vaquero");
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Pantalon(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoPantalon.VAQUEROS)); //AQUI AÑADIR EL PRODUCTO
+								System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
+								int num = 0;
+								try {
+									num = BD.contarProductos(con);
+								} catch (SQLException e2) {
+									// TODO Auto-generated catch block
+									e2.printStackTrace();
+								}
+								num = num + 1;
+								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Pantalon", "", "", "Vaquero", "", "", false, "");
+								try {
+									BD.restarUnidadesAProducto(con, "Vaquero", canti);
+								} catch (SQLException e1) {
+									e1.printStackTrace();
+								}
+								JOptionPane.showMessageDialog(null, "¡¡PRODUCTO AÑADIDO CORRECTAMENTE!!");
+								BD.closeBD(con);
+							}else
+								JOptionPane.showMessageDialog(null, "Lo sentimos, no hay suficientes unidades en stock", "ERROR", JOptionPane.ERROR_MESSAGE);
+						}else
+							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un nÃºmero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
+					}	
+				}else {
+					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesión primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
 	}
 	
 

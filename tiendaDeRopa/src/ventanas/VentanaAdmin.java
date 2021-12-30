@@ -10,6 +10,9 @@ import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -35,6 +38,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -49,7 +54,7 @@ public class VentanaAdmin extends JFrame {
 
 	private JPanel contentPane;
 	public static JPanel panelCentro, panelSur, panelArriba, panelArribaIzq, panelArribaDrc, panelNorte;
-	private JButton btnMostarMapa, btnVolver, btnAniadir, btnElegirEsePanel;
+	private JButton btnMostarMapa, btnVolver, btnAniadir, btnElegirEsePanel, btnOfertas;
 	public static JComboBox<String> comboProductos;
 	public static JLabel lblPrecio, lblStock, lblMarca, lblNombre, lblColor, lblFoto;
 	public static JTextField txtPrecio, txtStock, txtMarca, txtColor;
@@ -159,6 +164,7 @@ public class VentanaAdmin extends JFrame {
 		btnVolver = new JButton("VOLVER");
 		btnAniadir = new JButton("AÑADIR PRODUCTO");
 		btnElegirEsePanel = new JButton("CREAR UN PRODUCTO DE ESE TIPO");
+		btnOfertas = new JButton("OFERTAS");
 		
 		
 //		textArea = new JTextArea();
@@ -186,6 +192,7 @@ public class VentanaAdmin extends JFrame {
 			comboTipoSudaderas.addItem(n);
 		}
 		
+
 		
 		
 		
@@ -278,7 +285,7 @@ public class VentanaAdmin extends JFrame {
 		panelSur.add(btnAniadir);
 		panelSur.add(btnMostarMapa);
 		panelSur.add(btnElegirEsePanel);
-		
+		panelSur.add(btnOfertas);
 		
 		
 		
@@ -300,23 +307,69 @@ public class VentanaAdmin extends JFrame {
 					return false;
 				return true;
 			}
+			
 		};
 		
 		Connection con = BD.initBD("SweetWear.db");
 		ArrayList<Producto> al = BD.getTienda(con);
-//		int cod = 0;
+		BD.closeBD(con);
+		
 //		try {
 //			cod = BD.contarProductosTienda(con);
 //		} catch (SQLException e1) {
 //			// TODO Auto-generated catch block
 //			e1.printStackTrace();
 //		}
-		for (Producto p: al)
-			modeloTablaProductos.addRow( new Object[] { p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), p.getStock(), p.getMarca(), p.getRutaFoto() } );
-		BD.closeBD(con);
 		
-		//modeloTablaProductos.setColumnIdentifiers(nombres);
+		//NO FUNCIONA EL CODIGO DEL PRODUCTO --> SALE UNO QUE NO TIENE QUE SALIR
+		for (Producto p: al)
+			modeloTablaProductos.addRow( new Object[] { p.getCodigo()-1, p.getColor(), p.getNombre(), p.getPrecio(), p.getStock(), p.getMarca(), p.getRutaFoto() } );
+			
+			
+		
+		
 		tablaProductos = new JTable(modeloTablaProductos);
+		
+		tablaProductos.addMouseListener(new MouseAdapter() {
+			
+			
+			
+			public void mousePressed(MouseEvent e) {
+				if(e.getClickCount()== 3) {
+					JOptionPane.showMessageDialog(null, "Para borrar un producto, pulse el raton sobre el producto a borrar con ALT pulsado (Solamente borre los nuevos productos)", "ADVERTENCIA!!!", JOptionPane.NO_OPTION);
+					if (e.isAltDown()) {
+						int fil = tablaProductos.getSelectedRow();
+						if (fil != -1) {
+							int cod = (int) modeloTablaProductos.getValueAt(fil, 0);
+							Connection con = BD.initBD("SweetWear.db");
+							BD.eliminarProductoTienda(con, cod);
+							modeloTablaProductos.removeRow(fil);
+						}
+					}
+				}
+			}
+	
+		});
+		
+		tablaProductos.getModel().addTableModelListener(new TableModelListener() {
+			
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				int fil = e.getFirstRow();
+				int codigo = (int) modeloTablaProductos.getValueAt(fil, 0);
+				String color =  (String) modeloTablaProductos.getValueAt(fil, 1);
+				String nombre =  (String) modeloTablaProductos.getValueAt(fil, 2);
+				double precio = (double) modeloTablaProductos.getValueAt(fil, 3);
+				int stock = (int) modeloTablaProductos.getValueAt(fil, 4);
+				String marca = (String) modeloTablaProductos.getValueAt(fil, 5);
+				String rutaFoto = (String) modeloTablaProductos.getValueAt(fil, 6);
+				
+				Connection con = BD.initBD("SweetWear.db");
+				BD.modificarProductoTienda(con, codigo, color, nombre, precio, stock, marca, rutaFoto);
+				BD.closeBD(con);
+				
+			}
+		});
 		
 		tablaProductos.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 			
@@ -331,7 +384,11 @@ public class VentanaAdmin extends JFrame {
 				}
 				return c;
 			}
+		
+			
+			
 		});
+		
 		
 		
 		JScrollPane scrollTablaProductos = new JScrollPane(tablaProductos);
@@ -339,7 +396,7 @@ public class VentanaAdmin extends JFrame {
 		
 		
 				
-				
+			
 				
 		//EVENTOS
 		btnVolver.addActionListener(new ActionListener() {
@@ -366,6 +423,18 @@ public class VentanaAdmin extends JFrame {
 			}
 		});
 		
+		btnOfertas.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaOfertas v1 = new VentanaOfertas(ventanaActual);
+				ventanaActual.setVisible(false);
+				v1.setVisible(true);
+				
+				
+			}
+		});
+		
 		mntmCerrarAplicacion.addActionListener(new ActionListener() {
 			
 			@Override
@@ -374,6 +443,8 @@ public class VentanaAdmin extends JFrame {
 			}
 		});
 		
+		JOptionPane.showMessageDialog(null, "PARA BORRAR UN PRODUCTO PULSE EL RATÓN SOBRE EL CODIGO DE LOS PRODUCTO EN LA TABLA 3 VECES", "ADVERTENCIA!!!", JOptionPane.NO_OPTION);
+
 		
 		mntmCargarArchivo.addActionListener(new ActionListener() {
 			
@@ -418,7 +489,7 @@ public class VentanaAdmin extends JFrame {
 						else if (selec == "ZAPATOS")
 							System.out.println("ZAPATOS");
 							
-						}
+						}//HACER LO MISMO CON LAS QUE FALTAN
 					
 				
 				
@@ -446,6 +517,16 @@ public class VentanaAdmin extends JFrame {
 					if (im == null)
 						JOptionPane.showMessageDialog(null, "Tienes que Seleccionar una imagen", "ERROR", JOptionPane.ERROR_MESSAGE);
 					
+//					boolean existe = false;
+//					try {
+//						existe = BD.existeProductoMismoNombre(con, nombre);
+//					} catch (SQLException e2) {
+//						// TODO Auto-generated catch block
+//						e2.printStackTrace();
+//					}
+//					if (existe)
+//						JOptionPane.showMessageDialog(null, "ESTE PRODUCTO YA EXISTE!", "ERROR", JOptionPane.ERROR_MESSAGE);
+					
 					String rutaFoto = im.getDescription();
 					String rutaAdecuada = rutaFoto.substring(46, rutaFoto.length()); 
 					
@@ -468,7 +549,7 @@ public class VentanaAdmin extends JFrame {
 					//AQUI HABRA QUE VER COMO ATRIBUIRLE EL CODIGO AL PRODUCTO
 					//SUPONGO QUE SE HARA CONTANDO LOS PRODUCTOS DE LA BASE DE DATOS
 					//OSEA AÑADIENDOLO A LA BASES DE DATOS Y PILLANDO DE HAY EL ID/CODIGO!!!
-					Producto p = new Producto(999, color, nombre, precio, stock, marca, rutaFoto);
+					Producto p = new Producto(cod, color, nombre, precio, stock, marca, rutaFoto);
 					String [] fila = {String.valueOf(cod), color, nombre+ " " + nombreTipoCalcetines, String.valueOf(precio), String.valueOf(stock), marca, rutaAdecuada};
 					modeloTablaProductos.addRow(fila);
 					

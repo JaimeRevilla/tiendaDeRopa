@@ -30,7 +30,6 @@ import clases.Usuario;
 
 public class VentanaRegistro extends JFrame {
 
-	private static Logger log = Logger.getLogger("Log de Usuarios");
 	
 	private JPanel contentPane;
 	private JPanel panelCentral, panelSur;
@@ -69,8 +68,10 @@ public class VentanaRegistro extends JFrame {
 		VentanaAnterior = va;
 		VentanaActual = this;
 		
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1650, 1080);
+		setBounds(500, 150, 600, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -116,91 +117,79 @@ public class VentanaRegistro extends JFrame {
 		panelSur.setBackground(Color.CYAN);
 		panelCentral.setBackground(Color.CYAN);
 		
-//		btnRegistrar.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				String n = txtNombre.getText();
-//				int ed = Integer.parseInt(txtEdad.getText());
-//				String ermail = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$\")";
-//				String m = txtMail.getText();
-//				boolean correctoCorreo = Pattern.matches(ermail, m);
-//				if (correctoCorreo) {
-//					String c = txtCon.getText();
-//					//FALTARIA PONER AQUI DE ALGUNA MANERA LO DE LOS PERMISOS
-//					Usuario u = new Usuario(n, ed, m, c, false);
-//					//AÑADIRLO AL MAPA DE CLAVE USUARIO Y VALOR EL CARRITO ASOCIADO A ESE USUARIO!
-//					Connection con = BDUsuario.initBD("SweetWear.db");
-//					BDUsuario.insertarUsuario(con, n, ed, m, c, false);
-//					BDUsuario.closeBD(con);
-//					JOptionPane.showMessageDialog(null, "Persona registrada correctamente", "REGISTRO CORRECTO", JOptionPane.INFORMATION_MESSAGE);
-//					
-//					//Logger Usuarios
-//					try {
-//						Handler handler = new FileHandler("Usuarios.log");
-//						handler.setFormatter(new SimpleFormatter());
-//						log.addHandler(handler);
-//						log.log(Level.INFO, "Se ha añadido un Usuario");
-//						
-//					} catch (SecurityException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					} catch (IOException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					}
-//					
-//					vaciarCampos();
-//				}else {
-//					JOptionPane.showMessageDialog(null, "El correo electronico no es correcto", "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
-//					throw new ExcepcionImplicita("ERROR! El correo electronico no es correcto");
-//				}
-//				
-//			}
-//		});
-		
-		
-		
-		
-		
-		
-		
 		btnRegistrar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String n = txtNombre.getText();
 				int ed = Integer.parseInt(txtEdad.getText());
+				String ermail = "[A-Za-z]{1,20}@[A-Za-z]{1,20}.[a-z]{3}";
 				String m = txtMail.getText();
-				
-				String c = txtCon.getText();
-				//FALTARIA PONER AQUI DE ALGUNA MANERA LO DE LOS PERMISOS
-				Usuario u = new Usuario(n, ed, m, c, false);
-				//AÑADIRLO AL MAPA DE CLAVE USUARIO Y VALOR EL CARRITO ASOCIADO A ESE USUARIO!
-				Connection con = BD.initBD("SweetWear.db");
-				BD.insertarUsuario(con, n, ed, m, c, false);
-				BD.closeBD(con);
-				JOptionPane.showMessageDialog(null, "Persona registrada correctamente", "REGISTRO CORRECTO", JOptionPane.INFORMATION_MESSAGE);
+				boolean correctoCorreo = Pattern.matches(ermail, m);
+				if (correctoCorreo) {
+					String c = txtCon.getText();
+					Usuario u = new Usuario(n, ed, m, c, false);
+					VentanaPrincipal.tmUsuarios.put(n, u);
+					Connection con = BD.initBD("SweetWear.db");
+					BD.insertarUsuario(con, n, ed, m, c, false);
+					BD.closeBD(con);
+					JOptionPane.showMessageDialog(null, "Persona registrada correctamente", "REGISTRO CORRECTO", JOptionPane.INFORMATION_MESSAGE);
 					
-				//Logger Usuarios
-				try {
-					Handler handler = new FileHandler("Usuarios.log");
-					handler.setFormatter(new SimpleFormatter());
-					log.addHandler(handler);
-					log.log(Level.INFO, "Se ha añadido un Usuario");
-						
-				} catch (SecurityException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					//Logger Usuarios
+					VentanaPrincipal.log.log(Level.INFO, "Se ha añadido un Usuario");;
+					
+					
+					vaciarCampos();
+				}else {
+					JOptionPane.showMessageDialog(null, "El correo electronico no es correcto", "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
+					throw new ExcepcionImplicita("ERROR! El correo electronico no es correcto");
 				}
-					
-				vaciarCampos();
 				
 			}
 		});
+		
+		
+		
+		
+		
+		
+		
+//		btnRegistrar.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				String n = txtNombre.getText();
+//				int ed = Integer.parseInt(txtEdad.getText());
+//				String m = txtMail.getText();
+//				
+//				String c = txtCon.getText();
+//				//FALTARIA PONER AQUI DE ALGUNA MANERA LO DE LOS PERMISOS
+//				Usuario u = new Usuario(n, ed, m, c, false);
+//				//AÑADIRLO AL MAPA DE CLAVE USUARIO Y VALOR EL CARRITO ASOCIADO A ESE USUARIO!
+//				Connection con = BD.initBD("SweetWear.db");
+//				BD.insertarUsuario(con, n, ed, m, c, false);
+//				BD.closeBD(con);
+//				JOptionPane.showMessageDialog(null, "Persona registrada correctamente", "REGISTRO CORRECTO", JOptionPane.INFORMATION_MESSAGE);
+//					
+//				//Logger Usuarios
+//				try {
+//					Handler handler = new FileHandler("Usuarios.log");
+//					handler.setFormatter(new SimpleFormatter());
+//					log.addHandler(handler);
+//					log.log(Level.INFO, "Se ha añadido un Usuario");
+//						
+//				} catch (SecurityException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				} catch (IOException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//					
+//				vaciarCampos();
+//				
+//			}
+//		});
 		
 		
 		/**

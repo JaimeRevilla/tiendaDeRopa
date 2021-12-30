@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,6 +23,8 @@ import javax.swing.border.EmptyBorder;
 import clases.BD;
 
 public class VentanaInicioSesion extends JFrame {
+	
+	private static Logger log = Logger.getLogger("Log de Usuarios");
 
 	private JPanel contentPane;
 	private JFrame ventanaAnterior, ventanaActual;
@@ -30,6 +34,8 @@ public class VentanaInicioSesion extends JFrame {
 	private JTextField textNombre;
 	private JPasswordField textCon;
 	public static String n;
+	
+	
 	
 	
 	public VentanaInicioSesion(JFrame va) {
@@ -45,7 +51,8 @@ public class VentanaInicioSesion extends JFrame {
 		ventanaAnterior = va;
 		ventanaActual = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1650, 1080);
+		//setSize(1650, 1080);
+		setBounds(500, 150, 600, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -117,6 +124,7 @@ public class VentanaInicioSesion extends JFrame {
 				} else if (resul == 2){
 					JOptionPane.showMessageDialog(null, "¡¡BIENVENIDO "+ n+ "!!");
 					VentanaPrincipal.lblNombre.setText("BIENVENIDO " + n);
+					VentanaPrincipal.log.log(Level.INFO, "Se ha iniciado sesion como" + " " + n);
 					
 					if (!VentanaPrincipal.tmPedidos.containsKey(n))
 						VentanaPrincipal.tmPedidos.put(n, new ArrayList<>());

@@ -7,6 +7,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/Jon/Downloads/sqlite-jdbc-3.36.0.3 (1).jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/34688/Downloads/jcalendar-1.4.jar.zip"/>
+	<classpathentry kind="lib" path="jcalendar-1.4.jar"/>
+>>>>>>> branch 'master' of https://github.com/JaimeRevilla/tiendaDeRopa
 	<classpathentry kind="output" path="bin"/>
 </classpath>
