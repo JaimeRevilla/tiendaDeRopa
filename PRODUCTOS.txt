@@ -1,2 +1,0 @@
-a 1 Negro Chandal 20.0 44 Nike imagenes\\IconoPantalonChandal.png
-a 3 Azul Vaquero 20.0 55 Levis imagenes\\IconoPantalonVaquero.jpg

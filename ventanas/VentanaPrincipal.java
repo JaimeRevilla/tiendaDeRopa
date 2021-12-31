@@ -153,14 +153,15 @@ public class VentanaPrincipal extends JFrame {
 		//setBounds(500, 500, 600, 450);
 		setSize(1650, 1080);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
 		//FONDO DE LA VENTANA
-//		panelConFondo = new PanelConImagenDeFondo(getSize());
-//		panelConFondo.setImage("/imagenes/IconoZapatillas.png");
-//		setContentPane(panelConFondo);
+		//panelConFondo = new PanelConImagenDeFondo(getSize());
+		//panelConFondo.setImage("/imagenes/tienda-de-ropa.jpg");
+		//setContentPane(panelConFondo);
 		
 		
 		//CREAMOS LOS PANELES
@@ -291,7 +292,7 @@ public class VentanaPrincipal extends JFrame {
 		comboBusqueda = new JComboBox<String>();
 
 		//lblFrase = new JLabel("DI QUIÉN ERES SIN HABLAR");
-		lblFrase = new JLabel("AQUI VA UNA FRASE (SLOGAN) ");
+		lblFrase = new JLabel("M\u00C1S QUE ROPA");
 		Font font = new Font("Agency FB", Font.ITALIC, 50);
 		lblFrase.setFont(font);
 		
@@ -452,6 +453,18 @@ public class VentanaPrincipal extends JFrame {
 				
 			}
 		});
+		
+		btnP2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaCalcetines v1 = new VentanaCalcetines(ventanaActual);
+				ventanaActual.setVisible(false);
+				v1.setVisible(true);
+				
+			}
+		});
+		
 		
 		btnCambiarCon.addActionListener(new ActionListener() {
 			
