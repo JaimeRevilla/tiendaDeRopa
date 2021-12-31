@@ -86,7 +86,7 @@ public class VentanaPantalones extends JFrame {
 		panelP1.add(panelP12);
 		
 		btnChandal = new JButton();
-		VentanaPrincipal.ponerFotoABoton(btnChandal, "tiendaDeRopa\\src\\imagenes\\IconoPantalonChandal.png",  120, 120, 120, 120);
+		VentanaPrincipal.ponerFotoABoton(btnChandal, "imagenes\\IconoPantalonChandal.png",  120, 120, 120, 120);
 		panelP11.add(btnChandal);
 		
 		lblChandal = new JLabel("PANTALONES CHANDAL");
@@ -111,7 +111,7 @@ public class VentanaPantalones extends JFrame {
 		panelP2.add(panelP22);
 		
 		btnVaqueros = new JButton();
-		VentanaPrincipal.ponerFotoABoton(btnVaqueros, "tiendaDeRopa\\src\\imagenes\\IconoPantalonVaquero.jpg",  120, 120, 120, 120);
+		VentanaPrincipal.ponerFotoABoton(btnVaqueros, "imagenes\\IconoPantalonVaquero.jpg",  120, 120, 120, 120);
 		panelP21.add(btnVaqueros);
 		
 		lblVaquero = new JLabel("PANTALONES VAQUEROS");
@@ -136,7 +136,7 @@ public class VentanaPantalones extends JFrame {
 		panelP3.add(panelP32);
 		
 		btnCampana = new JButton();
-		VentanaPrincipal.ponerFotoABoton(btnCampana, "tiendaDeRopa\\src\\imagenes\\IconoPantalonCampana.png",  120, 120, 120, 120);
+		VentanaPrincipal.ponerFotoABoton(btnCampana, "imagenes\\IconoPantalonCampana.png",  120, 120, 120, 120);
 		panelP31.add(btnCampana);
 		
 		lblCampana = new JLabel("PANTALONES CAMPANA");

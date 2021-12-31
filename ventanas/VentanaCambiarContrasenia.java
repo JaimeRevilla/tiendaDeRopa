@@ -74,7 +74,7 @@ public class VentanaCambiarContrasenia extends JFrame {
 		
 		//CREACION DE LOS COMPONENTES
 		btnvolver = new JButton();
-		VentanaPrincipal.ponerFotoABoton(btnvolver, "tiendaDeRopa\\src\\imagenes\\IconoSalir.png", 30, 30, 30, 30);
+		VentanaPrincipal.ponerFotoABoton(btnvolver, "imagenes\\IconoSalir.png", 30, 30, 30, 30);
 		
 		btnCambiarCon = new JButton("CAMBIAR CONTRASENIA");
 		

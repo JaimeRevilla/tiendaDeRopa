@@ -234,23 +234,23 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		btnP1 = new JButton();
-		ponerFotoABoton(btnP1, "tiendaDeRopa\\src\\imagenes\\IconoZapatillas.png", 120, 120, 120, 120);
+		ponerFotoABoton(btnP1, "imagenes\\IconoZapatillas.png", 120, 120, 120, 120);
 		panelP1.add(btnP1);
 		
 		btnP2 = new JButton();
-		ponerFotoABoton(btnP2, "tiendaDeRopa\\src\\imagenes\\IconoCalcetines.png", 120, 120, 120, 120);
+		ponerFotoABoton(btnP2, "imagenes\\IconoCalcetines.png", 120, 120, 120, 120);
 		panelP2.add(btnP2);
 		
 		btnP3 = new JButton();
-		ponerFotoABoton(btnP3, "tiendaDeRopa\\src\\imagenes\\IconoSudadera.png", 120, 120, 120, 120);
+		ponerFotoABoton(btnP3, "imagenes\\IconoSudadera.png", 120, 120, 120, 120);
 		panelP3.add(btnP3);
 		
 		btnP4 = new JButton();
-		ponerFotoABoton(btnP4, "tiendaDeRopa\\src\\imagenes\\IconoPantalones.png", 120, 120, 120, 120);
+		ponerFotoABoton(btnP4, "imagenes\\IconoPantalones.png", 120, 120, 120, 120);
 		panelP4.add(btnP4);
 		
 		btnP5 = new JButton();
-		ponerFotoABoton(btnP5, "tiendaDeRopa\\src\\imagenes\\IconoCamiseta.png", 120, 120, 120, 120);
+		ponerFotoABoton(btnP5, "imagenes\\IconoCamiseta.png", 120, 120, 120, 120);
 		panelP5.add(btnP5);
 		
 		
@@ -263,24 +263,24 @@ public class VentanaPrincipal extends JFrame {
 		
 		//CREAMOS LOS COMPONENTES
 		btnInicioSesion = new JButton();
-		ponerFotoABoton(btnInicioSesion, "tiendaDeRopa\\src\\imagenes\\IconoIniciarSesion.png", 30, 30, 30, 30);
+		ponerFotoABoton(btnInicioSesion, "imagenes\\IconoIniciarSesion.png", 30, 30, 30, 30);
 		
 		btnSalir = new JButton();
-		ponerFotoABoton(btnSalir, "tiendaDeRopa\\src\\imagenes\\IconoSalir.png", 30, 30, 30, 30);
+		ponerFotoABoton(btnSalir, "imagenes\\IconoSalir.png", 30, 30, 30, 30);
 		
 		btnRegistrarme = new JButton();
-		ponerFotoABoton(btnRegistrarme, "tiendaDeRopa\\src\\imagenes\\IconoRegistro.jpg", 30, 30, 30, 30);
+		ponerFotoABoton(btnRegistrarme, "imagenes\\IconoRegistro.jpg", 30, 30, 30, 30);
 		
 		
 		btnAdmin = new JButton();
-		ponerFotoABoton(btnAdmin, "tiendaDeRopa\\src\\imagenes\\IconoAdmin.png", 30, 30, 30, 30);
+		ponerFotoABoton(btnAdmin, "imagenes\\IconoAdmin.png", 30, 30, 30, 30);
 		btnAdmin.setVisible(false);
 		
 		btnCerrarSesion = new JButton();
-		ponerFotoABoton(btnCerrarSesion, "tiendaDeRopa\\src\\imagenes\\IconoCerrarSesion.png", 30, 30, 30, 30);
+		ponerFotoABoton(btnCerrarSesion, "imagenes\\IconoCerrarSesion.png", 30, 30, 30, 30);
 		
 		btnBusqueda = new JButton();
-		ponerFotoABoton(btnBusqueda, "tiendaDeRopa\\src\\imagenes\\IconoBusqueda.jpg", 30, 30, 30, 30);
+		ponerFotoABoton(btnBusqueda, "imagenes\\IconoBusqueda.jpg", 30, 30, 30, 30);
 		//NO SE COMO PONER EL BOTON A LA DERECHA DEL TODOO
 		btnBusqueda.setAlignmentX(JButton.RIGHT_ALIGNMENT);
 		
@@ -313,10 +313,10 @@ public class VentanaPrincipal extends JFrame {
 	
 			
 		btnCarrito = new JButton();
-		ponerFotoABoton(btnCarrito, "tiendaDeRopa\\src\\imagenes\\IconoCarrito.png", 30, 30, 30, 30);
+		ponerFotoABoton(btnCarrito, "imagenes\\IconoCarrito.png", 30, 30, 30, 30);
 		
 		btnCambiarCon = new JButton();
-		ponerFotoABoton(btnCambiarCon, "tiendaDeRopa\\src\\imagenes\\IconoCambiarContraseña.png", 30, 30, 30, 30);
+		ponerFotoABoton(btnCambiarCon, "imagenes\\IconoCambiarContraseña.png", 30, 30, 30, 30);
 		btnCambiarCon.setVisible(false);
 		
 		modelosp = new SpinnerNumberModel(50, 0, 100, 1);

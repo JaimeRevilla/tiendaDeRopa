@@ -450,7 +450,7 @@ public class VentanaAdmin extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser fc = new JFileChooser("tiendaDeRopa\\src\\imagenes");
+				JFileChooser fc = new JFileChooser("imagenes");
 				int sel = fc.showOpenDialog(null);
 				if(sel == JFileChooser.APPROVE_OPTION) {
 					File ficheroSeleccionado = fc.getSelectedFile();
