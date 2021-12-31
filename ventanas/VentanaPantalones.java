@@ -74,6 +74,7 @@ public class VentanaPantalones extends JFrame {
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		
 		//--------------------------------------------------------------------------------------------------
+		System.out.println("FUNCIONA");
 		
 		panelP1 = new JPanel();
 		panelP1.setLayout(new GridLayout(2, 1));
