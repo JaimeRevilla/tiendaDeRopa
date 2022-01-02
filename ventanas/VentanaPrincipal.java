@@ -464,7 +464,17 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		
-		
+		btnP2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaCalcetines v1 = new VentanaCalcetines(ventanaActual);
+				ventanaActual.setVisible(false);
+				v1.setVisible(true);
+				
+			}
+		});
+
 		btnP4.addActionListener(new ActionListener() {
 			
 			@Override
@@ -476,17 +486,16 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		
-		btnP2.addActionListener(new ActionListener() {
+		btnP5.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaCalcetines v1 = new VentanaCalcetines(ventanaActual);
+				VentanaCamiseta v1 = new VentanaCamiseta(ventanaActual);
 				ventanaActual.setVisible(false);
 				v1.setVisible(true);
 				
 			}
 		});
-		
 		
 		btnCambiarCon.addActionListener(new ActionListener() {
 			

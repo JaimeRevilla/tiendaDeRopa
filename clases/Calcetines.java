@@ -24,13 +24,17 @@ public class Calcetines extends Producto {
 		this.tipoCalcetines = tipoCalcetinas;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "Calcetines [tipoCalcetinas=" + tipoCalcetines + ", getTipoCalcetinas()=" + getTipoCalcetinas()
 				+ ", getCodigo()=" + getCodigo() + ", getColor()=" + getColor() + ", getNombre()=" + getNombre()
 				+ ", getPrecio()=" + getPrecio() + ", getStock()=" + getStock() + ", getMarca()=" + getMarca()
 				+ ", getRutaFoto()=" + getRutaFoto() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
 				+ ", toString()=" + super.toString() + "]";
+	}*/
+	
+	public String toString() {
+		return getNombre() + " " + getPrecio() + "euros" + " " + getStock() + " uds";
 	}
 	
 	

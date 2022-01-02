@@ -1,3 +1,2 @@
-a 0 Negro Chandal 20.0 3 Nike imagenes\\IconoPantalonChandal.png
-a 1 Negro Campana 25.0 3 Brownie imagenes\\IconoPantalonCampana.png
-a 2 Azul Vaquero 20.0 4 Levis imagenes\\IconoPantalonVaquero.jpg
+Piki 0 Blanco Pinkie 10.0 1 Nike imagenes\\IconoCalcetinesPinkie.jpg
+a 1 Blanco Pinkie 10.0 5 Nike imagenes\\IconoCalcetinesPinkie.jpg
