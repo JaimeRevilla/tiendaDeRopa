@@ -101,7 +101,7 @@ public class VentanaEstadisticas extends JFrame {
 		btnObtenerEstadisticas = new JButton("OBTENER ESTADISTICAS");
 		panelSur.add(btnObtenerEstadisticas);
 		
-		lblTitulo1 = new JLabel("ESTADISTICAS GENERALES");
+		lblTitulo1 = new JLabel("ESTADISTICAS GENERALES Y PERSONALES");
 		panelNorte.add(lblTitulo1);
 		
 		lblPrecioMedioPedidos = new JLabel("PRECIO MEDIO DE LOS PEDIDOS: ");

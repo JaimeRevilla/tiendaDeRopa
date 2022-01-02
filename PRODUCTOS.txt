@@ -1,2 +1,6 @@
 Piki 0 Blanco Pinkie 10.0 1 Nike imagenes\\IconoCalcetinesPinkie.jpg
 a 1 Blanco Pinkie 10.0 5 Nike imagenes\\IconoCalcetinesPinkie.jpg
+a 2 Blanco Pinkie 10.0 4 Nike imagenes\\IconoCalcetinesPinkie.jpg
+a 3 Negro Alto 15.0 3 Adidas imagenes\\IconoCalcetinesAlto.jpg
+a 4 Negro Polo 35.0 3 Lacoste imagenes\\IconoCamisetaPolo.png
+iker 5 Blanco Tobillero 10.0 4 Adidas imagenes\\IconoCalcetinesTobilleros.jpg

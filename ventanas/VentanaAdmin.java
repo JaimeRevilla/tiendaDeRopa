@@ -165,12 +165,13 @@ public class VentanaAdmin extends JFrame {
 		
 		
 		//---------------------------------------------------------------
-		btnMostarMapa = new JButton("USUARIOS");
+		btnMostarMapa = new JButton("DATOS GENERALES");
 		btnVolver = new JButton("VOLVER");
 		btnAniadir = new JButton("AÑADIR PRODUCTO");
 		btnElegirEsePanel = new JButton("CREAR UN PRODUCTO DE ESE TIPO");
 		btnOfertas = new JButton("OFERTAS");
 		btnEstadisticas = new JButton("ESTADISTICAS");
+		btnAniadir.setVisible(false);
 		
 		
 		
@@ -468,6 +469,7 @@ public class VentanaAdmin extends JFrame {
 							panelArribaIzq.add(lblTipoZapato);
 							panelArribaIzq.add(comboTipoZapatos);
 						}
+					btnAniadir.setVisible(true);
 					}			
 			}
 		});

@@ -641,56 +641,8 @@ public class VentanaPrincipal extends JFrame {
 			
 			
 		});
-		
-		
-	
-	//------------------------------------------------------------------------------------------------------------------------------
-		
-	
-	
 	}
-	/**
-	 * Metodo por el cual los pedidos que se hubiesen hecho en el carrito son borrados
-	 */
-	
-	private void borrarPedidos() {
-		Object [] claves = tmPedidos.keySet().toArray();
-		for (Object c : claves) {
-			tmPedidos.remove(c);
-		}
-	}
-	
-	
-	
-	
-	/**
-	 * Metodo que carga el mapaPedidos en un TextArea
-	 */
-	private void cargarMapaPedidosEnTextArea() {
-		/*String texto = "INFORMACION DEL PEDIDO";
-		for(String clave: tmPedidos.keySet()) {
-			texto = texto + clave + "\n";
-			HashSet<String> valor = tmPedidos.get(clave);
-			for(String pedi: valor) {
-				texto = texto + "\t\t" + pedi + "\n";
-			}
-		}*/
-		
-		//hacer que el tmPedidos se pueda enlazar con el HashSet<>
-	}
-	
-	
-	/**
-	 * Metodo que carga el mapaUsuarios en una JList
-	 */
-	private void cargarMapaUsuariosEnLista () {
-		for(String clave: tmUsuarios.keySet()) {
-			Usuario valor = tmUsuarios.get(clave);
-			modeloListaUsuario.addElement(valor);
-		}
 
-		
-	}
 	
 	//PRIMERO LLAMAR A ESTE METODO Y UNA VEZ EL MAPA ESTE LLENO LLAMAR A cargarMapaUsuariosEnLista PARA QUE SE CARGUE EL MODELO DE LA LISTA
 	/**

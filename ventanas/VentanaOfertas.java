@@ -232,130 +232,132 @@ public class VentanaOfertas extends JFrame {
 				String producto = txtProducto.getText();
 				String porc = txtPorcentaje.getText();
 				
-				System.out.println("Producto: " + producto);
-				System.out.println("Porc: " + porc);
-				
-				
-				
 				if (!producto.equals("") && !porc.equals("")) {
-					Runnable r1 = new Runnable() {
-						
-						@Override
-						public void run() {
+					Connection con = BD.initBD("SweetWear.db");
+					String product = txtProducto.getText();
+					boolean res = false;
+					try {
+						res = BD.existeProductoMismoNombre(con, product);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					if (res == true) {
+						Runnable r1 = new Runnable() {
 							
-							boolean fin = false;
-							while (fin == false) {
-								long milis = System.currentTimeMillis();
-								Date d = new Date(milis);
-								String f = sdf.format(d);
-								try {
-									Thread.sleep(1000);
-								} catch (InterruptedException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-								Date ini = VentanaOfertas.fechaIni;
-								String iniString = sdf.format(ini);
+							@Override
+							public void run() {
 								
-								String anio = iniString.substring(0, 4);
-								
-								String mes = iniString.substring(5,7);
-								
-								String dia = iniString.substring(8, iniString.length());
-								
-	//							String producto = txtProducto.getText();
-	//							String porc = txtPorcentaje.getText();
-	//							
-	//							System.out.println("Producto: " + producto);
-	//							System.out.println("Porc: " + porc);
-	//							
-								
-								
-								if (d.getYear() == Integer.parseInt(mes) && d.getMonth() == Integer.parseInt(mes) && d.getDay() == Integer.parseInt(dia)) {
-									Connection con = BD.initBD("SweetWear.db");
-									boolean resul = false;
+								boolean fin = false;
+								while (fin == false) {
+									long milis = System.currentTimeMillis();
+									Date d = new Date(milis);
+									String f = sdf.format(d);
 									try {
-										resul = BD.existeProductoMismoNombre(con, producto);
-									} catch (SQLException e) {
+										Thread.sleep(1000);
+									} catch (InterruptedException e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
 									}
-									if (resul) {
-										try {
-											BD.ponerProductoEnOferta(con, producto, Double.parseDouble(porc));
-											BD.closeBD(con);
-											fin = true;
-										} catch (NumberFormatException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-										} catch (SQLException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-										}
-									}
+									Date ini = VentanaOfertas.fechaIni;
+									String iniString = sdf.format(ini);
+									
+									String anio = iniString.substring(0, 4);
+									
+									String mes = iniString.substring(5,7);
+									
+									String dia = iniString.substring(8, iniString.length());
+									
+									
+									if (d.getYear() == Integer.parseInt(anio) && d.getMonth() == Integer.parseInt(mes) && d.getDay() == Integer.parseInt(dia)) {
 										
-								}
-								
-							}
-							
-							fin = false;
-							while (fin == false) {
-								long milis = System.currentTimeMillis();
-								Date d = new Date(milis);
-								String f = sdf.format(d);
-								try {
-									Thread.sleep(1000);
-								} catch (InterruptedException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-								Date fi = VentanaOfertas.fechaFin;
-								String iniString = sdf.format(fi);
-								
-								String anio = iniString.substring(0, 4);
-								
-								String mes = iniString.substring(5,7);
-								
-								String dia = iniString.substring(8, iniString.length());
-								
-								String producto = txtProducto.getText();
-								String porc = txtPorcentaje.getText();
-								
-								
-								if (d.getYear() == Integer.parseInt(mes) && d.getMonth() == Integer.parseInt(mes) && d.getDay() == Integer.parseInt(dia)) {
-									Connection con = BD.initBD("SweetWear.db");
-									boolean resul = false;
-									try {
-										resul = BD.existeProductoMismoNombre(con, producto);
-									} catch (SQLException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-									if (resul) {
+										boolean resul = false;
 										try {
-											BD.finOferta(con, producto, Double.parseDouble(porc));
-											BD.closeBD(con);
-											fin = true;
-										} catch (NumberFormatException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
+											resul = BD.existeProductoMismoNombre(con, producto);
 										} catch (SQLException e) {
 											// TODO Auto-generated catch block
 											e.printStackTrace();
 										}
+										if (resul) {
+											try {
+												BD.ponerProductoEnOferta(con, producto, Double.parseDouble(porc));
+												BD.closeBD(con);
+												fin = true;
+											} catch (NumberFormatException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											} catch (SQLException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+										}
+											
 									}
+									
 								}
+								
+								fin = false;
+								while (fin == false) {
+									long milis = System.currentTimeMillis();
+									Date d = new Date(milis);
+									String f = sdf.format(d);
+									try {
+										Thread.sleep(1000);
+									} catch (InterruptedException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									Date fi = VentanaOfertas.fechaFin;
+									String iniString = sdf.format(fi);
+									
+									String anio = iniString.substring(0, 4);
+									
+									String mes = iniString.substring(5,7);
+									
+									String dia = iniString.substring(8, iniString.length());
+									
+									String producto = txtProducto.getText();
+									String porc = txtPorcentaje.getText();
+									
+									
+									if (d.getYear() == Integer.parseInt(anio) && d.getMonth() == Integer.parseInt(mes) && d.getDay() == Integer.parseInt(dia)) {
+										Connection con = BD.initBD("SweetWear.db");
+										boolean resul = false;
+										try {
+											resul = BD.existeProductoMismoNombre(con, producto);
+										} catch (SQLException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										if (resul) {
+											try {
+												BD.finOferta(con, producto, Double.parseDouble(porc));
+												BD.closeBD(con);
+												fin = true;
+											} catch (NumberFormatException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											} catch (SQLException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+										}
+									}
+									
+							}
 								
 						}
-							
-					}
-					};
-					Thread t1 = new Thread(r1);
-					t1.start();
+						};
+						Thread t1 = new Thread(r1);
+						t1.start();
+						JOptionPane.showMessageDialog(null, "OFERTA APLICADA CORRECTAMENTE!!!", "OFERTA", JOptionPane.NO_OPTION);
+
+					}else
+						JOptionPane.showMessageDialog(null, "El producto no existe!", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}else 
 					JOptionPane.showMessageDialog(null, "Nombra un producto y su descuento correspondiente", "ERROR", JOptionPane.ERROR_MESSAGE);
+//				JOptionPane.showMessageDialog(null, "OFERTA APLICADA CORRECTAMENTE!!!", "OFERTA", JOptionPane.NO_OPTION);
 
-				
 			}
 		});
 	}
