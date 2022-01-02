@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -91,7 +93,21 @@ public class VentanaInicioSesion extends JFrame {
 		panelCentral.setBackground(Color.CYAN);
 		panelSur.setBackground(Color.CYAN);
 		
+		//-----------------------------------------------------------------------------------------------------------
+		ventanaActual.addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				VentanaPrincipal.guardarMapaUsuariosEnFicheroDeTexto();
+				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
+				VentanaPrincipal.guardarListaHistorialBusqueda();
+				VentanaPrincipal.guardarMapaSatisfaccion();
+			
+			}
+		});
 		
+		//---------------------------------------------------------------------------------------------------------------
 		
 		btnVolverAtras.addActionListener(new ActionListener() {
 			
@@ -132,8 +148,10 @@ public class VentanaInicioSesion extends JFrame {
 						VentanaPrincipal.tmPedidos.get(n);
 					
 					VentanaPrincipal.btnCerrarSesion.setVisible(true);
-					VentanaPrincipal.pb.setVisible(true);
-					VentanaPrincipal.sp.setVisible(true);
+					if (!VentanaPrincipal.hmSatisfaccion.containsKey(n)) {
+						VentanaPrincipal.pb.setVisible(true);
+						VentanaPrincipal.sp.setVisible(true);
+					}
 					VentanaPrincipal.btnCambiarCon.setVisible(true);
 					VentanaPrincipal.btnInicioSesion.setVisible(false);
 					boolean admin = BD.obtenerAdmin(con, n);

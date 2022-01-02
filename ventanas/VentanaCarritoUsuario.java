@@ -176,11 +176,21 @@ public class VentanaCarritoUsuario extends JFrame {
 						BD.eliminarProductoCliente(con, p.getCodigo());
 						BD.sumarUnidadesAProducto(con, p.getNombre(), p.getStock());
 						sto = BD.obtenerStockProducto(con, p.getNombre());
+						
+						VentanaPantalones.lblChandal = new JLabel();
+						VentanaPantalones.lblVaquero = new JLabel();
+						VentanaPantalones.lblCampana = new JLabel();
+						
 						if (p.getNombre().equals("Chandal")) {
 							VentanaPantalones.lblChandal.setText("PANTALONES CHANDAL" + ": " + "Cantidades restantes: " + sto + " unidades");
 						}else if (p.getNombre().equals("Vaquero")){
 							VentanaPantalones.lblVaquero.setText("PANTALONES VAQUEROS" + ": " + "Cantidades restantes: " + sto + " unidades");
+						}else if (p.getNombre().equals("Campana")) {
+							VentanaPantalones.lblCampana.setText("PANTALONES CAMPANA" + ": " + "Cantidades restantes: " + sto + " unidades");
 						}
+						
+						//HABRA QUE HACERLO CON TODOS LOS PRODUCTOS QUE FALTAN!!
+						
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -213,12 +223,16 @@ public class VentanaCarritoUsuario extends JFrame {
 					@Override
 					public void windowClosing(WindowEvent e) {
 						// TODO Auto-generated method stub
+						VentanaPrincipal.guardarMapaUsuariosEnFicheroDeTexto();
 						VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
+						VentanaPrincipal.guardarListaHistorialBusqueda();
+						VentanaPrincipal.guardarMapaSatisfaccion();
+					
 					}
 				});
 				
 		
-		//HILO
+		//HILO (FOTO DEL PRODUCTO)
 		
 		Runnable r1 = new Runnable() {
 			
@@ -228,7 +242,9 @@ public class VentanaCarritoUsuario extends JFrame {
 					int pos1 = listaPedido.getSelectedIndex();
 					if (pos1 != -1) {
 						panelCentralArriba.removeAll();
-						Producto p = VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).get(pos1);
+						Producto p = null;
+						if (VentanaPrincipal.tmPedidos.containsKey(VentanaInicioSesion.n))
+							p = VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).get(pos1);
 						panelCentralArriba.setLayout(new GridLayout(1,2));
 						panelCentralArriba.add(scrollListaPedido);
 						panelCentralArriba.add(lblFoto);
@@ -243,13 +259,17 @@ public class VentanaCarritoUsuario extends JFrame {
 						}
 					}else if (modeloListaPedido.size() != 0) {
 						panelCentralArriba.removeAll();
-						Producto p1 = VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).get(0);
+						Producto p1 = null;
+						if (VentanaPrincipal.tmPedidos.containsKey(VentanaInicioSesion.n))
+							p1 = VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).get(0);
 						panelCentralArriba.setLayout(new GridLayout(1,2));
 						panelCentralArriba.add(scrollListaPedido);
 						panelCentralArriba.add(lblFoto);
-						ImageIcon im2 = new ImageIcon(p1.getRutaFoto());
-						im2.setDescription(p1.getRutaFoto());
-						lblFoto.setIcon(im2);
+						if (p1 != null) {
+							ImageIcon im2 = new ImageIcon(p1.getRutaFoto());
+							im2.setDescription(p1.getRutaFoto());
+							lblFoto.setIcon(im2);
+						}
 						try {
 							Thread.sleep(250);
 						} catch (InterruptedException e) {

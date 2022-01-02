@@ -45,21 +45,26 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import clases.BD;
+import clases.PanelConImagenDeFondo;
+import clases.Pantalon;
 import clases.Producto;
 import clases.TipoCalcetines;
+import clases.TipoCamiseta;
+import clases.TipoPantalon;
 import clases.TipoProductos;
 import clases.TipoSudadera;
+import clases.TipoZapato;
 
 public class VentanaAdmin extends JFrame {
 
 	private JPanel contentPane;
 	public static JPanel panelCentro, panelSur, panelArriba, panelArribaIzq, panelArribaDrc, panelNorte;
-	private JButton btnMostarMapa, btnVolver, btnAniadir, btnElegirEsePanel, btnOfertas;
+	private JButton btnMostarMapa, btnVolver, btnAniadir, btnElegirEsePanel, btnOfertas, btnEstadisticas;
 	public static JComboBox<String> comboProductos;
 	public static JLabel lblPrecio, lblStock, lblMarca, lblNombre, lblColor, lblFoto;
-	public static JTextField txtPrecio, txtStock, txtMarca, txtColor;
-	public static JLabel lblTipoCalcetines, lblTipoSudadera;
-	public static JComboBox<String> comboTipoCalcetines, comboTipoSudaderas;
+	public static JTextField txtPrecio, txtStock, txtMarca, txtColor, txtColorCordones, txtGoretex;
+	public static JLabel lblTipoCalcetines, lblTipoSudadera, lblTipoCamiseta, lblTipoPantalon, lblColorCordones, lblGoretex, lblTipoZapato;
+	public static JComboBox<String> comboTipoCalcetines, comboTipoSudaderas, comboTipoCamisetas, comboTipoPantalones, comboTipoZapatos;
 	private JTextArea textArea;
 	private JFrame ventanaActual, ventanaAnterior;
 	private JTable tablaProductos;
@@ -165,6 +170,8 @@ public class VentanaAdmin extends JFrame {
 		btnAniadir = new JButton("AÑADIR PRODUCTO");
 		btnElegirEsePanel = new JButton("CREAR UN PRODUCTO DE ESE TIPO");
 		btnOfertas = new JButton("OFERTAS");
+		btnEstadisticas = new JButton("ESTADISTICAS");
+		
 		
 		
 //		textArea = new JTextArea();
@@ -192,8 +199,23 @@ public class VentanaAdmin extends JFrame {
 			comboTipoSudaderas.addItem(n);
 		}
 		
+		comboTipoCamisetas = new JComboBox<>();
+		for (TipoCamiseta s : TipoCamiseta.values()) {
+			String n = String.valueOf(s);
+			comboTipoCamisetas.addItem(n);
+		}
 
+		comboTipoPantalones = new JComboBox<>();
+		for (TipoPantalon s : TipoPantalon.values()) {
+			String n = String.valueOf(s);
+			comboTipoPantalones.addItem(n);
+		}
 		
+		comboTipoZapatos = new JComboBox<>();
+		for (TipoZapato s : TipoZapato.values()) {
+			String n = String.valueOf(s);
+			comboTipoZapatos.addItem(n);
+		}
 		
 		
 		//SEGURAMENTE ESTO HABRA QUE METERLO EN ALGUN HILO SUPONGO
@@ -201,91 +223,14 @@ public class VentanaAdmin extends JFrame {
 		lblNombre = new JLabel("NOMBRE");
 		panelArribaIzq.add(lblNombre);
 		panelArribaIzq.add(comboProductos);
-//		int pos = comboProductos.getSelectedIndex();
-//			if (pos != -1) {
-//				String selec = comboProductos.getItemAt(pos);
-//				if (selec == "CALCETINES") {
-//					VentanaAdmin.mostrarPanel(panelArribaIzq);
-//					lblTipoCalcetines = new JLabel("TIPO CALCETINES: ");
-//					panelArribaIzq.add(lblTipoCalcetines);
-//					panelArribaIzq.add(comboTipoCalcetines);
-//				}
-//				else if (selec == "SUDADERA") {
-//					lblTipoSudadera = new JLabel("TIPO SUDADERA");
-//					panelArribaIzq.add(lblTipoSudadera);
-//					panelArribaIzq.add(comboTipoSudaderas);
-//				}
-//				else if (selec == "CAMISETA")
-//					System.out.println("");
-//				else if (selec == "PANTALON")
-//					System.out.println("PERRO");
-//				else if (selec == "ZAPATOS")
-//					System.out.println("ZAPATOS");
-//					
-//				}
 		
-			
-		
-		
-		
-		
-//		int pos = comboProductos.getSelectedIndex();
-//		if (pos != -1) {
-//			String selec = comboProductos.getItemAt(pos);
-//			if (selec == "CALCETINES") {
-//				lblTipoCalcetines = new JLabel("TIPO CALCETINES");
-//				panelArribaIzq.add(lblTipoCalcetines);
-//				panelArribaIzq.add(comboTipoCalcetines);	
-//			}
-//			else if (selec == "SUDADERA") {
-//				lblTipoSudadera = new JLabel("TIPO SUDADERA");
-//				panelArribaIzq.add(lblTipoSudadera);
-//				panelArribaIzq.add(comboTipoSudaderas);
-//			}
-//			else if (selec == "CAMISETA")
-//				System.out.println("");
-//			else if (selec == "PANTALON")
-//				System.out.println("PERRO");
-//			else if (selec == "ZAPATOS")
-//				System.out.println("ZAPATOS");
-//			
-//		}
-		
-		
-		
-//		lblNombre = new JLabel("NOMBRE: ");
-//		lblColor = new JLabel("COLOR");
-//		lblPrecio = new JLabel("PRECIO: ");
-//		lblStock = new JLabel("STOCK: ");
-//		lblMarca = new JLabel("MARCA: ");
-//		
-//		txtPrecio = new JTextField();
-//		txtStock = new JTextField();
-//		txtMarca = new JTextField();
-//		txtColor = new JTextField();
-//		txtPrecio.setColumns(10);
-//		txtStock.setColumns(10);
-//		txtMarca.setColumns(10);
-//		txtColor.setColumns(10);
-//		
-//		
-//		
-//		panelArribaIzq.add(lblNombre);
-//		panelArribaIzq.add(comboProductos);
-//		panelArribaIzq.add(lblColor);
-//		panelArribaIzq.add(txtColor);
-//		panelArribaIzq.add(lblPrecio);
-//		panelArribaIzq.add(txtPrecio);
-//		panelArribaIzq.add(lblStock);
-//		panelArribaIzq.add(txtStock);
-//		panelArribaIzq.add(lblMarca);
-//		panelArribaIzq.add(txtMarca);
 		
 		panelSur.add(btnVolver);
 		panelSur.add(btnAniadir);
 		panelSur.add(btnMostarMapa);
 		panelSur.add(btnElegirEsePanel);
 		panelSur.add(btnOfertas);
+		panelSur.add(btnEstadisticas);
 		
 		
 		
@@ -355,19 +300,24 @@ public class VentanaAdmin extends JFrame {
 			
 			@Override
 			public void tableChanged(TableModelEvent e) {
-				int fil = e.getFirstRow();
-				int codigo = (int) modeloTablaProductos.getValueAt(fil, 0);
-				String color =  (String) modeloTablaProductos.getValueAt(fil, 1);
-				String nombre =  (String) modeloTablaProductos.getValueAt(fil, 2);
-				double precio = (double) modeloTablaProductos.getValueAt(fil, 3);
-				int stock = (int) modeloTablaProductos.getValueAt(fil, 4);
-				String marca = (String) modeloTablaProductos.getValueAt(fil, 5);
-				String rutaFoto = (String) modeloTablaProductos.getValueAt(fil, 6);
-				
-				Connection con = BD.initBD("SweetWear.db");
-				BD.modificarProductoTienda(con, codigo, color, nombre, precio, stock, marca, rutaFoto);
-				BD.closeBD(con);
-				
+//				int fil = e.getFirstRow();
+//				//int codigo = (int) modeloTablaProductos.getValueAt(fil, 0);
+//				String cod = String.valueOf(modeloTablaProductos.getValueAt(fil, 0));
+//				int codigo = Integer.parseInt(cod);
+//						
+//				
+//				String color =  (String) modeloTablaProductos.getValueAt(fil, 1);
+//				String nombre =  (String) modeloTablaProductos.getValueAt(fil, 2);
+//				double precio = (double) modeloTablaProductos.getValueAt(fil, 3);
+//				int stock = (int) modeloTablaProductos.getValueAt(fil, 4);
+//				String marca = (String) modeloTablaProductos.getValueAt(fil, 5);
+//				String rutaFoto = (String) modeloTablaProductos.getValueAt(fil, 6);
+//				
+//				Connection con = BD.initBD("SweetWear.db");
+//				
+//				BD.modificarProductoTienda(con, codigo,  color, nombre, precio, stock, marca, rutaFoto);
+//				BD.closeBD(con);
+//				
 			}
 		});
 		
@@ -435,6 +385,17 @@ public class VentanaAdmin extends JFrame {
 			}
 		});
 		
+		btnEstadisticas.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaEstadisticas v1 = new VentanaEstadisticas(ventanaActual);
+				ventanaActual.setVisible(false);
+				v1.setVisible(true);
+				
+			}
+		});
+		
 		mntmCerrarAplicacion.addActionListener(new ActionListener() {
 			
 			@Override
@@ -475,26 +436,42 @@ public class VentanaAdmin extends JFrame {
 							lblTipoCalcetines = new JLabel("TIPO CALCETINES: ");
 							panelArribaIzq.add(lblTipoCalcetines);
 							panelArribaIzq.add(comboTipoCalcetines);
-						}
-						else if (selec == "SUDADERA") {
+						
+						}else if (selec == "SUDADERA") {
 							VentanaAdmin.mostrarPanel(panelArribaIzq);
-							lblTipoSudadera = new JLabel("TIPO SUDADERA");
+							lblTipoSudadera = new JLabel("TIPO SUDADERA: ");
 							panelArribaIzq.add(lblTipoSudadera);
 							panelArribaIzq.add(comboTipoSudaderas);
+						
+						}else if (selec == "CAMISETA") {
+							VentanaAdmin.mostrarPanel(panelArribaIzq);
+							lblTipoCamiseta = new JLabel("TIPO CAMISETA: ");
+							panelArribaIzq.add(lblTipoCamiseta);
+							panelArribaIzq.add(comboTipoCamisetas);
+						}else if (selec == "PANTALON") {
+							VentanaAdmin.mostrarPanel(panelArribaIzq);
+							lblTipoPantalon = new JLabel("TIPO PANTALON: ");
+							panelArribaIzq.add(lblTipoPantalon);
+							panelArribaIzq.add(comboTipoPantalones);
+						}else if (selec == "ZAPATOS") {
+							//ME DA PROBLEMAS Y NO SE PORQUE
+							VentanaAdmin.mostrarPanel(panelArribaIzq);
+							lblColorCordones = new JLabel("COLOR DE LOS CORDONES: ");
+							txtColorCordones = new JTextField();
+							lblGoretex = new JLabel("GORETEX (true o false): ");
+							txtGoretex = new JTextField();
+							lblTipoZapato = new JLabel("TIPO ZAPATO: ");
+							panelArribaIzq.add(lblColorCordones);
+							panelArribaIzq.add(txtColorCordones);
+							panelArribaIzq.add(lblGoretex);
+							panelArribaIzq.add(txtGoretex);
+							panelArribaIzq.add(lblTipoZapato);
+							panelArribaIzq.add(comboTipoZapatos);
 						}
-						else if (selec == "CAMISETA")
-							System.out.println("");
-						else if (selec == "PANTALON")
-							System.out.println("PERRO");
-						else if (selec == "ZAPATOS")
-							System.out.println("ZAPATOS");
-							
-						}//HACER LO MISMO CON LAS QUE FALTAN
-					
-				
-				
+					}			
 			}
 		});
+		
 		
 		
 		//EVENTOS
@@ -514,63 +491,86 @@ public class VentanaAdmin extends JFrame {
 					int stock = Integer.parseInt(txtStock.getText());
 					String marca = txtMarca.getText();
 					ImageIcon im = (ImageIcon)lblFoto.getIcon();
-					if (im == null)
+					
+					if (im != null) {	
+						System.out.println("1");
+						String rutaFoto = im.getDescription();
+						String rutaAdecuada = rutaFoto.substring(32, rutaFoto.length()); 
+						
+						
+						String nombreTipoCalcetines = "";
+						String nombreTipoPantalon = "";
+						String nombreTipoSudaderas = "";
+						String nombreTipoCamiseta = "";
+						String nombreTipoZapato = "";
+						String colorCordones = "";
+						boolean goretex = false;
+						
+						if (nombre.equals("CALCETINES")) {
+							int posTipoCalcetines = comboTipoCalcetines.getSelectedIndex();
+							nombreTipoCalcetines = comboTipoCalcetines.getItemAt(posTipoCalcetines);
+						} else if (nombre.equals("PANTALON")) {
+							int posTipoPantalon = comboTipoPantalones.getSelectedIndex();
+							nombreTipoPantalon = comboTipoPantalones.getItemAt(posTipoPantalon);
+						} else if (nombre.equals("SUDADERA")) {
+							int posTipoSudaderas = comboTipoSudaderas.getSelectedIndex();
+							nombreTipoSudaderas = comboTipoSudaderas.getItemAt(posTipoSudaderas);
+						} else if (nombre.equals("CAMISETA")) {
+							int posTipoCamiseta = comboTipoCamisetas.getSelectedIndex();
+							nombreTipoCamiseta = comboTipoCamisetas.getItemAt(posTipoCamiseta);
+						}else if (nombre.equals("ZAPATOS")) {
+							int posTipoZapato = comboTipoZapatos.getSelectedIndex();
+							nombreTipoZapato = comboTipoZapatos.getItemAt(posTipoZapato);
+							
+							colorCordones = txtColorCordones.getText();
+							goretex = Boolean.parseBoolean(txtGoretex.getText()); 	 
+						}
+						System.out.println("2");
+
+						Connection con = BD.initBD("SweetWear.db");
+						int cod = 0;
+						try {
+							cod = BD.contarProductosTienda(con);
+							System.out.println(cod);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						cod = cod + 1;
+						
+						//AQUI HABRA QUE VER COMO ATRIBUIRLE EL CODIGO AL PRODUCTO
+						//SUPONGO QUE SE HARA CONTANDO LOS PRODUCTOS DE LA BASE DE DATOS
+						//OSEA AÑADIENDOLO A LA BASES DE DATOS Y PILLANDO DE HAY EL ID/CODIGO!!!
+						Producto p = new Producto(cod, color, nombre, precio, stock, marca, rutaFoto);
+						String [] fila = {String.valueOf(cod), color, nombre, String.valueOf(precio), String.valueOf(stock), marca, rutaAdecuada};
+						modeloTablaProductos.addRow(fila);
+						
+							
+					
+						//HABRA QUE PONERLE DE CODIGO 1 MAS QUE EL CODIGO DEL ULTIMO PRODUCTO QUE HAY EN LA TABLA DE LA BASE DE DATOS!!
+						if (nombre.equals("CALCETINES")) {
+							BD.insertarProductoTienda(con, cod, color, nombre+ " " + nombreTipoCalcetines, precio, stock, marca, rutaAdecuada, nombre , nombreTipoCalcetines, "", "", "", "", false, "");
+						} else if (nombre.equals("PANTALON")) {
+							BD.insertarProductoTienda(con, cod, color, nombre+ " " + nombreTipoPantalon, precio, stock, marca, rutaAdecuada, nombre , "", "", nombreTipoPantalon, "", "", false, "");
+							//METER UN BOTON DEL PRODUCTO EN LA VENTANA CORRESPONDIENTE!!	
+						}else if (nombre.equals("CAMISETA")) {
+							BD.insertarProductoTienda(con, cod, color, nombre+ " " + nombreTipoCamiseta, precio, stock, marca, rutaAdecuada, nombre , "", nombreTipoCamiseta, "", "", "", false, "");
+						}else if (nombre.equals("SUDADERA")) {
+							BD.insertarProductoTienda(con, cod, color, nombre+ " " + nombreTipoSudaderas, precio, stock, marca, rutaAdecuada, nombre , "", "", "", nombreTipoSudaderas, "", false, "");
+						}else if (nombre.equals("ZAPATOS")) {
+							BD.insertarProductoTienda(con, cod, color, nombre+ " " + nombreTipoZapato, precio, stock, marca, rutaAdecuada, nombre , "", "", "", "", colorCordones, goretex, nombreTipoZapato);
+						}
+						BD.closeBD(con);
+						
+						//METER UN BOTON DEL PRODUCTO EN LA VENTANA CORRESPONDIENTE!!
+						
+						
+						
+						JOptionPane.showMessageDialog(null, "¡¡PRODUCTO AÑADIDO CORRECTAMENTE!!");
+					}else {
 						JOptionPane.showMessageDialog(null, "Tienes que Seleccionar una imagen", "ERROR", JOptionPane.ERROR_MESSAGE);
-					
-//					boolean existe = false;
-//					try {
-//						existe = BD.existeProductoMismoNombre(con, nombre);
-//					} catch (SQLException e2) {
-//						// TODO Auto-generated catch block
-//						e2.printStackTrace();
-//					}
-//					if (existe)
-//						JOptionPane.showMessageDialog(null, "ESTE PRODUCTO YA EXISTE!", "ERROR", JOptionPane.ERROR_MESSAGE);
-					
-					String rutaFoto = im.getDescription();
-					String rutaAdecuada = rutaFoto.substring(46, rutaFoto.length()); 
-					
-					
-					int posTipoCalcetines = comboTipoCalcetines.getSelectedIndex();
-					String nombreTipoCalcetines = comboTipoCalcetines.getItemAt(pos);
-					
-					
-						
-					Connection con = BD.initBD("SweetWear.db");
-					int cod = 0;
-					try {
-						cod = BD.contarProductosTienda(con);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					}
-					cod = cod + 1;
-					
-					//AQUI HABRA QUE VER COMO ATRIBUIRLE EL CODIGO AL PRODUCTO
-					//SUPONGO QUE SE HARA CONTANDO LOS PRODUCTOS DE LA BASE DE DATOS
-					//OSEA AÑADIENDOLO A LA BASES DE DATOS Y PILLANDO DE HAY EL ID/CODIGO!!!
-					Producto p = new Producto(cod, color, nombre, precio, stock, marca, rutaFoto);
-					String [] fila = {String.valueOf(cod), color, nombre+ " " + nombreTipoCalcetines, String.valueOf(precio), String.valueOf(stock), marca, rutaAdecuada};
-					modeloTablaProductos.addRow(fila);
-					
-						
-				
-					//HABRA QUE PONERLE DE CODIGO 1 MAS QUE EL CODIGO DEL ULTIMO PRODUCTO QUE HAY EN LA TABLA DE LA BASE DE DATOS!!
-					if (nombre.equals("CALCETINES")) {
-						BD.insertarProductoTienda(con, cod, color, nombre+ " " + nombreTipoCalcetines, precio, stock, marca, rutaAdecuada, nombre , nombreTipoCalcetines, "", "", "", "", false, "");
-					} else if (nombre.equals("PANTALON")) {
-						//BD.insertarProductoTienda(con, cod, color, nombre, precio, stock, marca, rutaFoto, rutaFoto, rutaFoto, rutaFoto, nombre, marca, color, rootPaneCheckingEnabled, rutaFoto);
-					}else if (nombre.equals("CAMISETA")) {
-						//BD.insertarProductoTienda(con, cod, color, nombre, precio, stock, marca, rutaFoto, rutaFoto, rutaFoto, rutaFoto, nombre, marca, color, rootPaneCheckingEnabled, rutaFoto);
-					}else if (nombre.equals("SUDADERA")) {
-						//BD.insertarProductoTienda(con, cod, color, nombre, precio, stock, marca, rutaFoto, rutaFoto, rutaFoto, rutaFoto, nombre, marca, color, rootPaneCheckingEnabled, rutaFoto);
-					}else if (nombre.equals("ZAPATOS")) {
-						//BD.insertarProductoTienda(con, cod, color, nombre, precio, stock, marca, rutaFoto, rutaFoto, rutaFoto, rutaFoto, nombre, marca, color, rootPaneCheckingEnabled, rutaFoto);
-					}
-					BD.closeBD(con);
-					JOptionPane.showMessageDialog(null, "¡¡PRODUCTO AÑADIDO CORRECTAMENTE!!");
-				}
-					
+				}	
 			});
 		
 		
@@ -614,5 +614,53 @@ public class VentanaAdmin extends JFrame {
 		panel.updateUI();
 		
 	}
-
+	
+	public static void actionListenerDeLosPantalonesDeLosProdsDeLaTienda (JLabel lblNuevoProd, String nombreProd, String tipoProd) {
+		String texto = VentanaPrincipal.lblNombre.getText();
+		if (texto != "") {
+			int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
+			if(resp == JOptionPane.OK_OPTION) {
+				//AQUI SE AÑADIRA AL CARRITO ESTE PRODUCTO
+				String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
+				int canti = Integer.parseInt(cant);
+				if (canti > 0) {
+					Connection con = BD.initBD("SweetWear.db");
+					int stock = BD.obtenerStockProducto(con, nombreProd);
+					if (stock >= canti) {
+						if (stock == 0) 
+							 lblNuevoProd.setText(nombreProd + tipoProd + ": " + "NO HAY CANTIDADES EN STOCK");
+						else
+							lblNuevoProd.setText(nombreProd + tipoProd  + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
+						Producto p = BD.obtenerProductoTienda(con, nombreProd);
+						VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Pantalon(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoPantalon.CHANDAL)); //AQUI AÑADIR EL PRODUCTO
+						System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
+						int num = 0;
+						try {
+							num = BD.contarProductos(con);
+						} catch (SQLException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}
+						num = num + 1;
+						BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Pantalon", "", "", tipoProd, "", "", false, "");
+						try {
+							BD.restarUnidadesAProducto(con, nombreProd, canti);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						JOptionPane.showMessageDialog(null, "¡¡PRODUCTO AÑADIDO CORRECTAMENTE!!");
+						BD.closeBD(con);
+					}else
+						JOptionPane.showMessageDialog(null, "Lo sentimos, no hay suficientes unidades en stock", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}else
+					JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un nÃºmero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
+			}	
+		}else {
+			JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesión primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 }
+	
+
+

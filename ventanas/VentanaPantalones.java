@@ -26,10 +26,10 @@ import clases.TipoPantalon;
 public class VentanaPantalones extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel panelCentral, panelP1, panelP11, panelP12, panelP2, panelP21, panelP22, panelP3, panelP31, panelP32, panelNorte;
+	public static JPanel panelCentral, panelP1, panelP11, panelP12, panelP2, panelP21, panelP22, panelP3, panelP31, panelP32, panelNorte;
 	private JFrame ventanaAnterior, ventanaActual;
 	private JPanel panelSur;
-	private JButton btnVolver, btnChandal, btnVaqueros, btnCampana;
+	public static JButton btnVolver, btnChandal, btnVaqueros, btnCampana;
 	static public JLabel lblChandal, lblVaquero, lblCampana;
 
 
@@ -70,7 +70,7 @@ public class VentanaPantalones extends JFrame {
 		panelSur.add(btnVolver);
 		
 		panelCentral = new JPanel();
-		panelCentral.setLayout(new GridLayout(2, 2));
+		panelCentral.setLayout(new GridLayout(0, 2));
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		
 		//--------------------------------------------------------------------------------------------------
@@ -143,16 +143,31 @@ public class VentanaPantalones extends JFrame {
 		lblCampana = new JLabel("PANTALONES CAMPANA");
 		panelP32.add(lblCampana);
 		
+		int sto2 = BD.obtenerStockProducto(con, "Campana");
+		if (sto2 == 0)
+			lblCampana.setText("PANTALONES CAMPANA: " + "NO HAY NINGUNA UNIDAD EN STOCK");
+		else
+			lblCampana.setText("PANTALONES CAMPANA: " + "Cantidades restantes: " + sto2 + " unidades");
+		
+		
+		//------------------------------------------------------------------------------------------------------------------
+		
 		//EVENTOS DE VENTANA
+		
 		ventanaActual.addWindowListener(new WindowAdapter() {
 			
 			@Override
 			public void windowClosing(WindowEvent e) {
 				// TODO Auto-generated method stub
-				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarMapaUsuariosEnFicheroDeTexto();
+				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
+				VentanaPrincipal.guardarListaHistorialBusqueda();
+				VentanaPrincipal.guardarMapaSatisfaccion();
+			
 			}
 		});
+		
+		//---------------------------------------------------------------------------------------------------------------
 		
 		 
 		
@@ -196,7 +211,7 @@ public class VentanaPantalones extends JFrame {
 									// TODO Auto-generated catch block
 									e2.printStackTrace();
 								}
-								num = num + 1;
+//								num = num + 1;
 								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Pantalon", "", "", "Chandal", "", "", false, "");
 								try {
 									BD.restarUnidadesAProducto(con, "Chandal", canti);
@@ -265,6 +280,56 @@ public class VentanaPantalones extends JFrame {
 					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesión primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
 				
+			}
+		});
+		
+		
+		btnCampana.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String texto = VentanaPrincipal.lblNombre.getText();
+				if (texto != "") {
+					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
+					if(resp == JOptionPane.OK_OPTION) {
+						//AQUI SE AÑADIRA AL CARRITO ESTE PRODUCTO
+						String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
+						int canti = Integer.parseInt(cant);
+						if (canti > 0) {
+							Connection con = BD.initBD("SweetWear.db");
+							int stock = BD.obtenerStockProducto(con, "Campana");
+							if (stock >= canti) {
+								if (stock == 0) 
+									lblCampana.setText("PANTALONES CAMPANA" + ": " + "NO HAY CANTIDADES EN STOCK");
+								else
+									lblCampana.setText("PANTALONES CAMPANA" + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
+								Producto p = BD.obtenerProductoTienda(con, "Campana");
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Pantalon(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoPantalon.CAMPANA)); //AQUI AÑADIR EL PRODUCTO
+								System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
+								int num = 0;
+								try {
+									num = BD.contarProductos(con);
+								} catch (SQLException e2) {
+									// TODO Auto-generated catch block
+									e2.printStackTrace();
+								}
+								num = num + 1;
+								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Pantalon", "", "", "Campana", "", "", false, "");
+								try {
+									BD.restarUnidadesAProducto(con, "Campana", canti);
+								} catch (SQLException e1) {
+									e1.printStackTrace();
+								}
+								JOptionPane.showMessageDialog(null, "¡¡PRODUCTO AÑADIDO CORRECTAMENTE!!");
+								BD.closeBD(con);
+							}else
+								JOptionPane.showMessageDialog(null, "Lo sentimos, no hay suficientes unidades en stock", "ERROR", JOptionPane.ERROR_MESSAGE);
+						}else
+							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un numero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
+					}	
+				}else {
+					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesión primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 	}

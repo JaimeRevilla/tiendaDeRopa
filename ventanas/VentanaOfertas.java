@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -149,6 +151,21 @@ public class VentanaOfertas extends JFrame {
 		panelCentralAbajo.add(lblPorcentaje);
 		panelCentralAbajo.add(txtPorcentaje);
 		
+		//-----------------------------------------------------------------------------------------------------------
+		ventanaActual.addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				VentanaPrincipal.guardarMapaUsuariosEnFicheroDeTexto();
+				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
+				VentanaPrincipal.guardarListaHistorialBusqueda();
+				VentanaPrincipal.guardarMapaSatisfaccion();
+			
+			}
+		});
+		
+		//---------------------------------------------------------------------------------------------------------------
 		//INICIALIZAR LAS VARIABLE fechaIni y fechaFin;
 		VentanaOfertas.fechaIni = null;
 		VentanaOfertas.fechaFin = null;

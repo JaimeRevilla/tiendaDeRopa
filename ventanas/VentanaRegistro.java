@@ -6,8 +6,11 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -37,9 +40,9 @@ public class VentanaRegistro extends JFrame {
 	private JPasswordField txtCon;
 	private JTextField txtNombre, txtEdad, txtMail;
 	private JButton btnRegistrar, btnVolver;
-	private static JFrame VentanaActual;
+	private static JFrame ventanaActual;
 
-	private JFrame VentanaAnterior;
+	private JFrame ventanaAnterior;
 
 	/**
 	 * Launch the application.
@@ -65,8 +68,8 @@ public class VentanaRegistro extends JFrame {
 		Connection con = BD.initBD("SweetWear.db");
 		BD.crearTablaUsuario(con);		//HE QUITADO TANTO EN ESTA VENTANA COMO EN LA DE INICIO DE 
 		BD.closeBD(con);					//SESION ESTE APARTADO DE BD PARA QUE AL MENOS SE VEA QUE LA FUNCION FUNCIONA
-		VentanaAnterior = va;
-		VentanaActual = this;
+		ventanaAnterior = va;
+		ventanaActual = this;
 		
 		
 		
@@ -117,35 +120,61 @@ public class VentanaRegistro extends JFrame {
 		panelSur.setBackground(Color.CYAN);
 		panelCentral.setBackground(Color.CYAN);
 		
+		//-----------------------------------------------------------------------------------------------------------
+		ventanaActual.addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				VentanaPrincipal.guardarMapaUsuariosEnFicheroDeTexto();
+				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
+				VentanaPrincipal.guardarListaHistorialBusqueda();
+				VentanaPrincipal.guardarMapaSatisfaccion();
+			
+			}
+		});
+		
+		//---------------------------------------------------------------------------------------------------------------
+		
 		btnRegistrar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String n = txtNombre.getText();
-				int ed = Integer.parseInt(txtEdad.getText());
-				String ermail = "[A-Za-z]{1,20}@[A-Za-z]{1,20}.[a-z]{3}";
-				String m = txtMail.getText();
-				boolean correctoCorreo = Pattern.matches(ermail, m);
-				if (correctoCorreo) {
-					String c = txtCon.getText();
-					Usuario u = new Usuario(n, ed, m, c, false);
-					VentanaPrincipal.tmUsuarios.put(n, u);
-					Connection con = BD.initBD("SweetWear.db");
-					BD.insertarUsuario(con, n, ed, m, c, false);
-					BD.closeBD(con);
-					JOptionPane.showMessageDialog(null, "Persona registrada correctamente", "REGISTRO CORRECTO", JOptionPane.INFORMATION_MESSAGE);
-					
-					//Logger Usuarios
-					VentanaPrincipal.log.log(Level.INFO, "Se ha añadido un Usuario");;
-					
-					
-					vaciarCampos();
-				}else {
-					JOptionPane.showMessageDialog(null, "El correo electronico no es correcto", "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
-					throw new ExcepcionImplicita("ERROR! El correo electronico no es correcto");
+				Connection con = BD.initBD("SweetWear.db");
+				boolean existe = false;
+				try {
+					existe = BD.existeUsuarioConEseNombre(con, n);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
-				
+				if (!VentanaPrincipal.tmUsuarios.containsKey(n) && existe == false) {
+					int ed = Integer.parseInt(txtEdad.getText());
+					String ermail = "[A-Za-z]{1,20}@[A-Za-z]{1,20}.[a-z]{3}";
+					String m = txtMail.getText();
+					boolean correctoCorreo = Pattern.matches(ermail, m);
+					if (correctoCorreo) {
+						String c = txtCon.getText();
+						Usuario u = new Usuario(n, ed, m, c, false);
+						VentanaPrincipal.tmUsuarios.put(n, u);
+						BD.insertarUsuario(con, n, ed, m, c, false);
+						BD.closeBD(con);
+						JOptionPane.showMessageDialog(null, "Persona registrada correctamente", "REGISTRO CORRECTO", JOptionPane.INFORMATION_MESSAGE);
+						//Logger Usuarios
+						VentanaPrincipal.log.log(Level.INFO, "Se ha añadido un Usuario");;
+						vaciarCampos();
+					}else {
+						JOptionPane.showMessageDialog(null, "El correo electronico no es correcto", "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
+						vaciarCampos();
+						throw new ExcepcionImplicita("ERROR! El correo electronico no es correcto");
+					}
+				}else
+					JOptionPane.showMessageDialog(null, "Ya existe un usuario con ese nombre!!!", "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
+					vaciarCampos();
+
 			}
+			
 		});
 		
 		
@@ -199,8 +228,8 @@ public class VentanaRegistro extends JFrame {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaActual.dispose();
-				VentanaAnterior.setVisible(true);
+				ventanaActual.dispose();
+				ventanaAnterior.setVisible(true);
 			}
 		});
 		setVisible(true);		

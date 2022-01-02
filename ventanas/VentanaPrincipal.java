@@ -32,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.TreeMap;
 import java.util.Vector;
@@ -85,6 +86,7 @@ public class VentanaPrincipal extends JFrame {
 	private JButton btnP1, btnP2, btnP3, btnP4, btnP5;
 	public static JButton btnAdmin, btnCerrarSesion, btnCambiarCon,  btnInicioSesion;
 	private JFrame ventanaActual;
+	public static HashMap<String, Integer> hmSatisfaccion = new HashMap<>(); //MAPA que tiene como clave el nombre del usuario y como valor su satisfaccion con la tienda
 	public static TreeMap<String, ArrayList<Producto>> tmPedidos = new TreeMap<>(); //MAPA que tiene como clave el nombre del usuario y como valor el pedido con los productos
 	public static TreeMap<String, Usuario> tmUsuarios = new TreeMap<>();
 	public static DefaultListModel<Usuario> modeloListaUsuario;
@@ -292,7 +294,7 @@ public class VentanaPrincipal extends JFrame {
 		comboBusqueda = new JComboBox<String>();
 
 		//lblFrase = new JLabel("DI QUIÉN ERES SIN HABLAR");
-		lblFrase = new JLabel("M\u00C1S QUE ROPA");
+		lblFrase = new JLabel("DI QUIÉN ERES SIN HABLAR ");
 		Font font = new Font("Agency FB", Font.ITALIC, 50);
 		lblFrase.setFont(font);
 		
@@ -368,6 +370,26 @@ public class VentanaPrincipal extends JFrame {
 				pb.setValue(valor);
 			}
 		});
+		
+		//EVENTO PROGRESS BAR
+		pb.addMouseListener(new MouseAdapter() {
+			
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int resp = JOptionPane.showConfirmDialog(null,"¿ESTA SEGURO DE SU OPCIÓN?");
+				if(resp == JOptionPane.OK_OPTION) {
+					int valor = pb.getValue();
+					hmSatisfaccion.put(VentanaInicioSesion.n, valor);
+					VentanaPrincipal.pb.setVisible(false);
+					VentanaPrincipal.sp.setVisible(false);
+					JOptionPane.showMessageDialog(null, "GRACIAS POR COLABORAR!!!", "GRACIAS!!!", JOptionPane.NO_OPTION);
+					
+				}
+				
+			}
+		});
+		
 		btnInicioSesion.addActionListener(new ActionListener() {
 			
 			@Override
@@ -594,6 +616,7 @@ public class VentanaPrincipal extends JFrame {
 				cargarMapaUsuariosDeFicheroDeTexto();
 				cargarMapaPedidosDeFicheroDeTexto();
 				cargarListaHistorialBusqueda();
+				cargarMapaSatisfaccion();
 			}
 				
 			
@@ -603,6 +626,7 @@ public class VentanaPrincipal extends JFrame {
 				guardarMapaUsuariosEnFicheroDeTexto();
 				guardarMapaPedidosEnFicheroDeTexto();
 				guardarListaHistorialBusqueda();
+				guardarMapaSatisfaccion();
 			}
 			
 			
@@ -613,29 +637,7 @@ public class VentanaPrincipal extends JFrame {
 	
 	//------------------------------------------------------------------------------------------------------------------------------
 		
-	//EVENTO PROGRESS BAR
-		
-	pb.addMouseListener(new MouseAdapter() {
-		
-		
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			int resp = JOptionPane.showConfirmDialog(null,"¿ESTA SEGURO DE SU OPCIÓN?");
-			if(resp == JOptionPane.OK_OPTION) {
-				VentanaPrincipal.pb.setVisible(false);
-				VentanaPrincipal.sp.setVisible(false);
-				JOptionPane.showMessageDialog(null, "GRACIAS POR COLABORAR!!!", "GRACIAS!!!", JOptionPane.NO_OPTION);
-				//AQUI IRA ALGO PARA EL TEMA DE LAS ESTADISTICAS
-			}
-			
-		}
-	});
-		
-
-		
-	//--------------------------------------------------------------------------------------------------------------------------------	
-		
-		
+	
 	
 	}
 	/**
@@ -888,6 +890,53 @@ public class VentanaPrincipal extends JFrame {
 		}
 	}
 	
+	public static void guardarMapaSatisfaccion() {
+		PrintWriter pw = null;
+		
+		try {
+			pw = new PrintWriter("ESTADISTICAS.txt");
+			for (String n: hmSatisfaccion.keySet()) {
+				int valor = hmSatisfaccion.get(n);
+				pw.println(n + " " + valor);
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (pw!= null) {
+				pw.flush();
+				pw.close();
+			}
+		}
+	}
+	
+	public static void cargarMapaSatisfaccion() {
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader("ESTADISTICAS.txt"));
+			String linea = br.readLine();
+			while (linea != null) {
+				String [] datosProducto = linea.split(" ");
+				String n = datosProducto[0];
+				int valor = Integer.parseInt(datosProducto[1]);
+				hmSatisfaccion.put(n, valor);
+				linea = br.readLine();
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (br!= null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
 		
 	/**

@@ -98,7 +98,21 @@ public class VentanaCambiarContrasenia extends JFrame {
 		panelSur.add(btnCambiarCon);
 		
 		
+		//-----------------------------------------------------------------------------------------------------------
+		ventanaActual.addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				VentanaPrincipal.guardarMapaUsuariosEnFicheroDeTexto();
+				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
+				VentanaPrincipal.guardarListaHistorialBusqueda();
+				VentanaPrincipal.guardarMapaSatisfaccion();
+			
+			}
+		});
 		
+		//---------------------------------------------------------------------------------------------------------------
 		
 		//EVENTOS
 		btnvolver.addActionListener(new ActionListener() {

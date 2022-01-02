@@ -228,6 +228,18 @@ public class BD {
 		
 	}
 	
+	public static boolean existeUsuarioConEseNombre(Connection con, String n) throws SQLException {
+		String sent = "select * from usuario where nom='"+n+"'";
+		Statement stmt = null;
+		stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(sent);
+		boolean existe = false;
+		if(rs.next())
+			existe = true;
+		rs.close();
+		return existe;
+	}
+	
 	public static TreeMap<String, Usuario> obtenerMapaUsuarios(Connection con) {
 		TreeMap<String, Usuario> tmUsuarios = new TreeMap<>();
 		
@@ -541,7 +553,7 @@ public class BD {
 	}
 	
 	public static void modificarProductoTienda(Connection con, int codigo, String color, String nombre, double precio, int stock, String marca, String rutaFoto) {
-		String sent = "update tienda set codigo="+codigo+",color='"+color+"',nombre='"+nombre+"',precio="+precio+",stock="+stock+",marca='"+marca+"',rutaFoto='"+rutaFoto+"' where codigo="+codigo;
+		String sent = "update tienda set codigo="+codigo+", color='"+color+"',nombre='"+nombre+"',precio="+precio+",stock="+stock+",marca='"+marca+"',rutaFoto='"+rutaFoto+"' where codigo="+codigo;
 		Statement stmt = null;
 		try {
 			stmt = con.createStatement();
@@ -552,6 +564,7 @@ public class BD {
 		}
 		
 	}
+	
 	
 	
 	
@@ -682,148 +695,4 @@ public class BD {
 	
 	//---------------------------------------------------------------------------------------------------------------------------
 	
-
-	
-	
-	public static void crearTablaCalcetines(Connection con) {
-		String sent = "CREATE TABLE IF NOT EXISTS calcetines (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String, tipoCalcetines String)";
-		Statement stmt = null;
-		
-		try {
-			stmt = con.createStatement();
-			stmt.executeUpdate(sent);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		
-	}
-	
-	
-	//------------------------------------------------------------------------------------------------------------------------------
-	
-	
-	
-	public static void crearTablaCamiseta(Connection con) {
-		String sent = "CREATE TABLE IF NOT EXISTS camiseta (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String, tipoCamiseta String)";
-		Statement stmt = null;
-		
-		try {
-			stmt = con.createStatement();
-			stmt.executeUpdate(sent);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		
-	}
-	
-	//------------------------------------------------------------------------------------------------------------------
-	
-	
-	public static void crearTablaPantalon(Connection con) {
-		String sent = "CREATE TABLE IF NOT EXISTS pantalon (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String, tipoPantalon String)";
-		Statement stmt = null;
-		
-		try {
-			stmt = con.createStatement();
-			stmt.executeUpdate(sent);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		
-	}
-	
-	//-----------------------------------------------------------------------------------------------------------------
-	
-	public static void crearTablaSudadera(Connection con) {
-		String sent = "CREATE TABLE IF NOT EXISTS sudadera (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String, tipoSudadera String)";
-		Statement stmt = null;
-		
-		try {
-			stmt = con.createStatement();
-			stmt.executeUpdate(sent);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		
-	}
-	
-//----------------------------------------------------------------------------------------------------------------
-	
-	public static void crearTablaZapato(Connection con) {
-		String sent = "CREATE TABLE IF NOT EXISTS zapato (codigo int, color String, nombre String, precio double, stock int, marca String, rutaFoto String, colorCordones String, goretex boolean, tipoZapato String)";
-		Statement stmt = null;
-		
-		try {
-			stmt = con.createStatement();
-			stmt.executeUpdate(sent);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		
-	}
-	
-	//eliminarProducto
-	//InsetarProducto
-	//ObtenerProducto
-	//Los que se ocurran
 }

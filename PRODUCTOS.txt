@@ -1,0 +1,3 @@
+a 0 Negro Chandal 20.0 3 Nike imagenes\\IconoPantalonChandal.png
+a 1 Negro Campana 25.0 3 Brownie imagenes\\IconoPantalonCampana.png
+a 2 Azul Vaquero 20.0 4 Levis imagenes\\IconoPantalonVaquero.jpg
