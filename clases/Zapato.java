@@ -11,7 +11,7 @@ public class Zapato extends Producto {
 
 	
 	
-	public Zapato(int codigo, String nombre, double precio, int stock, String marca, String color, String rutaFoto, boolean goretex,
+	public Zapato(int codigo, String nombre, double precio, int stock, String marca, String color, String rutaFoto, /*boolean goretex,*/
 			TipoZapato tipoZapato) {
 		super(codigo, nombre, color, precio, stock, marca, rutaFoto);
 		this.colorCordones = color;
@@ -42,7 +42,7 @@ public class Zapato extends Producto {
 
 
 
-	public String getColorCordones() {
+	/*public String getColorCordones() {
 		return colorCordones;
 	}
 
@@ -55,25 +55,21 @@ public class Zapato extends Producto {
 	}
 	public void setGoretex(boolean goretex) {
 		this.goretex = goretex;
-	}
+	}*/
 
 
 
-	@Override
+	/*@Override
 	public String toString() {
-		return "Zapato [colorCordones=" + colorCordones + ", goretex=" + goretex + ", tipoZapato=" + tipoZapato
-				+ ", getCodigo()=" + getCodigo() + ", getColor()=" + getColor() + ", getNombre()=" + getNombre()
-				+ ", getPrecio()=" + getPrecio() + ", getStock()=" + getStock() + ", getMarca()=" + getMarca()
-				+ ", getRutaFoto()=" + getRutaFoto() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "Sudadera [tipoSudadera=" + tipoSudadera + ", getCodigo()=" + getCodigo() + ", getColor()=" + getColor()
+				+ ", getNombre()=" + getNombre() + ", getPrecio()=" + getPrecio() + ", getStock()=" + getStock()
+				+ ", getMarca()=" + getMarca() + ", getRutaFoto()=" + getRutaFoto() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}*/
+	
+	public String toString() {
+		return getNombre() + " " + getPrecio() + "euros" + " " + getStock() + " uds";
 	}
-
-	
-	
-	
-	
-
-
 }
 
 

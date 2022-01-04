@@ -11,9 +11,9 @@ public class Sudadera extends Producto {
 		}else if(nombre.contains("SIN_GORRO")) {
 			this.tipoSudadera = TipoSudadera.SIN_GORRO;
 		}else if(nombre.contains("LARGA_GORRO")) {
-			this.tipoSudadera = TipoSudadera.LARGA_GORRO;
+			this.tipoSudadera = TipoSudadera.CON_CREMALLERA;
 		}else {
-			this.tipoSudadera = TipoSudadera.LARGA_SIN_GORRO;
+			this.tipoSudadera = TipoSudadera.SIN_CREMALLERA;
 		}
 	
 	}

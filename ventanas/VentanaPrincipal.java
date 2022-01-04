@@ -464,11 +464,34 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		
+		btnP1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaZapato v1 = new VentanaZapato(ventanaActual);
+				ventanaActual.setVisible(false);
+				v1.setVisible(true);
+				
+			}
+		});
+		
+		
 		btnP2.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VentanaCalcetines v1 = new VentanaCalcetines(ventanaActual);
+				ventanaActual.setVisible(false);
+				v1.setVisible(true);
+				
+			}
+		});
+		
+		btnP3.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaSudadera v1 = new VentanaSudadera(ventanaActual);
 				ventanaActual.setVisible(false);
 				v1.setVisible(true);
 				
