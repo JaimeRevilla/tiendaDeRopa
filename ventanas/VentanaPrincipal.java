@@ -619,7 +619,7 @@ public class VentanaPrincipal extends JFrame {
 				if(!busq.equals("")) {
 					if (busq.equals("pantalon") || busq.equals("vaquero") || busq.equals("chandal") || busq.equals("campana")) {
 						if (!listaHistorialBusqueda.contains(busq)) {
-							if (listaHistorialBusqueda == null) {
+							if (listaHistorialBusqueda != null) {
 								int pos = busquedaBinariaPosicionEnLaQueInsertarParaMantenerOrdenada(listaHistorialBusqueda, 0, listaHistorialBusqueda.size(), busq);
 								listaHistorialBusqueda.add(pos, busq);
 							}else
@@ -632,7 +632,7 @@ public class VentanaPrincipal extends JFrame {
 					
 					}else if (busq.equals("calcetin") || busq.equals("pinkie") || busq.equals("tobillero") || busq.equals("alto")) {	
 						if (!listaHistorialBusqueda.contains(busq)) {
-							if (listaHistorialBusqueda == null) {
+							if (listaHistorialBusqueda != null) {
 								int pos = busquedaBinariaPosicionEnLaQueInsertarParaMantenerOrdenada(listaHistorialBusqueda, 0, listaHistorialBusqueda.size(), busq);
 								listaHistorialBusqueda.add(pos, busq);
 							}else
@@ -644,7 +644,7 @@ public class VentanaPrincipal extends JFrame {
 						v1.setVisible(true);
 					}else if (busq.equals("camiseta") || busq.equals("polo") || busq.equals("camiseta") || busq.equals("camisa")) {	
 						if (!listaHistorialBusqueda.contains(busq)) {
-							if (listaHistorialBusqueda == null) {
+							if (listaHistorialBusqueda != null) {
 								int pos = busquedaBinariaPosicionEnLaQueInsertarParaMantenerOrdenada(listaHistorialBusqueda, 0, listaHistorialBusqueda.size(), busq);
 								listaHistorialBusqueda.add(pos, busq);
 							}else
@@ -656,7 +656,7 @@ public class VentanaPrincipal extends JFrame {
 						v1.setVisible(true);
 					}else if (busq.equals("sudadera") || busq.equals("conGorro") || busq.equals("sinGorro") || busq.equals("conCremallera") || busq.equals("sinCremallera")) {	
 						if (!listaHistorialBusqueda.contains(busq)) {
-							if (listaHistorialBusqueda == null) {
+							if (listaHistorialBusqueda != null) {
 								int pos = busquedaBinariaPosicionEnLaQueInsertarParaMantenerOrdenada(listaHistorialBusqueda, 0, listaHistorialBusqueda.size(), busq);
 								listaHistorialBusqueda.add(pos, busq);
 							}else
@@ -668,7 +668,7 @@ public class VentanaPrincipal extends JFrame {
 						v1.setVisible(true);
 					}else if (busq.equals("zapato") || busq.equals("bota") || busq.equals("deportiva") || busq.equals("formal") || busq.equals("tacon")) {	
 						if (!listaHistorialBusqueda.contains(busq)) {
-							if (listaHistorialBusqueda == null) {
+							if (listaHistorialBusqueda != null) {
 								int pos = busquedaBinariaPosicionEnLaQueInsertarParaMantenerOrdenada(listaHistorialBusqueda, 0, listaHistorialBusqueda.size(), busq);
 								listaHistorialBusqueda.add(pos, busq);
 							}else

@@ -146,6 +146,9 @@ public class VentanaCarritoUsuario extends JFrame {
 				// TODO Auto-generated method stub
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarMapaUsuariosEnFicheroDeTexto();
+				VentanaPrincipal.guardarListaHistorialBusqueda();
+				VentanaPrincipal.guardarMapaSatisfaccion();
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
 			}
 		});
 		
@@ -165,7 +168,8 @@ public class VentanaCarritoUsuario extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n) != null || VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).size() != 0) {
+				System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).size());
+				if (VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).size() != 0) {
 					VentanaCarritoUsuario.RealizarFactura();
 					VentanaPrincipal.log.log(Level.INFO, VentanaInicioSesion.n + " ha realizado una compra");
 
@@ -184,7 +188,7 @@ public class VentanaCarritoUsuario extends JFrame {
 					listaPedido.repaint();
 					lblFoto.setIcon(null);
 					lblPrecio.setText("NO HAY PRODUCTOS EN EL CARRITO");
-				}else
+				}else 
 					JOptionPane.showMessageDialog(null, "Su carrito esta vacio! Realize algun pedido para poder facturar la compra!", "VACIO", JOptionPane.ERROR_MESSAGE);
 
 			}
