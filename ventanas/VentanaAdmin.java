@@ -7,12 +7,15 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Vector;
+import java.util.logging.Level;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -157,14 +161,6 @@ public class VentanaAdmin extends JFrame {
 		panelArriba.add(panelArribaDrc);
 		panelArribaDrc.setBackground(Color.CYAN);
 		
-		//--------------------------------------------------------
-//		panelCalcetines = new JPanel();
-//		panelCalcetines.setLayout(new GridLayout(0, 2));
-//		panelArriba.add(panelCalcetines);
-//		panelCalcetines.setBackground(Color.CYAN);
-		
-		
-		
 		//---------------------------------------------------------------
 		btnMostarMapa = new JButton("DATOS GENERALES");
 		VentanaPrincipal.ponerFotoABoton(btnMostarMapa, "imagenes\\IconoDatos.png", 30, 30, 30, 30);
@@ -182,8 +178,6 @@ public class VentanaAdmin extends JFrame {
 		
 		
 		
-//		textArea = new JTextArea();
-//		panelArribaDrc.add(textArea);
 		lblFoto = new JLabel();
 		panelArribaDrc.add(lblFoto);
 		
@@ -242,13 +236,8 @@ public class VentanaAdmin extends JFrame {
 		
 		
 		
-		/**
-		 * CREACION DE LA TABLA
-		 */
 		
-		//CUANDO HABRA LA VENTANA TENDRAS QUE CARGARSE LOS PRODUCTOS QUE HAY EN LA BASE DE DATOS!!!
-		//String nombres[] = {"ID","COLOR","TIPO PRODUCTO","PRECIO", "STOCK", "MARCA", "RUTA FOTO"};
-		
+		//CREACIÓN DE LA TABLA
 		modeloTablaProductos = new DefaultTableModel();
 		Vector<String> cabeceras = new Vector<String>( Arrays.asList( "ID","COLOR","TIPO PRODUCTO","PRECIO", "STOCK", "MARCA", "RUTA FOTO") );
 		modeloTablaProductos = new DefaultTableModel(  
@@ -267,20 +256,10 @@ public class VentanaAdmin extends JFrame {
 		ArrayList<Producto> al = BD.getTienda(con);
 		BD.closeBD(con);
 		
-//		try {
-//			cod = BD.contarProductosTienda(con);
-//		} catch (SQLException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-		
-		//NO FUNCIONA EL CODIGO DEL PRODUCTO --> SALE UNO QUE NO TIENE QUE SALIR
 		for (Producto p: al) {
-			modeloTablaProductos.addRow( new Object[] { i, p.getColor(), p.getNombre(), p.getPrecio(), p.getStock(), p.getMarca(), p.getRutaFoto() } );
+			modeloTablaProductos.addRow( new Object[] { p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), p.getStock(), p.getMarca(), p.getRutaFoto() } );
 			i++;
 		}
-			
-		
 		
 		tablaProductos = new JTable(modeloTablaProductos);
 		
@@ -310,15 +289,14 @@ public class VentanaAdmin extends JFrame {
 			@Override
 			public void tableChanged(TableModelEvent e) {
 				int fil = e.getFirstRow();
-				//int codigo = (int) modeloTablaProductos.getValueAt(fil, 0);
 				String cod = String.valueOf(modeloTablaProductos.getValueAt(fil, 0));
 				int codigo = Integer.parseInt(cod);
 						
 				
 				String color =  (String) modeloTablaProductos.getValueAt(fil, 1);
 				String nombre =  (String) modeloTablaProductos.getValueAt(fil, 2);
-				double precio = (double) modeloTablaProductos.getValueAt(fil, 3);
-				int stock = (int) modeloTablaProductos.getValueAt(fil, 4);
+				double precio = Double.parseDouble(String.valueOf(modeloTablaProductos.getValueAt(fil, 3)));
+				int stock = Integer.parseInt(String.valueOf(modeloTablaProductos.getValueAt(fil, 4)));
 				String marca = (String) modeloTablaProductos.getValueAt(fil, 5);
 				String rutaFoto = (String) modeloTablaProductos.getValueAt(fil, 6);
 				
@@ -340,13 +318,6 @@ public class VentanaAdmin extends JFrame {
 					c.setBackground(Color.LIGHT_GRAY);
 				else 
 					c.setBackground(Color.WHITE);
-				
-//				double precio = (double)modeloTablaProductos.getValueAt(row, 2);
-//				if(precio<40) {
-//					c.setForeground(Color.GREEN);
-//				}else {
-//					c.setForeground(Color.BLACK);
-//				}
 				return c;
 			}
 		
@@ -354,19 +325,11 @@ public class VentanaAdmin extends JFrame {
 			
 		});
 		
-		
-		
 		JScrollPane scrollTablaProductos = new JScrollPane(tablaProductos);
 		panelArribaDrc.add(scrollTablaProductos);
 		
-		//-----------------------------------------------------------------------------------------------------------------
 		lblFotoTabla = new JLabel("");
 		panelArribaDrc.add(lblFotoTabla);
-		
-		
-		//----------------------------------------------------------------------------------------------------------------
-				
-			
 				
 		//EVENTOS
 		btnVolver.addActionListener(new ActionListener() {
@@ -378,9 +341,6 @@ public class VentanaAdmin extends JFrame {
 			}
 		});
 		setVisible(true);
-				
-				//QUE VUELVA A LA VENTANA DESDE LA QUE HA VENIDO!
-			
 		
 		
 		btnMostarMapa.addActionListener(new ActionListener() {
@@ -436,13 +396,39 @@ public class VentanaAdmin extends JFrame {
 				if(sel == JFileChooser.APPROVE_OPTION) {
 					File ficheroSeleccionado = fc.getSelectedFile();
 					ImageIcon im = new ImageIcon(ficheroSeleccionado.getAbsolutePath());
+					ImageIcon imagenConDimensiones = new ImageIcon(im.getImage().getScaledInstance(200,200,Image.SCALE_DEFAULT));
 					im.setDescription(ficheroSeleccionado.getAbsolutePath());
-					lblFoto.setIcon(im);
+					
+					lblFoto.setIcon(imagenConDimensiones);
+					lblFoto.setSize(200, 200);
+					
 				}
 				
 				
 			}
 		});
+		
+	//------------------------------------------------------------------------------------------------------------------
+		
+				//EVENTOS DE VENTANA
+				
+		ventanaActual.addWindowListener(new WindowAdapter() {
+				
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				VentanaPrincipal.guardarMapaUsuariosEnFicheroDeTexto();
+				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
+				VentanaPrincipal.guardarListaHistorialBusqueda();
+				VentanaPrincipal.guardarMapaSatisfaccion();
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
+					
+			}
+		});
+				
+	//---------------------------------------------------------------------------------------------------------------
+				
+		
 		
 		
 		//HILO (FOTO DEL PRODUCTO)
@@ -457,8 +443,12 @@ public class VentanaAdmin extends JFrame {
 							String rutaFoto = (String) tablaProductos.getValueAt(fila, 6);
 							
 							ImageIcon im = new ImageIcon(rutaFoto);
+							ImageIcon imagenConDimensiones = new ImageIcon(im.getImage().getScaledInstance(240,240,Image.SCALE_DEFAULT));
+							
 							im.setDescription(rutaFoto);
-							lblFotoTabla.setIcon(im);
+							
+							lblFotoTabla.setIcon(imagenConDimensiones);
+							lblFotoTabla.setSize(240, 240);
 							try {
 								Thread.sleep(50);
 							} catch (InterruptedException e) {
@@ -469,8 +459,12 @@ public class VentanaAdmin extends JFrame {
 							String rutaFoto = (String) tablaProductos.getValueAt(0, 6);
 						
 							ImageIcon im = new ImageIcon(rutaFoto);
+							ImageIcon imagenConDimensiones = new ImageIcon(im.getImage().getScaledInstance(240,240,Image.SCALE_DEFAULT));
+							
 							im.setDescription(rutaFoto);
-							lblFotoTabla.setIcon(im);
+							
+							lblFotoTabla.setIcon(imagenConDimensiones);
+							lblFotoTabla.setSize(320, 240);
 							try {
 								Thread.sleep(50);
 							} catch (InterruptedException e) {
@@ -518,7 +512,6 @@ public class VentanaAdmin extends JFrame {
 							panelArribaIzq.add(lblTipoPantalon);
 							panelArribaIzq.add(comboTipoPantalones);
 						}else if (selec == "ZAPATOS") {
-							//ME DA PROBLEMAS Y NO SE PORQUE
 							VentanaAdmin.mostrarPanel(panelArribaIzq);
 							lblColorCordones = new JLabel("COLOR DE LOS CORDONES: ");
 							txtColorCordones = new JTextField();
@@ -537,9 +530,6 @@ public class VentanaAdmin extends JFrame {
 			}
 		});
 		
-		
-		
-		//EVENTOS
 			btnAniadir.addActionListener(new ActionListener() {
 					
 				@Override
@@ -591,7 +581,7 @@ public class VentanaAdmin extends JFrame {
 						int cod = 0;
 						try {
 							cod = BD.contarProductosTienda(con);
-							System.out.println(cod);
+							
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

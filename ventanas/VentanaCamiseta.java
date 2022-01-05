@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Level;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -169,6 +170,7 @@ public class VentanaCamiseta extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
 			
 			}
 		});
@@ -208,7 +210,7 @@ public class VentanaCamiseta extends JFrame {
 								else
 									lblPolo.setText("POLO" + ": " + "Unidades restantes: " + (stock-canti) + " unidades     " + "Precio: " + pre1 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "Polo");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Camiseta(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCamiseta.POLO)); //AQUI AÑADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Camiseta(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCamiseta.POLO)); //AQUI AÑADIR EL PRODUCTO
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -216,7 +218,7 @@ public class VentanaCamiseta extends JFrame {
 									// TODO Auto-generated catch block
 									e2.printStackTrace();
 								}
-//								num = num + 1;
+								num = num + 1;
 								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Camiseta", "", "Polo", "", "", "", false, "");
 								try {
 									BD.restarUnidadesAProducto(con, "Polo", canti);
@@ -258,7 +260,7 @@ public class VentanaCamiseta extends JFrame {
 								else
 									lblCamisa.setText("CAMISA" + ": " + "Unidades restantes: " + (stock-canti) + " unidades     " + "Precio: " + pre2 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "Camisa");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Camiseta(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCamiseta.CAMISA)); //AQUI AÑADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Camiseta(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCamiseta.CAMISA)); //AQUI AÑADIR EL PRODUCTO
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -308,7 +310,7 @@ public class VentanaCamiseta extends JFrame {
 								else
 									lblCamiseta.setText("CAMISETA" + ": " + "Unidades restantes: " + (stock-canti) + " unidades     " + "Precio: " + pre3 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "Camiseta");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Camiseta(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCamiseta.CAMISETA)); //AQUI AÑADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Camiseta(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCamiseta.CAMISETA)); //AQUI AÑADIR EL PRODUCTO
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);

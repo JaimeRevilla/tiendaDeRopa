@@ -70,7 +70,7 @@ public class VentanaCambiarContrasenia extends JFrame {
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		panelSur.setBackground(Color.CYAN);
 		
-		panelCentral = new PanelConImagenDeFondo(getSize());
+		panelCentral = new JPanel();
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		panelCentral.setLayout(new GridLayout(3,2));
 		panelCentral.setBackground(Color.CYAN);
@@ -162,25 +162,25 @@ public class VentanaCambiarContrasenia extends JFrame {
 			}
 		});
 		
-//---------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------
 		
 		//EVENTOS DE VENTANA
+				
 		ventanaActual.addWindowListener(new WindowAdapter() {
-					
-			@Override
-			public void windowOpened(WindowEvent e) {
-
-				}
-						
 					
 			@Override
 			public void windowClosing(WindowEvent e) {
 				// TODO Auto-generated method stub
 				VentanaPrincipal.guardarMapaUsuariosEnFicheroDeTexto();
-			}								
+				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
+				VentanaPrincipal.guardarListaHistorialBusqueda();
+				VentanaPrincipal.guardarMapaSatisfaccion();
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
+				
+			}
 		});
 				
-		
+				
 		
 	}
 	

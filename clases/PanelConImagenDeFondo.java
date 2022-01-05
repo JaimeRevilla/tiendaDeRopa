@@ -2,30 +2,20 @@ package clases;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
-
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
 
-public class PanelConImagenDeFondo extends JPanel{
-	private static final long serialVersionUID = 1L;
+public class PanelConImagenDeFondo extends javax.swing.JPanel {
 	
-	private Image fondo = null;
-	
-	public PanelConImagenDeFondo(Dimension dim) {
-		setPreferredSize(dim);
+	public PanelConImagenDeFondo(){
+		this.setSize(600,462);
 	}
 	
-	protected void paintComponent(Graphics g) {
+	public void paintComponent (Graphics g){
+		Dimension tamanio = getSize();
+		ImageIcon imagenFondo = new ImageIcon(getClass().getResource("imagenes\\fondoDePrueba.jpg"));
+		g.drawImage(imagenFondo.getImage(),0,0,tamanio.width, tamanio.height, null);
+		setOpaque(false);
 		super.paintComponent(g);
-		g.drawImage(fondo, 0, 0, getSize().width, getSize().height, this);
 	}
-	
-	public void setImage(String image) {
-		fondo = new ImageIcon(getClass().getResource(image)).getImage();
-	}
-	
-	public String toString() {
-		return this.getName();
-	}
+
 }

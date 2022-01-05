@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,8 +36,7 @@ public class VentanaOfertas extends JFrame {
 	private JTextField txtProducto, txtPorcentaje;
 	private SimpleDateFormat sdf;
 	private JCalendar calendar;
-	public static Date fechaIni, fechaFin;
-
+	private Date fI, fF;
 
 	/**
 	 * Launch the application.
@@ -166,15 +166,12 @@ public class VentanaOfertas extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
 			
 			}
 		});
 		
 		//---------------------------------------------------------------------------------------------------------------
-		//INICIALIZAR LAS VARIABLE fechaIni y fechaFin;
-		VentanaOfertas.fechaIni = null;
-		VentanaOfertas.fechaFin = null;
-		
 		
 		//EVENTOS
 		btnVolver.addActionListener(new ActionListener() {
@@ -192,7 +189,7 @@ public class VentanaOfertas extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Date fechaSeleccionada = calendar.getDate();
-				VentanaOfertas.fechaIni = fechaSeleccionada;
+				fI = fechaSeleccionada;
 				String fechaInicio = sdf.format(fechaSeleccionada);
 				lblFecha1.setText("FECHA INICIAL DE LAS REBAJAS: " + fechaInicio);
 				String fin = lblFecha2.getText();
@@ -213,11 +210,11 @@ public class VentanaOfertas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Date fechaSeleccionada = calendar.getDate();
 				String fechaFin = sdf.format(fechaSeleccionada);
-				VentanaOfertas.fechaFin = fechaSeleccionada;
+				fF = fechaSeleccionada;
 				String inicio = lblFecha1.getText();
 				String fin = lblFecha2.getText();
-				long fechIni = VentanaOfertas.fechaIni.getTime();
-				long fechFin = VentanaOfertas.fechaFin.getTime();
+				long fechIni = fI.getTime();
+				long fechFin = fF.getTime();
 				if (fechIni >= fechFin) {
 					JOptionPane.showMessageDialog(null, "Selecciona una fecha mayor a la inicial", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}else {
@@ -248,121 +245,35 @@ public class VentanaOfertas extends JFrame {
 						e1.printStackTrace();
 					}
 					if (res == true) {
-						Runnable r1 = new Runnable() {
-							
-							@Override
-							public void run() {
-								
-								boolean fin = false;
-								while (fin == false) {
-									long milis = System.currentTimeMillis();
-									Date d = new Date(milis);
-									String f = sdf.format(d);
-									try {
-										Thread.sleep(1000);
-									} catch (InterruptedException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-									Date ini = VentanaOfertas.fechaIni;
-									String iniString = sdf.format(ini);
-									
-									String anio = iniString.substring(0, 4);
-									
-									String mes = iniString.substring(5,7);
-									
-									String dia = iniString.substring(8, iniString.length());
-									
-									
-									if (d.getYear() == Integer.parseInt(anio) && d.getMonth() == Integer.parseInt(mes) && d.getDay() == Integer.parseInt(dia)) {
-										
-										boolean resul = false;
-										try {
-											resul = BD.existeProductoMismoNombre(con, producto);
-										} catch (SQLException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-										}
-										if (resul) {
-											try {
-												BD.ponerProductoEnOferta(con, producto, Double.parseDouble(porc));
-												BD.closeBD(con);
-												fin = true;
-											} catch (NumberFormatException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											} catch (SQLException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											}
-										}
-											
-									}
-									
-								}
-								
-								fin = false;
-								while (fin == false) {
-									long milis = System.currentTimeMillis();
-									Date d = new Date(milis);
-									String f = sdf.format(d);
-									try {
-										Thread.sleep(1000);
-									} catch (InterruptedException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-									Date fi = VentanaOfertas.fechaFin;
-									String iniString = sdf.format(fi);
-									
-									String anio = iniString.substring(0, 4);
-									
-									String mes = iniString.substring(5,7);
-									
-									String dia = iniString.substring(8, iniString.length());
-									
-									String producto = txtProducto.getText();
-									String porc = txtPorcentaje.getText();
-									
-									
-									if (d.getYear() == Integer.parseInt(anio) && d.getMonth() == Integer.parseInt(mes) && d.getDay() == Integer.parseInt(dia)) {
-										Connection con = BD.initBD("SweetWear.db");
-										boolean resul = false;
-										try {
-											resul = BD.existeProductoMismoNombre(con, producto);
-										} catch (SQLException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-										}
-										if (resul) {
-											try {
-												BD.finOferta(con, producto, Double.parseDouble(porc));
-												BD.closeBD(con);
-												fin = true;
-											} catch (NumberFormatException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											} catch (SQLException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											}
-										}
-									}
-									
+						Date fA = new Date(System.currentTimeMillis());
+						if(fA.getTime()>= fI.getTime() && fA.getTime()<= fF.getTime()) {	
+							try {
+								BD.ponerProductoEnOferta(con, producto, Double.parseDouble(porc));
+							} catch (NumberFormatException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
 							}
-								
-						}
-						};
-						Thread t1 = new Thread(r1);
-						t1.start();
-						JOptionPane.showMessageDialog(null, "OFERTA APLICADA CORRECTAMENTE!!!", "OFERTA", JOptionPane.NO_OPTION);
-
+							BD.closeBD(con);
+							JOptionPane.showMessageDialog(null, "OFERTA APLICADA CORRECTAMENTE!!!", "OFERTA", JOptionPane.NO_OPTION);
+						}else {
+							try {
+								BD.finOferta(con, producto, Double.parseDouble(porc));
+							} catch (NumberFormatException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							JOptionPane.showMessageDialog(null, "PERIODO DE OFERTA FINALIZADO!!!", "OFERTA", JOptionPane.NO_OPTION);
+						}	
 					}else
 						JOptionPane.showMessageDialog(null, "El producto no existe!", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}else 
 					JOptionPane.showMessageDialog(null, "Nombra un producto y su descuento correspondiente", "ERROR", JOptionPane.ERROR_MESSAGE);
-//				JOptionPane.showMessageDialog(null, "OFERTA APLICADA CORRECTAMENTE!!!", "OFERTA", JOptionPane.NO_OPTION);
-
 			}
 		});
 	}

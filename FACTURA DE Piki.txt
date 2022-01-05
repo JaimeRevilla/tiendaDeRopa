@@ -1,0 +1,5 @@
+FACTURA DE Piki
+1- Tacon Rojo 85.0 euros  3 Asos imagenes\\IconoZapatillasTacones.png      Precio Del Mismo Articulo teniendo en cuenta las unidades compradas: 255.0 euros
+2- Camiseta Blanca 15.0 euros  2 PullAndBear imagenes\\IconoCamisetaNormal.png      Precio Del Mismo Articulo teniendo en cuenta las unidades compradas: 30.0 euros
+3- Polo Negro 35.0 euros  2 Lacoste imagenes\\IconoCamisetaPolo.png      Precio Del Mismo Articulo teniendo en cuenta las unidades compradas: 70.0 euros
+Precio total de la compra: 355.0 euros

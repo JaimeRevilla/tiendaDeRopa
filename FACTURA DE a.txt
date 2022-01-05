@@ -1,2 +1,5 @@
 FACTURA DE a
-Precio total de la compra: 0.0 euros
+1- Bota Negro 60.0 euros  3 Martens imagenes\\IconoZapatillasBotas.png      Precio Del Mismo Articulo teniendo en cuenta las unidades compradas: 180.0 euros
+2- Formal Negro 25.0 euros  4 Brownie imagenes\\IconoPantalonCampana.png      Precio Del Mismo Articulo teniendo en cuenta las unidades compradas: 100.0 euros
+3- Pinkie Blanco 10.0 euros  3 Nike imagenes\\IconoCalcetinesPinkie.png      Precio Del Mismo Articulo teniendo en cuenta las unidades compradas: 30.0 euros
+Precio total de la compra: 310.0 euros

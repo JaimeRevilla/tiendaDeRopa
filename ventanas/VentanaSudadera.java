@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Level;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -195,6 +196,7 @@ public class VentanaSudadera extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
 			
 			}
 		});
@@ -234,7 +236,7 @@ public class VentanaSudadera extends JFrame {
 								else
 									lblConCremallera.setText("SUDADERA CON CREMALLERA" + ": " + "Unidades restantes: " + (stock-canti) + " unidades   " + "Precio: " + pre1 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "ConCremallera");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.CON_CREMALLERA)); //AQUI AÑADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.CON_CREMALLERA)); //AQUI AÑADIR EL PRODUCTO
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -242,7 +244,7 @@ public class VentanaSudadera extends JFrame {
 									// TODO Auto-generated catch block
 									e2.printStackTrace();
 								}
-//								num = num + 1;
+								num = num + 1;
 								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Sudadera", "", "", "", "ConCremallera", "", false, "");
 								try {
 									BD.restarUnidadesAProducto(con, "ConCremallera", canti);
@@ -284,7 +286,7 @@ public class VentanaSudadera extends JFrame {
 								else
 									lblSinCremallera.setText("SUDADERA SIN CREMALLERA" + ": " + "Unidades restantes: " + (stock-canti) + " unidades   " + "Precio: " + pre2 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "SinCremallera");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.SIN_CREMALLERA)); //AQUI AÑADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.SIN_CREMALLERA)); //AQUI AÑADIR EL PRODUCTO
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -334,7 +336,7 @@ public class VentanaSudadera extends JFrame {
 								else
 									lblConGorro.setText("SUDADERA CON GORRO:" + ": " + "Unidades restantes: " + (stock-canti) + " unidades   " + "Precio: " + pre3 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "ConGorro");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.CON_GORRO)); //AQUI AÑADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.CON_GORRO)); //AQUI AÑADIR EL PRODUCTO
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -382,7 +384,7 @@ public class VentanaSudadera extends JFrame {
 								else
 									lblSinGorro.setText("SUDADERA SIN GORRO" + ": " + "Unidades restantes: " + (stock-canti) + " unidades   " + "Precio: " + pre4 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "SinGorro");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.SIN_GORRO)); //AQUI AÑADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.SIN_GORRO)); //AQUI AÑADIR EL PRODUCTO
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);

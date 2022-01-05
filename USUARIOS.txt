@@ -1,6 +1,7 @@
 Admin Admin@sweetWear.com 55 Admin false
-Piki Piki@sweetWear.com 19 Piki true
-a a@sweetWear.com 1 a true
+Itziar Itziar@Itziar.com 49 Itziar false
+Piki Piki@sweetWear.com 19 Piki false
+a a@sweetWear.com 1 a false
 arene arene@sweetWear.com 33 arene false
 b b@sweetWear.com 34 r false
 g elGmailDeG@pepito.com 66 g false

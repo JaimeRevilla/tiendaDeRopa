@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class Producto{
 	
-	private static int contador = 0;
 	
 	private int codigo;
 	private String color;
@@ -15,21 +14,16 @@ public class Producto{
 	private String rutaFoto;
 	
 	public Producto(int codigo, String color, String nombre, double precio, int stock, String marca, String rutaFoto) {
-		this.codigo = contador++; //Guardo el valor del contado en el atributo código y luego al contador le sumo 1
+		this.codigo = codigo; //Guardo el valor del contado en el atributo código y luego al contador le sumo 1
 		this.color = color;
 		this.nombre = nombre;
 		this.precio = precio;
 		this.stock = stock;
 		this.marca = marca;
 		this.rutaFoto = rutaFoto;
-	}
-	
-	//CREO QUE RUTA FOTO ES ALGO QUE NO NECESITAMOS DE MOMENTO, CREO QUE ES ALGO MAS ESTETICO QUE IMPORTANTE (NO DIGO QUE SEA MALA IDEA)
-	
+		
+	}	
 
-	public static int getContador() {
-		return contador;
-	}
 
 	public int getCodigo() {
 		return codigo;

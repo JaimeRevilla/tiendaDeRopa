@@ -593,7 +593,6 @@ public class BD {
 				String rutaFoto = rs.getString("rutaFoto");
 				Producto p = new Producto(codigo, color, nombre, precio, stock, marca, rutaFoto);
 				al.add(p);
-				
 			
 			}
 		} catch (SQLException e) {

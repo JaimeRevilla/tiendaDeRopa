@@ -3,6 +3,7 @@ package ventanas;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -12,6 +13,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 
 import javax.swing.DefaultListModel;
@@ -168,16 +170,20 @@ public class VentanaCarritoUsuario extends JFrame {
 					VentanaPrincipal.log.log(Level.INFO, VentanaInicioSesion.n + " ha realizado una compra");
 
 					modeloListaPedido.removeAllElements();
-					for (Producto p: VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n)) {
+					
+					Iterator<Producto> it = VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).iterator();
+					while(it.hasNext()) {
+						Producto p = it.next();
+						it.remove();
 						VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).remove(p);
 						Connection con = BD.initBD("SweetWear.db");
 						BD.eliminarProductoCliente(con, p.getCodigo());
 						BD.closeBD(con);
 					}
+					JOptionPane.showMessageDialog(null, "COMPRA REALIZADA CORRECTAMENTE!! GRACIAS POR CONFIAR EN NOSOTROS!! ", "GRACIAS!!!", JOptionPane.NO_OPTION);
 					listaPedido.repaint();
 					lblFoto.setIcon(null);
 					lblPrecio.setText("NO HAY PRODUCTOS EN EL CARRITO");
-					//listaPedido.updateUI();
 				}else
 					JOptionPane.showMessageDialog(null, "Su carrito esta vacio! Realize algun pedido para poder facturar la compra!", "VACIO", JOptionPane.ERROR_MESSAGE);
 
@@ -290,6 +296,7 @@ public class VentanaCarritoUsuario extends JFrame {
 						VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 						VentanaPrincipal.guardarListaHistorialBusqueda();
 						VentanaPrincipal.guardarMapaSatisfaccion();
+						VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
 					
 					}
 				});
@@ -311,9 +318,13 @@ public class VentanaCarritoUsuario extends JFrame {
 						panelCentralArriba.setLayout(new GridLayout(1,2));
 						panelCentralArriba.add(scrollListaPedido);
 						panelCentralArriba.add(lblFoto);
-						ImageIcon im = new ImageIcon(p.getRutaFoto());
-						im.setDescription(p.getRutaFoto());
-						lblFoto.setIcon(im);
+						if (p != null) {
+							ImageIcon im = new ImageIcon(p.getRutaFoto());
+							ImageIcon imagenConDimensiones = new ImageIcon(im.getImage().getScaledInstance(300,300,Image.SCALE_DEFAULT));
+							im.setDescription(p.getRutaFoto());
+							lblFoto.setIcon(imagenConDimensiones);
+							lblFoto.setSize(300, 300);
+						}
 						try {
 							Thread.sleep(50);
 						} catch (InterruptedException e) {
@@ -331,7 +342,9 @@ public class VentanaCarritoUsuario extends JFrame {
 						if (p1 != null) {
 							ImageIcon im2 = new ImageIcon(p1.getRutaFoto());
 							im2.setDescription(p1.getRutaFoto());
-							lblFoto.setIcon(im2);
+							ImageIcon imagenConDimensiones2 = new ImageIcon(im2.getImage().getScaledInstance(300,300,Image.SCALE_DEFAULT));
+							lblFoto.setIcon(imagenConDimensiones2);
+							lblFoto.setSize(300, 300);
 						}
 						try {
 							Thread.sleep(50);

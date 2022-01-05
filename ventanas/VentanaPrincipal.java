@@ -83,8 +83,9 @@ public class VentanaPrincipal extends JFrame {
 	//DECLARACION DE LOS ATRIBUTOS
 	
 	private JPanel contentPane;
+//	private PanelConImagenDeFondo contentPane;
 	private JPanel panelCentral, panelArriba, panelNorte, panelArribaDrc, panelArribaIzq, panelNorteIzq, panelNorteMedio, panelNorteDrc;
-	private JPanel panelP1, panelP2, panelP3, panelP4, panelArribaIzq1, panelArribaIzq11, panelArribaIzq12, panelArribaIzq13, panelArribaIzq2;
+	private JPanel panelP1, panelP2, panelP3, panelP4, panelP5, panelArribaIzq1, panelArribaIzq11, panelArribaIzq12, panelArribaIzq13, panelArribaIzq2;
 	private JButton btnSalir, btnRegistrarme,  btnCarrito, btnBusqueda;
 	private JButton btnP1, btnP2, btnP3, btnP4, btnP5;
 	public static JButton btnAdmin, btnCerrarSesion, btnCambiarCon,  btnInicioSesion;
@@ -104,8 +105,9 @@ public class VentanaPrincipal extends JFrame {
 	private JTextField txtBusqueda;
 	private JComboBox<String> comboBusqueda;
 	public static ArrayList<String> listaHistorialBusqueda = new ArrayList<String>();
+	private String fondo = "imagenes\\IconoIniciarSesion.png";
 	
-	private PanelConImagenDeFondo panelConFondo, panelP5;
+	private PanelConImagenDeFondo panelConFondo;
 	
 	static Logger log = Logger.getLogger("Log de Usuarios");
 	
@@ -163,7 +165,7 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		//FONDO DE LA VENTANA
+		//FONDO DE LA VENTANA	
 		//panelConFondo = new PanelConImagenDeFondo(getSize());
 		//panelConFondo.setImage("/imagenes/tienda-de-ropa.jpg");
 		//setContentPane(panelConFondo);
@@ -259,8 +261,7 @@ public class VentanaPrincipal extends JFrame {
 		panelArribaDrc.add(panelP4);
 		panelP4.setBackground(Color.CYAN);
 		
-		panelP5 = new PanelConImagenDeFondo(getSize());
-		//panelP5.setImage("/imagenes/IconoZapatillas.png");
+		panelP5 = new JPanel();
 		panelArribaDrc.add(panelP5);
 		panelP5.setBackground(Color.CYAN);
 		
@@ -766,7 +767,6 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	public static void cargarMapaUsuariosDeFicheroDeTexto () {
 		BufferedReader br = null;
-		//System.out.println("ENTRO A CARGAR");
 		try {
 			br = new BufferedReader(new FileReader("USUARIOS.txt"));
 			String linea = br.readLine();

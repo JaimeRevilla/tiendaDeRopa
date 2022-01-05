@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Level;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -171,6 +172,7 @@ public class VentanaCalcetines extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
 			
 			}
 		});
@@ -210,7 +212,7 @@ public class VentanaCalcetines extends JFrame {
 								else
 									lblPinkie.setText("CALCETINES PINKIE" + ": " + "Unidades restantes: " + (stock-canti) + " unidades    " + "Precio: " + pre1 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "Pinkie");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Calcetines(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCalcetines.PINKIE)); //AQUI AÑADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Calcetines(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCalcetines.PINKIE)); //AQUI AÑADIR EL PRODUCTO
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -218,7 +220,7 @@ public class VentanaCalcetines extends JFrame {
 									// TODO Auto-generated catch block
 									e2.printStackTrace();
 								}
-//								num = num + 1;
+								num = num + 1;
 								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Calcetines", "Pinkie", "", "", "", "", false, "");
 								try {
 									BD.restarUnidadesAProducto(con, "Pinkie", canti);
@@ -260,7 +262,7 @@ public class VentanaCalcetines extends JFrame {
 								else
 									lblTobillero.setText("CALCETINES TOBILLEROS" + ": " + "Unidades restantes: " + (stock-canti) + " unidades    " + "Precio: " + pre2 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "Tobillero");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Calcetines(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCalcetines.TOBILLERO)); //AQUI AÑADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Calcetines(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCalcetines.TOBILLERO)); //AQUI AÑADIR EL PRODUCTO
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -310,7 +312,7 @@ public class VentanaCalcetines extends JFrame {
 								else
 									lblAlto.setText("CALCETINES ALTOS" + ": " + "Unidades restantes: " + (stock-canti) + " unidades    " + "Precio: " + pre3 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "Alto");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Calcetines(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCalcetines.ALTO)); //AQUI AÑADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Calcetines(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCalcetines.ALTO)); //AQUI AÑADIR EL PRODUCTO
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
