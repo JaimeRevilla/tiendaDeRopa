@@ -31,13 +31,16 @@ import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.TreeMap;
 import java.util.Vector;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -81,7 +84,7 @@ public class VentanaPrincipal extends JFrame {
 	
 	private JPanel contentPane;
 	private JPanel panelCentral, panelArriba, panelNorte, panelArribaDrc, panelArribaIzq, panelNorteIzq, panelNorteMedio, panelNorteDrc;
-	private JPanel panelP1, panelP2, panelP3, panelP4, panelArribaIzq1, panelArribaIzq2;
+	private JPanel panelP1, panelP2, panelP3, panelP4, panelArribaIzq1, panelArribaIzq11, panelArribaIzq12, panelArribaIzq13, panelArribaIzq2;
 	private JButton btnSalir, btnRegistrarme,  btnCarrito, btnBusqueda;
 	private JButton btnP1, btnP2, btnP3, btnP4, btnP5;
 	public static JButton btnAdmin, btnCerrarSesion, btnCambiarCon,  btnInicioSesion;
@@ -93,7 +96,7 @@ public class VentanaPrincipal extends JFrame {
 	public static JList<Usuario> listaUsuario;
 	private JScrollPane scrollLista;
 	private JLabel lblTitulo;
-	public static JLabel lblNombre;
+	public static JLabel lblNombre, lblValoracion;
 	private JLabel lblHora, lblFrase;
 	public static JProgressBar pb = new JProgressBar();
 	public static SpinnerModel modelosp;
@@ -182,7 +185,34 @@ public class VentanaPrincipal extends JFrame {
 		
 		panelArribaIzq1 = new JPanel();
 		panelArribaIzq.add(panelArribaIzq1);
+		panelArribaIzq1.setLayout(new GridLayout(0,3,0,0));
 		panelArribaIzq1.setBackground(Color.CYAN);
+		
+		panelArribaIzq11 = new JPanel();
+		panelArribaIzq1.add(panelArribaIzq11);
+		panelArribaIzq11.setBackground(Color.CYAN);
+		
+		panelArribaIzq12 = new JPanel();
+		panelArribaIzq1.add(panelArribaIzq12);
+		panelArribaIzq12.setBackground(Color.CYAN);
+		
+		FlowLayout flowLayout3 = (FlowLayout) panelArribaIzq11.getLayout();
+		flowLayout3.setAlignment(FlowLayout.LEFT);
+		
+		panelArribaIzq13 = new JPanel();
+		panelArribaIzq1.add(panelArribaIzq13);
+		panelArribaIzq13.setBackground(Color.CYAN);
+		
+		FlowLayout flowLayout4 = (FlowLayout) panelArribaIzq13.getLayout();
+		flowLayout4.setAlignment(FlowLayout.RIGHT);
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		panelArribaIzq2 = new JPanel();
 		panelArribaIzq.add(panelArribaIzq2);
@@ -272,7 +302,7 @@ public class VentanaPrincipal extends JFrame {
 		ponerFotoABoton(btnSalir, "imagenes\\IconoSalir.png", 30, 30, 30, 30);
 		
 		btnRegistrarme = new JButton();
-		ponerFotoABoton(btnRegistrarme, "imagenes\\IconoRegistro.jpg", 30, 30, 30, 30);
+		ponerFotoABoton(btnRegistrarme, "imagenes\\IconoRegistro.png", 30, 30, 30, 30);
 		
 		
 		btnAdmin = new JButton();
@@ -283,13 +313,15 @@ public class VentanaPrincipal extends JFrame {
 		ponerFotoABoton(btnCerrarSesion, "imagenes\\IconoCerrarSesion.png", 30, 30, 30, 30);
 		
 		btnBusqueda = new JButton();
-		ponerFotoABoton(btnBusqueda, "imagenes\\IconoBusqueda.jpg", 30, 30, 30, 30);
-		//NO SE COMO PONER EL BOTON A LA DERECHA DEL TODOO
-		btnBusqueda.setAlignmentX(JButton.RIGHT_ALIGNMENT);
+		ponerFotoABoton(btnBusqueda, "imagenes\\IconoBusqueda.png", 30, 30, 30, 30);
 		
 		
 		lblNombre = new JLabel("");
-		lblTitulo = new JLabel("SWEET WEAR");
+		lblTitulo = new JLabel("SWEET WEAR ");
+		Font font1 = new Font("Agency FB", Font.ITALIC, 30);
+		lblTitulo.setFont(font1);
+		
+		
 		lblTitulo.setForeground(Color.BLACK);
 		comboBusqueda = new JComboBox<String>();
 
@@ -330,29 +362,31 @@ public class VentanaPrincipal extends JFrame {
 		pb.setValue(50);
 		pb.setVisible(false);
 		
-		
+		lblValoracion = new JLabel("VALÓRANOS:");
+		lblValoracion.setVisible(false);
 		
 	
 		
 		//AÑADIMOS LOS COMPONENTES A LOS PANELES
 
-		panelArribaIzq1.add(btnCarrito);
-		panelArribaIzq1.add(btnInicioSesion);
-		panelArribaIzq1.add(btnSalir);
-		panelArribaIzq1.add(btnCerrarSesion);
-		panelArribaIzq1.add(btnCambiarCon);
+		panelArribaIzq12.add(btnCarrito);
+		panelArribaIzq12.add(btnInicioSesion);
+		panelArribaIzq12.add(btnSalir);
+		panelArribaIzq12.add(btnCerrarSesion);
+		panelArribaIzq12.add(btnCambiarCon);
 		
 
 		panelNorteDrc.add(lblHora);
-		panelArribaIzq1.add(btnRegistrarme);
+		panelArribaIzq12.add(btnRegistrarme);
 		panelNorteIzq.add(lblNombre);
-		panelArribaIzq1.add(btnAdmin);
-		panelArribaIzq1.add(pb);
-		panelArribaIzq1.add(sp);
+		panelArribaIzq12.add(btnAdmin);
+		panelArribaIzq13.add(lblValoracion);
+		panelArribaIzq13.add(pb);
+		panelArribaIzq13.add(sp);
 		
-		panelArribaIzq1.add(btnBusqueda);
-		panelArribaIzq1.add(txtBusqueda);
-		panelArribaIzq1.add(comboBusqueda);
+		panelArribaIzq11.add(btnBusqueda);
+		panelArribaIzq11.add(txtBusqueda);
+		panelArribaIzq11.add(comboBusqueda);
 		
 		panelArribaIzq2.add(lblFrase);
 		
@@ -381,8 +415,10 @@ public class VentanaPrincipal extends JFrame {
 				if(resp == JOptionPane.OK_OPTION) {
 					int valor = pb.getValue();
 					hmSatisfaccion.put(VentanaInicioSesion.n, valor);
+					VentanaPrincipal.lblValoracion.setVisible(false);
 					VentanaPrincipal.pb.setVisible(false);
 					VentanaPrincipal.sp.setVisible(false);
+					VentanaPrincipal.log.log(Level.INFO, VentanaInicioSesion.n + " ha valorado la tienda");
 					JOptionPane.showMessageDialog(null, "GRACIAS POR COLABORAR!!!", "GRACIAS!!!", JOptionPane.NO_OPTION);
 					
 				}
@@ -403,10 +439,10 @@ public class VentanaPrincipal extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//guardarMapaUsuariosEnFicheroDeTexto();		
 				System.exit(0);
+				
 						
-					}
+			}
 		});
 		
 		//EVENTO DELBOTON REGISTRAR
@@ -430,6 +466,7 @@ public class VentanaPrincipal extends JFrame {
 					ventanaActual.setVisible(false);
 					v1.setVisible(true);
 					VentanaCarritoUsuario.lblCarrito.setText("CARRITO DE LA COMPRA DE " + VentanaInicioSesion.n);
+					VentanaPrincipal.log.log(Level.INFO, VentanaInicioSesion.n + " ha accedido a su carrito de la compra");
 				} else {
 					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesión primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
@@ -451,12 +488,14 @@ public class VentanaPrincipal extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+			VentanaPrincipal.log.log(Level.INFO, VentanaInicioSesion.n + " ha cerrado sesión");
 			lblNombre.setText("");
 			VentanaInicioSesion.n = "";
 			btnAdmin.setVisible(false);
 			btnCambiarCon.setVisible(false);
 			pb.setVisible(false);
 			sp.setVisible(false);
+			lblValoracion.setVisible(false);
 			btnCerrarSesion.setVisible(false);
 			btnInicioSesion.setVisible(true);
 			repaint();
@@ -537,6 +576,8 @@ public class VentanaPrincipal extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				JOptionPane.showMessageDialog(null, "Escriba el producto o tipo del producto en minuscula y en singular porfavor!!!", "ADVERTENCIA!!!", JOptionPane.NO_OPTION);
 				JOptionPane.showMessageDialog(null, "Si quiere consultar algo buscado recientemente, seleccionelo en el desplegable, pulse enter y pulse el boton de busqueda!!! ", "ADVERTENCIA!!!", JOptionPane.NO_OPTION);
+				VentanaPrincipal.log.log(Level.INFO, "Se ha cargado el historial de busqueda");
+				Collections.sort((List<String>) listaHistorialBusqueda); //ORDENA LA LISTA ASCENDENTEMENTE
 				if(listaHistorialBusqueda.size() != 0) {
 					comboBusqueda.removeAllItems();
 					for (String n: listaHistorialBusqueda) {
@@ -577,19 +618,69 @@ public class VentanaPrincipal extends JFrame {
 				if(!busq.equals("")) {
 					if (busq.equals("pantalon") || busq.equals("vaquero") || busq.equals("chandal") || busq.equals("campana")) {
 						if (!listaHistorialBusqueda.contains(busq)) {
-							listaHistorialBusqueda.add(busq);
+							if (listaHistorialBusqueda == null) {
+								int pos = busquedaBinariaPosicionEnLaQueInsertarParaMantenerOrdenada(listaHistorialBusqueda, 0, listaHistorialBusqueda.size(), busq);
+								listaHistorialBusqueda.add(pos, busq);
+							}else
+								listaHistorialBusqueda.add(busq);
 						}
 						txtBusqueda.setText("");
 						VentanaPantalones v1 = new VentanaPantalones(ventanaActual);
 						ventanaActual.setVisible(false);
 						v1.setVisible(true);
-						
+					
+					}else if (busq.equals("calcetin") || busq.equals("pinkie") || busq.equals("tobillero") || busq.equals("alto")) {	
+						if (!listaHistorialBusqueda.contains(busq)) {
+							if (listaHistorialBusqueda == null) {
+								int pos = busquedaBinariaPosicionEnLaQueInsertarParaMantenerOrdenada(listaHistorialBusqueda, 0, listaHistorialBusqueda.size(), busq);
+								listaHistorialBusqueda.add(pos, busq);
+							}else
+								listaHistorialBusqueda.add(busq);
+						}
+						txtBusqueda.setText("");
+						VentanaCalcetines v1 = new VentanaCalcetines(ventanaActual);
+						ventanaActual.setVisible(false);
+						v1.setVisible(true);
+					}else if (busq.equals("camiseta") || busq.equals("polo") || busq.equals("camiseta") || busq.equals("camisa")) {	
+						if (!listaHistorialBusqueda.contains(busq)) {
+							if (listaHistorialBusqueda == null) {
+								int pos = busquedaBinariaPosicionEnLaQueInsertarParaMantenerOrdenada(listaHistorialBusqueda, 0, listaHistorialBusqueda.size(), busq);
+								listaHistorialBusqueda.add(pos, busq);
+							}else
+								listaHistorialBusqueda.add(busq);
+						}
+						txtBusqueda.setText("");
+						VentanaCamiseta v1 = new VentanaCamiseta(ventanaActual);
+						ventanaActual.setVisible(false);
+						v1.setVisible(true);
+					}else if (busq.equals("sudadera") || busq.equals("conGorro") || busq.equals("sinGorro") || busq.equals("conCremallera") || busq.equals("sinCremallera")) {	
+						if (!listaHistorialBusqueda.contains(busq)) {
+							if (listaHistorialBusqueda == null) {
+								int pos = busquedaBinariaPosicionEnLaQueInsertarParaMantenerOrdenada(listaHistorialBusqueda, 0, listaHistorialBusqueda.size(), busq);
+								listaHistorialBusqueda.add(pos, busq);
+							}else
+								listaHistorialBusqueda.add(busq);
+						}
+						txtBusqueda.setText("");
+						VentanaSudadera v1 = new VentanaSudadera(ventanaActual);
+						ventanaActual.setVisible(false);
+						v1.setVisible(true);
+					}else if (busq.equals("zapato") || busq.equals("bota") || busq.equals("deportiva") || busq.equals("formal") || busq.equals("tacon")) {	
+						if (!listaHistorialBusqueda.contains(busq)) {
+							if (listaHistorialBusqueda == null) {
+								int pos = busquedaBinariaPosicionEnLaQueInsertarParaMantenerOrdenada(listaHistorialBusqueda, 0, listaHistorialBusqueda.size(), busq);
+								listaHistorialBusqueda.add(pos, busq);
+							}else
+								listaHistorialBusqueda.add(busq);
+						}
+						txtBusqueda.setText("");
+						VentanaZapato v1 = new VentanaZapato(ventanaActual);
+						ventanaActual.setVisible(false);
+						v1.setVisible(true);
 					} else {
 						JOptionPane.showMessageDialog(null, "NO EXISTE ESE ARTICULO", "ERROR", JOptionPane.ERROR_MESSAGE);
 						txtBusqueda.setText("");
 					}	
-
-					//AQUI IRAN OTROS ELSE IF CUANDO ESTEN HECHAS LAS DEMAS VENTANAS
 				}else 
 					JOptionPane.showMessageDialog(null, "INDICA EL ARTICULO A ENCONTRAR", "ERROR", JOptionPane.ERROR_MESSAGE);
 				
@@ -620,7 +711,7 @@ public class VentanaPrincipal extends JFrame {
 					long milis = System.currentTimeMillis();
 					Date fecha = new Date(milis);
 					String f = sdf.format(fecha);
-					lblHora.setText(f);
+					lblHora.setText("Fecha Actual: " + f);
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
@@ -640,7 +731,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		//----------------------------------------------------------------------------------------------------------------
 		
-		//EVENTOS DE VENTANA
+		//EVENTOS DE VENTANA --> GUARDA LAS ESTRUCTURA DE DATOS AL CERRAR LA VENTANA Y LAS CARGA AL ABRIR LA VENTANA
 		ventanaActual.addWindowListener(new WindowAdapter() {
 			
 			@Override
@@ -649,6 +740,7 @@ public class VentanaPrincipal extends JFrame {
 				cargarMapaPedidosDeFicheroDeTexto();
 				cargarListaHistorialBusqueda();
 				cargarMapaSatisfaccion();
+				VentanaPrincipal.log.log(Level.INFO, "Se han cargado las estructuras de datos de los ficheros de información");
 			}
 				
 			
@@ -659,6 +751,7 @@ public class VentanaPrincipal extends JFrame {
 				guardarMapaPedidosEnFicheroDeTexto();
 				guardarListaHistorialBusqueda();
 				guardarMapaSatisfaccion();
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
 			}
 			
 			
@@ -708,15 +801,7 @@ public class VentanaPrincipal extends JFrame {
 					e.printStackTrace();
 				}
 			}
-		}
-		
-//		for(String n: tmUsuarios.keySet()) {
-//			System.out.println(n);
-//			System.out.println("\t"+tmUsuarios.get(n));
-//		}
-//		
-		
-		
+		}	
 	}
 	
 	
@@ -792,14 +877,12 @@ public class VentanaPrincipal extends JFrame {
 				}
 			}
 		}
-//		for(String n: tmPedidos.keySet()) {
-//			System.out.println(n);
-//			for(Producto p: tmPedidos.get(n))
-//				System.out.println("\t" +p);
-//		}
-		
 	}	
 	
+	
+	/**
+	 * METODO PARA GUARDAR EN UN FICHERO DE TEXTO EL MAPA DE LOS PEDIDOS DE CADA USUARIO
+	 */
 	public static void guardarMapaPedidosEnFicheroDeTexto () {
 		PrintWriter pw = null;
 		
@@ -828,6 +911,9 @@ public class VentanaPrincipal extends JFrame {
 		
 	}
 	
+	/**
+	 * METODO PARA GUARDAR EN UN FICHERO DE TEXTO LA LISTA DE PALABRAS DEL HISTORIAL DE BUSQUEDA
+	 */
 	public static void guardarListaHistorialBusqueda() {
 		PrintWriter pw = null;
 		
@@ -847,6 +933,9 @@ public class VentanaPrincipal extends JFrame {
 		}
 	}
 	
+	/**
+	 * METODO PARA CARGAR DESDE UN FICHERO DE TEXTO LA LISTA DE PALABRAS DEL HISTORIAL DE BUSQUEDA
+	 */
 	public static void cargarListaHistorialBusqueda () {
 		BufferedReader br = null;
 		try {
@@ -874,6 +963,10 @@ public class VentanaPrincipal extends JFrame {
 		}
 	}
 	
+	
+	/**
+	 * METODO PARA GUARDAR EN UN FICHERO DE TEXTO EL MAPA DE SATISFACCION
+	 */
 	public static void guardarMapaSatisfaccion() {
 		PrintWriter pw = null;
 		
@@ -894,6 +987,10 @@ public class VentanaPrincipal extends JFrame {
 		}
 	}
 	
+	
+	/**
+	 * METODO PARA CARGAR UN MAPA DE LA SATISFACCION DE LOS USUARIOS DESDE UN FICHERO DE TEXTO
+	 */
 	public static void cargarMapaSatisfaccion() {
 		BufferedReader br = null;
 		try {
@@ -922,9 +1019,32 @@ public class VentanaPrincipal extends JFrame {
 		}
 	}
 
+	/**
+	 * METODO RECURSIVO (RECURSIVIDAD MULTIPLE) PARA BUSCAR EN QUE POSICIÓN HABRIA QUE INSERTAR ALGO PARA QUE LA LISTA SE MANTUVIERA ORDENADA
+	 * @param al El ArrayList
+	 * @param pi Posicion Inicial
+	 * @param pf Posicion Final
+	 * @param valor El String para buscar su posicion
+	 * @return Devuelve la posicion en el ArrayList
+	 */
+	public static int busquedaBinariaPosicionEnLaQueInsertarParaMantenerOrdenada (ArrayList<String> al, int pi, int pf, String valor) {
+		int mitad = (pi+pf)/2;
+		
+		if (pf<pi) {
+			return al.size();
+		}else if (al.get(mitad).compareTo(valor)<0) {
+			return busquedaBinariaPosicionEnLaQueInsertarParaMantenerOrdenada(al, mitad+1, pf, valor);
+		}else if (al.get(mitad).compareTo(valor)>0) {
+			if (mitad == 0 || al.get(mitad-1).compareTo(valor)<0) {
+				return mitad;
+			}else
+				return busquedaBinariaPosicionEnLaQueInsertarParaMantenerOrdenada(al, pi, mitad-1, valor);
+		}else
+			return al.size();
+	}
 		
 	/**
-	 * METODO QUE PONE UNA IMÁGEN A UN BOTON CON LAS MEDIDAS PERSONALIZADAS
+	 * METODO QUE PONE UN COLOR DETERMINADO A UN BOTON CON LAS MEDIDAS PERSONALIZADAS
 	 * @param btn --> EL BOTON AL QUE SE LE VA A PONER UNA IMÁGEN
 	 * @param rutaFoto --> RUTA DE LA IMAGEN PARA PODER ACCEDER A ELLA
 	 * @param x --> VALOR DE LA COORDENADA X DE LA IMÁGEN
@@ -942,6 +1062,25 @@ public class VentanaPrincipal extends JFrame {
 		btn.setBackground(Color.GREEN);
 	}
 	
+	/**
+	 * METODO QUE PONE UN COLOR SELECCIONADO A UN BOTON CON LAS MEDIDAS PERSONALIZADAS
+	 * @param btn --> EL BOTON AL QUE SE LE VA A PONER UNA IMÁGEN
+	 * @param rutaFoto --> RUTA DE LA IMAGEN PARA PODER ACCEDER A ELLA
+	 * @param x --> VALOR DE LA COORDENADA X DE LA IMÁGEN
+	 * @param y --> VALOR DE LA COORDENADA Y DE LA IMÁGEN
+	 * @param width --> ANCHURA DE LA IMÁGEN
+	 * @param height --> ALTURA DE LA IMÁGEN
+	 * @param color --> EL COLOR SELECCIONADO
+	 */
+	public static void ponerFotoABotonDelColorQueQuieras (JButton btn, String rutaFoto, int x, int y, int width, int height, Color color) {
+		btn.setBounds(x, y, width, height);
+		int ancho = btn.getWidth();
+		int alto = btn.getHeight();
+		ImageIcon icon = new ImageIcon(rutaFoto);
+		Icon i = new ImageIcon(icon.getImage().getScaledInstance(alto, ancho, Image.SCALE_DEFAULT));
+		btn.setIcon(i);
+		btn.setBackground(color);
+	}
 	
 	
     

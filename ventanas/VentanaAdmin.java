@@ -61,7 +61,7 @@ public class VentanaAdmin extends JFrame {
 	public static JPanel panelCentro, panelSur, panelArriba, panelArribaIzq, panelArribaDrc, panelNorte;
 	private JButton btnMostarMapa, btnVolver, btnAniadir, btnElegirEsePanel, btnOfertas, btnEstadisticas;
 	public static JComboBox<String> comboProductos;
-	public static JLabel lblPrecio, lblStock, lblMarca, lblNombre, lblColor, lblFoto;
+	public static JLabel lblPrecio, lblStock, lblMarca, lblNombre, lblColor, lblFoto, lblFotoTabla;
 	public static JTextField txtPrecio, txtStock, txtMarca, txtColor, txtColorCordones, txtGoretex;
 	public static JLabel lblTipoCalcetines, lblTipoSudadera, lblTipoCamiseta, lblTipoPantalon, lblColorCordones, lblGoretex, lblTipoZapato;
 	public static JComboBox<String> comboTipoCalcetines, comboTipoSudaderas, comboTipoCamisetas, comboTipoPantalones, comboTipoZapatos;
@@ -76,6 +76,7 @@ public class VentanaAdmin extends JFrame {
 	private JMenuItem mntmCargarArchivo;
 	private JMenuItem mntmCerrarAplicacion;
 	public static JPanel panelCalcetines, panelSudadera, panelPantalones, panelCamiseta, panelZapato;
+	public static int i = 1;
 
 	/**
 	 * Launch the application.
@@ -152,7 +153,7 @@ public class VentanaAdmin extends JFrame {
 		panelArribaIzq.setBackground(Color.CYAN);
 		
 		panelArribaDrc = new JPanel();
-		panelArribaDrc.setLayout(new GridLayout(2, 1));
+		panelArribaDrc.setLayout(new GridLayout(3, 1));
 		panelArriba.add(panelArribaDrc);
 		panelArribaDrc.setBackground(Color.CYAN);
 		
@@ -166,11 +167,17 @@ public class VentanaAdmin extends JFrame {
 		
 		//---------------------------------------------------------------
 		btnMostarMapa = new JButton("DATOS GENERALES");
+		VentanaPrincipal.ponerFotoABoton(btnMostarMapa, "imagenes\\IconoDatos.png", 30, 30, 30, 30);
 		btnVolver = new JButton("VOLVER");
+		VentanaPrincipal.ponerFotoABoton(btnVolver, "imagenes\\IconoSalir.png", 30, 30, 30, 30);
 		btnAniadir = new JButton("AÑADIR PRODUCTO");
+		VentanaPrincipal.ponerFotoABoton(btnAniadir, "imagenes\\IconoAniadir.png", 30, 30, 30, 30);
 		btnElegirEsePanel = new JButton("CREAR UN PRODUCTO DE ESE TIPO");
+		VentanaPrincipal.ponerFotoABoton(btnElegirEsePanel, "imagenes\\IconoElegir.png", 30, 30, 30, 30);
 		btnOfertas = new JButton("OFERTAS");
+		VentanaPrincipal.ponerFotoABoton(btnOfertas, "imagenes\\IconoOferta.png", 30, 30, 30, 30);
 		btnEstadisticas = new JButton("ESTADISTICAS");
+		VentanaPrincipal.ponerFotoABoton(btnEstadisticas, "imagenes\\IconoEstadisticas.png", 30, 30, 30, 30);
 		btnAniadir.setVisible(false);
 		
 		
@@ -268,9 +275,10 @@ public class VentanaAdmin extends JFrame {
 //		}
 		
 		//NO FUNCIONA EL CODIGO DEL PRODUCTO --> SALE UNO QUE NO TIENE QUE SALIR
-		for (Producto p: al)
-			modeloTablaProductos.addRow( new Object[] { p.getCodigo()-1, p.getColor(), p.getNombre(), p.getPrecio(), p.getStock(), p.getMarca(), p.getRutaFoto() } );
-			
+		for (Producto p: al) {
+			modeloTablaProductos.addRow( new Object[] { i, p.getColor(), p.getNombre(), p.getPrecio(), p.getStock(), p.getMarca(), p.getRutaFoto() } );
+			i++;
+		}
 			
 		
 		
@@ -301,24 +309,24 @@ public class VentanaAdmin extends JFrame {
 			
 			@Override
 			public void tableChanged(TableModelEvent e) {
-//				int fil = e.getFirstRow();
-//				//int codigo = (int) modeloTablaProductos.getValueAt(fil, 0);
-//				String cod = String.valueOf(modeloTablaProductos.getValueAt(fil, 0));
-//				int codigo = Integer.parseInt(cod);
-//						
-//				
-//				String color =  (String) modeloTablaProductos.getValueAt(fil, 1);
-//				String nombre =  (String) modeloTablaProductos.getValueAt(fil, 2);
-//				double precio = (double) modeloTablaProductos.getValueAt(fil, 3);
-//				int stock = (int) modeloTablaProductos.getValueAt(fil, 4);
-//				String marca = (String) modeloTablaProductos.getValueAt(fil, 5);
-//				String rutaFoto = (String) modeloTablaProductos.getValueAt(fil, 6);
-//				
-//				Connection con = BD.initBD("SweetWear.db");
-//				
-//				BD.modificarProductoTienda(con, codigo,  color, nombre, precio, stock, marca, rutaFoto);
-//				BD.closeBD(con);
-//				
+				int fil = e.getFirstRow();
+				//int codigo = (int) modeloTablaProductos.getValueAt(fil, 0);
+				String cod = String.valueOf(modeloTablaProductos.getValueAt(fil, 0));
+				int codigo = Integer.parseInt(cod);
+						
+				
+				String color =  (String) modeloTablaProductos.getValueAt(fil, 1);
+				String nombre =  (String) modeloTablaProductos.getValueAt(fil, 2);
+				double precio = (double) modeloTablaProductos.getValueAt(fil, 3);
+				int stock = (int) modeloTablaProductos.getValueAt(fil, 4);
+				String marca = (String) modeloTablaProductos.getValueAt(fil, 5);
+				String rutaFoto = (String) modeloTablaProductos.getValueAt(fil, 6);
+				
+				Connection con = BD.initBD("SweetWear.db");
+				
+				BD.modificarProductoTienda(con, codigo,  color, nombre, precio, stock, marca, rutaFoto);
+				BD.closeBD(con);
+				
 			}
 		});
 		
@@ -328,11 +336,17 @@ public class VentanaAdmin extends JFrame {
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 					int row, int column) {
 				Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-				if(column == 0) {
+				if(column == 0) 
 					c.setBackground(Color.LIGHT_GRAY);
-				}else {
+				else 
 					c.setBackground(Color.WHITE);
-				}
+				
+//				double precio = (double)modeloTablaProductos.getValueAt(row, 2);
+//				if(precio<40) {
+//					c.setForeground(Color.GREEN);
+//				}else {
+//					c.setForeground(Color.BLACK);
+//				}
 				return c;
 			}
 		
@@ -345,7 +359,12 @@ public class VentanaAdmin extends JFrame {
 		JScrollPane scrollTablaProductos = new JScrollPane(tablaProductos);
 		panelArribaDrc.add(scrollTablaProductos);
 		
+		//-----------------------------------------------------------------------------------------------------------------
+		lblFotoTabla = new JLabel("");
+		panelArribaDrc.add(lblFotoTabla);
 		
+		
+		//----------------------------------------------------------------------------------------------------------------
 				
 			
 				
@@ -425,6 +444,50 @@ public class VentanaAdmin extends JFrame {
 			}
 		});
 		
+		
+		//HILO (FOTO DEL PRODUCTO)
+		
+			Runnable r1 = new Runnable() {
+					
+				@Override
+				public void run() {
+					while (true) {
+						int fila = tablaProductos.getSelectedRow();
+						if (fila != -1) {
+							String rutaFoto = (String) tablaProductos.getValueAt(fila, 6);
+							
+							ImageIcon im = new ImageIcon(rutaFoto);
+							im.setDescription(rutaFoto);
+							lblFotoTabla.setIcon(im);
+							try {
+								Thread.sleep(50);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}else {
+							String rutaFoto = (String) tablaProductos.getValueAt(0, 6);
+						
+							ImageIcon im = new ImageIcon(rutaFoto);
+							im.setDescription(rutaFoto);
+							lblFotoTabla.setIcon(im);
+							try {
+								Thread.sleep(50);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					}
+						
+				}
+			};
+			Thread t1 = new Thread(r1);
+			t1.start();
+				
+
+		
+		
 		btnElegirEsePanel.addActionListener(new ActionListener() {
 			
 			@Override
@@ -482,10 +545,7 @@ public class VentanaAdmin extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					
-						
-					//CREAR UNA BASE DE DATOS PARA PRODUCTO
-					//METER EL PRODUCTO EN LA BASE DE DATOS
-					//METERLOS EN LOS DEMAS SITIOS QUE SEA NECESARIO (LA TABLA Y LA JLIST)
+
 					int pos = comboProductos.getSelectedIndex();
 					String nombre = comboProductos.getItemAt(pos);
 					String color = txtColor.getText();
@@ -495,7 +555,6 @@ public class VentanaAdmin extends JFrame {
 					ImageIcon im = (ImageIcon)lblFoto.getIcon();
 					
 					if (im != null) {	
-						System.out.println("1");
 						String rutaFoto = im.getDescription();
 						String rutaAdecuada = rutaFoto.substring(32, rutaFoto.length()); 
 						
@@ -527,7 +586,6 @@ public class VentanaAdmin extends JFrame {
 							colorCordones = txtColorCordones.getText();
 							goretex = Boolean.parseBoolean(txtGoretex.getText()); 	 
 						}
-						System.out.println("2");
 
 						Connection con = BD.initBD("SweetWear.db");
 						int cod = 0;
@@ -539,22 +597,18 @@ public class VentanaAdmin extends JFrame {
 							e1.printStackTrace();
 						}
 						cod = cod + 1;
-						
-						//AQUI HABRA QUE VER COMO ATRIBUIRLE EL CODIGO AL PRODUCTO
-						//SUPONGO QUE SE HARA CONTANDO LOS PRODUCTOS DE LA BASE DE DATOS
-						//OSEA AÑADIENDOLO A LA BASES DE DATOS Y PILLANDO DE HAY EL ID/CODIGO!!!
+						//String.valueOf(cod)
 						Producto p = new Producto(cod, color, nombre, precio, stock, marca, rutaFoto);
-						String [] fila = {String.valueOf(cod), color, nombre, String.valueOf(precio), String.valueOf(stock), marca, rutaAdecuada};
+						String [] fila = {String.valueOf(i), color, nombre, String.valueOf(precio), String.valueOf(stock), marca, rutaAdecuada};
 						modeloTablaProductos.addRow(fila);
+						i++;
 						
 							
 					
-						//HABRA QUE PONERLE DE CODIGO 1 MAS QUE EL CODIGO DEL ULTIMO PRODUCTO QUE HAY EN LA TABLA DE LA BASE DE DATOS!!
 						if (nombre.equals("CALCETINES")) {
 							BD.insertarProductoTienda(con, cod, color, nombre+ " " + nombreTipoCalcetines, precio, stock, marca, rutaAdecuada, nombre , nombreTipoCalcetines, "", "", "", "", false, "");
 						} else if (nombre.equals("PANTALON")) {
-							BD.insertarProductoTienda(con, cod, color, nombre+ " " + nombreTipoPantalon, precio, stock, marca, rutaAdecuada, nombre , "", "", nombreTipoPantalon, "", "", false, "");
-							//METER UN BOTON DEL PRODUCTO EN LA VENTANA CORRESPONDIENTE!!	
+							BD.insertarProductoTienda(con, cod, color, nombre+ " " + nombreTipoPantalon, precio, stock, marca, rutaAdecuada, nombre , "", "", nombreTipoPantalon, "", "", false, "");	
 						}else if (nombre.equals("CAMISETA")) {
 							BD.insertarProductoTienda(con, cod, color, nombre+ " " + nombreTipoCamiseta, precio, stock, marca, rutaAdecuada, nombre , "", nombreTipoCamiseta, "", "", "", false, "");
 						}else if (nombre.equals("SUDADERA")) {
@@ -564,7 +618,7 @@ public class VentanaAdmin extends JFrame {
 						}
 						BD.closeBD(con);
 						
-						//METER UN BOTON DEL PRODUCTO EN LA VENTANA CORRESPONDIENTE!!
+						
 						
 						
 						
@@ -617,51 +671,8 @@ public class VentanaAdmin extends JFrame {
 		
 	}
 	
-	public static void actionListenerDeLosPantalonesDeLosProdsDeLaTienda (JLabel lblNuevoProd, String nombreProd, String tipoProd) {
-		String texto = VentanaPrincipal.lblNombre.getText();
-		if (texto != "") {
-			int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
-			if(resp == JOptionPane.OK_OPTION) {
-				//AQUI SE AÑADIRA AL CARRITO ESTE PRODUCTO
-				String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
-				int canti = Integer.parseInt(cant);
-				if (canti > 0) {
-					Connection con = BD.initBD("SweetWear.db");
-					int stock = BD.obtenerStockProducto(con, nombreProd);
-					if (stock >= canti) {
-						if (stock == 0) 
-							 lblNuevoProd.setText(nombreProd + tipoProd + ": " + "NO HAY CANTIDADES EN STOCK");
-						else
-							lblNuevoProd.setText(nombreProd + tipoProd  + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
-						Producto p = BD.obtenerProductoTienda(con, nombreProd);
-						VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Pantalon(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoPantalon.CHANDAL)); //AQUI AÑADIR EL PRODUCTO
-						System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
-						int num = 0;
-						try {
-							num = BD.contarProductos(con);
-						} catch (SQLException e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
-						}
-						num = num + 1;
-						BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Pantalon", "", "", tipoProd, "", "", false, "");
-						try {
-							BD.restarUnidadesAProducto(con, nombreProd, canti);
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-						JOptionPane.showMessageDialog(null, "¡¡PRODUCTO AÑADIDO CORRECTAMENTE!!");
-						BD.closeBD(con);
-					}else
-						JOptionPane.showMessageDialog(null, "Lo sentimos, no hay suficientes unidades en stock", "ERROR", JOptionPane.ERROR_MESSAGE);
-				}else
-					JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un nÃºmero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
-			}	
-		}else {
-			JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesión primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
-		}
-	}
+	
+	
 }
 	
 

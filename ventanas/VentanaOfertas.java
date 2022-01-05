@@ -122,17 +122,22 @@ public class VentanaOfertas extends JFrame {
 		//CREACION DE LOS COMPONENTES
 		btnVolver = new JButton("VOLVER");
 		panelSur.add(btnVolver);
+		VentanaPrincipal.ponerFotoABoton(btnVolver, "imagenes\\IconoSalir.png", 30, 30, 30, 30);
 		
 		btnFechaInicio = new JButton("FECHA INICIO");
 		panelSur.add(btnFechaInicio);
+		VentanaPrincipal.ponerFotoABoton(btnFechaInicio, "imagenes\\IconoFechaInicio.png", 30, 30, 30, 30);
+
 		
 		btnFechaFin = new JButton("FECHA FIN");
 		panelSur.add(btnFechaFin);
+		VentanaPrincipal.ponerFotoABoton(btnFechaFin, "imagenes\\IconoFechaFin.png", 30, 30, 30, 30);
 		btnFechaFin.setVisible(false);
 
 		
 		btnEmpezarOferta = new JButton("APLICAR OFERTA");
 		panelSur.add(btnEmpezarOferta);
+		VentanaPrincipal.ponerFotoABoton(btnEmpezarOferta, "imagenes\\IconoOferta.png", 30, 30, 30, 30);
 		btnEmpezarOferta.setVisible(false);
 		
 		

@@ -41,15 +41,6 @@ public class VentanaInicioSesion extends JFrame {
 	
 	
 	public VentanaInicioSesion(JFrame va) {
-//		Connection con = BD.initBD("SweetWear.db");
-//		BD.crearTablaUsuario(con);
-//		BD.crearTablaCalcetines(con);
-//		BD.crearTablaCamiseta(con);
-//		BD.crearTablaPantalon(con);
-//		BD.crearTablaSudadera(con);
-//		BD.crearTablaZapato(con);
-//		VentanaPrincipal.tmUsuarios = BD.obtenerMapaUsuarios(con);
-//		BD.closeBD(con);
 		ventanaAnterior = va;
 		ventanaActual = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,9 +77,11 @@ public class VentanaInicioSesion extends JFrame {
 		
 		btnVolverAtras = new JButton("VOLVER");
 		panelSur.add(btnVolverAtras);
+		VentanaPrincipal.ponerFotoABoton(btnVolverAtras,"imagenes\\IconoSalir.png", 30, 30, 30, 30);
 		
 		btnIniciarSesion = new JButton("INICIAR SESION");
 		panelSur.add(btnIniciarSesion);
+		VentanaPrincipal.ponerFotoABoton(btnIniciarSesion, "imagenes\\IconoiniciarSesion.png", 30, 30, 30, 30);
 		
 		panelCentral.setBackground(Color.CYAN);
 		panelSur.setBackground(Color.CYAN);
@@ -130,12 +123,10 @@ public class VentanaInicioSesion extends JFrame {
 				Connection con = BD.initBD("SweetWear.db"); 
 				int resul = BD.obtenerUsuario(con, n, c);
 				if (resul == 0) {
-					//JOptionPane.showMessageDialog(null, "¡¡PRIMERO TIENES QUE REGISTRARTE!!");
 					JOptionPane.showMessageDialog(null, "¡¡PRIMERO TIENES QUE REGISTRARTE!!", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 					new VentanaRegistro(ventanaActual);
 					ventanaActual.setVisible(false);
 				} else if (resul == 1){
-					//JOptionPane.showMessageDialog(null, "¡¡LA CONTRASEÑA EN INCORRECTA!!");
 					JOptionPane.showMessageDialog(null, "¡¡LA CONTRASEÑA EN INCORRECTA!!", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				} else if (resul == 2){
 					JOptionPane.showMessageDialog(null, "¡¡BIENVENIDO "+ n+ "!!");
@@ -151,12 +142,11 @@ public class VentanaInicioSesion extends JFrame {
 					if (!VentanaPrincipal.hmSatisfaccion.containsKey(n)) {
 						VentanaPrincipal.pb.setVisible(true);
 						VentanaPrincipal.sp.setVisible(true);
+						VentanaPrincipal.lblValoracion.setVisible(true);
 					}
 					VentanaPrincipal.btnCambiarCon.setVisible(true);
 					VentanaPrincipal.btnInicioSesion.setVisible(false);
 					boolean admin = BD.obtenerAdmin(con, n);
-					System.out.println(n);
-					System.out.println(admin);
 					if (admin == true) {
 						VentanaPrincipal.btnAdmin.setVisible(true);
 					}

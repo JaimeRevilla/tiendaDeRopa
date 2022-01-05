@@ -11,22 +11,25 @@ public class Zapato extends Producto {
 
 	
 	
-	public Zapato(int codigo, String nombre, double precio, int stock, String marca, String color, String rutaFoto, /*boolean goretex,*/
+	public Zapato(int codigo, String nombre, double precio, int stock, String marca, String color, String rutaFoto, String colorCordones, boolean goretex,
 			TipoZapato tipoZapato) {
 		super(codigo, nombre, color, precio, stock, marca, rutaFoto);
-		this.colorCordones = color;
+		this.colorCordones = colorCordones;
 		this.goretex = goretex;
-		if(nombre.contains("BOTAS")) {
+		if(nombre.contains("BOTA")) {
 			this.tipoZapato = TipoZapato.BOTAS;
-		}else if(nombre.contains("DEPORTIVAS")) {
+		}else if(nombre.contains("DEPORTIVA")) {
 			this.tipoZapato = TipoZapato.DEPORTIVAS;
-		}else if(nombre.contains("FORMALES")) {
+		}else if(nombre.contains("FORMAL")) {
 			this.tipoZapato = TipoZapato.FORMALES;
-		}else if(nombre.contains("TACONES")) {
+		}else if(nombre.contains("TACON")) {
 			this.tipoZapato = TipoZapato.TACONES;
 		}
 	
 	}
+	
+	
+	
 	
 	
 
@@ -34,15 +37,11 @@ public class Zapato extends Producto {
 		return tipoZapato;
 	}
 
-
-
 	public void setTipoZapato(TipoZapato tipoZapato) {
 		this.tipoZapato = tipoZapato;
 	}
 
-
-
-	/*public String getColorCordones() {
+	public String getColorCordones() {
 		return colorCordones;
 	}
 
@@ -55,7 +54,7 @@ public class Zapato extends Producto {
 	}
 	public void setGoretex(boolean goretex) {
 		this.goretex = goretex;
-	}*/
+	}
 
 
 

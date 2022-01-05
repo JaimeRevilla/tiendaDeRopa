@@ -41,6 +41,7 @@ public class VentanaRegistro extends JFrame {
 	private JTextField txtNombre, txtEdad, txtMail;
 	private JButton btnRegistrar, btnVolver;
 	private static JFrame ventanaActual;
+	public static String ermail = "[A-Za-z]{1,}[0-9]{0,}[A-Za-z]{0,}@[A-Za-z]{1,}.[a-z]{2,3}";
 
 	private JFrame ventanaAnterior;
 
@@ -66,8 +67,6 @@ public class VentanaRegistro extends JFrame {
 	public VentanaRegistro(JFrame va) {
 
 		Connection con = BD.initBD("SweetWear.db");
-		BD.crearTablaUsuario(con);		//HE QUITADO TANTO EN ESTA VENTANA COMO EN LA DE INICIO DE 
-		BD.closeBD(con);					//SESION ESTE APARTADO DE BD PARA QUE AL MENOS SE VEA QUE LA FUNCION FUNCIONA
 		ventanaAnterior = va;
 		ventanaActual = this;
 		
@@ -112,7 +111,9 @@ public class VentanaRegistro extends JFrame {
 		
 		
 		btnRegistrar = new JButton("REGISTRAR");
+		VentanaPrincipal.ponerFotoABoton(btnRegistrar, "imagenes\\IconoRegistro.png", 30, 30, 30, 30);
 		btnVolver = new JButton("VOLVER");
+		VentanaPrincipal.ponerFotoABoton(btnVolver, "imagenes\\IconoSalir.png", 30, 30, 30, 30);
 		
 		panelSur.add(btnVolver);
 		panelSur.add(btnRegistrar);
@@ -151,7 +152,7 @@ public class VentanaRegistro extends JFrame {
 				}
 				if (!VentanaPrincipal.tmUsuarios.containsKey(n) && existe == false) {
 					int ed = Integer.parseInt(txtEdad.getText());
-					String ermail = "[A-Za-z]{1,20}@[A-Za-z]{1,20}.[a-z]{3}";
+					//String ermail = "[A-Za-z]{1,20}@[A-Za-z]{1,20}.[a-z]{3}";
 					String m = txtMail.getText();
 					boolean correctoCorreo = Pattern.matches(ermail, m);
 					if (correctoCorreo) {
@@ -175,51 +176,7 @@ public class VentanaRegistro extends JFrame {
 
 			}
 			
-		});
-		
-		
-		
-		
-		
-		
-		
-//		btnRegistrar.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				String n = txtNombre.getText();
-//				int ed = Integer.parseInt(txtEdad.getText());
-//				String m = txtMail.getText();
-//				
-//				String c = txtCon.getText();
-//				//FALTARIA PONER AQUI DE ALGUNA MANERA LO DE LOS PERMISOS
-//				Usuario u = new Usuario(n, ed, m, c, false);
-//				//AÑADIRLO AL MAPA DE CLAVE USUARIO Y VALOR EL CARRITO ASOCIADO A ESE USUARIO!
-//				Connection con = BD.initBD("SweetWear.db");
-//				BD.insertarUsuario(con, n, ed, m, c, false);
-//				BD.closeBD(con);
-//				JOptionPane.showMessageDialog(null, "Persona registrada correctamente", "REGISTRO CORRECTO", JOptionPane.INFORMATION_MESSAGE);
-//					
-//				//Logger Usuarios
-//				try {
-//					Handler handler = new FileHandler("Usuarios.log");
-//					handler.setFormatter(new SimpleFormatter());
-//					log.addHandler(handler);
-//					log.log(Level.INFO, "Se ha añadido un Usuario");
-//						
-//				} catch (SecurityException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				} catch (IOException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-//					
-//				vaciarCampos();
-//				
-//			}
-//		});
-		
+		});	
 		
 		/**
 		 * Botón que al clickar cierra la ventana actual y abre la anterior

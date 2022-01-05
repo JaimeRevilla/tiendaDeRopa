@@ -1,0 +1,2 @@
+FACTURA DE a
+Precio total de la compra: 0.0 euros

@@ -1,0 +1,6 @@
+FACTURA DE iker
+1- Polo Negro 35.0 euros  1 Lacoste imagenes\\IconoCamisetaPolo.png      Precio Del Pedido: 35.0 euros
+2- Camiseta Blanca 15.0 euros  1 PullAndBear imagenes\\IconoCamisetaNormal.png      Precio Del Pedido: 15.0 euros
+3- Camisa Blanca 40.0 euros  1 Lacoste imagenes\\IconoCamisetaCamisa.png      Precio Del Pedido: 40.0 euros
+4- ConCremallera Marron 55.0 euros  1 Shein imagenes\\IconoSudaderaConCremallera.png      Precio Del Pedido: 55.0 euros
+Precio total de la compra: 145.0 euros

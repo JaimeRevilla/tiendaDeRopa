@@ -1,6 +1,7 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
+import java.util.logging.Level;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -66,21 +68,24 @@ public class VentanaCambiarContrasenia extends JFrame {
 		//CREACION DE LOS PANELES
 		panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
+		panelSur.setBackground(Color.CYAN);
 		
 		panelCentral = new PanelConImagenDeFondo(getSize());
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		panelCentral.setLayout(new GridLayout(3,2));
-		
+		panelCentral.setBackground(Color.CYAN);
 		
 		//CREACION DE LOS COMPONENTES
-		btnvolver = new JButton();
+		btnvolver = new JButton("VOLVER");
 		VentanaPrincipal.ponerFotoABoton(btnvolver, "imagenes\\IconoSalir.png", 30, 30, 30, 30);
 		
 		btnCambiarCon = new JButton("CAMBIAR CONTRASENIA");
+		VentanaPrincipal.ponerFotoABoton(btnCambiarCon, "imagenes\\IconoCambiarContraseña.png", 30, 30, 30, 30);
 		
 		lblConActual = new JLabel("CONTRASEÑA ACTUAL: ");
 		lblConNueva = new JLabel("CONTRASEÑA NUEVA: ");
 		lblConNueva2 = new JLabel("REPETIR CONTRASEÑA");
+
 		
 		txtConActual = new JPasswordField();
 		txtConNueva = new JPasswordField();
@@ -143,6 +148,7 @@ public class VentanaCambiarContrasenia extends JFrame {
 						Usuario u = BD.obtenerUsuario(con, VentanaInicioSesion.n);
 						u.setCon(nueva);
 						VentanaPrincipal.tmUsuarios.get(VentanaInicioSesion.n).setCon(nueva);
+						VentanaPrincipal.log.log(Level.INFO, VentanaInicioSesion.n + " ha modificiado su contrasenia");
 						JOptionPane.showMessageDialog(null, "CONTRASEÑA ACTUALIZADA CORRECTAMENTE");
 					}else{
 						JOptionPane.showMessageDialog(null, "LA CONTRASEÑAS NO COINCIDEN", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -156,6 +162,7 @@ public class VentanaCambiarContrasenia extends JFrame {
 			}
 		});
 		
+//---------------------------------------------------------------------------------------------------------------
 		
 		//EVENTOS DE VENTANA
 		ventanaActual.addWindowListener(new WindowAdapter() {
@@ -170,16 +177,14 @@ public class VentanaCambiarContrasenia extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				// TODO Auto-generated method stub
 				VentanaPrincipal.guardarMapaUsuariosEnFicheroDeTexto();
-			}
-					
-					
-					
+			}								
 		});
 				
 		
 		
 	}
 	
+//---------------------------------------------------------------------------------------------------------------------	
 	
 	
 			

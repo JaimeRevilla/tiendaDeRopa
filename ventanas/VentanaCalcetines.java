@@ -71,6 +71,8 @@ public class VentanaCalcetines extends JFrame {
 		
 		btnVolver = new JButton("VOLVER");
 		panelSur.add(btnVolver);
+		VentanaPrincipal.ponerFotoABoton(btnVolver, "imagenes\\IconoSalir.png", 30, 30, 30, 30);
+
 		
 		panelCentral = new JPanel();
 		panelCentral.setLayout(new GridLayout(0, 2));
@@ -90,7 +92,7 @@ public class VentanaCalcetines extends JFrame {
 		panelP1.add(panelP12);
 		
 		btnPinkie = new JButton();
-		VentanaPrincipal.ponerFotoABoton(btnPinkie, "imagenes\\IconoCalcetinesPinkie.jpg",  120, 120, 120, 120);
+		VentanaPrincipal.ponerFotoABoton(btnPinkie, "imagenes\\IconoCalcetinesPinkie.png",  120, 120, 120, 120);
 		panelP11.add(btnPinkie);
 		
 		lblPinkie = new JLabel("CALCETINES PINKIE");
@@ -98,10 +100,11 @@ public class VentanaCalcetines extends JFrame {
 		
 		Connection con = BD.initBD("SweetWear.db");
 		int sto = BD.obtenerStockProducto(con, "Pinkie");
+		double pre1 = BD.obtenerPrecioProducto(con,"Pinkie");
 		if (sto == 0) 
 			lblPinkie.setText("CALCETINES PINKIE" + ": " + "NO HAY NINGUNA UNIDAD EN STOCK");
 		else
-			lblPinkie.setText("CALCETINES PINKIE" + ": " + "Cantidades restantes: " + sto + " unidades");
+			lblPinkie.setText("CALCETINES PINKIE" + ": " + "Unidades restantes: " + sto + " unidades    " + "Precio: " + pre1 + " euros");
 		
 		//----------------------------------------------------------------------------
 		panelP2 = new JPanel();
@@ -115,7 +118,7 @@ public class VentanaCalcetines extends JFrame {
 		panelP2.add(panelP22);
 		
 		btnTobillero = new JButton();
-		VentanaPrincipal.ponerFotoABoton(btnTobillero, "imagenes\\IconoCalcetinesTobilleros.jpg",  120, 120, 120, 120);
+		VentanaPrincipal.ponerFotoABoton(btnTobillero, "imagenes\\IconoCalcetinesTobilleros.png",  120, 120, 120, 120);
 		panelP21.add(btnTobillero);
 		
 		lblTobillero = new JLabel("CALCETINES TOBILLEROS");
@@ -123,10 +126,11 @@ public class VentanaCalcetines extends JFrame {
 		
 		
 		int sto1 = BD.obtenerStockProducto(con, "Tobillero");
+		double pre2 = BD.obtenerPrecioProducto(con,"Tobillero");
 		if (sto1 == 0) 
 			lblTobillero.setText("CALCETINES TOBILLEROS" + ": " + "NO HAY NINGUNA UNIDAD EN STOCK");
 		else
-			lblTobillero.setText("CALCETINES TOBILLEROS" + ": " + "Cantidades restantes: " + sto1 + " unidades");
+			lblTobillero.setText("CALCETINES TOBILLEROS" + ": " + "Unidades restantes: " + sto1 + " unidades    " + "Precio: " + pre2 + " euros");
 		
 		//--------------------------------------------------------------------------
 		panelP3 = new JPanel();
@@ -140,17 +144,18 @@ public class VentanaCalcetines extends JFrame {
 		panelP3.add(panelP32);
 		
 		btnAlto = new JButton();
-		VentanaPrincipal.ponerFotoABoton(btnAlto, "imagenes\\IconoCalcetinesAlto.jpg",  120, 120, 120, 120);
+		VentanaPrincipal.ponerFotoABoton(btnAlto, "imagenes\\IconoCalcetinesAlto.png",  120, 120, 120, 120);
 		panelP31.add(btnAlto);
 		
 		lblAlto = new JLabel("CALCETINES ALTOS");
 		panelP32.add(lblAlto);
 		
 		int sto2 = BD.obtenerStockProducto(con, "Alto");
+		double pre3 = BD.obtenerPrecioProducto(con, "Alto");
 		if (sto2 == 0)
 			lblAlto.setText("CALCETINES ALTOS: " + "NO HAY NINGUNA UNIDAD EN STOCK");
 		else
-			lblAlto.setText("CALCETINES ALTOS: " + "Cantidades restantes: " + sto2 + " unidades");
+			lblAlto.setText("CALCETINES ALTOS: " + "Unidades restantes: " + sto2 + " unidades    " + "Precio: " + pre3 + " euros");
 		
 		
 		//------------------------------------------------------------------------------------------------------------------
@@ -194,19 +199,18 @@ public class VentanaCalcetines extends JFrame {
 					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
 						//AQUI SE AÑADIRA AL CARRITO ESTE PRODUCTO
-						String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
+						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
 							Connection con = BD.initBD("SweetWear.db");
 							int stock = BD.obtenerStockProducto(con, "Pinkie");
 							if (stock >= canti) {
 								if (stock == 0) 
-									lblPinkie.setText("CALCETINES PINKIE" + ": " + "NO HAY CANTIDADES EN STOCK");
+									lblPinkie.setText("CALCETINES PINKIE" + ": " + "NO HAY UNIDADES EN STOCK");
 								else
-									lblPinkie.setText("CALCETINES PINKIE" + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
+									lblPinkie.setText("CALCETINES PINKIE" + ": " + "Unidades restantes: " + (stock-canti) + " unidades    " + "Precio: " + pre1 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "Pinkie");
 								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Calcetines(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCalcetines.PINKIE)); //AQUI AÑADIR EL PRODUCTO
-								System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -215,7 +219,7 @@ public class VentanaCalcetines extends JFrame {
 									e2.printStackTrace();
 								}
 //								num = num + 1;
-								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Calcetines", "", "", "Pinkie", "", "", false, "");
+								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Calcetines", "Pinkie", "", "", "", "", false, "");
 								try {
 									BD.restarUnidadesAProducto(con, "Pinkie", canti);
 								} catch (SQLException e1) {
@@ -245,19 +249,18 @@ public class VentanaCalcetines extends JFrame {
 					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
 						//AQUI SE AÑADIRA AL CARRITO ESTE PRODUCTO
-						String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
+						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
 							Connection con = BD.initBD("SweetWear.db");
 							int stock = BD.obtenerStockProducto(con, "Tobillero");
 							if (stock >= canti) {
 								if (stock == 0) 
-									lblTobillero.setText("CALCETINES TOBILLEROS" + ": " + "NO HAY CANTIDADES EN STOCK");
+									lblTobillero.setText("CALCETINES TOBILLEROS" + ": " + "NO HAY UNIDADES EN STOCK");
 								else
-									lblTobillero.setText("CALCETINES TOBILLEROS" + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
+									lblTobillero.setText("CALCETINES TOBILLEROS" + ": " + "Unidades restantes: " + (stock-canti) + " unidades    " + "Precio: " + pre2 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "Tobillero");
 								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Calcetines(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCalcetines.TOBILLERO)); //AQUI AÑADIR EL PRODUCTO
-								System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -266,7 +269,7 @@ public class VentanaCalcetines extends JFrame {
 									e2.printStackTrace();
 								}
 								num = num + 1;
-								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Calcetines", "", "", "Tobillero", "", "", false, "");
+								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Calcetines", "Tobillero", "", "", "", "", false, "");
 								try {
 									BD.restarUnidadesAProducto(con, "Tobillero", canti);
 								} catch (SQLException e1) {
@@ -296,19 +299,18 @@ public class VentanaCalcetines extends JFrame {
 					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
 						//AQUI SE AÑADIRA AL CARRITO ESTE PRODUCTO
-						String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
+						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
 							Connection con = BD.initBD("SweetWear.db");
 							int stock = BD.obtenerStockProducto(con, "Alto");
 							if (stock >= canti) {
 								if (stock == 0) 
-									lblAlto.setText("CALCETINES ALTOS" + ": " + "NO HAY CANTIDADES EN STOCK");
+									lblAlto.setText("CALCETINES ALTOS" + ": " + "NO HAY UNIDADES EN STOCK");
 								else
-									lblAlto.setText("CALCETINES ALTOS" + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
+									lblAlto.setText("CALCETINES ALTOS" + ": " + "Unidades restantes: " + (stock-canti) + " unidades    " + "Precio: " + pre3 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "Alto");
 								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Calcetines(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCalcetines.ALTO)); //AQUI AÑADIR EL PRODUCTO
-								System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -317,7 +319,7 @@ public class VentanaCalcetines extends JFrame {
 									e2.printStackTrace();
 								}
 								num = num + 1;
-								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Calcetines", "", "", "Alto", "", "", false, "");
+								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Calcetines", "Alto", "", "", "", "", false, "");
 								try {
 									BD.restarUnidadesAProducto(con, "Alto", canti);
 								} catch (SQLException e1) {

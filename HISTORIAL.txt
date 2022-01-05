@@ -1,0 +1,5 @@
+alto
+calcetin
+chandal
+sudadera
+vaquero

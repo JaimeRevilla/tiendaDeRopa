@@ -70,9 +70,13 @@ public class VentanaAdmin2 extends JFrame {
 		
 		btnVolver = new JButton("VOLVER");
 		panelSur.add(btnVolver);
+		VentanaPrincipal.ponerFotoABoton(btnVolver, "imagenes\\IconoSalir.png", 30, 30, 30, 30);
+
 		
 		btnTextArea = new JButton("MOSTRAR DATOS REGISTRADOS");
 		panelSur.add(btnTextArea);
+		VentanaPrincipal.ponerFotoABoton(btnTextArea, "imagenes\\IconoDatos.png", 30, 30, 30, 30);
+
 		
 		panelCentro = new JPanel();
 		contentPane.add(panelCentro, BorderLayout.CENTER);
@@ -138,20 +142,22 @@ public class VentanaAdmin2 extends JFrame {
 				
 				String texto2 = "PEDIDOS:";
 				for (String clave: VentanaPrincipal.tmPedidos.keySet()) {
+					texto2 = texto2 + "\n" + clave;
 					for (Producto p :VentanaPrincipal.tmPedidos.get(clave)) {
-						texto2 = texto2 + "\n" + clave + "\t" + p + "\n";
+						texto2 = texto2 + "\t" + p + "\n";
 					}
 				}
 				textAreaPedidos.setText(texto2);
-				
+	
 				String texto3 = "TIENDA:";
+				int i = 1;
 				Connection con = BD.initBD("SweetWear.db");
 				ArrayList<Producto> al = BD.getTienda(con);
 				for (Producto p : al) {
-					texto3 = texto3  + "\n" + p.getCodigo() + "- " + p + "\n";
+					texto3 = texto3  + "\n" + i + "- " + p + "\n";
+					i++;
 				}
 				textAreaTienda.setText(texto3);
-				
 				
 				String texto4 = "ESTADISTICAS:";
 				mostrarMapaEstadisticas(VentanaPrincipal.hmSatisfaccion, VentanaPrincipal.hmSatisfaccion.keySet().iterator(), texto4);

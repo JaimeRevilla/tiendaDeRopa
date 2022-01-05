@@ -7,9 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -73,14 +76,14 @@ public class VentanaCarritoUsuario extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
-		
+			
 		//CREACIÓN DE LOS PANELES
 		panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		
 		btnVolver = new JButton("VOLVER");
 		panelSur.add(btnVolver);
+		VentanaPrincipal.ponerFotoABoton(btnVolver, "imagenes\\IconoSalir.png", 30, 30, 30, 30);
 		
 		panelNorte = new JPanel();
 		contentPane.add(panelNorte, BorderLayout.NORTH);
@@ -102,9 +105,12 @@ public class VentanaCarritoUsuario extends JFrame {
 		
 		btnImprimirRecivo = new JButton("IMPRIMIR RECIVO");
 		panelSur.add(btnImprimirRecivo);
+		VentanaPrincipal.ponerFotoABoton(btnImprimirRecivo, "imagenes\\IconoImprimirRecivo.png", 30, 30, 30, 30);
+		
 		
 		btnBorrar = new JButton("BORRAR PRODUCTO");
 		panelSur.add(btnBorrar);
+		VentanaPrincipal.ponerFotoABoton(btnBorrar, "imagenes\\IconoBorrarProducto.png", 30, 30, 30, 30);
 		
 		modeloListaPedido = new DefaultListModel<>();
 		listaPedido = new JList<>(modeloListaPedido);
@@ -157,8 +163,24 @@ public class VentanaCarritoUsuario extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//LO QUE VA A HACER ESTE METODO ES COGER Y PONER EL ARRAYLIST EN UN FICHERO DE TEXTO LLAMADO FACTURA
-				
+				if (VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n) != null || VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).size() != 0) {
+					VentanaCarritoUsuario.RealizarFactura();
+					VentanaPrincipal.log.log(Level.INFO, VentanaInicioSesion.n + " ha realizado una compra");
+
+					modeloListaPedido.removeAllElements();
+					for (Producto p: VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n)) {
+						VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).remove(p);
+						Connection con = BD.initBD("SweetWear.db");
+						BD.eliminarProductoCliente(con, p.getCodigo());
+						BD.closeBD(con);
+					}
+					listaPedido.repaint();
+					lblFoto.setIcon(null);
+					lblPrecio.setText("NO HAY PRODUCTOS EN EL CARRITO");
+					//listaPedido.updateUI();
+				}else
+					JOptionPane.showMessageDialog(null, "Su carrito esta vacio! Realize algun pedido para poder facturar la compra!", "VACIO", JOptionPane.ERROR_MESSAGE);
+
 			}
 		});
 		
@@ -176,20 +198,61 @@ public class VentanaCarritoUsuario extends JFrame {
 						BD.eliminarProductoCliente(con, p.getCodigo());
 						BD.sumarUnidadesAProducto(con, p.getNombre(), p.getStock());
 						sto = BD.obtenerStockProducto(con, p.getNombre());
+						double pre = BD.obtenerPrecioProducto(con,p.getNombre());
 						
 						VentanaPantalones.lblChandal = new JLabel();
 						VentanaPantalones.lblVaquero = new JLabel();
 						VentanaPantalones.lblCampana = new JLabel();
+						VentanaCalcetines.lblPinkie = new JLabel();
+						VentanaCalcetines.lblTobillero = new JLabel();
+						VentanaCalcetines.lblAlto = new JLabel();
+						VentanaCamiseta.lblPolo = new JLabel();
+						VentanaCamiseta.lblCamiseta = new JLabel();
+						VentanaCamiseta.lblCamisa = new JLabel();
+						VentanaSudadera.lblConGorro = new JLabel();
+						VentanaSudadera.lblSinGorro = new JLabel();
+						VentanaSudadera.lblConCremallera = new JLabel();
+						VentanaSudadera.lblSinCremallera = new JLabel();
+						VentanaZapato.lblBotas = new JLabel();
+						VentanaZapato.lblDeportivas = new JLabel();
+						VentanaZapato.lblFormales = new JLabel();
+						VentanaZapato.lblTacones = new JLabel();
 						
 						if (p.getNombre().equals("Chandal")) {
-							VentanaPantalones.lblChandal.setText("PANTALONES CHANDAL" + ": " + "Cantidades restantes: " + sto + " unidades");
+							VentanaPantalones.lblChandal.setText("PANTALONES CHANDAL" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
 						}else if (p.getNombre().equals("Vaquero")){
-							VentanaPantalones.lblVaquero.setText("PANTALONES VAQUEROS" + ": " + "Cantidades restantes: " + sto + " unidades");
+							VentanaPantalones.lblVaquero.setText("PANTALONES VAQUEROS" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
 						}else if (p.getNombre().equals("Campana")) {
-							VentanaPantalones.lblCampana.setText("PANTALONES CAMPANA" + ": " + "Cantidades restantes: " + sto + " unidades");
+							VentanaPantalones.lblCampana.setText("PANTALONES CAMPANA" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
+						}else if (p.getNombre().equals("Pinkie")) {
+							VentanaCalcetines.lblPinkie.setText("CALCETINES PINKIE" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
+						}else if (p.getNombre().equals("Tobillero")) {
+							VentanaCalcetines.lblTobillero.setText("CALCETINES TOBILLEROS" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
+						}else if (p.getNombre().equals("Alto")) {
+							VentanaCalcetines.lblAlto.setText("CALCETINES ALTOS" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
+						}else if (p.getNombre().equals("Polo")) {
+							VentanaCamiseta.lblPolo.setText("POLO" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
+						}else if (p.getNombre().equals("Camisa")) {
+							VentanaCamiseta.lblCamisa.setText("CAMISA" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
+						}else if (p.getNombre().equals("Camiseta")) {
+							VentanaCamiseta.lblCamiseta.setText("CAMISETA" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
+						}else if (p.getNombre().equals("ConCremallera")) {
+							VentanaSudadera.lblConCremallera.setText("SUDADERA CON CREMALLERA" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
+						}else if (p.getNombre().equals("SinCremallera")) {
+							VentanaSudadera.lblSinCremallera.setText("SUDADERA SIN CREMALLERA" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
+						}else if (p.getNombre().equals("ConGorro")) {
+							VentanaSudadera.lblConGorro.setText("SUDADERA CON GORRO" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
+						}else if (p.getNombre().equals("SinGorro")) {
+							VentanaSudadera.lblSinGorro.setText("SUDADERA SIN GORRO" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
+						}else if (p.getNombre().equals("Bota")) {
+							VentanaZapato.lblBotas.setText("BOTAS" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
+						}else if (p.getNombre().equals("Deportiva")) {
+							VentanaZapato.lblDeportivas.setText("DEPORTIVAS" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
+						}else if (p.getNombre().equals("Tacon")) {
+							VentanaZapato.lblTacones.setText("TACONES" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
+						}else if (p.getNombre().equals("Formal")) {
+							VentanaZapato.lblFormales.setText("FORMALES" + ": " + "Cantidades restantes: " + sto + " unidades   " + "Precio: " + pre + " euros");
 						}
-						
-						//HABRA QUE HACERLO CON TODOS LOS PRODUCTOS QUE FALTAN!!
 						
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
@@ -252,7 +315,7 @@ public class VentanaCarritoUsuario extends JFrame {
 						im.setDescription(p.getRutaFoto());
 						lblFoto.setIcon(im);
 						try {
-							Thread.sleep(250);
+							Thread.sleep(50);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -271,7 +334,7 @@ public class VentanaCarritoUsuario extends JFrame {
 							lblFoto.setIcon(im2);
 						}
 						try {
-							Thread.sleep(250);
+							Thread.sleep(50);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -281,7 +344,7 @@ public class VentanaCarritoUsuario extends JFrame {
 						panelCentralArriba.add(scrollListaPedido);
 						lblFoto.setIcon(null);
 						try {
-							Thread.sleep(250);
+							Thread.sleep(50);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -295,6 +358,34 @@ public class VentanaCarritoUsuario extends JFrame {
 		t1.start();
 		
 		
+	}
+	
+	public static void RealizarFactura() {
+		PrintWriter pw = null;
+		try {
+			pw = new PrintWriter("FACTURA DE " + VentanaInicioSesion.n + ".txt");
+			pw.println("FACTURA DE " + VentanaInicioSesion.n);
+			double sumaTotal = 0;
+			double suma1 = 0;
+			int i = 1;
+			ArrayList<Producto> al = VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n);
+			for (Producto p: al) {
+				suma1 = (p.getPrecio() * p.getStock());
+				sumaTotal = sumaTotal + (p.getPrecio() * p.getStock());
+				pw.println(i + "- " + p.getNombre() + " " + p.getColor() + " " + p.getPrecio()+ " euros  " + p.getStock()+ " " + p.getMarca()+ " " + p.getRutaFoto() + "      " + "Precio Del Mismo Articulo teniendo en cuenta las unidades compradas: " + suma1 + " euros");
+				i++;
+			}
+			pw.println("Precio total de la compra: " + sumaTotal + " euros");
+			
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}finally {
+			if (pw!= null) {
+				pw.flush();
+				pw.close();
+			}
+		}
 	}
 
 }

@@ -72,6 +72,7 @@ public class VentanaZapato extends JFrame {
 		
 		btnVolver = new JButton("VOLVER");
 		panelSur.add(btnVolver);
+		VentanaPrincipal.ponerFotoABoton(btnVolver, "imagenes\\IconoSalir.png", 30, 30, 30, 30);
 		
 		panelCentral = new JPanel();
 		panelCentral.setLayout(new GridLayout(0, 2));
@@ -98,11 +99,12 @@ public class VentanaZapato extends JFrame {
 		panelP12.add(lblBotas);
 		
 		Connection con = BD.initBD("SweetWear.db");
-		int sto = BD.obtenerStockProducto(con, "Botas");
+		int sto = BD.obtenerStockProducto(con, "Bota");
+		double pre1 = BD.obtenerPrecioProducto(con,"Bota");
 		if (sto == 0) 
 			lblBotas.setText("BOTAS" + ": " + "NO HAY NINGUNA UNIDAD EN STOCK");
 		else
-			lblBotas.setText("BOTAS" + ": " + "Cantidades restantes: " + sto + " unidades");
+			lblBotas.setText("BOTAS" + ": " + "Unidades restantes: " + sto + " unidades    " + "Precio: " + pre1 + " euros");
 		
 		//----------------------------------------------------------------------------
 		panelP2 = new JPanel();
@@ -123,11 +125,12 @@ public class VentanaZapato extends JFrame {
 		panelP22.add(lblDeportivas);
 		
 		
-		int sto1 = BD.obtenerStockProducto(con, "Deportivas");
+		int sto1 = BD.obtenerStockProducto(con, "Deportiva");
+		double pre2 = BD.obtenerPrecioProducto(con,"Deportiva");
 		if (sto1 == 0) 
 			lblDeportivas.setText("DEPORTIVAS" + ": " + "NO HAY NINGUNA UNIDAD EN STOCK");
 		else
-			lblDeportivas.setText("DEPORTIVAS" + ": " + "Cantidades restantes: " + sto1 + " unidades");
+			lblDeportivas.setText("DEPORTIVAS" + ": " + "Unidades restantes: " + sto1 + " unidades    " + "Precio: " + pre2 + " euros");
 		
 		//--------------------------------------------------------------------------
 		panelP3 = new JPanel();
@@ -147,11 +150,12 @@ public class VentanaZapato extends JFrame {
 		lblTacones = new JLabel("TACONES");
 		panelP32.add(lblTacones);
 		
-		int sto2 = BD.obtenerStockProducto(con, "Tacones");
+		int sto2 = BD.obtenerStockProducto(con, "Tacon");
+		double pre3 = BD.obtenerPrecioProducto(con,"Tacon");
 		if (sto2 == 0)
 			lblTacones.setText("TACONES: " + "NO HAY NINGUNA UNIDAD EN STOCK");
 		else
-			lblTacones.setText("TACONES: " + "Cantidades restantes: " + sto2 + " unidades");
+			lblTacones.setText("TACONES: " + "Unidades restantes: " + sto2 + " unidades    " + "Precio: " + pre3 + " euros");
 		
 		
 		//------------------------------------------------------------------------------------------------------------------
@@ -172,11 +176,12 @@ public class VentanaZapato extends JFrame {
 		lblFormales = new JLabel("FORMALES");
 		panelP42.add(lblFormales);
 		
-		int sto3 = BD.obtenerStockProducto(con, "Formales");
+		int sto3 = BD.obtenerStockProducto(con, "Formal");
+		double pre4 = BD.obtenerPrecioProducto(con,"Formal");
 		if (sto3 == 0)
 			lblFormales.setText("FORMALES: " + "NO HAY NINGUNA UNIDAD EN STOCK");
 		else
-			lblFormales.setText("FORMALES: " + "Cantidades restantes: " + sto3 + " unidades");
+			lblFormales.setText("FORMALES: " + "Unidades restantes: " + sto3 + " unidades    " + "Precio: " + pre4 + " euros");
 		//------------------------------------------------------------------------------------------------------------------
 		
 		//EVENTOS DE VENTANA
@@ -218,19 +223,18 @@ public class VentanaZapato extends JFrame {
 					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
 						//AQUI SE AÑADIRA AL CARRITO ESTE PRODUCTO
-						String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
+						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
 							Connection con = BD.initBD("SweetWear.db");
-							int stock = BD.obtenerStockProducto(con, "Botas");
+							int stock = BD.obtenerStockProducto(con, "Bota");
 							if (stock >= canti) {
 								if (stock == 0) 
-									lblBotas.setText("BOTAS" + ": " + "NO HAY CANTIDADES EN STOCK");
+									lblBotas.setText("BOTAS" + ": " + "NO HAY UNIDADES EN STOCK");
 								else
-									lblBotas.setText("BOTAS" + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
-								Producto p = BD.obtenerProductoTienda(con, "Botas");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Zapato(0, p.getNombre(), p.getPrecio(), canti, p.getMarca(), p.getColor(), p.getRutaFoto(), /*p.isGoretex(),*/ TipoZapato.BOTAS)); //AQUI AÑADIR EL PRODUCTO
-								System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
+									lblBotas.setText("BOTAS" + ": " + "Unidades restantes: " + (stock-canti) + " unidades     " + "Precio: " + pre1 + " euros");
+								Producto p = BD.obtenerProductoTienda(con, "Bota");
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Zapato(0, p.getColor(), p.getPrecio(), canti, p.getMarca(), p.getNombre(), p.getRutaFoto(), "Negro", true, TipoZapato.BOTAS)); //AQUI AÑADIR EL PRODUCTO
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -239,9 +243,9 @@ public class VentanaZapato extends JFrame {
 									e2.printStackTrace();
 								}
 //								num = num + 1;
-								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Botas", "", "", "", "", "", false, "");
+								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Zapato", "", "", "", "", "Negro", true, "Bota");
 								try {
-									BD.restarUnidadesAProducto(con, "Botas", canti);
+									BD.restarUnidadesAProducto(con, "Bota", canti);
 								} catch (SQLException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
@@ -269,19 +273,18 @@ public class VentanaZapato extends JFrame {
 					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
 						//AQUI SE AÑADIRA AL CARRITO ESTE PRODUCTO
-						String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
+						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
 							Connection con = BD.initBD("SweetWear.db");
-							int stock = BD.obtenerStockProducto(con, "Deportivas");
+							int stock = BD.obtenerStockProducto(con, "Deportiva");
 							if (stock >= canti) {
 								if (stock == 0) 
-									lblDeportivas.setText("DEPORTIVAS:" + ": " + "NO HAY CANTIDADES EN STOCK");
+									lblDeportivas.setText("DEPORTIVAS:" + ": " + "NO HAY UNIDADES EN STOCK");
 								else
-									lblDeportivas.setText("DEPORTIVAS" + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
-								Producto p = BD.obtenerProductoTienda(con, "Deportivas");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Zapato(0, p.getNombre(), p.getPrecio(), canti, p.getMarca(), p.getColor(), p.getRutaFoto(), /*p.isGoretex(),*/ TipoZapato.DEPORTIVAS)); //AQUI AÑADIR EL PRODUCTO
-								System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
+									lblDeportivas.setText("DEPORTIVAS" + ": " + "Unidades restantes: " + (stock-canti) + " unidades     " + "Precio: " + pre2 + " euros");
+								Producto p = BD.obtenerProductoTienda(con, "Deportiva");
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Zapato(0, p.getColor(), p.getPrecio(), canti, p.getMarca(), p.getNombre(), p.getRutaFoto(), "Negro",  false, TipoZapato.DEPORTIVAS)); //AQUI AÑADIR EL PRODUCTO
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -290,9 +293,9 @@ public class VentanaZapato extends JFrame {
 									e2.printStackTrace();
 								}
 								num = num + 1;
-								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Deportivas", "", "", "", "", "", false, "");
+								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Zapato", "", "", "", "", "Negro", false, "Deportiva");
 								try {
-									BD.restarUnidadesAProducto(con, "Deportivas", canti);
+									BD.restarUnidadesAProducto(con, "Deportiva", canti);
 								} catch (SQLException e1) {
 									e1.printStackTrace();
 								}
@@ -320,19 +323,18 @@ public class VentanaZapato extends JFrame {
 					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
 						//AQUI SE AÑADIRA AL CARRITO ESTE PRODUCTO
-						String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
+						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
 							Connection con = BD.initBD("SweetWear.db");
-							int stock = BD.obtenerStockProducto(con, "Tacones");
+							int stock = BD.obtenerStockProducto(con, "Tacon");
 							if (stock >= canti) {
 								if (stock == 0) 
-									lblTacones.setText("TACONES:" + ": " + "NO HAY CANTIDADES EN STOCK");
+									lblTacones.setText("TACONES:" + ": " + "NO HAY UNIDADES EN STOCK");
 								else
-									lblTacones.setText("TACONES:" + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
-								Producto p = BD.obtenerProductoTienda(con, "Tacones");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Zapato(0, p.getNombre(), p.getPrecio(), canti, p.getMarca(), p.getColor(), p.getRutaFoto(), /*p.isGoretex(),*/ TipoZapato.TACONES)); //AQUI AÑADIR EL PRODUCTO
-								System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
+									lblTacones.setText("TACONES:" + ": " + "Unidades restantes: " + (stock-canti) + " unidades     " + "Precio: " + pre3 + " euros");
+								Producto p = BD.obtenerProductoTienda(con, "Tacon");
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Zapato(0, p.getColor(), p.getPrecio(), canti, p.getMarca(), p.getNombre(), p.getRutaFoto(), "Rojo" ,false, TipoZapato.TACONES)); //AQUI AÑADIR EL PRODUCTO
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -341,9 +343,9 @@ public class VentanaZapato extends JFrame {
 									e2.printStackTrace();
 								}
 								num = num + 1;
-								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Tacones", "", "", "", "", "", false, "");
+								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Zapato", "", "", "", "", "Rojo", false, "Tacon");
 								try {
-									BD.restarUnidadesAProducto(con, "Tacones", canti);
+									BD.restarUnidadesAProducto(con, "Tacon", canti);
 								} catch (SQLException e1) {
 									e1.printStackTrace();
 								}
@@ -369,19 +371,18 @@ public class VentanaZapato extends JFrame {
 					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
 						//AQUI SE AÑADIRA AL CARRITO ESTE PRODUCTO
-						String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
+						String cant = JOptionPane.showInputDialog("Cuantas Unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
 							Connection con = BD.initBD("SweetWear.db");
-							int stock = BD.obtenerStockProducto(con, "Formales");
+							int stock = BD.obtenerStockProducto(con, "Formal");
 							if (stock >= canti) {
 								if (stock == 0) 
-									lblTacones.setText("FORMALES" + ": " + "NO HAY CANTIDADES EN STOCK");
+									lblFormales.setText("FORMALES" + ": " + "NO HAY UNIDADES EN STOCK");
 								else
-									lblTacones.setText("FORMALES" + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
-								Producto p = BD.obtenerProductoTienda(con, "Formales");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Zapato(0, p.getNombre(), p.getPrecio(), canti, p.getMarca(), p.getColor(), p.getRutaFoto(), /*p.isGoretex(),*/ TipoZapato.FORMALES)); //AQUI AÑADIR EL PRODUCTO
-								System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
+									lblFormales.setText("FORMALES" + ": " + "Unidades restantes: " + (stock-canti) + " unidades     " + "Precio: " + pre4 + " euros");
+								Producto p = BD.obtenerProductoTienda(con, "Formal");
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Zapato(0, p.getColor(), p.getPrecio(), canti, p.getMarca(), p.getNombre(), p.getRutaFoto(), "Marron",  false,  TipoZapato.FORMALES)); //AQUI AÑADIR EL PRODUCTO
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -390,9 +391,9 @@ public class VentanaZapato extends JFrame {
 									e2.printStackTrace();
 								}
 								num = num + 1;
-								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Formales", "", "", "", "", "", false, "");
+								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Zapato", "", "", "", "", "Marron", false, "Formal");
 								try {
-									BD.restarUnidadesAProducto(con, "Formales", canti);
+									BD.restarUnidadesAProducto(con, "Formal", canti);
 								} catch (SQLException e1) {
 									e1.printStackTrace();
 								}

@@ -1,6 +1,8 @@
 package clases;
 
+import java.util.regex.Pattern;
 
+import ventanas.VentanaRegistro;
 
 public class Usuario implements Comparable<Usuario> {
 	
@@ -13,7 +15,12 @@ public class Usuario implements Comparable<Usuario> {
 	public Usuario(String nombre, int edad, String mail, String con, boolean permisos) {
 		this.nombre = nombre;
 		this.edad = edad;
-		this.mail = mail;
+		boolean correcto = Pattern.matches(VentanaRegistro.ermail, mail);
+		if (correcto) {
+			this.mail = mail;
+		}else {
+			this.mail = nombre + "@"+ "sweetWear.com";
+		}
 		this.con = con;
 		this.permisos = permisos;
 		
@@ -63,11 +70,14 @@ public class Usuario implements Comparable<Usuario> {
 	}
 
 	@Override
+//	public String toString() {
+//		return "Usuario [nombre=" + nombre + ", mail=" + mail + ", edad=" + edad + ", con=" + con + ", permisos="
+//				+ permisos + "]";
+//	}
+	
 	public String toString() {
-		return "Usuario [nombre=" + nombre + ", mail=" + mail + ", edad=" + edad + ", con=" + con + ", permisos="
-				+ permisos + "]";
+		return "Nombre: " + nombre + "   Edad: " + edad + "   Correo: " + mail + "   Contrasenia: " + con + "   Permisos: " + permisos;
 	}
-
 	
 	public int compareTo(Usuario o) {
 		//ORDENAR DESCENDENTEMENTE

@@ -70,6 +70,8 @@ public class VentanaSudadera extends JFrame {
 		
 		btnVolver = new JButton("VOLVER");
 		panelSur.add(btnVolver);
+		VentanaPrincipal.ponerFotoABoton(btnVolver, "imagenes\\IconoSalir.png", 30, 30, 30, 30);
+
 		
 		panelCentral = new JPanel();
 		panelCentral.setLayout(new GridLayout(0, 2));
@@ -96,11 +98,12 @@ public class VentanaSudadera extends JFrame {
 		panelP12.add(lblConCremallera);
 		
 		Connection con = BD.initBD("SweetWear.db");
-		int sto = BD.obtenerStockProducto(con, "Con cremallera");
+		int sto = BD.obtenerStockProducto(con, "ConCremallera");
+		double pre1 = BD.obtenerPrecioProducto(con,"ConCremallera");
 		if (sto == 0) 
 			lblConCremallera.setText("SUDADERA CON CREMALLERA" + ": " + "NO HAY NINGUNA UNIDAD EN STOCK");
 		else
-			lblConCremallera.setText("SUDADERA CON CREMALLERA" + ": " + "Cantidades restantes: " + sto + " unidades");
+			lblConCremallera.setText("SUDADERA CON CREMALLERA" + ": " + "Unidades restantes: " + sto + " unidades     " + "Precio: " + pre1 + " euros");
 		
 		//----------------------------------------------------------------------------
 		panelP2 = new JPanel();
@@ -121,11 +124,12 @@ public class VentanaSudadera extends JFrame {
 		panelP22.add(lblSinCremallera);
 		
 		
-		int sto1 = BD.obtenerStockProducto(con, "Sin cremallera");
+		int sto1 = BD.obtenerStockProducto(con, "SinCremallera");
+		double pre2 = BD.obtenerPrecioProducto(con,"SinCremallera");
 		if (sto1 == 0) 
 			lblSinCremallera.setText("SUDADERA SIN CREMALLERA" + ": " + "NO HAY NINGUNA UNIDAD EN STOCK");
 		else
-			lblSinCremallera.setText("SUDADERA SIN CREMALLERA" + ": " + "Cantidades restantes: " + sto1 + " unidades");
+			lblSinCremallera.setText("SUDADERA SIN CREMALLERA" + ": " + "Unidades restantes: " + sto1 + " unidades     " + "Precio: " + pre2 + " euros");
 		
 		//--------------------------------------------------------------------------
 		panelP3 = new JPanel();
@@ -145,11 +149,13 @@ public class VentanaSudadera extends JFrame {
 		lblConGorro = new JLabel("SUDADERA CON GORRO");
 		panelP32.add(lblConGorro);
 		
-		int sto2 = BD.obtenerStockProducto(con, "Con gorro");
+		int sto2 = BD.obtenerStockProducto(con, "ConGorro");
+		double pre3 = BD.obtenerPrecioProducto(con,"ConGorro");
+
 		if (sto2 == 0)
 			lblConGorro.setText("SUDADERA CON GORRO: " + "NO HAY NINGUNA UNIDAD EN STOCK");
 		else
-			lblConGorro.setText("SUDADERA CON GORRO: " + "Cantidades restantes: " + sto2 + " unidades");
+			lblConGorro.setText("SUDADERA CON GORRO: " + "Unidades restantes: " + sto2 + " unidades      " + "Precio: " + pre3 + " euros");
 		
 		
 		//------------------------------------------------------------------------------------------------------------------
@@ -170,11 +176,12 @@ public class VentanaSudadera extends JFrame {
 		lblSinGorro = new JLabel("SUDADERA SIN GORRO");
 		panelP42.add(lblSinGorro);
 		
-		int sto3 = BD.obtenerStockProducto(con, "Sin gorro");
+		int sto3 = BD.obtenerStockProducto(con, "SinGorro");
+		double pre4 = BD.obtenerPrecioProducto(con,"SinGorro");
 		if (sto3 == 0)
 			lblSinGorro.setText("SUDADERA SIN GORRO: " + "NO HAY NINGUNA UNIDAD EN STOCK");
 		else
-			lblSinGorro.setText("SUDADERA SIN GORRO: " + "Cantidades restantes: " + sto3 + " unidades");
+			lblSinGorro.setText("SUDADERA SIN GORRO: " + "Cantidades restantes: " + sto3 + " unidades    " + "Precio: " + pre4 + " euros");
 		//------------------------------------------------------------------------------------------------------------------
 		
 		//EVENTOS DE VENTANA
@@ -216,19 +223,18 @@ public class VentanaSudadera extends JFrame {
 					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
 						//AQUI SE AÑADIRA AL CARRITO ESTE PRODUCTO
-						String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
+						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
 							Connection con = BD.initBD("SweetWear.db");
-							int stock = BD.obtenerStockProducto(con, "Con cremallera");
+							int stock = BD.obtenerStockProducto(con, "ConCremallera");
 							if (stock >= canti) {
 								if (stock == 0) 
-									lblConCremallera.setText("SUDADERA CON CREMALLERA" + ": " + "NO HAY CANTIDADES EN STOCK");
+									lblConCremallera.setText("SUDADERA CON CREMALLERA" + ": " + "NO HAY UNIDADES EN STOCK");
 								else
-									lblConCremallera.setText("SUDADERA CON CREMALLERA" + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
-								Producto p = BD.obtenerProductoTienda(con, "Con cremallera");
+									lblConCremallera.setText("SUDADERA CON CREMALLERA" + ": " + "Unidades restantes: " + (stock-canti) + " unidades   " + "Precio: " + pre1 + " euros");
+								Producto p = BD.obtenerProductoTienda(con, "ConCremallera");
 								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.CON_CREMALLERA)); //AQUI AÑADIR EL PRODUCTO
-								System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -237,9 +243,9 @@ public class VentanaSudadera extends JFrame {
 									e2.printStackTrace();
 								}
 //								num = num + 1;
-								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Sudadera", "", "", "Con cremallera", "", "", false, "");
+								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Sudadera", "", "", "", "ConCremallera", "", false, "");
 								try {
-									BD.restarUnidadesAProducto(con, "Con cremallera", canti);
+									BD.restarUnidadesAProducto(con, "ConCremallera", canti);
 								} catch (SQLException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
@@ -267,19 +273,18 @@ public class VentanaSudadera extends JFrame {
 					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
 						//AQUI SE AÑADIRA AL CARRITO ESTE PRODUCTO
-						String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
+						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
 							Connection con = BD.initBD("SweetWear.db");
-							int stock = BD.obtenerStockProducto(con, "Sin cremallera");
+							int stock = BD.obtenerStockProducto(con, "SinCremallera");
 							if (stock >= canti) {
 								if (stock == 0) 
-									lblSinCremallera.setText("SUDADERA SIN CREMALLERA:" + ": " + "NO HAY CANTIDADES EN STOCK");
+									lblSinCremallera.setText("SUDADERA SIN CREMALLERA:" + ": " + "NO HAY UNIDADES EN STOCK");
 								else
-									lblSinCremallera.setText("SUDADERA SIN CREMALLERA" + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
-								Producto p = BD.obtenerProductoTienda(con, "Sin cremallera");
+									lblSinCremallera.setText("SUDADERA SIN CREMALLERA" + ": " + "Unidades restantes: " + (stock-canti) + " unidades   " + "Precio: " + pre2 + " euros");
+								Producto p = BD.obtenerProductoTienda(con, "SinCremallera");
 								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.SIN_CREMALLERA)); //AQUI AÑADIR EL PRODUCTO
-								System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -288,9 +293,9 @@ public class VentanaSudadera extends JFrame {
 									e2.printStackTrace();
 								}
 								num = num + 1;
-								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Sudadera", "", "", "Sin cremallera", "", "", false, "");
+								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Sudadera", "", "", "", "SinCremallera", "", false, "");
 								try {
-									BD.restarUnidadesAProducto(con, "Sin cremallera", canti);
+									BD.restarUnidadesAProducto(con, "SinCremallera", canti);
 								} catch (SQLException e1) {
 									e1.printStackTrace();
 								}
@@ -318,19 +323,18 @@ public class VentanaSudadera extends JFrame {
 					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
 						//AQUI SE AÑADIRA AL CARRITO ESTE PRODUCTO
-						String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
+						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
 							Connection con = BD.initBD("SweetWear.db");
-							int stock = BD.obtenerStockProducto(con, "Con gorro");
+							int stock = BD.obtenerStockProducto(con, "ConGorro");
 							if (stock >= canti) {
 								if (stock == 0) 
-									lblConGorro.setText("SUDADERA CON GORRO:" + ": " + "NO HAY CANTIDADES EN STOCK");
+									lblConGorro.setText("SUDADERA CON GORRO:" + ": " + "NO HAY UNIDADES EN STOCK");
 								else
-									lblConGorro.setText("SUDADERA CON GORRO:" + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
-								Producto p = BD.obtenerProductoTienda(con, "Con gorro");
+									lblConGorro.setText("SUDADERA CON GORRO:" + ": " + "Unidades restantes: " + (stock-canti) + " unidades   " + "Precio: " + pre3 + " euros");
+								Producto p = BD.obtenerProductoTienda(con, "ConGorro");
 								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.CON_GORRO)); //AQUI AÑADIR EL PRODUCTO
-								System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -339,9 +343,9 @@ public class VentanaSudadera extends JFrame {
 									e2.printStackTrace();
 								}
 								num = num + 1;
-								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Sudadera", "", "", "Con gorro", "", "", false, "");
+								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Sudadera", "", "", "", "ConGorro", "", false, "");
 								try {
-									BD.restarUnidadesAProducto(con, "Con gorro", canti);
+									BD.restarUnidadesAProducto(con, "ConGorro", canti);
 								} catch (SQLException e1) {
 									e1.printStackTrace();
 								}
@@ -367,19 +371,18 @@ public class VentanaSudadera extends JFrame {
 					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
 						//AQUI SE AÑADIRA AL CARRITO ESTE PRODUCTO
-						String cant = JOptionPane.showInputDialog("Cuantas cantidades quieres");
+						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
 							Connection con = BD.initBD("SweetWear.db");
-							int stock = BD.obtenerStockProducto(con, "Con gorro");
+							int stock = BD.obtenerStockProducto(con, "SinGorro");
 							if (stock >= canti) {
 								if (stock == 0) 
-									lblConGorro.setText("SUDADERA CON GORRO" + ": " + "NO HAY CANTIDADES EN STOCK");
+									lblSinGorro.setText("SUDADERA SIN GORRO" + ": " + "NO HAY UNIDADES EN STOCK");
 								else
-									lblConGorro.setText("SUDADERA CON GORRO" + ": " + "Cantidades restantes: " + (stock-canti) + " unidades");
-								Producto p = BD.obtenerProductoTienda(con, "Con gorro");
+									lblSinGorro.setText("SUDADERA SIN GORRO" + ": " + "Unidades restantes: " + (stock-canti) + " unidades   " + "Precio: " + pre4 + " euros");
+								Producto p = BD.obtenerProductoTienda(con, "SinGorro");
 								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(0, p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.SIN_GORRO)); //AQUI AÑADIR EL PRODUCTO
-								System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n));
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -388,9 +391,9 @@ public class VentanaSudadera extends JFrame {
 									e2.printStackTrace();
 								}
 								num = num + 1;
-								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Sudadera", "", "", "Sin gorro", "", "", false, "");
+								BD.insertarProductoCliente(con, num ,VentanaInicioSesion.n , p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), "Sudadera", "", "", "", "SinGorro", "", false, "");
 								try {
-									BD.restarUnidadesAProducto(con, "Sin gorro", canti);
+									BD.restarUnidadesAProducto(con, "SinGorro", canti);
 								} catch (SQLException e1) {
 									e1.printStackTrace();
 								}
