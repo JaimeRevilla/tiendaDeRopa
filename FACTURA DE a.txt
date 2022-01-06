@@ -1,2 +1,3 @@
 FACTURA DE a
-Precio total de la compra: 0.0 euros
+1- Tacon Rojo 85.0 euros  2 Asos imagenes\\IconoZapatillasTacones.png      Precio Del Mismo Articulo teniendo en cuenta las unidades compradas: 170.0 euros
+Precio total de la compra: 170.0 euros

@@ -602,6 +602,21 @@ public class BD {
 		return al;
 	}
 	
+	public static void borrarTodosLosProductos(Connection con) {
+		String sent = "DELETE FROM tienda;";
+		Statement stmt = null;
+		
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(sent);
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+	
 	/**
 	 * METODO PARA SABER SI EXISTE UN PRODUCTO CON EL NOMBRE DADO POR PÁRAMETRO
 	 * @param con --> Conexion con la BD

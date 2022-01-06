@@ -1,10 +1,22 @@
-ene 05, 2022 11:54:46 P. M. ventanas.VentanaPrincipal$20 windowOpened
+ene 06, 2022 10:12:09 A. M. ventanas.VentanaPrincipal$20 windowOpened
 INFO: Se han cargado las estructuras de datos de los ficheros de información
-ene 05, 2022 11:54:52 P. M. ventanas.VentanaInicioSesion$3 actionPerformed
+ene 06, 2022 10:12:13 A. M. ventanas.VentanaPrincipal$16 mouseClicked
+INFO: Se ha cargado el historial de busqueda
+ene 06, 2022 10:12:19 A. M. ventanas.VentanaInicioSesion$3 actionPerformed
 INFO: Se ha iniciado sesion como a
-ene 05, 2022 11:54:56 P. M. ventanas.VentanaPrincipal$16 mouseClicked
-INFO: Se ha cargado el historial de busqueda
-ene 05, 2022 11:55:29 P. M. ventanas.VentanaPrincipal$16 mouseClicked
-INFO: Se ha cargado el historial de busqueda
-ene 05, 2022 11:55:32 P. M. ventanas.VentanaPrincipal$20 windowClosing
+ene 06, 2022 10:12:26 A. M. ventanas.VentanaEstadisticas <init>
+INFO: Estadísticas generales obtenidas correctamente
+ene 06, 2022 10:12:31 A. M. ventanas.VentanaEstadisticas$4 actionPerformed
+INFO: Estadísticas de Admin obtenidas correctamente
+ene 06, 2022 10:12:37 A. M. ventanas.VentanaEstadisticas$4 actionPerformed
+INFO: Estadísticas de a obtenidas correctamente
+ene 06, 2022 10:13:21 A. M. ventanas.VentanaAdmin2$4 actionPerformed
+INFO: Datos obtenidos correctamente!
+ene 06, 2022 10:13:40 A. M. ventanas.VentanaPrincipal$7 actionPerformed
+INFO: a ha accedido a su carrito de la compra
+ene 06, 2022 10:14:09 A. M. ventanas.VentanaPrincipal$7 actionPerformed
+INFO: a ha accedido a su carrito de la compra
+ene 06, 2022 10:14:11 A. M. ventanas.VentanaCarritoUsuario$4 actionPerformed
+INFO: a ha realizado una compra
+ene 06, 2022 10:14:19 A. M. ventanas.VentanaPrincipal$20 windowClosing
 INFO: Los ficheros de información han sido actualizados correctamente

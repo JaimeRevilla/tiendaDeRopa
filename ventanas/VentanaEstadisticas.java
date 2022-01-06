@@ -144,7 +144,7 @@ public class VentanaEstadisticas extends JFrame {
 		panelCentralAbajo.add(comboClientes);
 		
 		
-		
+		VentanaPrincipal.log.log(Level.INFO, "Estadísticas generales obtenidas correctamente");
 		
 		lblPrecioMedioPedidoCliente = new JLabel();
 		lblSatisfaccionCliente = new JLabel();
@@ -191,6 +191,7 @@ public class VentanaEstadisticas extends JFrame {
 					panelCentralAbajo.add(lblMinPrecioPedidoCliente);
 					
 					String selec = comboClientes.getItemAt(index);
+					VentanaPrincipal.log.log(Level.INFO, "Estadísticas de " + selec + " obtenidas correctamente");
 					double medio = dineroTotalDeLosProductosQueSeHaVendidoElCliente(selec) / cuantosProductosSeHanVendidoDelCliente(selec);
 					String lblMedio = "";
 					//if (VentanaPrincipal.tmPedidos.get(selec).size() == 0) {

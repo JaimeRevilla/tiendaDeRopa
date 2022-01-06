@@ -168,7 +168,6 @@ public class VentanaCarritoUsuario extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).size());
 				if (VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).size() != 0) {
 					VentanaCarritoUsuario.RealizarFactura();
 					VentanaPrincipal.log.log(Level.INFO, VentanaInicioSesion.n + " ha realizado una compra");
@@ -184,10 +183,10 @@ public class VentanaCarritoUsuario extends JFrame {
 						BD.eliminarProductoCliente(con, p.getCodigo());
 						BD.closeBD(con);
 					}
-					JOptionPane.showMessageDialog(null, "COMPRA REALIZADA CORRECTAMENTE!! GRACIAS POR CONFIAR EN NOSOTROS!! ", "GRACIAS!!!", JOptionPane.NO_OPTION);
 					listaPedido.repaint();
 					lblFoto.setIcon(null);
 					lblPrecio.setText("NO HAY PRODUCTOS EN EL CARRITO");
+					JOptionPane.showMessageDialog(null, "COMPRA REALIZADA CORRECTAMENTE!! GRACIAS POR CONFIAR EN NOSOTROS!! ", "GRACIAS!!!", JOptionPane.NO_OPTION);
 				}else 
 					JOptionPane.showMessageDialog(null, "Su carrito esta vacio! Realize algun pedido para poder facturar la compra!", "VACIO", JOptionPane.ERROR_MESSAGE);
 

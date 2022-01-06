@@ -165,7 +165,7 @@ public class VentanaAdmin2 extends JFrame {
 				String texto4 = "ESTADISTICAS:";
 				mostrarMapaEstadisticas(VentanaPrincipal.hmSatisfaccion, VentanaPrincipal.hmSatisfaccion.keySet().iterator(), texto4);
 				
-				
+				VentanaPrincipal.log.log(Level.INFO, "Datos obtenidos correctamente!");
 				JOptionPane.showMessageDialog(null, "DATOS OBTENIDOS CORRECTAMENTE!!!", "EXITO!!!", JOptionPane.NO_OPTION);
 			}
 		});		

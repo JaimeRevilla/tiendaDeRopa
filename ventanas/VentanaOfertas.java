@@ -257,18 +257,8 @@ public class VentanaOfertas extends JFrame {
 								e1.printStackTrace();
 							}
 							BD.closeBD(con);
+							VentanaPrincipal.log.log(Level.INFO, "Se ha aplicado la oferta correctamente");
 							JOptionPane.showMessageDialog(null, "OFERTA APLICADA CORRECTAMENTE!!!", "OFERTA", JOptionPane.NO_OPTION);
-						}else {
-							try {
-								BD.finOferta(con, producto, Double.parseDouble(porc));
-							} catch (NumberFormatException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							} catch (SQLException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-							JOptionPane.showMessageDialog(null, "PERIODO DE OFERTA FINALIZADO!!!", "OFERTA", JOptionPane.NO_OPTION);
 						}	
 					}else
 						JOptionPane.showMessageDialog(null, "El producto no existe!", "ERROR", JOptionPane.ERROR_MESSAGE);
