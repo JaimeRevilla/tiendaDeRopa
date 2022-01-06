@@ -81,6 +81,7 @@ public class VentanaAdmin extends JFrame {
 	private JMenuItem mntmCerrarAplicacion;
 	public static JPanel panelCalcetines, panelSudadera, panelPantalones, panelCamiseta, panelZapato;
 	public static int i = 1;
+	public static String rutalblFoto = "";
 
 	/**
 	 * Launch the application.
@@ -273,7 +274,7 @@ public class VentanaAdmin extends JFrame {
 					if (e.isAltDown()) {
 						int fil = tablaProductos.getSelectedRow();
 						if (fil != -1) {
-							int cod = (int) modeloTablaProductos.getValueAt(fil, 0);
+							int cod = Integer.parseInt(String.valueOf(modeloTablaProductos.getValueAt(fil, 0)));
 							Connection con = BD.initBD("SweetWear.db");
 							BD.eliminarProductoTienda(con, cod);
 							modeloTablaProductos.removeRow(fil);
@@ -396,10 +397,11 @@ public class VentanaAdmin extends JFrame {
 				if(sel == JFileChooser.APPROVE_OPTION) {
 					File ficheroSeleccionado = fc.getSelectedFile();
 					ImageIcon im = new ImageIcon(ficheroSeleccionado.getAbsolutePath());
-					ImageIcon imagenConDimensiones = new ImageIcon(im.getImage().getScaledInstance(200,200,Image.SCALE_DEFAULT));
 					im.setDescription(ficheroSeleccionado.getAbsolutePath());
+					ImageIcon imagenConDimensiones = new ImageIcon(im.getImage().getScaledInstance(200,200,Image.SCALE_DEFAULT));
 					
 					lblFoto.setIcon(imagenConDimensiones);
+					VentanaAdmin.rutalblFoto = im.getDescription();
 					lblFoto.setSize(200, 200);
 					
 				}
@@ -444,7 +446,7 @@ public class VentanaAdmin extends JFrame {
 							
 							ImageIcon im = new ImageIcon(rutaFoto);
 							ImageIcon imagenConDimensiones = new ImageIcon(im.getImage().getScaledInstance(240,240,Image.SCALE_DEFAULT));
-							
+					
 							im.setDescription(rutaFoto);
 							
 							lblFotoTabla.setIcon(imagenConDimensiones);
@@ -542,12 +544,18 @@ public class VentanaAdmin extends JFrame {
 					double precio = Double.parseDouble(txtPrecio.getText());
 					int stock = Integer.parseInt(txtStock.getText());
 					String marca = txtMarca.getText();
-					ImageIcon im = (ImageIcon)lblFoto.getIcon();
+					ImageIcon im5 = (ImageIcon)lblFoto.getIcon();	
 					
-					if (im != null) {	
-						String rutaFoto = im.getDescription();
-						String rutaAdecuada = rutaFoto.substring(32, rutaFoto.length()); 
+					if (im5 != null) {
+						String rutaFoto = VentanaAdmin.rutalblFoto;
+						String rutaAdecuada = "imagenes\\Icono" + nombre +".png";
+						if (rutaFoto != null) {
+							rutaAdecuada =  rutaFoto.substring(32, 40) + "\\\\" + rutaFoto.substring(41, rutaFoto.length()); 
+						}
+
 						
+
+													
 						
 						String nombreTipoCalcetines = "";
 						String nombreTipoPantalon = "";

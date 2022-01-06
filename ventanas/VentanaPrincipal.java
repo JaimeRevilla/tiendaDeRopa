@@ -268,7 +268,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		btnP1 = new JButton();
-		ponerFotoABoton(btnP1, "imagenes\\IconoZapatillas.png", 120, 120, 120, 120);
+		ponerFotoABoton(btnP1, "imagenes\\IconoZapatillas.png", 120, 120, 120, 120);	
 		panelP1.add(btnP1);
 		
 		btnP2 = new JButton();
