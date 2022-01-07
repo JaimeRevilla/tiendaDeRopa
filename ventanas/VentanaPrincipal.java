@@ -158,7 +158,8 @@ public class VentanaPrincipal extends JFrame {
 		ventanaActual = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setBounds(500, 500, 600, 450);
-		setSize(1650, 1080);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//setSize(1650, 1080);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -60,8 +60,9 @@ public class VentanaOfertas extends JFrame {
 	public VentanaOfertas(JFrame va) {
 		//PROPIEDADES DE LA VENTANA
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 //		setBounds(500, 150, 600, 450);
-		setSize(1650, 1080);
+		//setSize(1650, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

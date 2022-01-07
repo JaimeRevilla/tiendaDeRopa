@@ -73,7 +73,8 @@ public class VentanaRegistro extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(500, 150, 600, 450);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//setBounds(500, 150, 600, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

@@ -57,7 +57,8 @@ public class VentanaAdmin2 extends JFrame {
 		BD.closeBD(con);
 				
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1650, 1080);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//setSize(1650, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

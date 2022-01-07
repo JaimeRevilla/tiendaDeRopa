@@ -58,8 +58,9 @@ public class VentanaEstadisticas extends JFrame {
 	public VentanaEstadisticas(JFrame va) {
 		//PROPIEDADES DE LA VENTANA
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 //		setBounds(500, 150, 600, 450);
-		setSize(1450, 980);
+//		setSize(1450, 980);
 		
 //		contentPane = new PanelConImagenDeFondo(getSize());
 //		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -44,8 +44,9 @@ public class VentanaInicioSesion extends JFrame {
 		ventanaAnterior = va;
 		ventanaActual = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		//setSize(1650, 1080);
-		setBounds(500, 150, 600, 450);
+		//setBounds(500, 150, 600, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

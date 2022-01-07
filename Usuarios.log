@@ -1,4 +1,8 @@
-ene 06, 2022 7:48:28 P. M. ventanas.VentanaPrincipal$20 windowOpened
-INFO: Se han cargado las estructuras de datos de los ficheros de información
-ene 06, 2022 7:48:33 P. M. ventanas.VentanaPrincipal$20 windowClosing
-INFO: Los ficheros de información han sido actualizados correctamente
+ene 07, 2022 4:57:31 P. M. ventanas.VentanaPrincipal$20 windowOpened
+INFORMACIÓN: Se han cargado las estructuras de datos de los ficheros de información
+ene 07, 2022 4:57:52 P. M. ventanas.VentanaInicioSesion$3 actionPerformed
+INFORMACIÓN: Se ha iniciado sesion como a
+ene 07, 2022 4:57:54 P. M. ventanas.VentanaPrincipal$7 actionPerformed
+INFORMACIÓN: a ha accedido a su carrito de la compra
+ene 07, 2022 4:58:02 P. M. ventanas.VentanaPrincipal$20 windowClosing
+INFORMACIÓN: Los ficheros de información han sido actualizados correctamente
