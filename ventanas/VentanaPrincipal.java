@@ -158,10 +158,10 @@ public class VentanaPrincipal extends JFrame {
 		ventanaActual = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setBounds(500, 500, 600, 450);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		//setSize(1650, 1080);
+		//setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setSize(1650, 1080);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
+		contentPane.setBackground(new Color(122,217,196));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
@@ -174,118 +174,111 @@ public class VentanaPrincipal extends JFrame {
 		
 		//CREAMOS LOS PANELES
 		panelCentral = new JPanel();
-		panelCentral.setBackground(Color.CYAN);
+		panelCentral.setBackground(new Color(122,217,196));
 		panelCentral.setLayout(new GridLayout(0,1,0,0));
 		
 		panelArriba = new JPanel();
+		panelArriba.setBackground(new Color(122,217,196));
 		panelArriba.setLayout(new GridLayout(2,0,0,0));
 		panelCentral.add(panelArriba);
 		
 		panelArribaIzq = new JPanel();
 		panelArribaIzq.setLayout(new GridLayout(2, 1));
 		panelArriba.add(panelArribaIzq);
-		panelArribaIzq.setBackground(Color.CYAN);
+		panelArribaIzq.setBackground(new Color(122,217,196));
 		
 		panelArribaIzq1 = new JPanel();
 		panelArribaIzq.add(panelArribaIzq1);
 		panelArribaIzq1.setLayout(new GridLayout(0,3,0,0));
-		panelArribaIzq1.setBackground(Color.CYAN);
+		panelArribaIzq1.setBackground(new Color(122,217,196));
 		
 		panelArribaIzq11 = new JPanel();
 		panelArribaIzq1.add(panelArribaIzq11);
-		panelArribaIzq11.setBackground(Color.CYAN);
+		panelArribaIzq11.setBackground(new Color(122,217,196));
 		
 		panelArribaIzq12 = new JPanel();
 		panelArribaIzq1.add(panelArribaIzq12);
-		panelArribaIzq12.setBackground(Color.CYAN);
+		panelArribaIzq12.setBackground(new Color(122,217,196));
 		
 		FlowLayout flowLayout3 = (FlowLayout) panelArribaIzq11.getLayout();
 		flowLayout3.setAlignment(FlowLayout.LEFT);
 		
 		panelArribaIzq13 = new JPanel();
 		panelArribaIzq1.add(panelArribaIzq13);
-		panelArribaIzq13.setBackground(Color.CYAN);
+		panelArribaIzq13.setBackground(new Color(122,217,196));
 		
 		FlowLayout flowLayout4 = (FlowLayout) panelArribaIzq13.getLayout();
 		flowLayout4.setAlignment(FlowLayout.RIGHT);
 		
-		
-		
-		
-		
-		
-		
-		
-		
 		panelArribaIzq2 = new JPanel();
 		panelArribaIzq.add(panelArribaIzq2);
-		panelArribaIzq2.setBackground(Color.CYAN);
+		panelArribaIzq2.setBackground(new Color(122,217,196));
 		
 	   
 		panelArribaDrc = new JPanel();
 		panelArriba.add(panelArribaDrc);
 		panelArribaDrc.setLayout(new GridLayout(2, 3));
-		panelArribaDrc.setBackground(Color.CYAN);
+		panelArribaDrc.setBackground(new Color(122,217,196));
 		
 		panelNorte = new JPanel();
-		panelNorte.setBackground(Color.CYAN);
+		panelNorte.setBackground(Color.WHITE);
 		panelNorte.setLayout(new GridLayout(0,3,0,0));
 		
 		panelNorteIzq = new JPanel();
-		panelNorteIzq.setBackground(Color.CYAN);
+		panelNorteIzq.setBackground(new Color(122,217,196));
 		panelNorte.add(panelNorteIzq);
 		
 		
 		
 		panelNorteMedio = new JPanel();
-		panelNorteMedio.setBackground(Color.CYAN);
+		panelNorteMedio.setBackground(new Color(122,217,196));
 		panelNorte.add(panelNorteMedio);
 		
 		panelNorteDrc = new JPanel();
-		panelNorteDrc.setBackground(Color.CYAN);
+		panelNorteDrc.setBackground(new Color(122,217,196));
 		panelNorte.add(panelNorteDrc);
 	
 		//-------------------------------------------
 		panelP1 = new JPanel();
 		panelArribaDrc.add(panelP1);
-		panelP1.setBackground(Color.CYAN);
+		panelP1.setBackground(new Color(122,217,196));
 		
 		panelP2 = new JPanel();
 		panelArribaDrc.add(panelP2);
-		panelP2.setBackground(Color.CYAN);
+		panelP2.setBackground(new Color(122,217,196));
 		
 		panelP3 = new JPanel();
 		panelArribaDrc.add(panelP3);
-		panelP3.setBackground(Color.CYAN);
+		panelP3.setBackground(new Color(122,217,196));
 		
 		panelP4 = new JPanel();
 		panelArribaDrc.add(panelP4);
-		panelP4.setBackground(Color.CYAN);
+		panelP4.setBackground(new Color(122,217,196));
 		
 		panelP5 = new JPanel();
 		panelArribaDrc.add(panelP5);
-		panelP5.setBackground(Color.CYAN);
+		panelP5.setBackground(new Color(122,217,196));
 		
 		
 		
 		btnP1 = new JButton();
-		ponerFotoABoton(btnP1, "imagenes\\IconoZapatillas.png", 120, 120, 120, 120);	
+		ponerFotoABoton(btnP1, "imagenes\\Zapatilla.gif", 120, 120, 120, 120);	
 		panelP1.add(btnP1);
 		
 		btnP2 = new JButton();
-		ponerFotoABoton(btnP2, "imagenes\\IconoCalcetines.png", 120, 120, 120, 120);
+		ponerFotoABoton(btnP2, "imagenes\\Calcetin.gif", 120, 120, 120, 120);
 		panelP2.add(btnP2);
 		
 		btnP3 = new JButton();
-		ponerFotoABoton(btnP3, "imagenes\\IconoSudadera.png", 120, 120, 120, 120);
+		ponerFotoABoton(btnP3, "imagenes\\Sudadera.gif", 120, 120, 120, 120);
 		panelP3.add(btnP3);
 		
 		btnP4 = new JButton();
-		ponerFotoABoton(btnP4, "imagenes\\IconoPantalones.png", 120, 120, 120, 120);
+		ponerFotoABoton(btnP4, "imagenes\\pantalones.gif", 120, 120, 120, 120);
 		panelP4.add(btnP4);
 		
 		btnP5 = new JButton();
-		ponerFotoABoton(btnP5, "imagenes\\IconoCamiseta.png", 120, 120, 120, 120);
+		ponerFotoABoton(btnP5, "imagenes\\Camiseta.gif", 120, 120, 120, 120);
 		panelP5.add(btnP5);
 		
 		
@@ -319,19 +312,25 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		lblNombre = new JLabel("");
-		lblTitulo = new JLabel("SWEET WEAR ");
-		Font font1 = new Font("Agency FB", Font.ITALIC, 30);
-		lblTitulo.setFont(font1);
-		
-		
-		lblTitulo.setForeground(Color.BLACK);
-		comboBusqueda = new JComboBox<String>();
+		ImageIcon im = new ImageIcon("imagenes\\Titulo.gif");
+        ImageIcon imagenConDimensiones = new ImageIcon(im.getImage().getScaledInstance(200,50,Image.SCALE_DEFAULT));
+        im.setDescription("Titulo.gif");
 
-		//lblFrase = new JLabel("DI QUIÉN ERES SIN HABLAR");
-		lblFrase = new JLabel("DI QUIÉN ERES SIN HABLAR ");
-		Font font = new Font("Agency FB", Font.ITALIC, 50);
-		lblFrase.setFont(font);
-		
+
+        lblTitulo = new JLabel("");
+
+
+        lblTitulo.setIcon(imagenConDimensiones);
+
+        lblTitulo.setForeground(Color.BLACK);
+        comboBusqueda = new JComboBox<String>();
+
+        lblFrase = new JLabel("");
+
+        ImageIcon im1 = new ImageIcon("imagenes\\Eslogan.gif");
+        ImageIcon imagenConDimensiones1 = new ImageIcon(im1.getImage().getScaledInstance(400,75,Image.SCALE_DEFAULT));
+        im.setDescription("Eslogan.gif");
+        lblFrase.setIcon(imagenConDimensiones1);
 		
 		FlowLayout flowLayout = (FlowLayout) panelNorteIzq.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
@@ -1060,7 +1059,7 @@ public class VentanaPrincipal extends JFrame {
 		ImageIcon icon = new ImageIcon(rutaFoto);
 		Icon i = new ImageIcon(icon.getImage().getScaledInstance(alto, ancho, Image.SCALE_DEFAULT));
 		btn.setIcon(i);
-		btn.setBackground(Color.GREEN);
+		btn.setBackground(new Color(33,138,193));
 	}
 	
 	/**
