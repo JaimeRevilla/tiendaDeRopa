@@ -70,30 +70,30 @@ public class VentanaCambiarContrasenia extends JFrame {
 		//CREACION DE LOS PANELES
 		panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
-		panelSur.setBackground(Color.CYAN);
+		panelSur.setBackground(new Color(122,217,196));
 		
 		panelCentral = new JPanel();
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		panelCentral.setLayout(new GridLayout(3,2));
-		panelCentral.setBackground(Color.CYAN);
+		panelCentral.setBackground(new Color(122,217,196));
 		
 		//CREACION DE LOS COMPONENTES
 		btnvolver = new JButton("VOLVER");
 		VentanaPrincipal.ponerFotoABoton(btnvolver, "imagenes\\IconoSalir.png", 30, 30, 30, 30);
 		
 		btnCambiarCon = new JButton("CAMBIAR CONTRASENIA");
-		VentanaPrincipal.ponerFotoABoton(btnCambiarCon, "imagenes\\IconoCambiarContraseña.png", 30, 30, 30, 30);
+		VentanaPrincipal.ponerFotoABoton(btnCambiarCon, "imagenes\\IconoCambiarContraseï¿½a.png", 30, 30, 30, 30);
 		
-		lblConActual = new JLabel("CONTRASEÑA ACTUAL: ");
-		lblConNueva = new JLabel("CONTRASEÑA NUEVA: ");
-		lblConNueva2 = new JLabel("REPETIR CONTRASEÑA");
+		lblConActual = new JLabel("CONTRASEï¿½A ACTUAL: ");
+		lblConNueva = new JLabel("CONTRASEï¿½A NUEVA: ");
+		lblConNueva2 = new JLabel("REPETIR CONTRASEï¿½A");
 
 		
 		txtConActual = new JPasswordField();
 		txtConNueva = new JPasswordField();
 		txtConNueva2 = new JPasswordField();
 		
-		//AÑADIMOS LOS COMPONENTES A LOS PANELES
+		//Aï¿½ADIMOS LOS COMPONENTES A LOS PANELES
 		panelCentral.add(lblConActual);
 		panelCentral.add(txtConActual);
 		panelCentral.add(lblConNueva);
@@ -144,19 +144,19 @@ public class VentanaCambiarContrasenia extends JFrame {
 				String c = BD.obtenerConUsuario(con, VentanaInicioSesion.n);
 				if (c.equals(vieja)) {
 					if(nueva.equals(vieja)) {
-						JOptionPane.showMessageDialog(null, "LA CONTRASEÑA NUEVA ES LA MISMA QUE LA VIEJA", "ERROR", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "LA CONTRASEï¿½A NUEVA ES LA MISMA QUE LA VIEJA", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}else if (nueva.equals(nuevaRepetida)) {
 						BD.modificarConUsuario(con, VentanaInicioSesion.n, nueva);
 						Usuario u = BD.obtenerUsuario(con, VentanaInicioSesion.n);
 						u.setCon(nueva);
 						VentanaPrincipal.tmUsuarios.get(VentanaInicioSesion.n).setCon(nueva);
 						VentanaPrincipal.log.log(Level.INFO, VentanaInicioSesion.n + " ha modificiado su contrasenia");
-						JOptionPane.showMessageDialog(null, "CONTRASEÑA ACTUALIZADA CORRECTAMENTE");
+						JOptionPane.showMessageDialog(null, "CONTRASEï¿½A ACTUALIZADA CORRECTAMENTE");
 					}else{
-						JOptionPane.showMessageDialog(null, "LA CONTRASEÑAS NO COINCIDEN", "ERROR", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "LA CONTRASEï¿½AS NO COINCIDEN", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}
 				}else {
-					JOptionPane.showMessageDialog(null, "LA CONTRASEÑA NO ES CORRECTA", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "LA CONTRASEï¿½A NO ES CORRECTA", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				BD.closeBD(con);
 				vaciarCampos();
@@ -177,7 +177,7 @@ public class VentanaCambiarContrasenia extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
 				
 			}
 		});

@@ -118,13 +118,13 @@ public class VentanaAdmin extends JFrame {
 		panelCentro = new JPanel();
 		contentPane.add(panelCentro, BorderLayout.CENTER);
 		panelCentro.setLayout(new GridLayout(0, 1, 0, 0));
-		panelCentro.setBackground(Color.CYAN);
+		panelCentro.setBackground(new Color(122,217,196));
 		
 		panelNorte = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelNorte.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		contentPane.add(panelNorte, BorderLayout.NORTH);
-		panelNorte.setBackground(Color.CYAN);
+		panelNorte.setBackground(new Color(122,217,196));
 		
 		menuBar = new JMenuBar();
 		panelNorte.add(menuBar);
@@ -147,7 +147,7 @@ public class VentanaAdmin extends JFrame {
 		
 		panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
-		panelSur.setBackground(Color.CYAN);
+		panelSur.setBackground(new Color(122,217,196));
 		
 		panelArriba = new JPanel();
 		panelArriba.setLayout(new GridLayout(0, 2, 0, 0));
@@ -156,19 +156,19 @@ public class VentanaAdmin extends JFrame {
 		panelArribaIzq = new JPanel();
 		panelArribaIzq.setLayout(new GridLayout(0, 2));
 		panelArriba.add(panelArribaIzq);
-		panelArribaIzq.setBackground(Color.CYAN);
+		panelArribaIzq.setBackground(new Color(122,217,196));
 		
 		panelArribaDrc = new JPanel();
 		panelArribaDrc.setLayout(new GridLayout(3, 1));
 		panelArriba.add(panelArribaDrc);
-		panelArribaDrc.setBackground(Color.CYAN);
+		panelArribaDrc.setBackground(new Color(122,217,196));
 		
 		//---------------------------------------------------------------
 		btnMostarMapa = new JButton("DATOS GENERALES");
 		VentanaPrincipal.ponerFotoABoton(btnMostarMapa, "imagenes\\IconoDatos.png", 30, 30, 30, 30);
 		btnVolver = new JButton("VOLVER");
 		VentanaPrincipal.ponerFotoABoton(btnVolver, "imagenes\\IconoSalir.png", 30, 30, 30, 30);
-		btnAniadir = new JButton("AÑADIR PRODUCTO");
+		btnAniadir = new JButton("Aï¿½ADIR PRODUCTO");
 		VentanaPrincipal.ponerFotoABoton(btnAniadir, "imagenes\\IconoAniadir.png", 30, 30, 30, 30);
 		btnElegirEsePanel = new JButton("CREAR UN PRODUCTO DE ESE TIPO");
 		VentanaPrincipal.ponerFotoABoton(btnElegirEsePanel, "imagenes\\IconoElegir.png", 30, 30, 30, 30);
@@ -239,7 +239,7 @@ public class VentanaAdmin extends JFrame {
 		
 		
 		
-		//CREACIÓN DE LA TABLA
+		//CREACIï¿½N DE LA TABLA
 		modeloTablaProductos = new DefaultTableModel();
 		Vector<String> cabeceras = new Vector<String>( Arrays.asList( "ID","COLOR","TIPO PRODUCTO","PRECIO", "STOCK", "MARCA", "RUTA FOTO") );
 		modeloTablaProductos = new DefaultTableModel(  
@@ -386,7 +386,7 @@ public class VentanaAdmin extends JFrame {
 			}
 		});
 		
-		JOptionPane.showMessageDialog(null, "PARA BORRAR UN PRODUCTO PULSE EL RATÓN SOBRE EL CODIGO DE LOS PRODUCTO EN LA TABLA 3 VECES", "ADVERTENCIA!!!", JOptionPane.NO_OPTION);
+		JOptionPane.showMessageDialog(null, "PARA BORRAR UN PRODUCTO PULSE EL RATï¿½N SOBRE EL CODIGO DE LOS PRODUCTO EN LA TABLA 3 VECES", "ADVERTENCIA!!!", JOptionPane.NO_OPTION);
 
 		
 		mntmCargarArchivo.addActionListener(new ActionListener() {
@@ -424,7 +424,7 @@ public class VentanaAdmin extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
 					
 			}
 		});
@@ -621,7 +621,7 @@ public class VentanaAdmin extends JFrame {
 						
 						
 						
-						JOptionPane.showMessageDialog(null, "¡¡PRODUCTO AÑADIDO CORRECTAMENTE!!");
+						JOptionPane.showMessageDialog(null, "ï¿½ï¿½PRODUCTO Aï¿½ADIDO CORRECTAMENTE!!");
 					}else {
 						JOptionPane.showMessageDialog(null, "Tienes que Seleccionar una imagen", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}

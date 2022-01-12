@@ -1,6 +1,7 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -80,9 +81,10 @@ public class VentanaCarritoUsuario extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 			
-		//CREACIÓN DE LOS PANELES
+		//CREACIï¿½N DE LOS PANELES
 		panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
+		panelSur.setBackground(new Color(122,217,196));
 		
 		btnVolver = new JButton("VOLVER");
 		panelSur.add(btnVolver);
@@ -90,16 +92,20 @@ public class VentanaCarritoUsuario extends JFrame {
 		
 		panelNorte = new JPanel();
 		contentPane.add(panelNorte, BorderLayout.NORTH);
+		panelNorte.setBackground(new Color(122,217,196));
 		
 		panelCentral = new JPanel();
 		panelCentral.setLayout(new GridLayout(2,1));
 		contentPane.add(panelCentral, BorderLayout.CENTER);
+		panelCentral.setBackground(new Color(122,217,196));
 		
 		panelCentralArriba = new JPanel();
 		panelCentral.add(panelCentralArriba);
+		panelCentralArriba.setBackground(new Color(122,217,196));
 		
 		panelCentralAbajo = new JPanel();
 		panelCentral.add(panelCentralAbajo);
+		panelCentralAbajo.setBackground(new Color(122,217,196));
 		
 		//CREACION DE LOS COMPONENTES
 		lblCarrito = new JLabel();
@@ -149,7 +155,7 @@ public class VentanaCarritoUsuario extends JFrame {
 				VentanaPrincipal.guardarMapaUsuariosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
 			}
 		});
 		
@@ -300,7 +306,7 @@ public class VentanaCarritoUsuario extends JFrame {
 						VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 						VentanaPrincipal.guardarListaHistorialBusqueda();
 						VentanaPrincipal.guardarMapaSatisfaccion();
-						VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
+						VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
 					
 					}
 				});

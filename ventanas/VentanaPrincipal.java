@@ -286,7 +286,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		
-		//AÑADIMOS LOS PANELES AL PANEL PRINCIPAL DE LA VENTANA
+		//Aï¿½ADIMOS LOS PANELES AL PANEL PRINCIPAL DE LA VENTANA
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		contentPane.add(panelNorte, BorderLayout.NORTH);
 		
@@ -353,7 +353,7 @@ public class VentanaPrincipal extends JFrame {
 		ponerFotoABoton(btnCarrito, "imagenes\\IconoCarrito.png", 30, 30, 30, 30);
 		
 		btnCambiarCon = new JButton();
-		ponerFotoABoton(btnCambiarCon, "imagenes\\IconoCambiarContraseña.png", 30, 30, 30, 30);
+		ponerFotoABoton(btnCambiarCon, "imagenes\\IconoCambiarContraseï¿½a.png", 30, 30, 30, 30);
 		btnCambiarCon.setVisible(false);
 		
 		modelosp = new SpinnerNumberModel(50, 0, 100, 1);
@@ -364,12 +364,12 @@ public class VentanaPrincipal extends JFrame {
 		pb.setValue(50);
 		pb.setVisible(false);
 		
-		lblValoracion = new JLabel("VALÓRANOS:");
+		lblValoracion = new JLabel("VALï¿½RANOS:");
 		lblValoracion.setVisible(false);
 		
 	
 		
-		//AÑADIMOS LOS COMPONENTES A LOS PANELES
+		//Aï¿½ADIMOS LOS COMPONENTES A LOS PANELES
 
 		panelArribaIzq12.add(btnCarrito);
 		panelArribaIzq12.add(btnInicioSesion);
@@ -413,7 +413,7 @@ public class VentanaPrincipal extends JFrame {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int resp = JOptionPane.showConfirmDialog(null,"¿ESTA SEGURO DE SU OPCIÓN?");
+				int resp = JOptionPane.showConfirmDialog(null,"ï¿½ESTA SEGURO DE SU OPCIï¿½N?");
 				if(resp == JOptionPane.OK_OPTION) {
 					int valor = pb.getValue();
 					hmSatisfaccion.put(VentanaInicioSesion.n, valor);
@@ -470,7 +470,7 @@ public class VentanaPrincipal extends JFrame {
 					VentanaCarritoUsuario.lblCarrito.setText("CARRITO DE LA COMPRA DE " + VentanaInicioSesion.n);
 					VentanaPrincipal.log.log(Level.INFO, VentanaInicioSesion.n + " ha accedido a su carrito de la compra");
 				} else {
-					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesión primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesiï¿½n primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -490,7 +490,7 @@ public class VentanaPrincipal extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			VentanaPrincipal.log.log(Level.INFO, VentanaInicioSesion.n + " ha cerrado sesión");
+			VentanaPrincipal.log.log(Level.INFO, VentanaInicioSesion.n + " ha cerrado sesiï¿½n");
 			lblNombre.setText("");
 			VentanaInicioSesion.n = "";
 			btnAdmin.setVisible(false);
@@ -742,7 +742,7 @@ public class VentanaPrincipal extends JFrame {
 				cargarMapaPedidosDeFicheroDeTexto();
 				cargarListaHistorialBusqueda();
 				cargarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Se han cargado las estructuras de datos de los ficheros de información");
+				VentanaPrincipal.log.log(Level.INFO, "Se han cargado las estructuras de datos de los ficheros de informaciï¿½n");
 			}
 				
 			
@@ -753,7 +753,7 @@ public class VentanaPrincipal extends JFrame {
 				guardarMapaPedidosEnFicheroDeTexto();
 				guardarListaHistorialBusqueda();
 				guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
 			}
 			
 			
@@ -1021,7 +1021,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	/**
-	 * METODO RECURSIVO (RECURSIVIDAD MULTIPLE) PARA BUSCAR EN QUE POSICIÓN HABRIA QUE INSERTAR ALGO PARA QUE LA LISTA SE MANTUVIERA ORDENADA
+	 * METODO RECURSIVO (RECURSIVIDAD MULTIPLE) PARA BUSCAR EN QUE POSICIï¿½N HABRIA QUE INSERTAR ALGO PARA QUE LA LISTA SE MANTUVIERA ORDENADA
 	 * @param al El ArrayList
 	 * @param pi Posicion Inicial
 	 * @param pf Posicion Final
@@ -1046,12 +1046,12 @@ public class VentanaPrincipal extends JFrame {
 		
 	/**
 	 * METODO QUE PONE UN COLOR DETERMINADO A UN BOTON CON LAS MEDIDAS PERSONALIZADAS
-	 * @param btn --> EL BOTON AL QUE SE LE VA A PONER UNA IMÁGEN
+	 * @param btn --> EL BOTON AL QUE SE LE VA A PONER UNA IMï¿½GEN
 	 * @param rutaFoto --> RUTA DE LA IMAGEN PARA PODER ACCEDER A ELLA
-	 * @param x --> VALOR DE LA COORDENADA X DE LA IMÁGEN
-	 * @param y --> VALOR DE LA COORDENADA Y DE LA IMÁGEN
-	 * @param width --> ANCHURA DE LA IMÁGEN
-	 * @param height --> ALTURA DE LA IMÁGEN
+	 * @param x --> VALOR DE LA COORDENADA X DE LA IMï¿½GEN
+	 * @param y --> VALOR DE LA COORDENADA Y DE LA IMï¿½GEN
+	 * @param width --> ANCHURA DE LA IMï¿½GEN
+	 * @param height --> ALTURA DE LA IMï¿½GEN
 	 */
 	public static void ponerFotoABoton (JButton btn, String rutaFoto, int x, int y, int width, int height) {
 		btn.setBounds(x, y, width, height);
@@ -1065,12 +1065,12 @@ public class VentanaPrincipal extends JFrame {
 	
 	/**
 	 * METODO QUE PONE UN COLOR SELECCIONADO A UN BOTON CON LAS MEDIDAS PERSONALIZADAS
-	 * @param btn --> EL BOTON AL QUE SE LE VA A PONER UNA IMÁGEN
+	 * @param btn --> EL BOTON AL QUE SE LE VA A PONER UNA IMï¿½GEN
 	 * @param rutaFoto --> RUTA DE LA IMAGEN PARA PODER ACCEDER A ELLA
-	 * @param x --> VALOR DE LA COORDENADA X DE LA IMÁGEN
-	 * @param y --> VALOR DE LA COORDENADA Y DE LA IMÁGEN
-	 * @param width --> ANCHURA DE LA IMÁGEN
-	 * @param height --> ALTURA DE LA IMÁGEN
+	 * @param x --> VALOR DE LA COORDENADA X DE LA IMï¿½GEN
+	 * @param y --> VALOR DE LA COORDENADA Y DE LA IMï¿½GEN
+	 * @param width --> ANCHURA DE LA IMï¿½GEN
+	 * @param height --> ALTURA DE LA IMï¿½GEN
 	 * @param color --> EL COLOR SELECCIONADO
 	 */
 	public static void ponerFotoABotonDelColorQueQuieras (JButton btn, String rutaFoto, int x, int y, int width, int height, Color color) {

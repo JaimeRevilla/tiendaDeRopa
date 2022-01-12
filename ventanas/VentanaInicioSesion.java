@@ -54,16 +54,19 @@ public class VentanaInicioSesion extends JFrame {
 		
 		panelNorte = new JPanel();
 		contentPane.add(panelNorte, BorderLayout.NORTH);
+		panelNorte.setBackground(new Color(122,217,196));
 		
 		panelCentral = new JPanel();
 		panelCentral.setLayout(new GridLayout(0, 2));
 		contentPane.add(panelCentral, BorderLayout.CENTER);
+		panelCentral.setBackground(new Color(122,217,196));
 		
 		panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
-
+		panelSur.setBackground(new Color(122,217,196));
+		
 		lblNombre = new JLabel("INTRODUCE TU NOMBRE DE USUARIO: ");
-		lblCon = new JLabel("INTRODUCE UNA CONTRASEÑA: ");
+		lblCon = new JLabel("INTRODUCE UNA CONTRASEï¿½A: ");
 		
 		textNombre = new JTextField();
 		textCon = new JPasswordField();
@@ -84,8 +87,8 @@ public class VentanaInicioSesion extends JFrame {
 		panelSur.add(btnIniciarSesion);
 		VentanaPrincipal.ponerFotoABoton(btnIniciarSesion, "imagenes\\IconoiniciarSesion.png", 30, 30, 30, 30);
 		
-		panelCentral.setBackground(Color.CYAN);
-		panelSur.setBackground(Color.CYAN);
+		panelCentral.setBackground(new Color(122,217,196));
+		panelSur.setBackground(new Color(122,217,196));
 		
 		//-----------------------------------------------------------------------------------------------------------
 		ventanaActual.addWindowListener(new WindowAdapter() {
@@ -97,7 +100,7 @@ public class VentanaInicioSesion extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
 			
 			}
 		});
@@ -125,13 +128,13 @@ public class VentanaInicioSesion extends JFrame {
 				Connection con = BD.initBD("SweetWear.db"); 
 				int resul = BD.obtenerUsuario(con, n, c);
 				if (resul == 0) {
-					JOptionPane.showMessageDialog(null, "¡¡PRIMERO TIENES QUE REGISTRARTE!!", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "ï¿½ï¿½PRIMERO TIENES QUE REGISTRARTE!!", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 					new VentanaRegistro(ventanaActual);
 					ventanaActual.setVisible(false);
 				} else if (resul == 1){
-					JOptionPane.showMessageDialog(null, "¡¡LA CONTRASEÑA EN INCORRECTA!!", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "ï¿½ï¿½LA CONTRASEï¿½A EN INCORRECTA!!", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				} else if (resul == 2){
-					JOptionPane.showMessageDialog(null, "¡¡BIENVENIDO "+ n+ "!!");
+					JOptionPane.showMessageDialog(null, "ï¿½ï¿½BIENVENIDO "+ n+ "!!");
 					VentanaPrincipal.lblNombre.setText("BIENVENIDO " + n);
 					VentanaPrincipal.log.log(Level.INFO, "Se ha iniciado sesion como" + " " + n);
 					

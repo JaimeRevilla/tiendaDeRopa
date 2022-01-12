@@ -67,7 +67,7 @@ public class VentanaAdmin2 extends JFrame {
 		ventanaActual = this;
 		
 		panelSur = new JPanel();
-		panelSur.setBackground(Color.CYAN);
+		panelSur.setBackground(new Color(122,217,196));
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		
 		btnVolver = new JButton("VOLVER");
@@ -100,7 +100,7 @@ public class VentanaAdmin2 extends JFrame {
 		panelCentro.add(scrollTienda);
 		
 		textAreaEstadisticas = new JTextArea();
-		textAreaEstadisticas.setText("VALORACIÓN");
+		textAreaEstadisticas.setText("VALORACIï¿½N");
 		scrollEstadisticas = new JScrollPane(textAreaEstadisticas);
 		panelCentro.add(scrollEstadisticas);
 		
@@ -113,7 +113,7 @@ public class VentanaAdmin2 extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
 
 			
 			}

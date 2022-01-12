@@ -82,15 +82,17 @@ public class VentanaRegistro extends JFrame {
 		
 		panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
+		panelSur.setBackground(new Color(122,217,196));
 		
 		panelCentral = new JPanel();
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		panelCentral.setLayout(new GridLayout(0, 2, 0, 0));
+		panelCentral.setBackground(new Color(122,217,196));
 		
 		lblNombre = new JLabel("NOMBRE: ");
 		lblEdad = new JLabel("EDAD: ");
-		lblMail = new JLabel("CORREO ELECTRÓNICO: ");
-		lblCon = new JLabel("CONTRASEÑIA: ");
+		lblMail = new JLabel("CORREO ELECTRï¿½NICO: ");
+		lblCon = new JLabel("CONTRASEï¿½IA: ");
 		
 		txtNombre = new JTextField();
 		txtNombre.setColumns(10);
@@ -119,8 +121,8 @@ public class VentanaRegistro extends JFrame {
 		panelSur.add(btnVolver);
 		panelSur.add(btnRegistrar);
 		
-		panelSur.setBackground(Color.CYAN);
-		panelCentral.setBackground(Color.CYAN);
+		panelSur.setBackground(new Color(122,217,196));
+		panelCentral.setBackground(new Color(122,217,196));
 		
 		//-----------------------------------------------------------------------------------------------------------
 		ventanaActual.addWindowListener(new WindowAdapter() {
@@ -132,7 +134,7 @@ public class VentanaRegistro extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
 			
 			}
 		});
@@ -165,15 +167,15 @@ public class VentanaRegistro extends JFrame {
 						BD.closeBD(con);
 						JOptionPane.showMessageDialog(null, "Persona registrada correctamente", "REGISTRO CORRECTO", JOptionPane.INFORMATION_MESSAGE);
 						//Logger Usuarios
-						VentanaPrincipal.log.log(Level.INFO, "Se ha añadido un Usuario");;
+						VentanaPrincipal.log.log(Level.INFO, "Se ha aï¿½adido un Usuario");;
 						vaciarCampos();
 					}else {
-						JOptionPane.showMessageDialog(null, "El correo electronico no es correcto", "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "El correo electronico no es correcto", "ï¿½ï¿½ERROR!!", JOptionPane.ERROR_MESSAGE);
 						vaciarCampos();
 						throw new ExcepcionImplicita("ERROR! El correo electronico no es correcto");
 					}
 				}else
-					JOptionPane.showMessageDialog(null, "Ya existe un usuario con ese nombre!!!", "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Ya existe un usuario con ese nombre!!!", "ï¿½ï¿½ERROR!!", JOptionPane.ERROR_MESSAGE);
 					vaciarCampos();
 
 			}
@@ -181,7 +183,7 @@ public class VentanaRegistro extends JFrame {
 		});	
 		
 		/**
-		 * Botón que al clickar cierra la ventana actual y abre la anterior
+		 * Botï¿½n que al clickar cierra la ventana actual y abre la anterior
 		 */
 		
 		btnVolver.addActionListener(new ActionListener() {

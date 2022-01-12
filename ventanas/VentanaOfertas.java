@@ -1,6 +1,7 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -79,15 +80,16 @@ public class VentanaOfertas extends JFrame {
 		panelCentral = new JPanel();
 		panelCentral.setLayout(new GridLayout(2, 1));
 		contentPane.add(panelCentral, BorderLayout.CENTER);
+		panelCentral.setBackground(new Color(122,217,196));
 		
 		panelCentralArriba = new JPanel();
 		panelCentral.add(panelCentralArriba);
-		
+		panelCentralArriba.setBackground(new Color(122,217,196));
 		
 		panelCentralAbajo = new JPanel();
 		panelCentralAbajo.setLayout(new GridLayout(3,2));
 		panelCentral.add(panelCentralAbajo);
-		
+		panelCentralAbajo.setBackground(new Color(122,217,196));
 		
 		panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
@@ -167,7 +169,7 @@ public class VentanaOfertas extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de información han sido actualizados correctamente");
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
 			
 			}
 		});
