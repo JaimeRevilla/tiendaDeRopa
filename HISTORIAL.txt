@@ -1,9 +1,0 @@
-alto
-bota
-calcetin
-campana
-chandal
-deportiva
-formal
-sudadera
-vaquero

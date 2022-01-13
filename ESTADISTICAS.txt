@@ -1,6 +1,0 @@
-p 60
-a 53
-Piki 97
-t 80
-Itziar 60
-arene 56

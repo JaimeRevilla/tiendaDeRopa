@@ -83,7 +83,8 @@ public class VentanaAdmin2 extends JFrame {
 		panelCentro = new JPanel();
 		contentPane.add(panelCentro, BorderLayout.CENTER);
 		panelCentro.setLayout(new GridLayout(2, 2));
-	
+		panelCentro.setBackground(new Color(122,217,196));
+		
 		textAreaUsuarios = new JTextArea();
 		textAreaUsuarios.setText("USUARIOS");
 		scrollUsuarios = new JScrollPane(textAreaUsuarios);

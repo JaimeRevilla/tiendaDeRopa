@@ -70,6 +70,7 @@ public class VentanaCamiseta extends JFrame {
 		
 		panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
+		panelSur.setBackground(new Color(122, 217, 196));
 		
 		btnVolver = new JButton("VOLVER");
 		panelSur.add(btnVolver);
@@ -78,7 +79,7 @@ public class VentanaCamiseta extends JFrame {
 		panelCentral = new JPanel();
 		panelCentral.setLayout(new GridLayout(0, 2));
 		contentPane.add(panelCentral, BorderLayout.CENTER);
-		
+		panelCentral.setBackground(new Color(122,217,196));
 		//--------------------------------------------------------------------------------------------------
 	
 		
