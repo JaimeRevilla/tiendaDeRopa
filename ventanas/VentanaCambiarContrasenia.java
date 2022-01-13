@@ -58,10 +58,7 @@ public class VentanaCambiarContrasenia extends JFrame {
 		
 		//PROPIEDADES DE LA VENTANA
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		//setBounds(100, 100, 450, 300);
-		//setSize(1650, 1080);
-		//setBounds(500, 150, 600, 450);
+		setBounds(500, 150, 600, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -81,19 +78,19 @@ public class VentanaCambiarContrasenia extends JFrame {
 		btnvolver = new JButton("VOLVER");
 		VentanaPrincipal.ponerFotoABoton(btnvolver, "imagenes\\IconoSalir.png", 30, 30, 30, 30);
 		
-		btnCambiarCon = new JButton("CAMBIAR CONTRASENIA");
-		VentanaPrincipal.ponerFotoABoton(btnCambiarCon, "imagenes\\IconoCambiarContraseï¿½a.png", 30, 30, 30, 30);
+		btnCambiarCon = new JButton("CAMBIAR CONTRASEÑIA");
+		VentanaPrincipal.ponerFotoABoton(btnCambiarCon, "imagenes\\IconoCambiarContraseña.png", 30, 30, 30, 30);
 		
-		lblConActual = new JLabel("CONTRASEï¿½A ACTUAL: ");
-		lblConNueva = new JLabel("CONTRASEï¿½A NUEVA: ");
-		lblConNueva2 = new JLabel("REPETIR CONTRASEï¿½A");
+		lblConActual = new JLabel("CONTRASEÑIA ACTUAL: ");
+		lblConNueva = new JLabel("CONTRASEÑIA NUEVA: ");
+		lblConNueva2 = new JLabel("REPETIR CONTRASEÑIA");
 
 		
 		txtConActual = new JPasswordField();
 		txtConNueva = new JPasswordField();
 		txtConNueva2 = new JPasswordField();
 		
-		//Aï¿½ADIMOS LOS COMPONENTES A LOS PANELES
+		//AÑIADIMOS LOS COMPONENTES A LOS PANELES
 		panelCentral.add(lblConActual);
 		panelCentral.add(txtConActual);
 		panelCentral.add(lblConNueva);
@@ -115,6 +112,7 @@ public class VentanaCambiarContrasenia extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informacion han sido actualizados correctamente");
 			
 			}
 		});
@@ -144,19 +142,19 @@ public class VentanaCambiarContrasenia extends JFrame {
 				String c = BD.obtenerConUsuario(con, VentanaInicioSesion.n);
 				if (c.equals(vieja)) {
 					if(nueva.equals(vieja)) {
-						JOptionPane.showMessageDialog(null, "LA CONTRASEï¿½A NUEVA ES LA MISMA QUE LA VIEJA", "ERROR", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "LA CONTRASEÑIA NUEVA ES LA MISMA QUE LA VIEJA", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}else if (nueva.equals(nuevaRepetida)) {
 						BD.modificarConUsuario(con, VentanaInicioSesion.n, nueva);
 						Usuario u = BD.obtenerUsuario(con, VentanaInicioSesion.n);
 						u.setCon(nueva);
 						VentanaPrincipal.tmUsuarios.get(VentanaInicioSesion.n).setCon(nueva);
 						VentanaPrincipal.log.log(Level.INFO, VentanaInicioSesion.n + " ha modificiado su contrasenia");
-						JOptionPane.showMessageDialog(null, "CONTRASEï¿½A ACTUALIZADA CORRECTAMENTE");
+						JOptionPane.showMessageDialog(null, "CONTRASEÑIA ACTUALIZADA CORRECTAMENTE");
 					}else{
-						JOptionPane.showMessageDialog(null, "LA CONTRASEï¿½AS NO COINCIDEN", "ERROR", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "LA CONTRASEÑIAS NO COINCIDEN", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}
 				}else {
-					JOptionPane.showMessageDialog(null, "LA CONTRASEï¿½A NO ES CORRECTA", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "LA CONTRASEÑIA NO ES CORRECTA", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				BD.closeBD(con);
 				vaciarCampos();
@@ -164,7 +162,6 @@ public class VentanaCambiarContrasenia extends JFrame {
 			}
 		});
 		
-//------------------------------------------------------------------------------------------------------------------
 		
 		//EVENTOS DE VENTANA
 				
@@ -186,12 +183,11 @@ public class VentanaCambiarContrasenia extends JFrame {
 		
 	}
 	
-//---------------------------------------------------------------------------------------------------------------------	
+
 	
-	
-			
-	
-	
+	/**
+	 * METODO PARA VACIAR LOS CAMPOS DE LOS JTextFields
+	 */
 	private void vaciarCampos() {
 		txtConActual.setText("");
 		txtConNueva.setText("");

@@ -82,7 +82,6 @@ public class VentanaZapato extends JFrame {
 		panelCentral.setLayout(new GridLayout(0, 2));
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		panelCentral.setBackground(new Color(122,217,196));
-		//--------------------------------------------------------------------------------------------------
 	
 		
 		panelP1 = new JPanel();
@@ -113,7 +112,6 @@ public class VentanaZapato extends JFrame {
 		else
 			lblBotas.setText("BOTAS" + ": " + "Unidades restantes: " + sto + " unidades    " + "Precio: " + pre1 + " euros");
 		
-		//----------------------------------------------------------------------------
 		panelP2 = new JPanel();
 		panelP2.setLayout(new GridLayout(2, 1));
 		panelCentral.add(panelP2);
@@ -142,7 +140,6 @@ public class VentanaZapato extends JFrame {
 		else
 			lblDeportivas.setText("DEPORTIVAS" + ": " + "Unidades restantes: " + sto1 + " unidades    " + "Precio: " + pre2 + " euros");
 		
-		//--------------------------------------------------------------------------
 		panelP3 = new JPanel();
 		panelP3.setLayout(new GridLayout(2, 1));
 		panelCentral.add(panelP3);
@@ -171,7 +168,6 @@ public class VentanaZapato extends JFrame {
 			lblTacones.setText("TACONES: " + "Unidades restantes: " + sto2 + " unidades    " + "Precio: " + pre3 + " euros");
 		
 		
-		//------------------------------------------------------------------------------------------------------------------
 		panelP4 = new JPanel();
 		panelP4.setLayout(new GridLayout(2, 1));
 		panelCentral.add(panelP4);
@@ -198,7 +194,6 @@ public class VentanaZapato extends JFrame {
 			lblFormales.setText("FORMALES: " + "NO HAY NINGUNA UNIDAD EN STOCK");
 		else
 			lblFormales.setText("FORMALES: " + "Unidades restantes: " + sto3 + " unidades    " + "Precio: " + pre4 + " euros");
-		//------------------------------------------------------------------------------------------------------------------
 		
 		//EVENTOS DE VENTANA
 		
@@ -211,13 +206,11 @@ public class VentanaZapato extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informacion han sido actualizados correctamente");
 			
 			}
 		});
-		
-		//---------------------------------------------------------------------------------------------------------------
-		
+				
 		 
 		
 		//EVENTOS
@@ -237,9 +230,8 @@ public class VentanaZapato extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String texto = VentanaPrincipal.lblNombre.getText();
 				if (texto != "") {
-					int resp = JOptionPane.showConfirmDialog(null,"ï¿½Quieres aniadir este producto a tu cesta?");
+					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
-						//AQUI SE Aï¿½ADIRA AL CARRITO ESTE PRODUCTO
 						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
@@ -251,7 +243,7 @@ public class VentanaZapato extends JFrame {
 								else
 									lblBotas.setText("BOTAS" + ": " + "Unidades restantes: " + (stock-canti) + " unidades     " + "Precio: " + pre1 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "Bota");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Zapato(p.getCodigo(), p.getColor(), p.getPrecio(), canti, p.getMarca(), p.getNombre(), p.getRutaFoto(), "Negro", true, TipoZapato.BOTAS)); //AQUI Aï¿½ADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Zapato(p.getCodigo(), p.getColor(), p.getPrecio(), canti, p.getMarca(), p.getNombre(), p.getRutaFoto(), "Negro", true, TipoZapato.BOTAS)); 
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -267,15 +259,15 @@ public class VentanaZapato extends JFrame {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
-								JOptionPane.showMessageDialog(null, "ï¿½ï¿½PRODUCTO Aï¿½ADIDO CORRECTAMENTE!!");
+								JOptionPane.showMessageDialog(null, "PRODUCTO AÑIADIDO CORRECTAMENTE!!");
 								BD.closeBD(con);
 							}else
 								JOptionPane.showMessageDialog(null, "Lo sentimos, no hay suficientes unidades en stock", "ERROR", JOptionPane.ERROR_MESSAGE);
 						}else
-							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un nÃºmero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un numero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}	
 				}else {
-					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesiï¿½n primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesion primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});	
@@ -287,9 +279,8 @@ public class VentanaZapato extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String texto = VentanaPrincipal.lblNombre.getText();
 				if (texto != "") {
-					int resp = JOptionPane.showConfirmDialog(null,"ï¿½Quieres aniadir este producto a tu cesta?");
+					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
-						//AQUI SE Aï¿½ADIRA AL CARRITO ESTE PRODUCTO
 						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
@@ -301,7 +292,7 @@ public class VentanaZapato extends JFrame {
 								else
 									lblDeportivas.setText("DEPORTIVAS" + ": " + "Unidades restantes: " + (stock-canti) + " unidades     " + "Precio: " + pre2 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "Deportiva");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Zapato(p.getCodigo(), p.getColor(), p.getPrecio(), canti, p.getMarca(), p.getNombre(), p.getRutaFoto(), "Negro",  false, TipoZapato.DEPORTIVAS)); //AQUI Aï¿½ADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Zapato(p.getCodigo(), p.getColor(), p.getPrecio(), canti, p.getMarca(), p.getNombre(), p.getRutaFoto(), "Negro",  false, TipoZapato.DEPORTIVAS)); 
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -316,15 +307,15 @@ public class VentanaZapato extends JFrame {
 								} catch (SQLException e1) {
 									e1.printStackTrace();
 								}
-								JOptionPane.showMessageDialog(null, "ï¿½ï¿½PRODUCTO Aï¿½ADIDO CORRECTAMENTE!!");
+								JOptionPane.showMessageDialog(null, "PRODUCTO AÑIADIDO CORRECTAMENTE!!");
 								BD.closeBD(con);
 							}else
 								JOptionPane.showMessageDialog(null, "Lo sentimos, no hay suficientes unidades en stock", "ERROR", JOptionPane.ERROR_MESSAGE);
 						}else
-							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un nÃºmero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un numero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}	
 				}else {
-					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesiï¿½n primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesion primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
 				
 			}
@@ -337,9 +328,8 @@ public class VentanaZapato extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String texto = VentanaPrincipal.lblNombre.getText();
 				if (texto != "") {
-					int resp = JOptionPane.showConfirmDialog(null,"ï¿½Quieres aniadir este producto a tu cesta?");
+					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
-						//AQUI SE Aï¿½ADIRA AL CARRITO ESTE PRODUCTO
 						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
@@ -351,7 +341,7 @@ public class VentanaZapato extends JFrame {
 								else
 									lblTacones.setText("TACONES:" + ": " + "Unidades restantes: " + (stock-canti) + " unidades     " + "Precio: " + pre3 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "Tacon");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Zapato(p.getCodigo(), p.getColor(), p.getPrecio(), canti, p.getMarca(), p.getNombre(), p.getRutaFoto(), "Rojo" ,false, TipoZapato.TACONES)); //AQUI Aï¿½ADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Zapato(p.getCodigo(), p.getColor(), p.getPrecio(), canti, p.getMarca(), p.getNombre(), p.getRutaFoto(), "Rojo" ,false, TipoZapato.TACONES)); 
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -366,7 +356,7 @@ public class VentanaZapato extends JFrame {
 								} catch (SQLException e1) {
 									e1.printStackTrace();
 								}
-								JOptionPane.showMessageDialog(null, "ï¿½ï¿½PRODUCTO Aï¿½ADIDO CORRECTAMENTE!!");
+								JOptionPane.showMessageDialog(null, "PRODUCTO AÑIADIDO CORRECTAMENTE!!");
 								BD.closeBD(con);
 							}else
 								JOptionPane.showMessageDialog(null, "Lo sentimos, no hay suficientes unidades en stock", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -374,7 +364,7 @@ public class VentanaZapato extends JFrame {
 							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un numero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}	
 				}else {
-					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesiï¿½n primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesion primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -385,9 +375,8 @@ public class VentanaZapato extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String texto = VentanaPrincipal.lblNombre.getText();
 				if (texto != "") {
-					int resp = JOptionPane.showConfirmDialog(null,"ï¿½Quieres aniadir este producto a tu cesta?");
+					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
-						//AQUI SE Aï¿½ADIRA AL CARRITO ESTE PRODUCTO
 						String cant = JOptionPane.showInputDialog("Cuantas Unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
@@ -399,7 +388,7 @@ public class VentanaZapato extends JFrame {
 								else
 									lblFormales.setText("FORMALES" + ": " + "Unidades restantes: " + (stock-canti) + " unidades     " + "Precio: " + pre4 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "Formal");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Zapato(0, p.getColor(), p.getPrecio(), canti, p.getMarca(), p.getNombre(), p.getRutaFoto(), "Marron",  false,  TipoZapato.FORMALES)); //AQUI Aï¿½ADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Zapato(0, p.getColor(), p.getPrecio(), canti, p.getMarca(), p.getNombre(), p.getRutaFoto(), "Marron",  false,  TipoZapato.FORMALES));
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -414,7 +403,7 @@ public class VentanaZapato extends JFrame {
 								} catch (SQLException e1) {
 									e1.printStackTrace();
 								}
-								JOptionPane.showMessageDialog(null, "ï¿½ï¿½PRODUCTO Aï¿½ADIDO CORRECTAMENTE!!");
+								JOptionPane.showMessageDialog(null, "PRODUCTO AÑIADIDO CORRECTAMENTE!!");
 								BD.closeBD(con);
 							}else
 								JOptionPane.showMessageDialog(null, "Lo sentimos, no hay suficientes unidades en stock", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -422,7 +411,7 @@ public class VentanaZapato extends JFrame {
 							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un numero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}	
 				}else {
-					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesiï¿½n primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesion primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		

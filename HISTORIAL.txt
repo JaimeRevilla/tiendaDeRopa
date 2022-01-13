@@ -1,0 +1,7 @@
+bota
+camiseta
+chandal
+pantalon
+sudadera
+tacon
+zapato

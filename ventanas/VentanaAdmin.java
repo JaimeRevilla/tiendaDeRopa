@@ -69,7 +69,6 @@ public class VentanaAdmin extends JFrame {
 	public static JTextField txtPrecio, txtStock, txtMarca, txtColor, txtColorCordones, txtGoretex;
 	public static JLabel lblTipoCalcetines, lblTipoSudadera, lblTipoCamiseta, lblTipoPantalon, lblColorCordones, lblGoretex, lblTipoZapato;
 	public static JComboBox<String> comboTipoCalcetines, comboTipoSudaderas, comboTipoCamisetas, comboTipoPantalones, comboTipoZapatos;
-	private JTextArea textArea;
 	private JFrame ventanaActual, ventanaAnterior;
 	private JTable tablaProductos;
 	private DefaultTableModel modeloTablaProductos;
@@ -107,7 +106,6 @@ public class VentanaAdmin extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		//setSize(1650, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -168,7 +166,7 @@ public class VentanaAdmin extends JFrame {
 		VentanaPrincipal.ponerFotoABoton(btnMostarMapa, "imagenes\\IconoDatos.png", 30, 30, 30, 30);
 		btnVolver = new JButton("VOLVER");
 		VentanaPrincipal.ponerFotoABoton(btnVolver, "imagenes\\IconoSalir.png", 30, 30, 30, 30);
-		btnAniadir = new JButton("Aï¿½ADIR PRODUCTO");
+		btnAniadir = new JButton("AÑIADIR PRODUCTO");
 		VentanaPrincipal.ponerFotoABoton(btnAniadir, "imagenes\\IconoAniadir.png", 30, 30, 30, 30);
 		btnElegirEsePanel = new JButton("CREAR UN PRODUCTO DE ESE TIPO");
 		VentanaPrincipal.ponerFotoABoton(btnElegirEsePanel, "imagenes\\IconoElegir.png", 30, 30, 30, 30);
@@ -221,9 +219,7 @@ public class VentanaAdmin extends JFrame {
 			comboTipoZapatos.addItem(n);
 		}
 		
-		
-		//SEGURAMENTE ESTO HABRA QUE METERLO EN ALGUN HILO SUPONGO
-		
+				
 		lblNombre = new JLabel("NOMBRE");
 		panelArribaIzq.add(lblNombre);
 		panelArribaIzq.add(comboProductos);
@@ -239,7 +235,7 @@ public class VentanaAdmin extends JFrame {
 		
 		
 		
-		//CREACIï¿½N DE LA TABLA
+		//CREACION DE LA TABLA
 		modeloTablaProductos = new DefaultTableModel();
 		Vector<String> cabeceras = new Vector<String>( Arrays.asList( "ID","COLOR","TIPO PRODUCTO","PRECIO", "STOCK", "MARCA", "RUTA FOTO") );
 		modeloTablaProductos = new DefaultTableModel(  
@@ -327,7 +323,7 @@ public class VentanaAdmin extends JFrame {
 			
 		});
 		
-		JScrollPane scrollTablaProductos = new JScrollPane(tablaProductos);
+		scrollTablaProductos = new JScrollPane(tablaProductos);
 		panelArribaDrc.add(scrollTablaProductos);
 		
 		lblFotoTabla = new JLabel("");
@@ -386,7 +382,7 @@ public class VentanaAdmin extends JFrame {
 			}
 		});
 		
-		JOptionPane.showMessageDialog(null, "PARA BORRAR UN PRODUCTO PULSE EL RATï¿½N SOBRE EL CODIGO DE LOS PRODUCTO EN LA TABLA 3 VECES", "ADVERTENCIA!!!", JOptionPane.NO_OPTION);
+		JOptionPane.showMessageDialog(null, "PARA BORRAR UN PRODUCTO PULSE EL RATON SOBRE EL CODIGO DE LOS PRODUCTO EN LA TABLA 3 VECES", "ADVERTENCIA!!!", JOptionPane.NO_OPTION);
 
 		
 		mntmCargarArchivo.addActionListener(new ActionListener() {
@@ -411,9 +407,8 @@ public class VentanaAdmin extends JFrame {
 			}
 		});
 		
-	//------------------------------------------------------------------------------------------------------------------
 		
-				//EVENTOS DE VENTANA
+		//EVENTOS DE VENTANA
 				
 		ventanaActual.addWindowListener(new WindowAdapter() {
 				
@@ -424,12 +419,10 @@ public class VentanaAdmin extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
-					
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informacion han sido actualizados correctamente");					
 			}
 		});
 				
-	//---------------------------------------------------------------------------------------------------------------
 				
 		
 		
@@ -596,7 +589,6 @@ public class VentanaAdmin extends JFrame {
 							e1.printStackTrace();
 						}
 						cod = cod + 1;
-						//String.valueOf(cod)
 						Producto p = new Producto(cod, color, nombre, precio, stock, marca, rutaFoto);
 						String [] fila = {String.valueOf(i), color, nombre, String.valueOf(precio), String.valueOf(stock), marca, rutaAdecuada};
 						modeloTablaProductos.addRow(fila);
@@ -621,7 +613,7 @@ public class VentanaAdmin extends JFrame {
 						
 						
 						
-						JOptionPane.showMessageDialog(null, "ï¿½ï¿½PRODUCTO Aï¿½ADIDO CORRECTAMENTE!!");
+						JOptionPane.showMessageDialog(null, "PRODUCTO AÑIADIDO CORRECTAMENTE!!");
 					}else {
 						JOptionPane.showMessageDialog(null, "Tienes que Seleccionar una imagen", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}

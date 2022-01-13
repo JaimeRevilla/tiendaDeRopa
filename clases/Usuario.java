@@ -68,12 +68,6 @@ public class Usuario implements Comparable<Usuario> {
 	public boolean getPermisos() {
 		return permisos;
 	}
-
-	@Override
-//	public String toString() {
-//		return "Usuario [nombre=" + nombre + ", mail=" + mail + ", edad=" + edad + ", con=" + con + ", permisos="
-//				+ permisos + "]";
-//	}
 	
 	public String toString() {
 		return "Nombre: " + nombre + "   Edad: " + edad + "   Correo: " + mail + "   Contrasenia: " + con + "   Permisos: " + permisos;

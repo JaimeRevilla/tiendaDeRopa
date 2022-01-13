@@ -65,16 +65,11 @@ public class VentanaRegistro extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaRegistro(JFrame va) {
-
-		Connection con = BD.initBD("SweetWear.db");
 		ventanaAnterior = va;
 		ventanaActual = this;
 		
-		
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		//setBounds(500, 150, 600, 450);
+		setBounds(500, 150, 600, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -91,8 +86,8 @@ public class VentanaRegistro extends JFrame {
 		
 		lblNombre = new JLabel("NOMBRE: ");
 		lblEdad = new JLabel("EDAD: ");
-		lblMail = new JLabel("CORREO ELECTRï¿½NICO: ");
-		lblCon = new JLabel("CONTRASEï¿½IA: ");
+		lblMail = new JLabel("CORREO ELECTRONICO: ");
+		lblCon = new JLabel("CONTRASEÑIA: ");
 		
 		txtNombre = new JTextField();
 		txtNombre.setColumns(10);
@@ -134,7 +129,7 @@ public class VentanaRegistro extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informacion han sido actualizados correctamente");
 			
 			}
 		});
@@ -156,7 +151,6 @@ public class VentanaRegistro extends JFrame {
 				}
 				if (!VentanaPrincipal.tmUsuarios.containsKey(n) && existe == false) {
 					int ed = Integer.parseInt(txtEdad.getText());
-					//String ermail = "[A-Za-z]{1,20}@[A-Za-z]{1,20}.[a-z]{3}";
 					String m = txtMail.getText();
 					boolean correctoCorreo = Pattern.matches(ermail, m);
 					if (correctoCorreo) {
@@ -167,15 +161,15 @@ public class VentanaRegistro extends JFrame {
 						BD.closeBD(con);
 						JOptionPane.showMessageDialog(null, "Persona registrada correctamente", "REGISTRO CORRECTO", JOptionPane.INFORMATION_MESSAGE);
 						//Logger Usuarios
-						VentanaPrincipal.log.log(Level.INFO, "Se ha aï¿½adido un Usuario");;
+						VentanaPrincipal.log.log(Level.INFO, "Se ha añiadido un Usuario");;
 						vaciarCampos();
 					}else {
-						JOptionPane.showMessageDialog(null, "El correo electronico no es correcto", "ï¿½ï¿½ERROR!!", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "El correo electronico no es correcto", "ERROR!!", JOptionPane.ERROR_MESSAGE);
 						vaciarCampos();
 						throw new ExcepcionImplicita("ERROR! El correo electronico no es correcto");
 					}
 				}else
-					JOptionPane.showMessageDialog(null, "Ya existe un usuario con ese nombre!!!", "ï¿½ï¿½ERROR!!", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Ya existe un usuario con ese nombre!!!", "ERROR!!", JOptionPane.ERROR_MESSAGE);
 					vaciarCampos();
 
 			}

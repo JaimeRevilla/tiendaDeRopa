@@ -62,8 +62,6 @@ public class VentanaOfertas extends JFrame {
 		//PROPIEDADES DE LA VENTANA
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-//		setBounds(500, 150, 600, 450);
-		//setSize(1650, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -71,8 +69,6 @@ public class VentanaOfertas extends JFrame {
 		
 		ventanaAnterior = va;
 		ventanaActual = this;
-		
-		
 		
 		
 		//CREACION DE LOS PANELES
@@ -93,6 +89,7 @@ public class VentanaOfertas extends JFrame {
 		
 		panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
+		panelSur.setBackground(new Color(122,217,196));
 		
 		//SimpleDayFormtat y JCalendar
 		sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -169,7 +166,7 @@ public class VentanaOfertas extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaci�n han sido actualizados correctamente");
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informacion han sido actualizados correctamente");
 			
 			}
 		});

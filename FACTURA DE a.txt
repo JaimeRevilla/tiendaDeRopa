@@ -1,4 +1,4 @@
 FACTURA DE a
-1- Pinkie Blanco 10.0 euros  4 Nike imagenes\\IconoCalcetinesPinkie.png      Precio Del Mismo Articulo teniendo en cuenta las unidades compradas: 40.0 euros
-2- Pinkie Blanco 10.0 euros  4 Nike imagenes\\IconoCalcetinesPinkie.png      Precio Del Mismo Articulo teniendo en cuenta las unidades compradas: 40.0 euros
-Precio total de la compra: 80.0 euros
+1- Chandal Negro 25.0 euros  3 Nike imagenes\\IconoPantalonChandal.png      Precio Del Mismo Articulo teniendo en cuenta las unidades compradas: 75.0 euros
+2- Campana Negro 25.0 euros  3 Brownie imagenes\\IconoPantalonCampana.png      Precio Del Mismo Articulo teniendo en cuenta las unidades compradas: 75.0 euros
+Precio total de la compra: 150.0 euros

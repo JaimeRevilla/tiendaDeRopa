@@ -59,7 +59,6 @@ public class VentanaSudadera extends JFrame {
 	public VentanaSudadera(JFrame va) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		//setSize(1650, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -80,9 +79,7 @@ public class VentanaSudadera extends JFrame {
 		panelCentral = new JPanel();
 		panelCentral.setLayout(new GridLayout(0, 2));
 		contentPane.add(panelCentral, BorderLayout.CENTER);
-		panelCentral.setBackground(new Color(122,217,196));
-		//--------------------------------------------------------------------------------------------------
-	
+		panelCentral.setBackground(new Color(122,217,196));	
 		
 		panelP1 = new JPanel();
 		panelP1.setLayout(new GridLayout(2, 1));
@@ -112,7 +109,6 @@ public class VentanaSudadera extends JFrame {
 		else
 			lblConCremallera.setText("SUDADERA CON CREMALLERA" + ": " + "Unidades restantes: " + sto + " unidades     " + "Precio: " + pre1 + " euros");
 		
-		//----------------------------------------------------------------------------
 		panelP2 = new JPanel();
 		panelP2.setLayout(new GridLayout(2, 1));
 		panelCentral.add(panelP2);
@@ -141,7 +137,6 @@ public class VentanaSudadera extends JFrame {
 		else
 			lblSinCremallera.setText("SUDADERA SIN CREMALLERA" + ": " + "Unidades restantes: " + sto1 + " unidades     " + "Precio: " + pre2 + " euros");
 		
-		//--------------------------------------------------------------------------
 		panelP3 = new JPanel();
 		panelP3.setLayout(new GridLayout(2, 1));
 		panelCentral.add(panelP3);
@@ -211,7 +206,7 @@ public class VentanaSudadera extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informacion han sido actualizados correctamente");
 			
 			}
 		});
@@ -237,9 +232,8 @@ public class VentanaSudadera extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String texto = VentanaPrincipal.lblNombre.getText();
 				if (texto != "") {
-					int resp = JOptionPane.showConfirmDialog(null,"ï¿½Quieres aniadir este producto a tu cesta?");
+					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
-						//AQUI SE Aï¿½ADIRA AL CARRITO ESTE PRODUCTO
 						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
@@ -251,7 +245,7 @@ public class VentanaSudadera extends JFrame {
 								else
 									lblConCremallera.setText("SUDADERA CON CREMALLERA" + ": " + "Unidades restantes: " + (stock-canti) + " unidades   " + "Precio: " + pre1 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "ConCremallera");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.CON_CREMALLERA)); //AQUI Aï¿½ADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.CON_CREMALLERA)); 
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -267,15 +261,15 @@ public class VentanaSudadera extends JFrame {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
-								JOptionPane.showMessageDialog(null, "ï¿½ï¿½PRODUCTO Aï¿½ADIDO CORRECTAMENTE!!");
+								JOptionPane.showMessageDialog(null, "PRODUCTO AÑIADIDO CORRECTAMENTE!!");
 								BD.closeBD(con);
 							}else
 								JOptionPane.showMessageDialog(null, "Lo sentimos, no hay suficientes unidades en stock", "ERROR", JOptionPane.ERROR_MESSAGE);
 						}else
-							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un nÃºmero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un numero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}	
 				}else {
-					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesiï¿½n primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesion primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});	
@@ -287,9 +281,8 @@ public class VentanaSudadera extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String texto = VentanaPrincipal.lblNombre.getText();
 				if (texto != "") {
-					int resp = JOptionPane.showConfirmDialog(null,"ï¿½Quieres aniadir este producto a tu cesta?");
+					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
-						//AQUI SE Aï¿½ADIRA AL CARRITO ESTE PRODUCTO
 						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
@@ -301,7 +294,7 @@ public class VentanaSudadera extends JFrame {
 								else
 									lblSinCremallera.setText("SUDADERA SIN CREMALLERA" + ": " + "Unidades restantes: " + (stock-canti) + " unidades   " + "Precio: " + pre2 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "SinCremallera");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.SIN_CREMALLERA)); //AQUI Aï¿½ADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.SIN_CREMALLERA)); 
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -316,15 +309,15 @@ public class VentanaSudadera extends JFrame {
 								} catch (SQLException e1) {
 									e1.printStackTrace();
 								}
-								JOptionPane.showMessageDialog(null, "ï¿½ï¿½PRODUCTO Aï¿½ADIDO CORRECTAMENTE!!");
+								JOptionPane.showMessageDialog(null, "PRODUCTO AÑIADIDO CORRECTAMENTE!!");
 								BD.closeBD(con);
 							}else
 								JOptionPane.showMessageDialog(null, "Lo sentimos, no hay suficientes unidades en stock", "ERROR", JOptionPane.ERROR_MESSAGE);
 						}else
-							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un nÃºmero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un numero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}	
 				}else {
-					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesiï¿½n primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesion primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
 				
 			}
@@ -337,9 +330,8 @@ public class VentanaSudadera extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String texto = VentanaPrincipal.lblNombre.getText();
 				if (texto != "") {
-					int resp = JOptionPane.showConfirmDialog(null,"ï¿½Quieres aniadir este producto a tu cesta?");
+					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
-						//AQUI SE Aï¿½ADIRA AL CARRITO ESTE PRODUCTO
 						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
@@ -351,7 +343,7 @@ public class VentanaSudadera extends JFrame {
 								else
 									lblConGorro.setText("SUDADERA CON GORRO:" + ": " + "Unidades restantes: " + (stock-canti) + " unidades   " + "Precio: " + pre3 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "ConGorro");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.CON_GORRO)); //AQUI Aï¿½ADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.CON_GORRO)); 
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -366,7 +358,7 @@ public class VentanaSudadera extends JFrame {
 								} catch (SQLException e1) {
 									e1.printStackTrace();
 								}
-								JOptionPane.showMessageDialog(null, "ï¿½ï¿½PRODUCTO Aï¿½ADIDO CORRECTAMENTE!!");
+								JOptionPane.showMessageDialog(null, "PRODUCTO AÑIADIDO CORRECTAMENTE!!");
 								BD.closeBD(con);
 							}else
 								JOptionPane.showMessageDialog(null, "Lo sentimos, no hay suficientes unidades en stock", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -374,7 +366,7 @@ public class VentanaSudadera extends JFrame {
 							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un numero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}	
 				}else {
-					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesiï¿½n primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesion primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -385,9 +377,8 @@ public class VentanaSudadera extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String texto = VentanaPrincipal.lblNombre.getText();
 				if (texto != "") {
-					int resp = JOptionPane.showConfirmDialog(null,"ï¿½Quieres aniadir este producto a tu cesta?");
+					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
-						//AQUI SE Aï¿½ADIRA AL CARRITO ESTE PRODUCTO
 						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
@@ -399,7 +390,7 @@ public class VentanaSudadera extends JFrame {
 								else
 									lblSinGorro.setText("SUDADERA SIN GORRO" + ": " + "Unidades restantes: " + (stock-canti) + " unidades   " + "Precio: " + pre4 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "SinGorro");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.SIN_GORRO)); //AQUI Aï¿½ADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Sudadera(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoSudadera.SIN_GORRO)); 
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -414,7 +405,7 @@ public class VentanaSudadera extends JFrame {
 								} catch (SQLException e1) {
 									e1.printStackTrace();
 								}
-								JOptionPane.showMessageDialog(null, "ï¿½ï¿½PRODUCTO Aï¿½ADIDO CORRECTAMENTE!!");
+								JOptionPane.showMessageDialog(null, "PRODUCTO AÑIADIDO CORRECTAMENTE!!");
 								BD.closeBD(con);
 							}else
 								JOptionPane.showMessageDialog(null, "Lo sentimos, no hay suficientes unidades en stock", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -422,7 +413,7 @@ public class VentanaSudadera extends JFrame {
 							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un numero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}	
 				}else {
-					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesiï¿½n primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesion primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		

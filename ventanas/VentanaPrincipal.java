@@ -83,7 +83,6 @@ public class VentanaPrincipal extends JFrame {
 	//DECLARACION DE LOS ATRIBUTOS
 	
 	private JPanel contentPane;
-//	private PanelConImagenDeFondo contentPane;
 	private JPanel panelCentral, panelArriba, panelNorte, panelArribaDrc, panelArribaIzq, panelNorteIzq, panelNorteMedio, panelNorteDrc;
 	private JPanel panelP1, panelP2, panelP3, panelP4, panelP5, panelArribaIzq1, panelArribaIzq11, panelArribaIzq12, panelArribaIzq13, panelArribaIzq2;
 	private JButton btnSalir, btnRegistrarme,  btnCarrito, btnBusqueda;
@@ -95,7 +94,6 @@ public class VentanaPrincipal extends JFrame {
 	public static TreeMap<String, Usuario> tmUsuarios = new TreeMap<>();
 	public static DefaultListModel<Usuario> modeloListaUsuario;
 	public static JList<Usuario> listaUsuario;
-	private JScrollPane scrollLista;
 	private JLabel lblTitulo;
 	public static JLabel lblNombre, lblValoracion;
 	private JLabel lblHora, lblFrase;
@@ -105,9 +103,7 @@ public class VentanaPrincipal extends JFrame {
 	private JTextField txtBusqueda;
 	private JComboBox<String> comboBusqueda;
 	public static ArrayList<String> listaHistorialBusqueda = new ArrayList<String>();
-	private String fondo = "imagenes\\IconoIniciarSesion.png";
 	
-	private PanelConImagenDeFondo panelConFondo;
 	
 	static Logger log = Logger.getLogger("Log de Usuarios");
 	
@@ -117,7 +113,6 @@ public class VentanaPrincipal extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		System.out.println("Hola");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -158,19 +153,12 @@ public class VentanaPrincipal extends JFrame {
 		//PROPIEDADES DE LA VENTANA
 		ventanaActual = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setBounds(500, 500, 600, 450);
-		//setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setSize(1650, 1080);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(122,217,196));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
-		//FONDO DE LA VENTANA	
-		//panelConFondo = new PanelConImagenDeFondo(getSize());
-		//panelConFondo.setImage("/imagenes/tienda-de-ropa.jpg");
-		//setContentPane(panelConFondo);
 		
 		
 		//CREAMOS LOS PANELES
@@ -239,7 +227,6 @@ public class VentanaPrincipal extends JFrame {
 		panelNorteDrc.setBackground(new Color(122,217,196));
 		panelNorte.add(panelNorteDrc);
 	
-		//-------------------------------------------
 		panelP1 = new JPanel();
 		panelArribaDrc.add(panelP1);
 		panelP1.setBackground(new Color(122,217,196));
@@ -286,7 +273,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		
-		//Aï¿½ADIMOS LOS PANELES AL PANEL PRINCIPAL DE LA VENTANA
+		//INSERTAMOS LOS PANELES AL PANEL PRINCIPAL DE LA VENTANA
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		contentPane.add(panelNorte, BorderLayout.NORTH);
 		
@@ -353,7 +340,7 @@ public class VentanaPrincipal extends JFrame {
 		ponerFotoABoton(btnCarrito, "imagenes\\IconoCarrito.png", 30, 30, 30, 30);
 		
 		btnCambiarCon = new JButton();
-		ponerFotoABoton(btnCambiarCon, "imagenes\\IconoCambiarContraseï¿½a.png", 30, 30, 30, 30);
+		ponerFotoABoton(btnCambiarCon, "imagenes\\IconoCambiarContraseña.png", 30, 30, 30, 30);
 		btnCambiarCon.setVisible(false);
 		
 		modelosp = new SpinnerNumberModel(50, 0, 100, 1);
@@ -364,12 +351,12 @@ public class VentanaPrincipal extends JFrame {
 		pb.setValue(50);
 		pb.setVisible(false);
 		
-		lblValoracion = new JLabel("VALï¿½RANOS:");
+		lblValoracion = new JLabel("VALORANOS:");
 		lblValoracion.setVisible(false);
 		
 	
 		
-		//Aï¿½ADIMOS LOS COMPONENTES A LOS PANELES
+		//AÑIADIMOS LOS COMPONENTES A LOS PANELES
 
 		panelArribaIzq12.add(btnCarrito);
 		panelArribaIzq12.add(btnInicioSesion);
@@ -413,7 +400,7 @@ public class VentanaPrincipal extends JFrame {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int resp = JOptionPane.showConfirmDialog(null,"ï¿½ESTA SEGURO DE SU OPCIï¿½N?");
+				int resp = JOptionPane.showConfirmDialog(null,"¿ESTA SEGURO DE SU OPCION?");
 				if(resp == JOptionPane.OK_OPTION) {
 					int valor = pb.getValue();
 					hmSatisfaccion.put(VentanaInicioSesion.n, valor);
@@ -470,7 +457,7 @@ public class VentanaPrincipal extends JFrame {
 					VentanaCarritoUsuario.lblCarrito.setText("CARRITO DE LA COMPRA DE " + VentanaInicioSesion.n);
 					VentanaPrincipal.log.log(Level.INFO, VentanaInicioSesion.n + " ha accedido a su carrito de la compra");
 				} else {
-					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesiï¿½n primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesion primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -490,7 +477,7 @@ public class VentanaPrincipal extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			VentanaPrincipal.log.log(Level.INFO, VentanaInicioSesion.n + " ha cerrado sesiï¿½n");
+			VentanaPrincipal.log.log(Level.INFO, VentanaInicioSesion.n + " ha cerrado sesion");
 			lblNombre.setText("");
 			VentanaInicioSesion.n = "";
 			btnAdmin.setVisible(false);
@@ -742,7 +729,7 @@ public class VentanaPrincipal extends JFrame {
 				cargarMapaPedidosDeFicheroDeTexto();
 				cargarListaHistorialBusqueda();
 				cargarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Se han cargado las estructuras de datos de los ficheros de informaciï¿½n");
+				VentanaPrincipal.log.log(Level.INFO, "Se han cargado las estructuras de datos de los ficheros de informacion");
 			}
 				
 			
@@ -753,7 +740,7 @@ public class VentanaPrincipal extends JFrame {
 				guardarMapaPedidosEnFicheroDeTexto();
 				guardarListaHistorialBusqueda();
 				guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informacion han sido actualizados correctamente");
 			}
 			
 			
@@ -762,7 +749,6 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	
-	//PRIMERO LLAMAR A ESTE METODO Y UNA VEZ EL MAPA ESTE LLENO LLAMAR A cargarMapaUsuariosEnLista PARA QUE SE CARGUE EL MODELO DE LA LISTA
 	/**
 	 * Metodo que carga de un fichero de texto los el mapaUsuarios.
 	 */
@@ -816,7 +802,7 @@ public class VentanaPrincipal extends JFrame {
 			pw = new PrintWriter("USUARIOS.txt");
 			for (String nombre: VentanaPrincipal.tmUsuarios.keySet()) {
 				Usuario u = VentanaPrincipal.tmUsuarios.get(nombre);
-				pw.print(u.getNombre()+ " " + u.getMail() + " " + u.getEdad() + " " + u.getCon() + " " + u.getPermisos() + "\n"); //TODO Cambiar formato al guardar
+				pw.print(u.getNombre()+ " " + u.getMail() + " " + u.getEdad() + " " + u.getCon() + " " + u.getPermisos() + "\n"); 
 				
 			}
 			
@@ -891,7 +877,6 @@ public class VentanaPrincipal extends JFrame {
 			pw = new PrintWriter("PRODUCTOS.txt");
 			for (String nombre: VentanaPrincipal.tmPedidos.keySet()) {
 				ArrayList<Producto> u = VentanaPrincipal.tmPedidos.get(nombre);
-				//pw.println(nombre + "\n" + "\t");
 				for (Producto p: u) {
 					pw.println(nombre + " " + p.getCodigo() + " " + p.getColor() + " " + p.getNombre()+ " " + p.getPrecio()+ " " + p.getStock()+ " " + p.getMarca()+ " " + p.getRutaFoto());
 				}
@@ -1021,7 +1006,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	/**
-	 * METODO RECURSIVO (RECURSIVIDAD MULTIPLE) PARA BUSCAR EN QUE POSICIï¿½N HABRIA QUE INSERTAR ALGO PARA QUE LA LISTA SE MANTUVIERA ORDENADA
+	 * METODO RECURSIVO (RECURSIVIDAD MULTIPLE) PARA BUSCAR EN QUE POSICION HABRIA QUE INSERTAR ALGO PARA QUE LA LISTA SE MANTUVIERA ORDENADA
 	 * @param al El ArrayList
 	 * @param pi Posicion Inicial
 	 * @param pf Posicion Final
@@ -1048,10 +1033,10 @@ public class VentanaPrincipal extends JFrame {
 	 * METODO QUE PONE UN COLOR DETERMINADO A UN BOTON CON LAS MEDIDAS PERSONALIZADAS
 	 * @param btn --> EL BOTON AL QUE SE LE VA A PONER UNA IMï¿½GEN
 	 * @param rutaFoto --> RUTA DE LA IMAGEN PARA PODER ACCEDER A ELLA
-	 * @param x --> VALOR DE LA COORDENADA X DE LA IMï¿½GEN
-	 * @param y --> VALOR DE LA COORDENADA Y DE LA IMï¿½GEN
-	 * @param width --> ANCHURA DE LA IMï¿½GEN
-	 * @param height --> ALTURA DE LA IMï¿½GEN
+	 * @param x --> VALOR DE LA COORDENADA X DE LA IMAGEN
+	 * @param y --> VALOR DE LA COORDENADA Y DE LA IMAGEN
+	 * @param width --> ANCHURA DE LA IMAGEN
+	 * @param height --> ALTURA DE LA IMAGEN
 	 */
 	public static void ponerFotoABoton (JButton btn, String rutaFoto, int x, int y, int width, int height) {
 		btn.setBounds(x, y, width, height);
@@ -1067,10 +1052,10 @@ public class VentanaPrincipal extends JFrame {
 	 * METODO QUE PONE UN COLOR SELECCIONADO A UN BOTON CON LAS MEDIDAS PERSONALIZADAS
 	 * @param btn --> EL BOTON AL QUE SE LE VA A PONER UNA IMï¿½GEN
 	 * @param rutaFoto --> RUTA DE LA IMAGEN PARA PODER ACCEDER A ELLA
-	 * @param x --> VALOR DE LA COORDENADA X DE LA IMï¿½GEN
-	 * @param y --> VALOR DE LA COORDENADA Y DE LA IMï¿½GEN
-	 * @param width --> ANCHURA DE LA IMï¿½GEN
-	 * @param height --> ALTURA DE LA IMï¿½GEN
+	 * @param x --> VALOR DE LA COORDENADA X DE LA IMAGEN
+	 * @param y --> VALOR DE LA COORDENADA Y DE LA IMAGEN
+	 * @param width --> ANCHURA DE LA IMAGEN
+	 * @param height --> ALTURA DE LA IMAGEN
 	 * @param color --> EL COLOR SELECCIONADO
 	 */
 	public static void ponerFotoABotonDelColorQueQuieras (JButton btn, String rutaFoto, int x, int y, int width, int height, Color color) {

@@ -1,20 +1,20 @@
-ene. 13, 2022 2:18:38 A.Â M. ventanas.VentanaPrincipal$20 windowOpened
-INFO: Se han cargado las estructuras de datos de los ficheros de informaciï¿½n
-ene. 13, 2022 2:18:55 A.Â M. ventanas.VentanaInicioSesion$3 actionPerformed
-INFO: Se ha iniciado sesion como kike
-ene. 13, 2022 2:19:23 A.Â M. ventanas.VentanaPrincipal$16 mouseClicked
+ene 13, 2022 10:04:44 A. M. ventanas.VentanaPrincipal$20 windowOpened
+INFO: Se han cargado las estructuras de datos de los ficheros de informacion
+ene 13, 2022 10:04:47 A. M. ventanas.VentanaInicioSesion$3 actionPerformed
+INFO: Se ha iniciado sesion como a
+ene 13, 2022 10:04:55 A. M. ventanas.VentanaPrincipal$7 actionPerformed
+INFO: a ha accedido a su carrito de la compra
+ene 13, 2022 10:05:04 A. M. ventanas.VentanaAdmin2$4 actionPerformed
+INFO: Datos obtenidos correctamente!
+ene 13, 2022 10:05:27 A. M. ventanas.VentanaEstadisticas <init>
+INFO: Estadisticas generales obtenidas correctamente
+ene 13, 2022 10:05:31 A. M. ventanas.VentanaEstadisticas$4 actionPerformed
+INFO: Estadisticas de a obtenidas correctamente
+ene 13, 2022 10:05:35 A. M. ventanas.VentanaEstadisticas$4 actionPerformed
+INFO: Estadisticas de g obtenidas correctamente
+ene 13, 2022 10:05:42 A. M. ventanas.VentanaPrincipal$16 mouseClicked
 INFO: Se ha cargado el historial de busqueda
-ene. 13, 2022 2:19:30 A.Â M. ventanas.VentanaPrincipal$16 mouseClicked
-INFO: Se ha cargado el historial de busqueda
-ene. 13, 2022 2:19:46 A.Â M. ventanas.VentanaPrincipal$16 mouseClicked
-INFO: Se ha cargado el historial de busqueda
-ene. 13, 2022 2:20:00 A.Â M. ventanas.VentanaPrincipal$16 mouseClicked
-INFO: Se ha cargado el historial de busqueda
-ene. 13, 2022 2:20:27 A.Â M. ventanas.VentanaPrincipal$7 actionPerformed
-INFO: kike ha accedido a su carrito de la compra
-ene. 13, 2022 2:21:22 A.Â M. ventanas.VentanaCarritoUsuario$4 actionPerformed
-INFO: kike ha realizado una compra
-ene. 13, 2022 2:21:43 A.Â M. ventanas.VentanaPrincipal$9 actionPerformed
-INFO: kike ha cerrado sesiï¿½n
-ene. 13, 2022 2:21:57 A.Â M. ventanas.VentanaPrincipal$20 windowClosing
-INFO: Los ficheros de informaciï¿½n han sido actualizados correctamente
+ene 13, 2022 10:05:43 A. M. ventanas.VentanaPrincipal$7 actionPerformed
+INFO: a ha accedido a su carrito de la compra
+ene 13, 2022 10:06:02 A. M. ventanas.VentanaPrincipal$20 windowClosing
+INFO: Los ficheros de informacion han sido actualizados correctamente

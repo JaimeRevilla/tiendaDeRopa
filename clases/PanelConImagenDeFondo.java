@@ -10,6 +10,10 @@ public class PanelConImagenDeFondo extends javax.swing.JPanel {
 		this.setSize(600,462);
 	}
 	
+	
+	/**
+	 *METODO PARA PONER LA IMAGEN DE FONDO
+	 */
 	public void paintComponent (Graphics g){
 		Dimension tamanio = getSize();
 		ImageIcon imagenFondo = new ImageIcon(getClass().getResource("imagenes\\fondoDePrueba.jpg"));

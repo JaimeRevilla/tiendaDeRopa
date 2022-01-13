@@ -65,9 +65,6 @@ public class VentanaCarritoUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaCarritoUsuario(JFrame va) {
-		Connection con = BD.initBD("SweetWear.db");
-		//AQUI IRA CODIGO
-		BD.closeBD(con);
 		
 		//PROPIEDADES DE LA VENTANA
 		ventanaAnterior = va;
@@ -75,13 +72,12 @@ public class VentanaCarritoUsuario extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		//setSize(1650, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 			
-		//CREACI�N DE LOS PANELES
+		//CREACION DE LOS PANELES
 		panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		panelSur.setBackground(new Color(122,217,196));
@@ -155,8 +151,7 @@ public class VentanaCarritoUsuario extends JFrame {
 				VentanaPrincipal.guardarMapaUsuariosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaci�n han sido actualizados correctamente");
-			}
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informacion han sido actualizados correctamente");			}
 		});
 		
 		
@@ -293,23 +288,6 @@ public class VentanaCarritoUsuario extends JFrame {
 					JOptionPane.showMessageDialog(null, "NO HAS SELECCIONADO NINGUN PRODUCTO", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 			}
 		});
-		
-		
-		
-		//EVENTOS DE VENTANA
-				ventanaActual.addWindowListener(new WindowAdapter() {
-					
-					@Override
-					public void windowClosing(WindowEvent e) {
-						// TODO Auto-generated method stub
-						VentanaPrincipal.guardarMapaUsuariosEnFicheroDeTexto();
-						VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
-						VentanaPrincipal.guardarListaHistorialBusqueda();
-						VentanaPrincipal.guardarMapaSatisfaccion();
-						VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaci�n han sido actualizados correctamente");
-					
-					}
-				});
 				
 		
 		//HILO (FOTO DEL PRODUCTO)

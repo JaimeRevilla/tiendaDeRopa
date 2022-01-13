@@ -25,12 +25,10 @@ import clases.Producto;
 
 public class VentanaEstadisticas extends JFrame {
 
-//	private PanelConImagenDeFondo contentPane;
 	private JPanel contentPane;
 	private JFrame ventanaActual, ventanaAnterior;
 	private JPanel panelSur, panelCentralArriba, panelCentral, panelCentralAbajo, panelNorte;
 	private JButton btnVolver, btnObtenerEstadisticas;
-	private String fondo = "/imagenes/tienda-de-ropa.jpg";
 	private JLabel lblTitulo1, lblPrecioMedioPedidos, lblCliente, lblSatisfaccion, lblPrecioMedioPedidoCliente, lblSatisfaccionCliente;
 	private JLabel lblMaxPrecioPedido, lblMinPrecioPedido, lblMaxPrecioPedidoCliente, lblMinPrecioPedidoCliente;
 	private JComboBox<String> comboClientes;
@@ -60,17 +58,6 @@ public class VentanaEstadisticas extends JFrame {
 		//PROPIEDADES DE LA VENTANA
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-//		setBounds(500, 150, 600, 450);
-//		setSize(1450, 980);
-		
-//		contentPane = new PanelConImagenDeFondo(getSize());
-//		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-//		contentPane.setLayout(new BorderLayout(0, 0));
-//		setContentPane(contentPane);
-	
-//		contentPane = new PanelConImagenDeFondo(getSize());
-//		contentPane.setImage(fondo);
-		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -131,12 +118,12 @@ public class VentanaEstadisticas extends JFrame {
 		
 		lblMaxPrecioPedido = new JLabel();
 		double max = DineroDePedidoMasCara();
-		lblMaxPrecioPedido.setText("PEDIDO Mï¿½S CARO DE TODAS LAS COMPRAS: " + max + " euros");
+		lblMaxPrecioPedido.setText("PEDIDO MAS CARO DE TODAS LAS COMPRAS: " + max + " euros");
 		panelCentralArriba.add(lblMaxPrecioPedido);
 		
 		lblMinPrecioPedido = new JLabel();
 		double min = DineroDePedidoMasBarato();
-		lblMinPrecioPedido.setText("PEDIDO Mï¿½S BARATO DE TODAS LA COMPRAS: " + min + " euros");
+		lblMinPrecioPedido.setText("PEDIDO MAS BARATO DE TODAS LA COMPRAS: " + min + " euros");
 		panelCentralArriba.add(lblMinPrecioPedido);
 		
 		//---------------------------------------------------------------------------------------------
@@ -151,14 +138,14 @@ public class VentanaEstadisticas extends JFrame {
 		panelCentralAbajo.add(comboClientes);
 		
 		
-		VentanaPrincipal.log.log(Level.INFO, "Estadï¿½sticas generales obtenidas correctamente");
+		VentanaPrincipal.log.log(Level.INFO, "Estadisticas generales obtenidas correctamente");
 		
 		lblPrecioMedioPedidoCliente = new JLabel();
 		lblSatisfaccionCliente = new JLabel();
 		lblMaxPrecioPedidoCliente = new JLabel();
 		lblMinPrecioPedidoCliente = new JLabel();
 		
-		//-----------------------------------------------------------------------------------------------------------
+		//EVENTOS DE VENTANA
 		ventanaActual.addWindowListener(new WindowAdapter() {
 			
 			@Override
@@ -168,12 +155,10 @@ public class VentanaEstadisticas extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
-			
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informacion han sido actualizados correctamente");			
 			}
 		});
 		
-		//---------------------------------------------------------------------------------------------------------------
 		
 		//EVENTOS
 		btnVolver.addActionListener(new ActionListener() {
@@ -198,10 +183,9 @@ public class VentanaEstadisticas extends JFrame {
 					panelCentralAbajo.add(lblMinPrecioPedidoCliente);
 					
 					String selec = comboClientes.getItemAt(index);
-					VentanaPrincipal.log.log(Level.INFO, "Estadï¿½sticas de " + selec + " obtenidas correctamente");
+					VentanaPrincipal.log.log(Level.INFO, "Estadisticas de " + selec + " obtenidas correctamente");
 					double medio = dineroTotalDeLosProductosQueSeHaVendidoElCliente(selec) / cuantosProductosSeHanVendidoDelCliente(selec);
 					String lblMedio = "";
-					//if (VentanaPrincipal.tmPedidos.get(selec).size() == 0) {
 					if (VentanaPrincipal.tmPedidos.get(selec) == null || VentanaPrincipal.tmPedidos.get(selec).size() == 0) {
 						lblMedio = selec + " NO TIENE NINGUN PEDIDO REALIZADO";
 					}else
@@ -222,7 +206,7 @@ public class VentanaEstadisticas extends JFrame {
 					if (VentanaPrincipal.tmPedidos.get(selec) == null || VentanaPrincipal.tmPedidos.get(selec).size() == 0) {
 						lblMaxCliente = selec + " NO TIENE NINGUN PEDIDO REALIZADO";
 					}else 
-						lblMaxCliente = "PEDIDO Mï¿½S CARO DE LA COMPRA DE " + selec + ": " + maxCliente + " euros";
+						lblMaxCliente = "PEDIDO MAS CARO DE LA COMPRA DE " + selec + ": " + maxCliente + " euros";
 					lblMaxPrecioPedidoCliente.setText(lblMaxCliente);
 					
 					double minCliente = DineroDePedidoMasBarato(selec);
@@ -230,7 +214,7 @@ public class VentanaEstadisticas extends JFrame {
 					if (VentanaPrincipal.tmPedidos.get(selec) == null || VentanaPrincipal.tmPedidos.get(selec).size() == 0) {
 						lblMinCliente = selec + " NO TIENE NINGUN PEDIDO REALIZADO";
 					}else 
-						lblMinCliente = "PEDIDO Mï¿½S BARATO DE LA COMPRA DE " + selec + ": " + minCliente + " euros";
+						lblMinCliente = "PEDIDO MAS BARATO DE LA COMPRA DE " + selec + ": " + minCliente + " euros";
 					lblMinPrecioPedidoCliente.setText(lblMinCliente);
 					
 					
@@ -243,10 +227,7 @@ public class VentanaEstadisticas extends JFrame {
 		});
 
 
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	
+	}	
 	
 	//METODOS GENERALES
 	
@@ -388,7 +369,7 @@ public class VentanaEstadisticas extends JFrame {
 	
 	/**
 	 * METODO PARA OBTENER EL PEDIDO DENTRO DE LA COMPRA (1 TIPO DE ARTICULO  TENIENDO EN CUENTA LAS UNIDADES COMPRADAS) MAS CARO
-	 * DEL USUARIO CUYO NOMBRE EL ES DADO POR Pï¿½RAMETRO
+	 * DEL USUARIO CUYO NOMBRE EL ES DADO POR PÁRAMETRO
 	 * @param nombre --> EL NOMBRE DEL USUARIO
 	 * @return --> EL PRECIO MAS BARATO
 	 */
@@ -409,7 +390,7 @@ public class VentanaEstadisticas extends JFrame {
 	
 	/**
 	 * METODO PARA OBTENER EL PEDIDO DENTRO DE LA COMPRA (1 TIPO DE ARTICULO  TENIENDO EN CUENTA LAS UNIDADES COMPRADAS) MAS BARATO 
-	 * DEL USUARIO CUYO NOMBRE EL ES DADO POR Pï¿½RAMETRO
+	 * DEL USUARIO CUYO NOMBRE EL ES DADO POR PÁRAMETRO
 	 * @param nombre --> EL NOMBRE DEL USUARIO
 	 * @return 	--> EL PRECIO MAS BARATO
 	 */

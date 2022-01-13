@@ -8,20 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-
-
-/**
- * @author 34688
- *
- */
-/**
- * @author 34688
- *
- */
-/**
- * @author 34688
- *
- */
 public class BD {
 
 	
@@ -902,8 +888,5 @@ public class BD {
 		Statement stmt = null;
 		stmt = con.createStatement();
 		stmt.executeUpdate(sent);
-	}
-	
-	//---------------------------------------------------------------------------------------------------------------------------
-	
+	}	
 }

@@ -27,16 +27,6 @@ public class Camiseta extends Producto {
 	public void setTipoCamiseta(TipoCamiseta tipoCamiseta) {
 		this.tipoCamiseta = tipoCamiseta;
 	}
-
-
-
-	/*@Override
-	public String toString() {
-		return "Camiseta [tipoCamiseta=" + tipoCamiseta + ", getCodigo()=" + getCodigo() + ", getColor()=" + getColor()
-				+ ", getNombre()=" + getNombre() + ", getPrecio()=" + getPrecio() + ", getStock()=" + getStock()
-				+ ", getMarca()=" + getMarca() + ", getRutaFoto()=" + getRutaFoto() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
-	}*/
 	
 	public String toString() {
 		return getNombre() + " " + getPrecio() + "euros" + " " + getStock() + " uds";

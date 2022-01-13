@@ -1,0 +1,4 @@
+a 14 Negro Bota 60.0 4 Martens imagenes\\IconoZapatillasBotas.png
+a 17 Rojo Tacon 85.0 4 Asos imagenes\\IconoZapatillasTacones.png
+a 0 Negro Formal 25.0 4 Brownie imagenes\\IconoZapatillasFormales.png
+a 15 Negro Deportiva 45.0 4 Nike imagenes\\IconoZapatillasDeportivas.png

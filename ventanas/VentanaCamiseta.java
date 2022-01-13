@@ -59,7 +59,6 @@ public class VentanaCamiseta extends JFrame {
 	public VentanaCamiseta(JFrame va) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		//setSize(1650, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -169,7 +168,6 @@ public class VentanaCamiseta extends JFrame {
 			lblCamiseta.setText("CAMISETA: " + "Unidades restantes: " + sto2 + " unidades    " + "Precio: " + pre3 + " euros");
 		
 		
-		//------------------------------------------------------------------------------------------------------------------
 		
 		//EVENTOS DE VENTANA
 		
@@ -182,12 +180,10 @@ public class VentanaCamiseta extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
-			
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informacion han sido actualizados correctamente");			
 			}
 		});
 		
-		//---------------------------------------------------------------------------------------------------------------
 		
 		 
 		
@@ -208,9 +204,8 @@ public class VentanaCamiseta extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String texto = VentanaPrincipal.lblNombre.getText();
 				if (texto != "") {
-					int resp = JOptionPane.showConfirmDialog(null,"ï¿½Quieres aniadir este producto a tu cesta?");
+					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
-						//AQUI SE Aï¿½ADIRA AL CARRITO ESTE PRODUCTO
 						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
@@ -222,7 +217,7 @@ public class VentanaCamiseta extends JFrame {
 								else
 									lblPolo.setText("POLO" + ": " + "Unidades restantes: " + (stock-canti) + " unidades     " + "Precio: " + pre1 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "Polo");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Camiseta(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCamiseta.POLO)); //AQUI Aï¿½ADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Camiseta(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCamiseta.POLO)); 
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -238,7 +233,7 @@ public class VentanaCamiseta extends JFrame {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
-								JOptionPane.showMessageDialog(null, "ï¿½ï¿½PRODUCTO Aï¿½ADIDO CORRECTAMENTE!!");
+								JOptionPane.showMessageDialog(null, "PRODUCTO AÑIADIDO CORRECTAMENTE!!");
 								BD.closeBD(con);
 							}else
 								JOptionPane.showMessageDialog(null, "Lo sentimos, no hay suficientes unidades en stock", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -246,7 +241,7 @@ public class VentanaCamiseta extends JFrame {
 							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un nÃºmero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}	
 				}else {
-					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesiï¿½n primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesion primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});	
@@ -258,7 +253,7 @@ public class VentanaCamiseta extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String texto = VentanaPrincipal.lblNombre.getText();
 				if (texto != "") {
-					int resp = JOptionPane.showConfirmDialog(null,"ï¿½Quieres aniadir este producto a tu cesta?");
+					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
 						//AQUI SE Aï¿½ADIRA AL CARRITO ESTE PRODUCTO
 						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
@@ -272,7 +267,7 @@ public class VentanaCamiseta extends JFrame {
 								else
 									lblCamisa.setText("CAMISA" + ": " + "Unidades restantes: " + (stock-canti) + " unidades     " + "Precio: " + pre2 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "Camisa");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Camiseta(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCamiseta.CAMISA)); //AQUI Aï¿½ADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Camiseta(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCamiseta.CAMISA)); 
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -287,7 +282,7 @@ public class VentanaCamiseta extends JFrame {
 								} catch (SQLException e1) {
 									e1.printStackTrace();
 								}
-								JOptionPane.showMessageDialog(null, "ï¿½ï¿½PRODUCTO Aï¿½ADIDO CORRECTAMENTE!!");
+								JOptionPane.showMessageDialog(null, "PRODUCTO AÑIADIDO CORRECTAMENTE!!");
 								BD.closeBD(con);
 							}else
 								JOptionPane.showMessageDialog(null, "Lo sentimos, no hay suficientes unidades en stock", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -295,7 +290,7 @@ public class VentanaCamiseta extends JFrame {
 							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un nÃºmero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}	
 				}else {
-					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesiï¿½n primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesion primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
 				
 			}
@@ -308,9 +303,8 @@ public class VentanaCamiseta extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String texto = VentanaPrincipal.lblNombre.getText();
 				if (texto != "") {
-					int resp = JOptionPane.showConfirmDialog(null,"ï¿½Quieres aniadir este producto a tu cesta?");
+					int resp = JOptionPane.showConfirmDialog(null,"¿Quieres aniadir este producto a tu cesta?");
 					if(resp == JOptionPane.OK_OPTION) {
-						//AQUI SE Aï¿½ADIRA AL CARRITO ESTE PRODUCTO
 						String cant = JOptionPane.showInputDialog("Cuantas unidades quieres");
 						int canti = Integer.parseInt(cant);
 						if (canti > 0) {
@@ -322,7 +316,7 @@ public class VentanaCamiseta extends JFrame {
 								else
 									lblCamiseta.setText("CAMISETA" + ": " + "Unidades restantes: " + (stock-canti) + " unidades     " + "Precio: " + pre3 + " euros");
 								Producto p = BD.obtenerProductoTienda(con, "Camiseta");
-								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Camiseta(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCamiseta.CAMISETA)); //AQUI Aï¿½ADIR EL PRODUCTO
+								VentanaPrincipal.tmPedidos.get(VentanaInicioSesion.n).add(new Camiseta(p.getCodigo(), p.getColor(), p.getNombre(), p.getPrecio(), canti, p.getMarca(),p.getRutaFoto(), TipoCamiseta.CAMISETA)); 
 								int num = 0;
 								try {
 									num = BD.contarProductos(con);
@@ -337,7 +331,7 @@ public class VentanaCamiseta extends JFrame {
 								} catch (SQLException e1) {
 									e1.printStackTrace();
 								}
-								JOptionPane.showMessageDialog(null, "ï¿½ï¿½PRODUCTO Aï¿½ADIDO CORRECTAMENTE!!");
+								JOptionPane.showMessageDialog(null, "PRODUCTO AÑIADIDO CORRECTAMENTE!!");
 								BD.closeBD(con);
 							}else
 								JOptionPane.showMessageDialog(null, "Lo sentimos, no hay suficientes unidades en stock", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -345,7 +339,7 @@ public class VentanaCamiseta extends JFrame {
 							JOptionPane.showMessageDialog(null, "Error en cantidad, introduce un numero mayor que cero", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}	
 				}else {
-					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesiï¿½n primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Tienes que iniciar Sesion primero", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

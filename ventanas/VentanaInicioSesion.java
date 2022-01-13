@@ -26,8 +26,6 @@ import clases.BD;
 
 public class VentanaInicioSesion extends JFrame {
 	
-	private static Logger log = Logger.getLogger("Log de Usuarios");
-
 	private JPanel contentPane;
 	private JFrame ventanaAnterior, ventanaActual;
 	private JButton btnVolverAtras, btnIniciarSesion;
@@ -38,15 +36,11 @@ public class VentanaInicioSesion extends JFrame {
 	public static String n;
 	
 	
-	
-	
 	public VentanaInicioSesion(JFrame va) {
 		ventanaAnterior = va;
 		ventanaActual = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		//setSize(1650, 1080);
-		//setBounds(500, 150, 600, 450);
+		setBounds(500, 150, 600, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -66,7 +60,7 @@ public class VentanaInicioSesion extends JFrame {
 		panelSur.setBackground(new Color(122,217,196));
 		
 		lblNombre = new JLabel("INTRODUCE TU NOMBRE DE USUARIO: ");
-		lblCon = new JLabel("INTRODUCE UNA CONTRASEï¿½A: ");
+		lblCon = new JLabel("INTRODUCE UNA CONTRASEÑIA: ");
 		
 		textNombre = new JTextField();
 		textCon = new JPasswordField();
@@ -90,7 +84,6 @@ public class VentanaInicioSesion extends JFrame {
 		panelCentral.setBackground(new Color(122,217,196));
 		panelSur.setBackground(new Color(122,217,196));
 		
-		//-----------------------------------------------------------------------------------------------------------
 		ventanaActual.addWindowListener(new WindowAdapter() {
 			
 			@Override
@@ -100,12 +93,11 @@ public class VentanaInicioSesion extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaciï¿½n han sido actualizados correctamente");
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informacion han sido actualizados correctamente");
 			
 			}
 		});
 		
-		//---------------------------------------------------------------------------------------------------------------
 		
 		btnVolverAtras.addActionListener(new ActionListener() {
 			
@@ -122,19 +114,18 @@ public class VentanaInicioSesion extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				n = textNombre.getText();
-				//String n = textNombre.getText();
 				String c = textCon.getText();
 				
 				Connection con = BD.initBD("SweetWear.db"); 
 				int resul = BD.obtenerUsuario(con, n, c);
 				if (resul == 0) {
-					JOptionPane.showMessageDialog(null, "ï¿½ï¿½PRIMERO TIENES QUE REGISTRARTE!!", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "PRIMERO TIENES QUE REGISTRARTE!!", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 					new VentanaRegistro(ventanaActual);
 					ventanaActual.setVisible(false);
 				} else if (resul == 1){
-					JOptionPane.showMessageDialog(null, "ï¿½ï¿½LA CONTRASEï¿½A EN INCORRECTA!!", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "LA CONTRASEÑIA EN INCORRECTA!!", "ACCESO DENEGADO", JOptionPane.ERROR_MESSAGE);
 				} else if (resul == 2){
-					JOptionPane.showMessageDialog(null, "ï¿½ï¿½BIENVENIDO "+ n+ "!!");
+					JOptionPane.showMessageDialog(null, "BIENVENIDO "+ n+ "!!");
 					VentanaPrincipal.lblNombre.setText("BIENVENIDO " + n);
 					VentanaPrincipal.log.log(Level.INFO, "Se ha iniciado sesion como" + " " + n);
 					

@@ -14,7 +14,7 @@ public class Producto{
 	private String rutaFoto;
 	
 	public Producto(int codigo, String color, String nombre, double precio, int stock, String marca, String rutaFoto) {
-		this.codigo = codigo; //Guardo el valor del contado en el atributo código y luego al contador le sumo 1
+		this.codigo = codigo; 
 		this.color = color;
 		this.nombre = nombre;
 		this.precio = precio;
@@ -81,12 +81,6 @@ public class Producto{
 	public void setRutaFoto(String rutaFoto) {
 		this.rutaFoto = rutaFoto;
 	}
-
-//	@Override
-//	public String toString() {
-//		return "Producto [codigo=" + codigo + ", color=" + color + ", nombre=" + nombre + ", precio=" + precio
-//				+ ", stock=" + stock + ", marca=" + marca + ", rutaFoto=" + rutaFoto + "]";
-//	}
 	
 	public String toString() {
 		return getNombre() + " " + getPrecio() + "euros" + " " + getStock() + " uds";

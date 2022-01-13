@@ -8,7 +8,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="/Users/enriquepuenteruiz/Desktop/PROG3/jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="/Users/enriquepuenteruiz/Desktop/PROG3/sqlite-jdbc-3.36.0.3 (2).jar"/>
+	<classpathentry kind="lib" path="C:/Users/34688/Downloads/sqlite-jdbc-3.36.0.3 (3).jar"/>
+	<classpathentry kind="lib" path="C:/Users/34688/Downloads/jcalendar-1.4.jar.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

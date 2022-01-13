@@ -58,7 +58,6 @@ public class VentanaAdmin2 extends JFrame {
 				
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		//setSize(1650, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -101,7 +100,7 @@ public class VentanaAdmin2 extends JFrame {
 		panelCentro.add(scrollTienda);
 		
 		textAreaEstadisticas = new JTextArea();
-		textAreaEstadisticas.setText("VALORACI�N");
+		textAreaEstadisticas.setText("VALORACION");
 		scrollEstadisticas = new JScrollPane(textAreaEstadisticas);
 		panelCentro.add(scrollEstadisticas);
 		
@@ -114,7 +113,7 @@ public class VentanaAdmin2 extends JFrame {
 				VentanaPrincipal.guardarMapaPedidosEnFicheroDeTexto();
 				VentanaPrincipal.guardarListaHistorialBusqueda();
 				VentanaPrincipal.guardarMapaSatisfaccion();
-				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informaci�n han sido actualizados correctamente");
+				VentanaPrincipal.log.log(Level.INFO, "Los ficheros de informacion han sido actualizados correctamente");
 
 			
 			}
